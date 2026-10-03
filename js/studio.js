@@ -2,11 +2,8 @@
 // shows what to say, records, plays back, trims silence, evens out loudness, and saves the clip
 // under the right name in audio/ through tools/studio-server.mjs. Localhost only.
 import { loadContent } from './content.js';
+import { RATE, processTake, takeFromBuffer } from './takes.js';
 
-// Mono 16-bit WAV at 16 kHz: clear speech, and the full set stays under the spec's 10 MB.
-const RATE = 16000;
-const TARGET_RMS = 0.1; // about -20 dBFS while speaking
-const PEAK = 0.95;
 const LOCAL = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
 
 const S = { C: null, clips: [], recorded: {}, sel: 0, group: 'all', missingOnly: false, take: null, recorder: null, stream: null, ctx: null, busy: false };
@@ -122,7 +119,7 @@ async function toggleRecord() {
     S.recorder = null;
     try {
       const decoded = await decode(await new Blob(chunks, { type: recorder.mimeType }).arrayBuffer());
-      S.take = processTake(decoded);
+      S.take = processTake(takeFromBuffer(decoded));
       render();
       playTake();
     } catch (e) {
@@ -138,101 +135,6 @@ async function toggleRecord() {
 
 function decode(data) {
   return new Promise((resolve, reject) => audioContext().decodeAudioData(data, resolve, reject));
-}
-
-// Mono, DC removed, silence trimmed from both ends, loudness evened out, resampled to RATE.
-function processTake(buffer) {
-  const sr = buffer.sampleRate;
-  const mono = new Float32Array(buffer.length);
-  for (let ch = 0; ch < buffer.numberOfChannels; ch++) {
-    const d = buffer.getChannelData(ch);
-    for (let i = 0; i < d.length; i++) mono[i] += d[i] / buffer.numberOfChannels;
-  }
-  const mean = mono.reduce((a, b) => a + b, 0) / (mono.length || 1);
-  for (let i = 0; i < mono.length; i++) mono[i] -= mean;
-
-  // Trim: 10 ms frames; speech is anything above a sixteenth of the loudest frame.
-  const frame = Math.round(sr * 0.01);
-  const rms = [];
-  for (let i = 0; i + frame <= mono.length; i += frame) {
-    let s = 0;
-    for (let j = i; j < i + frame; j++) s += mono[j] * mono[j];
-    rms.push(Math.sqrt(s / frame));
-  }
-  const loudest = Math.max(...rms, 0);
-  if (loudest < 0.002) throw new Error('it was silent. Check the microphone.');
-  const threshold = Math.max(loudest / 16, 0.0015);
-  const first = rms.findIndex(v => v > threshold);
-  const last = rms.length - 1 - [...rms].reverse().findIndex(v => v > threshold);
-  const start = Math.max(0, (first - 4) * frame); // keep 40 ms before
-  const end = Math.min(mono.length, (last + 9) * frame); // and 90 ms after
-  let clip = mono.slice(start, end);
-
-  // Loudness: speaking level to the target, without letting the peak clip.
-  let sum = 0;
-  let n = 0;
-  let peak = 0;
-  for (const v of clip) {
-    peak = Math.max(peak, Math.abs(v));
-    if (Math.abs(v) > threshold) { sum += v * v; n++; }
-  }
-  const speaking = Math.sqrt(sum / (n || 1));
-  const gain = Math.min(TARGET_RMS / (speaking || 1), PEAK / (peak || 1));
-  clip = clip.map(v => v * gain);
-  // A 10 ms fade at each end so nothing clicks.
-  const fade = Math.round(sr * 0.01);
-  for (let i = 0; i < fade && i < clip.length; i++) {
-    clip[i] *= i / fade;
-    clip[clip.length - 1 - i] *= i / fade;
-  }
-  const samples = resample(clip, sr, RATE);
-  return { samples, wav: encodeWav(samples, RATE), seconds: samples.length / RATE };
-}
-
-// Windowed-sinc resampling, low-passed just under the new Nyquist frequency.
-function resample(input, from, to) {
-  if (from === to) return input;
-  const ratio = from / to;
-  const out = new Float32Array(Math.floor(input.length / ratio));
-  const cutoff = Math.min(1, to / from) * 0.92;
-  const half = 16;
-  for (let i = 0; i < out.length; i++) {
-    const center = i * ratio;
-    const lo = Math.ceil(center - half * ratio);
-    const hi = Math.floor(center + half * ratio);
-    let acc = 0;
-    let norm = 0;
-    for (let k = lo; k <= hi; k++) {
-      if (k < 0 || k >= input.length) continue;
-      const x = (k - center) * cutoff;
-      const sinc = x === 0 ? 1 : Math.sin(Math.PI * x) / (Math.PI * x);
-      const w = 0.5 + 0.5 * Math.cos((Math.PI * (k - center)) / (half * ratio + 1));
-      acc += input[k] * sinc * w;
-      norm += sinc * w;
-    }
-    out[i] = norm ? acc / norm : 0;
-  }
-  return out;
-}
-
-function encodeWav(samples, rate) {
-  const view = new DataView(new ArrayBuffer(44 + samples.length * 2));
-  const text = (o, s) => [...s].forEach((ch, i) => view.setUint8(o + i, ch.charCodeAt(0)));
-  text(0, 'RIFF');
-  view.setUint32(4, 36 + samples.length * 2, true);
-  text(8, 'WAVE');
-  text(12, 'fmt ');
-  view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true); // PCM
-  view.setUint16(22, 1, true); // mono
-  view.setUint32(24, rate, true);
-  view.setUint32(28, rate * 2, true);
-  view.setUint16(32, 2, true);
-  view.setUint16(34, 16, true);
-  text(36, 'data');
-  view.setUint32(40, samples.length * 2, true);
-  samples.forEach((v, i) => view.setInt16(44 + i * 2, Math.max(-1, Math.min(1, v)) * 0x7fff, true));
-  return new Blob([view.buffer], { type: 'audio/wav' });
 }
 
 function playSamples(samples, rate) {
@@ -263,7 +165,7 @@ async function saveTake() {
   if (!c || !S.take || S.busy) return;
   S.busy = true;
   try {
-    const res = await fetch(`api/clip/${c.id}`, { method: 'POST', headers: { 'content-type': 'audio/wav', 'x-studio': '1' }, body: S.take.wav });
+    const res = await fetch(`api/clip/${c.id}`, { method: 'POST', headers: { 'content-type': 'audio/wav', 'x-studio': '1' }, body: new Blob([S.take.wav], { type: 'audio/wav' }) });
     if (!res.ok) throw new Error(await res.text());
     S.recorded[c.id] = (await res.json()).file;
     S.take = null;

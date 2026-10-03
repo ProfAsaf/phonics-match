@@ -13,6 +13,8 @@ import {
   applyPlacement, applyLevelCheck, levelCheckWords, chantFor,
 } from '../js/session.js';
 import { topConfusions, nextStep } from '../js/stats.js';
+import { processTake, RATE } from '../js/takes.js';
+import { voiceJobs } from '../js/voices.js';
 
 const read = name => JSON.parse(readFileSync(new URL(`../content/${name}.json`, import.meta.url), 'utf8'));
 const C = buildIndex(Object.fromEntries(
@@ -390,4 +392,32 @@ test('dashboard confusions pair up the letters he mixed up', () => {
   P.records['ls:e'] = applyAttempt(P.records['ls:e'], { day: DAY0, hit: false, activity: 'soundMatch', picked: 'i' });
   P.records['ls:i'] = applyAttempt(P.records['ls:i'], { day: DAY0, hit: false, activity: 'soundMatch', picked: 'e' });
   assert.deepEqual(topConfusions(P, DAY0)[0], { pair: 'e and i', count: 2 });
+});
+
+// ---- Recordings and AI voices
+test('a take is trimmed, leveled, and saved as 16 kHz mono WAV', () => {
+  const sr = 48000;
+  const data = new Float32Array(sr * 1.5);
+  for (let i = 0; i < data.length; i++) {
+    const t = i / sr;
+    data[i] = ((Math.sin(i * 12.9898) * 43758.5453) % 1) * 0.001 + (t >= 0.4 && t < 1 ? 0.3 * Math.sin(2 * Math.PI * 300 * t) : 0);
+  }
+  const take = processTake({ sampleRate: sr, channels: [data] });
+  assert.ok(take.seconds > 0.65 && take.seconds < 0.8, String(take.seconds)); // 0.6 s of sound plus short margins
+  const voiced = [...take.samples].filter(v => Math.abs(v) > 0.02);
+  const rms = Math.sqrt(voiced.reduce((a, v) => a + v * v, 0) / voiced.length);
+  assert.ok(Math.abs(rms - 0.1) < 0.02, String(rms));
+  const view = new DataView(take.wav);
+  assert.equal(String.fromCharCode(...new Uint8Array(take.wav, 0, 4)), 'RIFF');
+  assert.equal(view.getUint16(22, true), 1);
+  assert.equal(view.getUint32(24, true), RATE);
+  assert.throws(() => processTake({ sampleRate: sr, channels: [new Float32Array(4800)] }), /silent/);
+});
+
+test('the AI voice makes every clip except the letter sounds and his shout; nonsense words carry their rhyme', () => {
+  const jobs = voiceJobs(C);
+  const expected = C.clips.filter(c => c.kind !== 'sound' && c.kind !== 'shout').map(c => c.id).sort();
+  assert.deepEqual(jobs.map(j => j.id).sort(), expected);
+  assert.match(jobs.find(j => j.id === 'w-lom').instructions, /rhymes with "mom"/);
+  assert.ok(jobs.every(j => j.text && j.instructions));
 });

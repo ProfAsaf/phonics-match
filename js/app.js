@@ -7,6 +7,7 @@ import { AudioEngine } from './audio.js';
 import { playChant } from './music.js';
 import { today } from './mastery.js';
 import { loadProgress, saveProgress } from './storage.js';
+import { listIds, getAudio } from './clipstore.js';
 import {
   planSession, currentItem, advance, atHalftime, halftime, halfTotal, scoreItem, finishSession,
   introduceSightWords, chantFor, placementItems, applyPlacement,
@@ -404,6 +405,8 @@ async function boot() {
   state.P = loadProgress(state.C, state.day);
   state.audio = new AudioEngine(state.C);
   state.audio.onCaption = text => caption(text);
+  state.audio.getLocal = getAudio;
+  state.audio.local = new Set(await listIds()); // clips recorded or made on this device
   applySettings();
   await state.audio.loadManifest();
   document.addEventListener('visibilitychange', () => {

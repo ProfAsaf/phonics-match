@@ -35,6 +35,7 @@ async function saveClip(id, body) {
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   const clips = { ...manifest.clips, [id]: file };
   manifest.clips = Object.fromEntries(Object.keys(clips).sort().map(k => [k, clips[k]]));
+  if (manifest.voices) delete manifest.voices[id]; // a real recording now; voice remakes leave it alone
   await writeFile(`${manifestPath}.tmp`, `${JSON.stringify(manifest, null, 2)}\n`);
   await rename(`${manifestPath}.tmp`, manifestPath);
   return file;

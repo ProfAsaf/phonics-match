@@ -10,11 +10,25 @@ node tools/studio-server.mjs
 
 Then open http://localhost:8321/. The first launch runs the sound check, team and color picks, and the placement sweep. Hold the gear in the top-left corner for three seconds to open the parent area.
 
-## Recording
+## Audio
 
-With the same server running, open http://localhost:8321/studio.html. It lists every clip the content needs, grouped so you can record one level at a time. Each take is trimmed, leveled, and saved as `audio/<id>.wav`, and `audio/manifest.json` is updated.
+- **Words, sentences, prompts, and commentary** come with a free AI voice (Kokoro, open source), made on a computer and published with the site in `audio/`. Words are spoken from their letters, sound by sound, so every vowel is the short one the game teaches and nonsense words come out exactly as spelled.
+- **The 24 letter sounds and his goal shout** need a real voice. Record them on the phone or iPad: in the parent area (hold the gear for three seconds), open Recordings → Record and make voices. Tap Record, say it, tap Stop, listen, then Keep. Each take is trimmed and leveled, and any other clip can be re-recorded the same way.
+- **Export recordings** in that screen to keep a backup, since Safari can clear a site's storage. Import puts them back on this or another device.
 
-Until a clip is recorded, the game plays a placeholder tone and shows a caption with the words. That way the whole game can be tried before anything is recorded. Once recording is done, turn placeholders off in the parent area; from then on, anything without a recording is left out of play.
+Clips recorded on a device stay on that device and take priority over files in `audio/`. Until a clip exists, the game plays a placeholder tone with a caption. Once everything has audio, turn placeholders off in the parent area; from then on, anything without audio is left out of play.
+
+### Remaking the free voices
+
+After changing words or sentences, or to try another voice, make the missing clips on a computer, then publish:
+
+```bash
+node tools/make-voices.mjs
+```
+
+The first time on a computer, run it with `--setup`: that makes a Python environment and downloads the voice model (about 400 MB) to `%LOCALAPPDATA%\phonics-voice`, outside the repo. Add `--voice af_bella --redo` to remake every AI clip in another voice; Kokoro's English voices are named `af_…` and `am_…`.
+
+The recorder can also make clips with an OpenAI voice instead, given an API key from platform.openai.com. On a computer, the studio (open http://localhost:8321/studio.html with the server running) records straight into `audio/`.
 
 ## Put it on the phone
 

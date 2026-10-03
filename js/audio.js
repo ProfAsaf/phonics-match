@@ -14,7 +14,10 @@ export class AudioEngine {
     this.base = base;
     this.ctx = null;
     this.buffers = new Map();
-    this.recorded = {};
+    this.recorded = {}; // clips published in audio/manifest.json
+    this.madeVoices = {};
+    this.local = new Set(); // clips made on this device; they win over published ones
+    this.getLocal = null; // id -> WAV bytes, from the clip store
     this.sources = new Set();
     this.timers = new Set();
     this.waits = new Set();
@@ -26,6 +29,8 @@ export class AudioEngine {
 
   // Must run inside a tap: iOS starts audio only from a user gesture.
   unlock() {
+    // Play like a media app, so the iPhone's silent switch doesn't mute the game (Safari 16.4+).
+    if (navigator.audioSession) navigator.audioSession.type = 'playback';
     if (!this.ctx) {
       const AC = window.AudioContext || window.webkitAudioContext;
       this.ctx = new AC();
@@ -46,14 +51,22 @@ export class AudioEngine {
   async loadManifest() {
     try {
       const res = await fetch(`${this.base}manifest.json`, { cache: 'no-cache' });
-      this.recorded = (await res.json()).clips ?? {};
+      const manifest = await res.json();
+      this.recorded = manifest.clips ?? {};
+      this.madeVoices = manifest.voices ?? {}; // published clips made with the free AI voice
     } catch {
       this.recorded = {};
+      this.madeVoices = {};
     }
   }
 
   isRecorded(id) {
-    return Object.hasOwn(this.recorded, id);
+    return this.local.has(id) || Object.hasOwn(this.recorded, id);
+  }
+
+  // Drops a decoded clip so the next play loads the new version.
+  forget(id) {
+    this.buffers.delete(id);
   }
 
   // An item may be played only when all of its audio exists (or placeholders are on).
@@ -68,7 +81,15 @@ export class AudioEngine {
   async load(id) {
     if (this.buffers.has(id)) return this.buffers.get(id);
     let buffer = null;
-    if (this.isRecorded(id)) {
+    if (this.local.has(id) && this.getLocal) {
+      try {
+        const data = await this.getLocal(id);
+        if (data) buffer = await this.decode(data.slice(0));
+      } catch (e) {
+        console.warn(`Could not load saved clip ${id}`, e);
+      }
+    }
+    if (!buffer && Object.hasOwn(this.recorded, id)) {
       try {
         const res = await fetch(this.base + this.recorded[id]);
         buffer = await this.decode(await res.arrayBuffer());

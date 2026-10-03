@@ -8,6 +8,7 @@ import { familyCounts, topConfusions, realVsNonsense, history, nextStep, FAMILY_
 import { levelCheckWords, applyLevelCheck } from './session.js';
 import { letterState } from './choose.js';
 import { saveProgress, exportProgress, parseImport, clearProgress } from './storage.js';
+import { openRecorder } from './recorder.js';
 import { h, sleep } from './ui.js';
 
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
@@ -219,9 +220,9 @@ export function openParent(state, { onClose, runPlacement }) {
       save();
     });
     return [
-      h('p', {}, `${recorded} of ${C.clips.length} clips recorded.`),
-      h('label', { class: 'field inline' }, box, h('span', {}, 'Play a placeholder tone, with a caption, for each clip not recorded yet. Turn this off once recording is done: then anything without a recording is left out of play.')),
-      h('p', { class: 'muted' }, 'Record on a computer: run "node tools/studio-server.mjs" and open the address it prints, then add /studio.html.'),
+      h('p', {}, `${recorded} of ${C.clips.length} clips have audio.`),
+      h('button', { class: 'pbig due', onclick: () => openRecorder(state, overlay, { onBack: render }) }, 'Record and make voices'),
+      h('label', { class: 'field inline' }, box, h('span', {}, 'Play a placeholder tone, with a caption, for each clip that has no audio yet. Turn this off once everything is recorded: then anything without audio is left out of play.')),
     ];
   }
 

@@ -555,6 +555,27 @@ button {
 .spark .ref { stroke: #ced4da; stroke-dasharray: 4 4; }
 .custom { padding-left: 18px; }
 .hidden { display: none; }
+.pbig:disabled, .pclose:disabled { opacity: 0.45; }
+
+/* The recorder, inside the parent area */
+.notice { background: #fff8db; }
+.row-inline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.row-inline select, .field input[type="password"] { font: inherit; padding: 8px 10px; border-radius: 10px; border: 1px solid #ced4da; min-height: 44px; }
+.rec-list { display: flex; flex-direction: column; gap: 6px; }
+.rec-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px; padding: 10px; border-radius: 12px; background: #f8f9fa; border: 2px solid transparent; cursor: pointer; }
+.rec-row.sel { border-color: var(--kit); background: #fff; cursor: default; }
+.rec-row .status { width: 12px; height: 12px; border-radius: 50%; background: #ced4da; margin-top: 9px; flex: none; }
+.rec-row.done .status { background: #18a558; }
+.rec-row .what { flex: 1; min-width: 160px; }
+.rec-row .say { font-size: 18px; font-weight: 600; }
+.rec-row .say.sound, .rec-row .say.word, .rec-row .say.nonsense, .rec-row .say.sight { font: 30px var(--print); }
+.rec-row .say.nonsense { color: #7b2cbf; }
+.chip { font-size: 12px; background: #e9ecef; color: #495057; border-radius: 999px; padding: 2px 9px; margin-top: 8px; }
+.rec-row.done .chip { background: #dff5e6; color: #18733f; }
+.rec-controls { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
+.pbig.rec { background: #ffe3e3; color: #a4161a; }
+.pbig.rec.on { background: #e5484d; color: #fff; }
+
 .check { max-width: 760px; margin: 0 auto; min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; }
 .check-word { font-size: clamp(80px, 22vmin, 180px); }
 .check-score { font-size: 64px; font-weight: 800; }
