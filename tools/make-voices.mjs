@@ -1,12 +1,15 @@
-// Makes the AI voice clips (everything except the letter sounds and his goal shout) with Kokoro,
-// a free open-source voice that runs on this computer, and adds them to audio/ like recordings.
-// Words are spoken from their letters, sound by sound, so every vowel is the short one the game
-// teaches, and nonsense words come out exactly as spelled. Sentences and prompts are read as text.
+// Makes the AI voice clips (everything except his goal shout) with Kokoro, a free open-source
+// voice that runs on this computer, and adds them to audio/ like recordings. Words are spoken from
+// their letters, sound by sound, so every vowel is the short one the game teaches, and nonsense
+// words come out exactly as spelled. Sentences and prompts are read as text. The letter sounds are
+// cut from syllables Kokoro says cleanly, by tools/kokoro_sounds.py.
 //
 //   node tools/make-voices.mjs --setup       one time: a Python environment and the voice model
 //   node tools/make-voices.mjs               make every clip that has no audio yet
+//   node tools/make-voices.mjs --sounds      make the letter sounds that have no audio yet
 //   node tools/make-voices.mjs --voice af_bella --redo     remake the AI clips in another voice
 //
+// Clips recorded in the studio are never replaced: --redo only remakes clips this tool made.
 // The voice lives outside the repo, in PHONICS_VOICE_DIR (default: %LOCALAPPDATA%\phonics-voice).
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync, renameSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
@@ -27,7 +30,7 @@ const args = process.argv.slice(2);
 const flag = name => args.includes(name);
 const option = (name, fallback) => (args.includes(name) ? args[args.indexOf(name) + 1] : fallback);
 const run = (cmd, cmdArgs) => {
-  const r = spawnSync(cmd, cmdArgs, { stdio: 'inherit' });
+  const r = spawnSync(cmd, cmdArgs, { stdio: 'inherit', env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
   if (r.status !== 0) throw new Error(`${cmd} ${cmdArgs.join(' ')} failed`);
 };
 
@@ -78,10 +81,52 @@ manifest.clips ??= {};
 manifest.voices ??= {}; // clips made by this tool, and in which voice; a studio recording removes its entry
 const voice = option('--voice', 'af_heart');
 const only = option('--only', null)?.split(',');
+const wanted = id => (only ? only.includes(id) : !manifest.clips[id] || (flag('--redo') && manifest.voices[id]));
 const kindOf = Object.fromEntries(C.clips.map(c => [c.id, c.kind]));
+const work = join(tmpdir(), `phonics-voices-${voice}`);
+mkdirSync(work, { recursive: true });
+
+// Trims, levels, and saves one of Kokoro's WAV files like a recording.
+const save = (id, file) => {
+  const raw = readFileSync(file);
+  const rate = raw.readUInt32LE(24);
+  const dataAt = raw.indexOf('data', 12, 'ascii') + 8;
+  const pcm = new Int16Array(raw.buffer.slice(raw.byteOffset + dataAt, raw.byteOffset + raw.length - ((raw.length - dataAt) % 2)));
+  const take = processTake({ sampleRate: rate, channels: [Float32Array.from(pcm, v => v / 32768)] });
+  writeFileSync(join(ROOT, 'audio', `${id}.wav`), Buffer.from(take.wav));
+  manifest.clips[id] = `${id}.wav`;
+  manifest.voices[id] = voice;
+  return take;
+};
+const sorted = obj => Object.fromEntries(Object.keys(obj).sort().map(k => [k, obj[k]]));
+const saveManifest = () => {
+  manifest.clips = sorted(manifest.clips);
+  manifest.voices = sorted(manifest.voices);
+  writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+};
+
+// ---- The letter sounds
+if (flag('--sounds')) {
+  const ids = C.clips.filter(c => c.kind === 'sound').map(c => c.id).filter(wanted);
+  if (!ids.length) {
+    console.log('Every letter sound already has audio. Add --redo to remake the AI ones.');
+    process.exit(0);
+  }
+  const out = join(work, 'sounds');
+  rmSync(out, { recursive: true, force: true });
+  console.log(`Making ${ids.length} letter sounds with ${voice}…`);
+  run(PYTHON, [fileURLToPath(new URL('kokoro_sounds.py', import.meta.url)), '--model-dir', VOICE_DIR, '--out', out, '--voice', voice, '--only', ids.map(id => id.slice(2)).join(',')]);
+  const made = ids.filter(id => existsSync(join(out, `${id}.wav`)));
+  for (const id of made) save(id, join(out, `${id}.wav`));
+  saveManifest();
+  console.log(`Saved ${made.length} letter sounds to audio/. Listen to each in the parent area (Recordings) and re-record any that sound wrong.`);
+  const missed = ids.filter(id => !made.includes(id));
+  if (missed.length) console.log(`Not made, so still placeholders: ${missed.join(', ')}`);
+  process.exit(0);
+}
 
 const jobs = voiceJobs(C)
-  .filter(j => (only ? only.includes(j.id) : !manifest.clips[j.id] || (flag('--redo') && manifest.voices[j.id])))
+  .filter(j => wanted(j.id))
   .map(j => {
     const w = j.id.startsWith('w-') ? C.byWord.get(j.id.slice(2)) : null;
     const kind = kindOf[j.id];
@@ -95,8 +140,6 @@ if (!jobs.length) {
 }
 
 // ---- Speak them, then trim, level, and save each like a recording
-const work = join(tmpdir(), `phonics-voices-${voice}`);
-mkdirSync(work, { recursive: true });
 writeFileSync(join(work, 'jobs.json'), JSON.stringify(jobs));
 console.log(`Making ${jobs.length} clips with ${voice}…`);
 if (flag('--redo') || only) for (const j of jobs) rmSync(join(work, 'raw', `${j.id}.wav`), { force: true });
@@ -105,21 +148,11 @@ run(PYTHON, [fileURLToPath(new URL('kokoro.py', import.meta.url)), '--model-dir'
 let bytes = 0;
 const report = [];
 for (const j of jobs) {
-  const raw = readFileSync(join(work, 'raw', `${j.id}.wav`));
-  const rate = raw.readUInt32LE(24);
-  const dataAt = raw.indexOf('data', 12, 'ascii') + 8;
-  const pcm = new Int16Array(raw.buffer.slice(raw.byteOffset + dataAt, raw.byteOffset + raw.length - ((raw.length - dataAt) % 2)));
-  const take = processTake({ sampleRate: rate, channels: [Float32Array.from(pcm, v => v / 32768)] });
-  writeFileSync(join(ROOT, 'audio', `${j.id}.wav`), Buffer.from(take.wav));
-  manifest.clips[j.id] = `${j.id}.wav`;
-  manifest.voices[j.id] = voice;
+  const take = save(j.id, join(work, 'raw', `${j.id}.wav`));
   bytes += take.wav.byteLength;
   report.push([j.id, take.seconds]);
 }
-const sorted = obj => Object.fromEntries(Object.keys(obj).sort().map(k => [k, obj[k]]));
-manifest.clips = sorted(manifest.clips);
-manifest.voices = sorted(manifest.voices);
-writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+saveManifest();
 
 const short = report.filter(([, s]) => s < 0.2).map(([id]) => id);
 console.log(`Saved ${report.length} clips (${(bytes / 1e6).toFixed(1)} MB) to audio/ and updated audio/manifest.json.`);

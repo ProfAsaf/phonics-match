@@ -13,7 +13,8 @@ Then open http://localhost:8321/. The first launch runs the sound check, team an
 ## Audio
 
 - **Words, sentences, prompts, and commentary** come with a free AI voice (Kokoro, open source), made on a computer and published with the site in `audio/`. Words are spoken from their letters, sound by sound, so every vowel is the short one the game teaches and nonsense words come out exactly as spelled.
-- **The 24 letter sounds and his goal shout** need a real voice. Record them on the phone or iPad: in the parent area (hold the gear for three seconds), open Recordings → Record and make voices. Tap Record, say it, tap Stop, listen, then Keep. Each take is trimmed and leveled, and any other clip can be re-recorded the same way.
+- **The 24 letter sounds** come from the same voice. A voice can't say a bare sound, so each one is cut from a syllable Kokoro says cleanly ("buh", "ahs", "zoo") and stretched to a second where the sound is held. Check them by ear: in the parent area (hold the gear for three seconds), open Recordings → Record and make voices, play each letter sound, and re-record any that sound wrong. Tap Record, say it, and it stops by itself; listen, then Keep. Each take is trimmed and leveled, and any other clip can be re-recorded the same way.
+- **His goal shout** is his to record, the same way.
 - **Export recordings** in that screen to keep a backup, since Safari can clear a site's storage. Import puts them back on this or another device.
 
 Clips recorded on a device stay on that device and take priority over files in `audio/`. Until a clip exists, the game plays a placeholder tone with a caption. Once everything has audio, turn placeholders off in the parent area; from then on, anything without audio is left out of play.
@@ -27,6 +28,12 @@ node tools/make-voices.mjs
 ```
 
 The first time on a computer, run it with `--setup`: that makes a Python environment and downloads the voice model (about 400 MB) to `%LOCALAPPDATA%\phonics-voice`, outside the repo. Add `--voice af_bella --redo` to remake every AI clip in another voice; Kokoro's English voices are named `af_…` and `am_…`.
+
+The letter sounds are made separately, by `tools/kokoro_sounds.py`, with `--sounds` (add `--redo` to remake them, or `--only s-z,s-v` for some). Clips recorded in the studio are never replaced.
+
+```bash
+node tools/make-voices.mjs --sounds
+```
 
 The recorder can also make clips with an OpenAI voice instead, given an API key from platform.openai.com. On a computer, the studio (open http://localhost:8321/studio.html with the server running) records straight into `audio/`.
 

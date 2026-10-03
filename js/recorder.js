@@ -1,6 +1,6 @@
-// Recording on the device itself, from the parent area. The letter sounds and his goal shout are
-// recorded with the microphone; everything else can be made once with an AI voice, and any clip
-// can be re-recorded. Clips are trimmed and leveled the same way as in the studio.
+// Recording on the device itself, from the parent area. His goal shout is recorded with the
+// microphone; everything else comes with the free AI voice (or can be made once with an OpenAI
+// voice), and any clip can be re-recorded. Clips are trimmed and leveled the same way as in the studio.
 import { today } from './mastery.js';
 import { processTake, takeFromBuffer } from './takes.js';
 import * as store from './clipstore.js';
@@ -8,15 +8,15 @@ import { VOICES, voiceJobs, speakWithRetry } from './voices.js';
 import { MicSession } from './mic.js';
 import { h } from './ui.js';
 
-const MIC_ONLY = new Set(['sound', 'shout']); // the AI voice never makes these
-const GROUP_LABELS = { Sounds: 'Letter sounds: record these yourself', 'Goal commentary': 'His goal shout, and goal commentary' };
+const MIC_ONLY = new Set(['sound', 'shout']); // an OpenAI voice can't say a bare letter sound
+const GROUP_LABELS = { Sounds: 'Letter sounds: listen, and re-record any that sound wrong', 'Goal commentary': 'His goal shout, and goal commentary' };
 const SAMPLE_LINE = 'Read the word. Find its picture.';
 
 export async function openRecorder(state, overlay, { onBack }) {
   const { C, audio } = state;
   let meta = await store.listMeta();
   let group = 'Sounds';
-  let selected = C.clips.find(c => c.group === group && !audio.isRecorded(c.id))?.id ?? null;
+  let selected = C.clips.find(c => c.group === group && !audio.isRecorded(c.id))?.id ?? C.clips.find(c => c.group === group)?.id ?? null;
   let take = null; // { id, samples, wav, seconds } waiting to be kept
   let recording = null; // { stop } while the microphone is on
   let making = null; // { controller } while AI voices are being made
@@ -84,9 +84,9 @@ export async function openRecorder(state, overlay, { onBack }) {
         h('button', { class: 'pclose', disabled: !!making || !!recording, onclick: leave }, 'Back')),
       notice && h('section', { class: 'psec notice' }, notice),
       h('section', { class: 'psec' },
-        h('h2', {}, 'AI voice for words, sentences, and prompts'),
+        h('h2', {}, 'AI voices'),
         counts.free
-          ? [h('p', { class: 'muted' }, 'Words, sentences, and prompts already have a free AI voice. Letter sounds and his goal shout need a real voice, so record those below; any other clip can be re-recorded too.'),
+          ? [h('p', { class: 'muted' }, 'Words, sentences, prompts, and letter sounds already have a free AI voice. The letter sounds are cut from AI speech, so listen to each one below and re-record any that sound wrong. His goal shout is his to record; any other clip can be re-recorded too.'),
             h('details', { open: !!making }, h('summary', {}, 'Switch to an OpenAI voice (optional)'), openai)]
           : [h('p', { class: 'muted' }, 'Letter sounds and his goal shout need a real voice, so record those below. Everything else can be made once with an OpenAI voice, for a few cents. These are AI-generated voices; any clip can be re-recorded below.'),
             openai]),
