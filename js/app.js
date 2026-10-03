@@ -415,6 +415,11 @@ async function boot() {
     if (document.hidden) ctx.suspend();
     else ctx.resume();
   });
+  // Any tap revives the audio if iOS stopped it (a phone call, the microphone, the app in the
+  // background); taps count as the user gesture iOS requires.
+  document.addEventListener('pointerdown', () => {
+    if (!state.audio.running) state.audio.unlock();
+  }, true);
   registerServiceWorker();
   if (LOCAL) window.phonics = state; // for poking at a session from the console while testing
   startScreen();

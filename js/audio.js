@@ -48,6 +48,21 @@ export class AudioEngine {
     return this.ctx?.state === 'running';
   }
 
+  // Drops the audio context; the next tap makes a fresh one (see unlock). Used after the
+  // microphone, which on iPhones can leave Web Audio stalled or playing through the earpiece.
+  reset() {
+    this.stop();
+    try {
+      this.ctx?.close();
+    } catch {
+      // already closed
+    }
+    this.ctx = null;
+    this.out = null;
+    this.noiseBuffer = null;
+    this.buffers.clear();
+  }
+
   async loadManifest() {
     try {
       const res = await fetch(`${this.base}manifest.json`, { cache: 'no-cache' });
@@ -79,6 +94,7 @@ export class AudioEngine {
   }
 
   async load(id) {
+    if (!this.ctx) return null; // no audio until the next tap brings it back
     if (this.buffers.has(id)) return this.buffers.get(id);
     let buffer = null;
     if (this.local.has(id) && this.getLocal) {
@@ -107,13 +123,13 @@ export class AudioEngine {
   }
 
   now() {
-    return this.ctx.currentTime;
+    return this.ctx?.currentTime ?? 0;
   }
 
   // Starts a clip at an exact time on the audio clock and returns when it will end.
   at(id, when) {
     const buffer = this.buffers.get(id);
-    if (!buffer) return when;
+    if (!buffer || !this.ctx) return when;
     const src = this.ctx.createBufferSource();
     src.buffer = buffer;
     src.connect(this.out);
@@ -206,6 +222,7 @@ export class AudioEngine {
   }
 
   async cue(id) {
+    if (!this.ctx) return;
     const h = hash(id);
     const t = this.now() + 0.03;
     [h % 5, (h >> 4) % 5].forEach((n, i) => this.tone(523.25 * 2 ** (PENTATONIC[n] / 12), t + i * 0.13, 0.12, 'triangle', 0.2));
@@ -214,6 +231,7 @@ export class AudioEngine {
 
   // ---- Synthesized sounds: music and effects, never speech.
   tone(freq, when, dur, type = 'sine', gain = 0.2) {
+    if (!this.ctx) return;
     const osc = this.ctx.createOscillator();
     const env = this.ctx.createGain();
     osc.type = type;
@@ -228,6 +246,7 @@ export class AudioEngine {
   }
 
   noise(when, dur, { gain = 0.2, type = 'bandpass', freq = 1500, q = 1 } = {}) {
+    if (!this.ctx) return;
     if (!this.noiseBuffer) {
       this.noiseBuffer = this.ctx.createBuffer(1, this.ctx.sampleRate, this.ctx.sampleRate);
       const d = this.noiseBuffer.getChannelData(0);
@@ -249,6 +268,7 @@ export class AudioEngine {
   }
 
   kick(when) {
+    if (!this.ctx) return;
     const osc = this.ctx.createOscillator();
     const env = this.ctx.createGain();
     osc.frequency.setValueAtTime(130, when);

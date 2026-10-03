@@ -2,7 +2,7 @@
 // recorded with the microphone; everything else can be made once with an AI voice, and any clip
 // can be re-recorded. Clips are trimmed and leveled the same way as in the studio.
 import { today } from './mastery.js';
-import { processTake, takeFromBuffer, RATE } from './takes.js';
+import { processTake, takeFromBuffer } from './takes.js';
 import * as store from './clipstore.js';
 import { VOICES, voiceJobs, speakWithRetry } from './voices.js';
 import { h } from './ui.js';
@@ -20,6 +20,7 @@ export async function openRecorder(state, overlay, { onBack }) {
   let take = null; // { id, samples, wav, seconds } waiting to be kept
   let recording = null; // { stop } while the microphone is on
   let making = null; // { controller } while AI voices are being made
+  let usedMic = false;
   let notice = '';
 
   // The AI voice controls are made once, so the key and choices survive re-renders.
@@ -125,11 +126,11 @@ export async function openRecorder(state, overlay, { onBack }) {
     else controls.append(h('button', { class: 'pbig rec', onclick: () => startRecording(c.id) }, '● Record'));
     if (take?.id === c.id && !recording) {
       controls.append(
-        h('button', { class: 'pbig', onclick: () => playSamples(take.samples) }, `▶ Hear take (${take.seconds.toFixed(1)}s)`),
+        h('button', { class: 'pbig', onclick: () => playWav(take.wav) }, `▶ Hear take (${take.seconds.toFixed(1)}s)`),
         h('button', { class: 'pbig due', onclick: keepTake }, '✓ Keep'),
         h('button', { class: 'pbig', onclick: () => { take = null; render(); } }, 'Discard'));
     } else if (source && !recording) {
-      controls.append(h('button', { class: 'pbig', onclick: () => { ensureAudio(); audio.stop(); audio.play(c.id); } }, '▶ Play'));
+      controls.append(h('button', { class: 'pbig', onclick: () => playClip(c.id) }, '▶ Play'));
       if (meta.has(c.id)) controls.append(h('button', { class: 'pbig', onclick: () => removeClip(c.id) }, 'Remove'));
     }
     el.append(controls);
@@ -148,6 +149,7 @@ export async function openRecorder(state, overlay, { onBack }) {
       return render();
     }
     if (navigator.audioSession) navigator.audioSession.type = 'play-and-record';
+    usedMic = true;
     let stream;
     try {
       stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
@@ -186,23 +188,38 @@ export async function openRecorder(state, overlay, { onBack }) {
     try {
       const decoded = await audio.decode(await blob.arrayBuffer());
       take = { id: selected, ...processTake(takeFromBuffer(decoded)) };
-      playSamples(take.samples);
     } catch (e) {
       notice = `That take didn't work: ${e.message}`;
     }
     render();
+    if (take) playWav(take.wav, { quiet: true }); // Safari may hold this back until the next tap
   }
 
-  function playSamples(samples) {
-    ensureAudio();
+  // Previews play through Safari's media player rather than the game's Web Audio, which the
+  // microphone can leave stalled or routed to the earpiece on iPhones.
+  let player = null;
+  function playUrl(url, { quiet = false, revoke = false } = {}) {
     audio.stop();
-    const buffer = audio.ctx.createBuffer(1, samples.length, RATE);
-    buffer.copyToChannel(samples, 0);
-    const src = audio.ctx.createBufferSource();
-    src.buffer = buffer;
-    src.connect(audio.out);
-    src.start();
-    audio.track(src);
+    if (player) player.pause();
+    player = new Audio(url);
+    if (revoke) player.addEventListener('ended', () => URL.revokeObjectURL(url));
+    return player.play().catch(e => {
+      if (quiet) return;
+      notice = `It didn't play: ${e.message}`;
+      render();
+    });
+  }
+
+  function playWav(wav, opts = {}) {
+    return playUrl(URL.createObjectURL(new Blob([wav], { type: 'audio/wav' })), { ...opts, revoke: true });
+  }
+
+  async function playClip(id) {
+    if (meta.has(id)) {
+      const wav = await store.getAudio(id);
+      if (wav) return playWav(wav);
+    }
+    if (audio.recorded[id]) return playUrl(`audio/${audio.recorded[id]}`);
   }
 
   async function keepTake() {
@@ -258,7 +275,7 @@ export async function openRecorder(state, overlay, { onBack }) {
     try {
       const wav = await speakWithRetry({ key, voice: voice.value, text: SAMPLE_LINE, instructions: 'Say this warmly and clearly at a calm pace, like a warm teacher talking to a young child.' });
       const t = processTake(takeFromBuffer(await audio.decode(wav)));
-      playSamples(t.samples);
+      playWav(t.wav);
       notice = '';
     } catch (e) {
       notice = e.message;
@@ -350,7 +367,10 @@ export async function openRecorder(state, overlay, { onBack }) {
 
   function leave() {
     if (making || recording) return;
+    player?.pause();
     audio.stop();
+    // After the microphone, start the game's audio fresh on the next tap, in case iOS left it stalled.
+    if (usedMic) audio.reset();
     onBack();
   }
 }
