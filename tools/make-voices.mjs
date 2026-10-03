@@ -62,9 +62,10 @@ const read = name => {
 };
 const C = buildIndex(Object.fromEntries(['sounds', 'levels', 'words', 'nonsense', 'sentences', 'prompts', 'custom-sentences'].map(n => [n, read(n)])));
 
-// How Kokoro spells each letter's taught sound; it matches Kokoro's own reading of regular words.
+// How Kokoro spells each letter's taught sound; it matches Kokoro's own reading of regular words,
+// except j: written as two symbols (dʒ), Kokoro drops the j's hiss and "jet" sounds like "yet".
 const SOUNDS = {
-  a: 'æ', e: 'ɛ', i: 'ɪ', o: 'ɑː', u: 'ʌ', b: 'b', c: 'k', d: 'd', f: 'f', g: 'ɡ', h: 'h', j: 'dʒ', k: 'k', l: 'l',
+  a: 'æ', e: 'ɛ', i: 'ɪ', o: 'ɑː', u: 'ʌ', b: 'b', c: 'k', d: 'd', f: 'f', g: 'ɡ', h: 'h', j: 'ʤ', k: 'k', l: 'l',
   m: 'm', n: 'n', p: 'p', r: 'ɹ', s: 's', t: 't', v: 'v', w: 'w', x: 'ks', y: 'j', z: 'z', ck: 'k', ll: 'l',
 };
 const phonemesFor = w => {

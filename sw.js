@@ -1,6 +1,6 @@
 // Offline play from the home screen (SPEC.md, "Technical requirements"): caches the whole game and
 // every recorded clip in audio/manifest.json. Bump VERSION on each release so phones pick it up.
-const VERSION = 6;
+const VERSION = 7;
 const CACHE = `phonics-v${VERSION}`;
 const FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/game.css',
