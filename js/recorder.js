@@ -5,11 +5,11 @@ import { today } from './mastery.js';
 import { processTake, takeFromBuffer } from './takes.js';
 import * as store from './clipstore.js';
 import { VOICES, voiceJobs, speakWithRetry } from './voices.js';
+import { MicSession } from './mic.js';
 import { h } from './ui.js';
 
 const MIC_ONLY = new Set(['sound', 'shout']); // the AI voice never makes these
 const GROUP_LABELS = { Sounds: 'Letter sounds: record these yourself', 'Goal commentary': 'His goal shout, and goal commentary' };
-const MAX_TAKE_SECONDS = 8;
 const SAMPLE_LINE = 'Read the word. Find its picture.';
 
 export async function openRecorder(state, overlay, { onBack }) {
@@ -33,6 +33,13 @@ export async function openRecorder(state, overlay, { onBack }) {
   const stop = h('button', { class: 'pbig danger', onclick: () => making?.controller.abort() }, 'Stop');
   const importFile = h('input', { type: 'file', accept: 'application/json,.json', class: 'hidden' });
   importFile.addEventListener('change', importRecordings);
+
+  // The microphone stays on while the recorder is open, and turns off if the app goes to the background.
+  const mic = new MicSession();
+  const onHidden = () => {
+    if (document.hidden && !recording) mic.close();
+  };
+  document.addEventListener('visibilitychange', onHidden);
 
   const sourceOf = id => meta.get(id)?.source
     ?? (Object.hasOwn(audio.recorded, id) ? (audio.madeVoices[id] ? 'free' : 'website') : null);
@@ -122,8 +129,19 @@ export async function openRecorder(state, overlay, { onBack }) {
       return el;
     }
     const controls = h('div', { class: 'rec-controls' });
-    if (recording) controls.append(h('button', { class: 'pbig rec on', onclick: stopRecording }, '■ Stop'));
-    else controls.append(h('button', { class: 'pbig rec', onclick: () => startRecording(c.id) }, '● Record'));
+    if (recording?.live) {
+      // Unmistakable: speak now. The meter shows it hearing you; it stops by itself after you finish.
+      controls.append(
+        h('div', { class: 'rec-live' }, h('div', {}, '● Recording: say it now'), h('div', { class: 'meter' }, h('i'))),
+        h('button', { class: 'pbig rec on', onclick: stopRecording }, '■ Stop'));
+    } else if (recording) {
+      controls.append(h('div', { class: 'rec-wait' }, 'Getting the microphone ready…'));
+    } else {
+      controls.append(h('button', { class: 'pbig rec', onclick: () => startRecording(c.id) }, '● Record'));
+    }
+    if (!recording && take?.id !== c.id) {
+      controls.append(h('div', { class: 'muted rec-hint' }, 'Tap Record. When the red bar shows, say it. It stops by itself when you finish.'));
+    }
     if (take?.id === c.id && !recording) {
       controls.append(
         h('button', { class: 'pbig', onclick: () => playWav(take.wav) }, `▶ Hear take (${take.seconds.toFixed(1)}s)`),
@@ -141,55 +159,46 @@ export async function openRecorder(state, overlay, { onBack }) {
     if (!audio.ctx || audio.ctx.state !== 'running') audio.unlock();
   }
 
-  // ---- Microphone
+  // ---- Microphone: asked for once per visit, on for the whole visit.
   async function startRecording(id) {
-    ensureAudio();
-    if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) {
-      notice = 'This browser cannot record. Use Safari on the iPhone or iPad, or the studio on a computer.';
-      return render();
-    }
-    if (navigator.audioSession) navigator.audioSession.type = 'play-and-record';
+    if (recording) return;
     usedMic = true;
-    let stream;
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
-    } catch {
-      if (navigator.audioSession) navigator.audioSession.type = 'playback';
-      notice = 'The microphone is blocked. Allow it for this site in Safari settings, then try again.';
-      return render();
-    }
-    const chunks = [];
-    const rec = new MediaRecorder(stream);
-    rec.ondataavailable = e => chunks.push(e.data);
-    const finished = new Promise(resolve => { rec.onstop = resolve; });
-    const timer = setTimeout(() => stopRecording(), MAX_TAKE_SECONDS * 1000);
-    recording = {
-      stop: async () => {
-        clearTimeout(timer);
-        rec.stop();
-        await finished;
-        stream.getTracks().forEach(t => t.stop()); // release the mic so playback is loud again
-        if (navigator.audioSession) navigator.audioSession.type = 'playback';
-        return new Blob(chunks, { type: rec.mimeType });
-      },
-    };
-    rec.start();
-    notice = '';
+    player?.pause();
     selected = id;
     take = null;
+    notice = '';
+    const session = { live: false, stop: null };
+    recording = session;
     render();
+    if (!(await mic.start())) {
+      recording = null;
+      notice = mic.error;
+      return render();
+    }
+    if (recording !== session) return; // left the recorder meanwhile
+    session.stop = mic.record({
+      onLive: () => {
+        session.live = true;
+        render();
+      },
+      onLevel: v => {
+        const bar = overlay.querySelector('.meter i');
+        if (bar) bar.style.width = `${Math.round(v * 100)}%`;
+      },
+      onAutoStop: () => stopRecording(),
+    }).stop;
   }
 
   async function stopRecording() {
-    if (!recording) return;
-    const active = recording;
+    const session = recording;
+    if (!session?.stop) return;
     recording = null;
-    const blob = await active.stop();
+    render();
+    const blob = await session.stop();
     try {
-      const decoded = await audio.decode(await blob.arrayBuffer());
-      take = { id: selected, ...processTake(takeFromBuffer(decoded)) };
+      take = { id: selected, ...processTake(takeFromBuffer(await mic.decode(blob))) };
     } catch (e) {
-      notice = `That take didn't work: ${e.message}`;
+      notice = e.message.includes('silent') ? "It didn't hear anything. Tap Record and try again, a little louder." : `That take didn't work: ${e.message}`;
     }
     render();
     if (take) playWav(take.wav, { quiet: true }); // Safari may hold this back until the next tap
@@ -368,6 +377,8 @@ export async function openRecorder(state, overlay, { onBack }) {
   function leave() {
     if (making || recording) return;
     player?.pause();
+    mic.close();
+    document.removeEventListener('visibilitychange', onHidden);
     audio.stop();
     // After the microphone, start the game's audio fresh on the next tap, in case iOS left it stalled.
     if (usedMic) audio.reset();

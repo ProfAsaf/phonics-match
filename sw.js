@@ -1,11 +1,11 @@
 // Offline play from the home screen (SPEC.md, "Technical requirements"): caches the whole game and
 // every recorded clip in audio/manifest.json. Bump VERSION on each release so phones pick it up.
-const VERSION = 3;
+const VERSION = 4;
 const CACHE = `phonics-v${VERSION}`;
 const FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/game.css',
   'js/activities.js', 'js/app.js', 'js/audio.js', 'js/choose.js', 'js/clipstore.js', 'js/config.js', 'js/content.js',
-  'js/mastery.js', 'js/music.js', 'js/parent.js', 'js/recorder.js', 'js/rng.js', 'js/session.js', 'js/stats.js',
+  'js/mastery.js', 'js/mic.js', 'js/music.js', 'js/parent.js', 'js/recorder.js', 'js/rng.js', 'js/session.js', 'js/stats.js',
   'js/storage.js', 'js/takes.js', 'js/ui.js', 'js/voices.js',
   'content/sounds.json', 'content/levels.json', 'content/words.json', 'content/nonsense.json',
   'content/sentences.json', 'content/prompts.json', 'content/custom-sentences.json',

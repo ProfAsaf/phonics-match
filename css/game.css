@@ -575,6 +575,21 @@ button {
 .rec-controls { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
 .pbig.rec { background: #ffe3e3; color: #a4161a; }
 .pbig.rec.on { background: #e5484d; color: #fff; }
+.rec-live {
+  width: 100%;
+  background: #e5484d;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  animation: recpulse 1.2s ease-in-out infinite;
+}
+@keyframes recpulse { 50% { background: #c9383d; } }
+.meter { margin-top: 8px; height: 12px; border-radius: 6px; background: #ffffff44; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: #fff; transition: width 60ms linear; }
+.rec-wait { width: 100%; background: #e9ecef; color: #495057; border-radius: 12px; padding: 12px 14px; font-size: 18px; }
+.rec-hint { width: 100%; }
 
 .check { max-width: 760px; margin: 0 auto; min-height: 80vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; }
 .check-word { font-size: clamp(80px, 22vmin, 180px); }
