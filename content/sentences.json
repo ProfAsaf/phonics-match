@@ -1,0 +1,55 @@
+{
+  "about": "Sight words, read-aloud sentences (the match headline, with its emoji), and one chant verse per step. Every other word must be in words.json at the sentence's step or earlier. In a chant, {Name} is a squad player's name and {act} or {Act} is one word from act, the same in every slot; a capital means the word starts a sentence. Tunes are public-domain nursery melodies, one word per note.",
+  "sightWords": ["the", "a", "I", "is", "his", "to"],
+  "sentences": [
+    { "text": "The cat sat.", "step": "1A", "emoji": "🐱" },
+    { "text": "A rat can rap.", "step": "1A", "emoji": "🐀🎤" },
+    { "text": "A bat had a hat.", "step": "1A", "emoji": "🦇🎩" },
+    { "text": "Dad had a nap.", "step": "1A", "emoji": "😴" },
+    { "text": "The pig is big.", "step": "1B", "emoji": "🐷" },
+    { "text": "A pig hid in a bin.", "step": "1B", "emoji": "🐷🗑️" },
+    { "text": "His cat sat in a pan.", "step": "1B", "emoji": "🐱🍳" },
+    { "text": "I hit it in!", "step": "1B", "emoji": "⚽🥅" },
+    { "text": "A dog sat on a log.", "step": "2A", "emoji": "🐶🪵" },
+    { "text": "The fox got in a box.", "step": "2A", "emoji": "🦊📦" },
+    { "text": "The pig had a wig.", "step": "2A", "emoji": "🐷🎀" },
+    { "text": "Mom ran to the hot dog.", "step": "2A", "emoji": "🌭😋" },
+    { "text": "A bug is on the rug.", "step": "2B", "emoji": "🐛" },
+    { "text": "The pup dug up a bun.", "step": "2B", "emoji": "🐶🍞" },
+    { "text": "A cub is in the tub.", "step": "2B", "emoji": "🐻🛁" },
+    { "text": "Mom had fun in the mud.", "step": "2B", "emoji": "🤣" },
+    { "text": "Ben fed his pet hen.", "step": "2C", "emoji": "🐔" },
+    { "text": "A hen is in bed.", "step": "2C", "emoji": "🐔🛏️" },
+    { "text": "The red jet got wet.", "step": "2C", "emoji": "✈️💦" },
+    { "text": "Ten men sat on a web.", "step": "2C", "emoji": "🕸️😂" }
+  ],
+  "chants": [
+    {
+      "step": "1A",
+      "tune": "Hot Cross Buns",
+      "lines": ["Tap, tap, tap!", "Bam, bam, bam!", "{Name} can tap, {Name} can pat, tap, tap,", "bam, bam, bam!"]
+    },
+    {
+      "step": "1B",
+      "tune": "Twinkle, Twinkle, Little Star",
+      "lines": ["{Act} it, {act} it, {act} it, {Name}.", "Rip it, rip it, rip it in."],
+      "act": ["tap", "hit", "tip", "pat"]
+    },
+    {
+      "step": "2A",
+      "tune": "Bingo",
+      "lines": ["{Name} can {act} it, {act} it, {act} it.", "Got it! Got it! It is in!"],
+      "act": ["lob", "zap", "tap", "hit"]
+    },
+    {
+      "step": "2B",
+      "tune": "Rain, Rain, Go Away",
+      "lines": ["Run, run, {Name}, run, run!", "It is fun to run, run, run!"]
+    },
+    {
+      "step": "2C",
+      "tune": "Old MacDonald Had a Farm",
+      "lines": ["Get it, get it, get it, {Name},", "get it in the net!"]
+    }
+  ]
+}

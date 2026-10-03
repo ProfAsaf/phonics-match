@@ -1,0 +1,26 @@
+{
+  "about": "Levels and steps in teaching order. Each step lists the letters it introduces; a word belongs to the first step by which all its letters have been introduced. Levels 3 to 6 are placeholders so the format can hold them later.",
+  "levels": [
+    {
+      "level": 1,
+      "summary": "Short a, then short i; consonants b, c, d, f, g, h, l, m, n, p, r, s, t",
+      "steps": [
+        { "step": "1A", "vowel": "a", "letters": ["a", "b", "c", "d", "f", "g", "h", "l", "m", "n", "p", "r", "s", "t"] },
+        { "step": "1B", "vowel": "i", "letters": ["i"] }
+      ]
+    },
+    {
+      "level": 2,
+      "summary": "Short o, then u, then e; consonants j, k, v, w, x, y, z",
+      "steps": [
+        { "step": "2A", "vowel": "o", "letters": ["o", "j", "k", "v", "w", "x", "y", "z"] },
+        { "step": "2B", "vowel": "u", "letters": ["u"] },
+        { "step": "2C", "vowel": "e", "letters": ["e"] }
+      ]
+    },
+    { "level": 3, "summary": "sh, ch, th, wh, ck, qu; doubled ff, ll, ss, zz", "steps": [] },
+    { "level": 4, "summary": "Consonant blends, first and last", "steps": [] },
+    { "level": 5, "summary": "Silent e", "steps": [] },
+    { "level": 6, "summary": "Common vowel teams", "steps": [] }
+  ]
+}

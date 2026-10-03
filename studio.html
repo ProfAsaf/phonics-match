@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recording Studio</title>
+  <link rel="stylesheet" href="css/studio.css">
+</head>
+<body>
+  <header>
+    <h1>Recording studio</h1>
+    <div class="bar">
+      <select id="group"><option value="all">Every clip</option></select>
+      <label><input type="checkbox" id="missing"> Only missing</label>
+      <span id="count"></span>
+      <span id="groupcount" class="muted"></span>
+    </div>
+    <details>
+      <summary>How to say the sounds (read this first)</summary>
+      <p>Clean sounds matter more than anything else in the game.</p>
+      <ul>
+        <li><b>Stretchable sounds</b> (f, l, m, n, r, s, v, z, and the vowels): hold for one second. "Mmm," not "muh."</li>
+        <li><b>Stop sounds</b> (b, d, g, k, p, t) and j: short and clipped, with as little "uh" as possible.</li>
+        <li><b>h, w, y:</b> h is a breath; w and y are quick, with no vowel after.</li>
+        <li><b>Short vowels:</b> a as in apple, e as in bed, i as in itch, o as in octopus, u as in up.</li>
+        <li><b>Words:</b> once, at normal speed, clearly.</li>
+        <li><b>Consistency:</b> one voice, one quiet room, same distance from the microphone.</li>
+      </ul>
+      <p class="muted">Keys: space records and stops, p plays the take, enter saves and moves on, the up and down arrows pick a clip. Each take is trimmed and leveled before you hear it, so what you hear is what gets saved.</p>
+    </details>
+  </header>
+  <main id="list"></main>
+  <script type="module" src="js/studio.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "phonics",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/studio-server.mjs"],
+      "port": 8321
+    }
+  ]
+}

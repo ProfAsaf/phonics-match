@@ -1,0 +1,13 @@
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Left behind if a studio save is interrupted
+audio/*.tmp
+
+# Personal Claude Code settings
+.claude/settings.local.json
+
+# The original copy of SPEC.md; SPEC.md is the one kept in the repo
+Phonics Game Build Spec.md

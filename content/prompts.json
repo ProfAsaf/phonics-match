@@ -1,0 +1,42 @@
+{
+  "about": "Everything the game says that is not a sound, word, or sentence. A parent records these on the recording page. cue: after three sessions a short tone replaces the prompt; the replay button still plays it in full. commentary lines rotate with his own goal shout on goals.",
+  "prompts": [
+    { "id": "tap-ball", "text": "Can you hear me? Tap the ball!" },
+    { "id": "who", "text": "Who's playing today?" },
+    { "id": "just-me", "text": "Just me." },
+    { "id": "grown-up", "text": "With a grown-up." },
+    { "id": "pick-team", "text": "Pick your team." },
+    { "id": "pick-color", "text": "Pick your team's color." },
+    { "id": "placement", "text": "Let's see which sounds you know. Listen, then tap the letter." },
+    { "id": "sound-match", "text": "Listen. Tap the letter that makes this sound.", "cue": true },
+    { "id": "sound-match-rev", "text": "What sound does this letter make?", "cue": true },
+    { "id": "new-letter", "text": "Here's a new letter. It says..." },
+    { "id": "blend", "text": "Listen. What word?", "cue": true },
+    { "id": "first", "text": "First sound?", "cue": true },
+    { "id": "last", "text": "Last sound?", "cue": true },
+    { "id": "middle", "text": "Middle sound?", "cue": true },
+    { "id": "build", "text": "Build the word.", "cue": true },
+    { "id": "read-find", "text": "Read the word. Find its picture.", "cue": true },
+    { "id": "hear-find", "text": "Listen. Find the word.", "cue": true },
+    { "id": "read-aloud", "text": "Touch each dot and say its sound. Then say the word.", "cue": true },
+    { "id": "check-word", "text": "Tap the word to check." },
+    { "id": "read-sentence", "text": "Read the headline!", "cue": true },
+    { "id": "sight-word", "text": "Here's a word to know by heart. This word is..." },
+    { "id": "watch", "text": "Watch the coach." },
+    { "id": "try-again", "text": "Try again." },
+    { "id": "here-it-is", "text": "Here it is." },
+    { "id": "halftime", "text": "Halftime! Let's sing." },
+    { "id": "your-turn", "text": "Your turn. Sing it!" },
+    { "id": "full-time", "text": "Full time! How many goals in all?" },
+    { "id": "new-player", "text": "You signed a new player!" },
+    { "id": "queen", "text": "The queen joins your team. You moved up!" },
+    { "id": "level-check", "text": "Read each word to your grown-up." },
+    { "id": "nice", "text": "Nice!", "praise": true },
+    { "id": "yes", "text": "Yes!", "praise": true },
+    { "id": "great", "text": "Great play!", "praise": true }
+  ],
+  "commentary": [
+    "What a pass!", "Goal! What a shot!", "Back of the net!", "The crowd goes wild!", "What a team!",
+    "Top corner!", "Unstoppable!", "Brilliant play!", "What a strike!", "They score again!"
+  ]
+}

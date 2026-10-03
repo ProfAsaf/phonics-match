@@ -1,0 +1,6 @@
+{
+  "about": "Your own headlines. Add a sentence and an emoji. The parent screen flags any word he can't decode yet, and the game uses only sentences he can read at his current step. Each sentence needs a recording; the recording page lists them.",
+  "sentences": [
+    { "text": "Dad is a big pig.", "emoji": "🐷" }
+  ]
+}

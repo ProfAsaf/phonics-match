@@ -1,0 +1,11 @@
+{
+  "name": "phonics-game",
+  "private": true,
+  "description": "No dependencies and no build step. This file only tells Node to treat js/*.js as modules, so the tests can import the game's logic.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node tools/check-content.mjs",
+    "studio": "node tools/studio-server.mjs"
+  }
+}
