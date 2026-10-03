@@ -1,12 +1,11 @@
-// Makes the AI voice clips (everything except his goal shout) with Kokoro, a free open-source
-// voice that runs on this computer, and adds them to audio/ like recordings. Words are spoken from
-// their letters, sound by sound, so every vowel is the short one the game teaches, and nonsense
-// words come out exactly as spelled. Sentences and prompts are read as text. The letter sounds are
-// cut from syllables Kokoro says cleanly, by tools/kokoro_sounds.py.
+// Makes the AI voice clips (everything except the letter sounds and his goal shout) with Kokoro,
+// a free open-source voice that runs on this computer, and adds them to audio/ like recordings.
+// Words are spoken from their letters, sound by sound, so every vowel is the short one the game
+// teaches, and nonsense words come out exactly as spelled. Sentences and prompts are read as text.
+// (An AI voice can't say a bare letter sound well; those come from a real voice.)
 //
 //   node tools/make-voices.mjs --setup       one time: a Python environment and the voice model
 //   node tools/make-voices.mjs               make every clip that has no audio yet
-//   node tools/make-voices.mjs --sounds      make the letter sounds that have no audio yet
 //   node tools/make-voices.mjs --voice af_bella --redo     remake the AI clips in another voice
 //
 // Clips recorded in the studio are never replaced: --redo only remakes clips this tool made.
@@ -104,26 +103,6 @@ const saveManifest = () => {
   manifest.voices = sorted(manifest.voices);
   writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 };
-
-// ---- The letter sounds
-if (flag('--sounds')) {
-  const ids = C.clips.filter(c => c.kind === 'sound').map(c => c.id).filter(wanted);
-  if (!ids.length) {
-    console.log('Every letter sound already has audio. Add --redo to remake the AI ones.');
-    process.exit(0);
-  }
-  const out = join(work, 'sounds');
-  rmSync(out, { recursive: true, force: true });
-  console.log(`Making ${ids.length} letter sounds with ${voice}…`);
-  run(PYTHON, [fileURLToPath(new URL('kokoro_sounds.py', import.meta.url)), '--model-dir', VOICE_DIR, '--out', out, '--voice', voice, '--only', ids.map(id => id.slice(2)).join(',')]);
-  const made = ids.filter(id => existsSync(join(out, `${id}.wav`)));
-  for (const id of made) save(id, join(out, `${id}.wav`));
-  saveManifest();
-  console.log(`Saved ${made.length} letter sounds to audio/. Listen to each in the parent area (Recordings) and re-record any that sound wrong.`);
-  const missed = ids.filter(id => !made.includes(id));
-  if (missed.length) console.log(`Not made, so still placeholders: ${missed.join(', ')}`);
-  process.exit(0);
-}
 
 const jobs = voiceJobs(C)
   .filter(j => wanted(j.id))

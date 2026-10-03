@@ -1,6 +1,7 @@
-// Recording on the device itself, from the parent area. His goal shout is recorded with the
-// microphone; everything else comes with the free AI voice (or can be made once with an OpenAI
-// voice), and any clip can be re-recorded. Clips are trimmed and leveled the same way as in the studio.
+// Recording on the device itself, from the parent area. The letter sounds and his goal shout are
+// recorded with the microphone (or imported from a file); everything else comes with the free AI
+// voice or can be made once with an OpenAI voice, and any clip can be re-recorded. Clips are
+// trimmed and leveled the same way as in the studio.
 import { today } from './mastery.js';
 import { processTake, takeFromBuffer } from './takes.js';
 import * as store from './clipstore.js';
@@ -8,8 +9,8 @@ import { VOICES, voiceJobs, speakWithRetry } from './voices.js';
 import { MicSession } from './mic.js';
 import { h } from './ui.js';
 
-const MIC_ONLY = new Set(['sound', 'shout']); // an OpenAI voice can't say a bare letter sound
-const GROUP_LABELS = { Sounds: 'Letter sounds: listen, and re-record any that sound wrong', 'Goal commentary': 'His goal shout, and goal commentary' };
+const MIC_ONLY = new Set(['sound', 'shout']); // an AI voice can't say a bare letter sound
+const GROUP_LABELS = { Sounds: 'Letter sounds: record or import these', 'Goal commentary': 'His goal shout, and goal commentary' };
 const SAMPLE_LINE = 'Read the word. Find its picture.';
 
 export async function openRecorder(state, overlay, { onBack }) {
@@ -43,18 +44,18 @@ export async function openRecorder(state, overlay, { onBack }) {
 
   const sourceOf = id => meta.get(id)?.source
     ?? (Object.hasOwn(audio.recorded, id) ? (audio.madeVoices[id] ? 'free' : 'website') : null);
-  const label = { mic: 'you', voice: 'OpenAI voice', free: 'free AI voice', website: 'website recording' };
+  const label = { mic: 'you', file: 'imported', voice: 'OpenAI voice', free: 'free AI voice', website: 'website recording' };
   render();
 
   function render() {
     const groups = [...new Set(C.clips.map(c => c.group))];
-    const counts = { mic: 0, voice: 0, free: 0, website: 0 };
+    const counts = { mic: 0, file: 0, voice: 0, free: 0, website: 0 };
     for (const c of C.clips) {
       const s = sourceOf(c.id);
-      if (s) counts[s]++;
+      if (s) counts[s] = (counts[s] ?? 0) + 1;
     }
-    const total = counts.mic + counts.voice + counts.free + counts.website;
-    const parts = [[counts.mic, 'recorded by you'], [counts.free, 'free AI voice'], [counts.voice, 'OpenAI voice'], [counts.website, 'website recordings']]
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    const parts = [[counts.mic, 'recorded by you'], [counts.file, 'imported'], [counts.free, 'free AI voice'], [counts.voice, 'OpenAI voice'], [counts.website, 'website recordings']]
       .filter(([n]) => n).map(([n, what]) => `${n} ${what}`);
     // With the free voice already published, OpenAI is only an optional switch.
     const openai = [
@@ -86,7 +87,7 @@ export async function openRecorder(state, overlay, { onBack }) {
       h('section', { class: 'psec' },
         h('h2', {}, 'AI voices'),
         counts.free
-          ? [h('p', { class: 'muted' }, 'Words, sentences, prompts, and letter sounds already have a free AI voice. The letter sounds are cut from AI speech, so listen to each one below and re-record any that sound wrong. His goal shout is his to record; any other clip can be re-recorded too.'),
+          ? [h('p', { class: 'muted' }, 'Words, sentences, and prompts already have a free AI voice. Letter sounds and his goal shout need a real voice: record them below, or import a file of sounds under Back up recordings. Any other clip can be re-recorded too.'),
             h('details', { open: !!making }, h('summary', {}, 'Switch to an OpenAI voice (optional)'), openai)]
           : [h('p', { class: 'muted' }, 'Letter sounds and his goal shout need a real voice, so record those below. Everything else can be made once with an OpenAI voice, for a few cents. These are AI-generated voices; any clip can be re-recorded below.'),
             openai]),
@@ -103,7 +104,7 @@ export async function openRecorder(state, overlay, { onBack }) {
         h('div', { class: 'rec-list' }, C.clips.filter(c => c.group === group).map(row))),
       h('section', { class: 'psec' },
         h('h2', {}, 'Back up recordings'),
-        h('p', { class: 'muted' }, 'Recordings live on this device. Save a copy so they survive if Safari clears its storage, or to move them to another device.'),
+        h('p', { class: 'muted' }, 'Recordings live on this device. Save a copy so they survive if Safari clears its storage, or to move them to another device. Import also loads a file of letter sounds made on a computer.'),
         h('div', { class: 'pbtns left' },
           h('button', { class: 'pbig', onclick: exportRecordings }, 'Export recordings'),
           h('button', { class: 'pbig', onclick: () => importFile.click() }, 'Import recordings'), importFile)),

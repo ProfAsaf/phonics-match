@@ -11,3 +11,6 @@ audio/*.tmp
 
 # The original copy of SPEC.md; SPEC.md is the one kept in the repo
 Phonics Game Build Spec.md
+
+# Your own files that must never be published (such as letter sounds you may use but not share)
+private/
