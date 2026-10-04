@@ -1,8 +1,7 @@
-// DOM helpers and the pieces every child screen shares: the replay button, the confirm button,
-// the parent corner, the pitch, and celebrations. Nothing on a child screen is written
-// instruction (ground rule 4); every target is at least 64 px (ground rule 8).
-import { PIECE_SYMBOL } from './content.js';
-import { pixelPiece, PIXEL_ICONS } from './pixel.js';
+// DOM helpers and the pieces every child screen shares: the replay button, the kick button (the
+// confirm step), the parent corner, celebrations, and chess-piece cards. Nothing on a child screen
+// is written instruction (ground rule 4); every target is at least 64 px (ground rule 8).
+import { ballSVG, ICONS, pieceSVG, kitPiece } from './art.js';
 
 export function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
@@ -10,6 +9,7 @@ export function h(tag, attrs = {}, ...kids) {
     if (v == null || v === false) continue;
     if (k === 'class') el.className = v;
     else if (k === 'text') el.textContent = v;
+    else if (k === 'html') el.innerHTML = v;
     else if (k === 'style') {
       for (const [p, val] of Object.entries(v)) {
         if (p.startsWith('--')) el.style.setProperty(p, val);
@@ -43,32 +43,46 @@ export function flash(el, ms = 450, cls = 'lit') {
   setTimeout(() => el.classList.remove(cls), ms);
 }
 
+export const icon = (name, cls = 'ico') => h('span', { class: cls, html: ICONS[name] });
+export const ballIcon = (cls = 'ico') => h('span', { class: cls, html: ballSVG() });
+
+// The confirm step is kicking the ball: he picks an answer, then kicks.
 export function confirmButton() {
-  return h('button', { class: 'confirm', 'aria-label': 'Go', disabled: true }, ballIcon('confirm-ball'));
+  return h('button', { class: 'confirm', 'aria-label': 'Kick', disabled: true }, ballIcon('confirm-ball'));
 }
 
+const SPEAKER_COLORS = ['#ffe08a', '#b5e3ff', '#ffc1b8', '#c9f2c7'];
 export function speakerButton(i) {
-  return h('button', { class: `card speaker s${i}`, 'aria-label': 'Sound' }, '🔈');
+  return h('button', { class: `card speaker s${i}`, 'aria-label': 'Sound', style: { background: SPEAKER_COLORS[i % 4] } }, icon('speaker', 'ico spk'));
 }
+
+// The first few times, if he picks an answer and doesn't kick, a hand points at the ball.
+let kickHint = null;
+export const setKickHint = fn => { kickHint = fn; };
 
 // Tap a choice to select it (onSelect plays its audio where that cannot give the answer away);
-// the confirm button submits, so a stray tap never answers by itself.
+// the kick button submits, so a stray tap never answers by itself.
 export function pick(choices, confirm, onSelect) {
   return new Promise(resolve => {
     let selected = null;
+    let hint = null;
     const handlers = choices.map(([value, el]) => {
+      el.dataset.v = String(value);
       const fn = () => {
         if (el.disabled) return;
         selected = value;
         for (const [, other] of choices) other.classList.toggle('selected', other === el);
         confirm.disabled = false;
         onSelect?.(value);
+        hint?.cancel();
+        hint = kickHint?.(confirm) ?? null;
       };
       el.addEventListener('click', fn);
       return [el, fn];
     });
     const go = () => {
       if (selected == null) return;
+      hint?.cancel();
       confirm.disabled = true;
       for (const [el, fn] of handlers) el.removeEventListener('click', fn);
       confirm.removeEventListener('click', go);
@@ -101,7 +115,7 @@ export function parentCorner(open) {
 }
 
 export function replayButton(onReplay) {
-  return h('button', { class: 'replay', 'aria-label': 'Hear it again', onclick: () => onReplay?.() }, '🔊');
+  return h('button', { class: 'replay', 'aria-label': 'Hear it again', onclick: () => onReplay?.() }, icon('speaker'));
 }
 
 // Placeholder captions: what a recording will say, shown only while it is a placeholder tone.
@@ -149,71 +163,13 @@ export function confetti(n = 40) {
   }));
 }
 
-// A chess piece card, drawn in his kit color (a gray silhouette until the player is signed).
+const kitColor = () => getComputedStyle(document.documentElement).getPropertyValue('--kit').trim() || '#e63946';
+
+// A chess piece card in his kit color (a pale silhouette until the player is signed).
 export function pieceEl(piece, { signed = true, number = null, name = null, small = false } = {}) {
-  const symbol = h('span', { class: 'symbol' });
-  symbol.innerHTML = `<svg viewBox="0 0 8 10" shape-rendering="crispEdges">${pixelPiece(piece, 'currentColor', 1)}</svg>`;
+  const col = signed ? kitPiece(kitColor()) : { fill: '#dfe5ec', shade: '#cfd7e0', detail: '#ffffff' };
   return h('div', { class: `piece ${signed ? 'signed' : 'silhouette'}${small ? ' small' : ''}` },
-    symbol,
+    h('span', { class: 'symbol', html: pieceSVG(piece, col) }),
     number != null && h('span', { class: 'number' }, number),
     name && h('span', { class: 'name' }, name));
-}
-
-const ballIcon = cls => {
-  const el = h('span', { class: cls });
-  el.innerHTML = PIXEL_ICONS.ball;
-  return el;
-};
-
-// The progress path: the pitch. Each item fills a slot; a pass puts a teammate there.
-export class Pitch {
-  constructor() {
-    this.slots = h('div', { class: 'slots' });
-    this.ball = ballIcon('pball');
-    this.goalCount = h('b', {}, '0');
-    this.el = h('div', { class: 'pitch' },
-      h('div', { class: 'line mid' }), h('div', { class: 'ring' }),
-      h('div', { class: 'net left' }), h('div', { class: 'net right' }),
-      this.slots, this.ball,
-      h('div', { class: 'scoreboard' }, ballIcon('sb-ball'), this.goalCount));
-    this.done = 0;
-    this.total = 1;
-  }
-
-  half(total) {
-    this.done = 0;
-    this.slots.replaceChildren();
-    this.resize(total);
-  }
-
-  resize(total) {
-    this.total = Math.max(total, this.done);
-    while (this.slots.children.length < this.total) this.slots.append(h('span', { class: 'pslot' }));
-    this.place();
-  }
-
-  mark(kind) {
-    const slot = this.slots.children[this.done];
-    if (slot) {
-      slot.className = `pslot ${kind}`;
-      if (kind === 'pass') slot.textContent = PIECE_SYMBOL.pawn;
-    }
-    this.done++;
-    this.place();
-  }
-
-  place() {
-    const x = this.total ? this.done / this.total : 0;
-    this.ball.style.left = `calc(${6 + 86 * x}% - 0.5em)`;
-  }
-
-  goals(n) {
-    this.goalCount.textContent = n;
-  }
-
-  async shoot() {
-    this.ball.classList.add('shoot');
-    await sleep(600);
-    this.ball.classList.remove('shoot');
-  }
 }

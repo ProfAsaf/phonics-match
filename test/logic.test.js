@@ -422,30 +422,23 @@ test('the AI voice makes every clip except the letter sounds and his shout; nons
   assert.ok(jobs.every(j => j.text && j.instructions));
 });
 
-// ---- The world map: the day's trip and his worlds
-test('the day is a trip past the six activities in order, with halftime after three and the trophy last', async () => {
-  const { STOPS, stopOf, stopStates, HALFTIME_STOP, TROPHY_STOP } = await import('../js/journey.js');
-  const { STOP_KINDS } = await import('../js/pixel.js');
-  assert.deepEqual(STOPS.map(s => s.kind), STOP_KINDS, 'every stop has its drawn badge');
-  assert.deepEqual(STOPS.filter(s => s.activity).map(s => s.activity), CONFIG.activities, 'levels follow the session order');
+// ---- The world map and the day's run
+test('the day is one run past the six activities in order, with halftime after three and the trophy last', async () => {
+  const { STOPS, stopOf, HALFTIME_STOP, TROPHY_STOP } = await import('../js/journey.js');
+  const { ANCHORS, START_X } = await import('../js/run.js');
+  assert.deepEqual(STOPS.filter(s => s.activity).map(s => s.activity), CONFIG.activities, 'stops follow the session order');
   assert.ok(STOPS.slice(0, HALFTIME_STOP).every(s => CONFIG.firstHalf.includes(s.activity)), 'halftime falls after the first half');
   assert.equal(TROPHY_STOP, STOPS.length - 1);
-  const order = CONFIG.activities.filter(a => a !== 'buildIt'); // say Build it is turned off
-  const states = stopStates(order, new Set([0, 1]), 2);
-  assert.deepEqual(states.slice(0, 5), ['done', 'done', 'next', 'ahead', 'skip']);
   assert.equal(stopOf('readAloud'), 6);
+  assert.equal(ANCHORS.length, STOPS.length, 'every stop has a place on the run');
+  assert.ok(ANCHORS.every((x, i) => x > (i ? ANCHORS[i - 1] + 1500 : START_X + 800)), 'the stops come in order, with room to run between');
 });
 
-test('each step is a new world with its own scenery, and the parent sees where he is', async () => {
-  const { worldFor, whereHeIs } = await import('../js/journey.js');
-  const { THEME_NAMES, pixelMapSVG, routeAt, ROUTE } = await import('../js/pixel.js');
+test('each step is a world with its own scenery, and the parent sees where he is', async () => {
+  const { worldFor, whereHeIs, WORLD_THEMES } = await import('../js/journey.js');
   const worlds = C.steps.map(s => worldFor(C, s.step));
   assert.deepEqual(worlds.map(w => w.number), C.steps.map((_, i) => i + 1));
-  assert.ok(worlds.every(w => THEME_NAMES.includes(w.theme)));
-  assert.equal(new Set(worlds.map(w => w.theme)).size, Math.min(worlds.length, THEME_NAMES.length), 'neighboring worlds look different');
-  for (const w of worlds) assert.ok(pixelMapSVG({ theme: w.theme, world: w.number }).startsWith('<svg'));
-  assert.deepEqual(routeAt(2, 0).map(Math.round), ROUTE[2], 'the walk starts on the stop');
-  assert.deepEqual(routeAt(2, 1).map(Math.round), ROUTE[3], 'and ends on the next one');
+  assert.equal(new Set(worlds.map(w => w.theme)).size, Math.min(worlds.length, WORLD_THEMES.length), 'neighboring worlds look different');
   const P = placedChild(['a', 'm', 's', 't']);
   const first = C.squad.players.filter(p => p.step === P.step);
   P.signed.push(first[0].word, first[1].word);
@@ -454,15 +447,37 @@ test('each step is a new world with its own scenery, and the parent sees where h
   assert.ok(lines[0].includes(`2 of ${first.length} players`));
 });
 
-test('every level has an animated pixel scene, and the goal celebration is drawn', async () => {
-  const { pixelLevelSVG, pixelGoalSVG, CHARACTERS, pixelPlayer } = await import('../js/pixel.js');
-  const { STOPS } = await import('../js/journey.js');
-  for (const s of STOPS) {
-    const markup = pixelLevelSVG(s.kind, { kit: '#1d6fd8', signed: ['pawn', 'knight'] });
-    assert.ok(markup.startsWith('<svg') && markup.includes('<animate'), `${s.kind} moves`);
-  }
-  assert.ok(pixelGoalSVG('#1d6fd8', 'fox').includes('<animateTransform'));
-  for (const c of CHARACTERS) assert.ok(pixelPlayer(c, '#1d6fd8', 6, { walk: true }).includes('<animateTransform'), `${c} walks`);
+test('on the map every match is a level, the gate waits for the queen, and later levels are locked', async () => {
+  const { mapWorlds, playsByStep, hereLevel, flagged, levelSpot, gateSpot, LEVELS_PER_WORLD } = await import('../js/journey.js');
+  const P = placedChild();
+  P.sessions = [{ day: DAY0, step: '1A' }, { day: DAY0, step: '1A' }, { day: DAY0 }]; // the last one is from before steps were saved
+  let worlds = mapWorlds(C, P);
+  assert.equal(worlds[0].state, 'here');
+  assert.equal(worlds[0].played, 3, 'old matches count for the current step');
+  assert.deepEqual(playsByStep(C, P), { '1A': 3 });
+  assert.equal(hereLevel(worlds[0]), 3, "he stands on today's level");
+  assert.equal(flagged(worlds[0]), 3);
+  assert.ok(worlds.slice(1, C.steps.length).every(w => w.state === 'ahead'));
+  const later = C.levels.filter(l => !l.steps.length).length;
+  assert.equal(worlds.filter(w => w.state === 'later').length, later, 'levels still to be written show as locked worlds');
+  assert.equal(worlds.find(w => w.step === C.steps.filter(s => s.level === 1).at(-1).step).gate, 'castle', "a level's last world ends at the castle");
+  assert.equal(worlds[0].queen, false);
+  P.queenReady['1A'] = true;
+  assert.equal(mapWorlds(C, P)[0].queen, true, 'the queen waits at the gate once she is ready');
+  P.step = '1B';
+  worlds = mapWorlds(C, P);
+  assert.deepEqual(worlds.slice(0, 2).map(w => w.state), ['done', 'here']);
+  P.sessions = Array.from({ length: LEVELS_PER_WORLD + 3 }, () => ({ day: DAY0, step: '1B' }));
+  assert.equal(hereLevel(mapWorlds(C, P)[1]), LEVELS_PER_WORLD - 1, 'past the last level he keeps playing on it');
+  for (let k = 1; k < LEVELS_PER_WORLD; k++) assert.ok(levelSpot(1, k).y < levelSpot(1, k - 1).y, 'the path climbs');
+  assert.ok(gateSpot(1).y < levelSpot(1, LEVELS_PER_WORLD - 1).y && gateSpot(1).y > levelSpot(2, 0).y, 'the gate is between the worlds');
+});
+
+test("a match is saved with the step it was played in, so it lands in that world's levels", () => {
+  const P = placedChild(['a', 'm', 's', 't', 'p', 'n']);
+  const S = planSession(C, P, { day: DAY0, seed: 'map' });
+  const done = finishSession(C, { ...P, step: '1B' }, S);
+  assert.equal(done.sessions.at(-1).step, P.step, 'the step he started in, even if he moved up during it');
 });
 
 test('every prompt cue plays two real notes, whatever its hash', async () => {

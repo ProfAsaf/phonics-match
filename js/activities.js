@@ -3,7 +3,7 @@
 //
 // ctx: { C, cfg, audio, stage, bottom, setReplay(fn), mode, childName, sessions, onSight(words) }
 import { clip } from './content.js';
-import { h, sleep, flash, pick, confirmButton, speakerButton, tapped } from './ui.js';
+import { h, sleep, flash, pick, confirmButton, speakerButton, tapped, icon } from './ui.js';
 
 const entry = (ctx, key) => ctx.C.byWord.get(key);
 const PRAISE = ['nice', 'yes', 'great'];
@@ -119,7 +119,7 @@ export async function soundMatch(ctx, item) {
     const choices = item.choices.map(l => [l, h('button', { class: 'card letter-card' }, l)]);
     const answerEl = choices.find(([l]) => l === item.answer)[1];
     const play = full => audio.say(() => audio.prompt('sound-match', { full }), () => audio.play(sound));
-    const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, '🔊'), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], () => play(true));
+    const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, icon('speaker', 'ico spk-target')), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], () => play(true));
     await play(false);
     return runChoice(ctx, {
       choices, confirm, answer: item.answer,
@@ -310,7 +310,7 @@ export async function readFind(ctx, item) {
       audio.stop();
       audio.play(clip.sound(w.sounds[i]));
     });
-    const earButton = h('button', { class: 'ear', 'aria-label': 'Hear the sounds' }, '👂');
+    const earButton = h('button', { class: 'ear', 'aria-label': 'Hear the sounds' }, icon('ear'));
     earButton.addEventListener('click', () => {
       ear = true;
       earButton.classList.add('on');
@@ -332,7 +332,7 @@ export async function readFind(ctx, item) {
   const choices = item.choices.map(k => [k, h('button', { class: 'card word-card' }, entry(ctx, k).letters.join(''))]);
   const coachCard = h('div', { class: 'coach-card' });
   const play = full => audio.say(() => audio.prompt('hear-find', { full }), () => audio.play(clip.word(w.word)));
-  const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, '🔊', coachCard), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], () => play(true));
+  const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, icon('speaker', 'ico spk-target'), coachCard), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], () => play(true));
   await play(false);
   const spell = () => {
     const cols = lettersWithDots(w.letters, false);
@@ -483,7 +483,7 @@ async function sightCard(ctx, word) {
 export async function placementItem(ctx, item) {
   const choices = item.choices.map(l => [l, h('button', { class: 'card letter-card' }, l)]);
   const play = () => ctx.audio.play(clip.sound(item.sound));
-  const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, '🔊'), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], play);
+  const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, icon('speaker', 'ico spk-target')), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], play);
   play();
   const picked = await pick(choices, confirm, () => ctx.audio.stop());
   ctx.audio.effect('tap');

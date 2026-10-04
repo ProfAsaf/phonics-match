@@ -7,7 +7,7 @@ import { FAMILIES, recId } from './mastery.js';
 import { familyCounts, topConfusions, realVsNonsense, history, nextStep, FAMILY_NAMES } from './stats.js';
 import { levelCheckWords, applyLevelCheck } from './session.js';
 import { letterState } from './choose.js';
-import { saveProgress, exportProgress, parseImport, clearProgress } from './storage.js';
+import { saveProgress, loadProgress, exportProgress, parseImport, clearProgress, activePlayer, switchPlayer, startTestPlayer } from './storage.js';
 import { openRecorder } from './recorder.js';
 import { whereHeIs } from './journey.js';
 import { h, sleep } from './ui.js';
@@ -33,11 +33,13 @@ export function openParent(state, { onClose, runPlacement }) {
 
   function render() {
     const P = state.P;
+    const testing = activePlayer() === 'test';
     overlay.replaceChildren(
       h('header', { class: 'phead' },
-        h('div', {}, h('h1', {}, P.settings.childName ? `${P.settings.childName}'s phonics` : 'Phonics'),
+        h('div', {}, h('h1', {}, testing ? 'Test player' : P.settings.childName ? `${P.settings.childName}'s phonics` : 'Phonics'),
           h('div', { class: 'muted' }, `Step ${P.step} · ${plural(P.sessionCount, 'match', 'matches')} played`)),
         h('button', { class: 'pclose', onclick: close }, 'Close')),
+      section("Who's playing", players()),
       section('Where he is', whereHeIs(C, P).map(line => h('p', { class: 'where' }, line))),
       section('Next step', h('p', { class: 'next' }, nextStep(C, P, state.day)),
         levelCheckButton()),
@@ -51,6 +53,33 @@ export function openParent(state, { onClose, runPlacement }) {
       section('Recordings', recordings()),
       section('Backup', backup()),
     );
+  }
+
+  // The child and a test player share the device: a grown-up can try anything as the test player
+  // without changing the child's progress, then switch back.
+  function players() {
+    const child = loadProgress(C, state.day, 'main').settings.childName || 'your child';
+    const go = fn => {
+      fn();
+      location.reload();
+    };
+    const testFrom = copy => () => go(() => startTestPlayer(C, state.day, { copy }));
+    if (activePlayer() === 'test') {
+      return [
+        h('p', { class: 'testing' }, `You're playing as the test player. Nothing you do here changes ${child}'s progress.`),
+        h('div', { class: 'pbtns left' },
+          h('button', { class: 'pbig due', onclick: () => go(() => switchPlayer('main')) }, `Back to ${child}`),
+          h('button', { class: 'pbig', onclick: testFrom(true) }, `Start the test over from ${child}'s place`),
+          h('button', { class: 'pbig', onclick: testFrom(false) }, 'Start the test over from the beginning')),
+      ];
+    }
+    return [
+      h('p', {}, `Playing as ${child}.`),
+      h('div', { class: 'pbtns left' },
+        h('button', { class: 'pbig', onclick: testFrom(true) }, `Test from ${child}'s place`),
+        h('button', { class: 'pbig', onclick: testFrom(false) }, 'Test from the beginning')),
+      h('p', { class: 'muted' }, `A test player lets you try anything without changing ${child}'s progress. Come back here and tap "Back to ${child}" when you're done.`),
+    ];
   }
 
   function section(title, ...kids) {
@@ -245,7 +274,10 @@ export function openParent(state, { onClose, runPlacement }) {
       h('button', {
         class: 'pbig danger',
         onclick: async () => {
-          if (!confirm('Erase all progress, players, and words? This cannot be undone. Export first if you might want it back.')) return;
+          const question = activePlayer() === 'test'
+            ? "Erase the test player's progress? Your child's progress stays as it is."
+            : 'Erase all progress, players, and words? This cannot be undone. Export first if you might want it back.';
+          if (!confirm(question)) return;
           clearProgress();
           await sleep(50);
           location.reload();

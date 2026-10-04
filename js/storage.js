@@ -1,11 +1,31 @@
 // Progress lives in localStorage under one versioned key and is written after every item
 // (SPEC.md, "Technical requirements"). Export and import move it as one JSON file.
+//
+// Two players share the device: the child, under the original key, and a test player a grown-up can
+// switch to from the parent area, so trying things out never changes the child's progress. The
+// active player is remembered; switching reloads the game.
 import { CONFIG } from './config.js';
 import { newProgress, upgradeProgress } from './session.js';
 
-export function loadProgress(C, day) {
+const PLAYER_KEY = 'phonics.player';
+export const PLAYERS = { main: CONFIG.storageKey, test: `${CONFIG.storageKey}.test` };
+const keyOf = id => PLAYERS[id] ?? PLAYERS.main;
+
+export function activePlayer() {
   try {
-    const raw = localStorage.getItem(CONFIG.storageKey);
+    return localStorage.getItem(PLAYER_KEY) === 'test' && localStorage.getItem(PLAYERS.test) ? 'test' : 'main';
+  } catch {
+    return 'main';
+  }
+}
+
+export function switchPlayer(id) {
+  localStorage.setItem(PLAYER_KEY, id === 'test' ? 'test' : 'main');
+}
+
+export function loadProgress(C, day, id = activePlayer()) {
+  try {
+    const raw = localStorage.getItem(keyOf(id));
     if (raw) return upgradeProgress(C, JSON.parse(raw));
   } catch (e) {
     console.warn('Could not read saved progress', e);
@@ -13,9 +33,9 @@ export function loadProgress(C, day) {
   return newProgress(C, day);
 }
 
-export function saveProgress(P) {
+export function saveProgress(P, id = activePlayer()) {
   try {
-    localStorage.setItem(CONFIG.storageKey, JSON.stringify(P));
+    localStorage.setItem(keyOf(id), JSON.stringify(P));
     return true;
   } catch (e) {
     console.warn('Could not save progress', e);
@@ -23,8 +43,16 @@ export function saveProgress(P) {
   }
 }
 
-export function clearProgress() {
-  localStorage.removeItem(CONFIG.storageKey);
+export function clearProgress(id = activePlayer()) {
+  localStorage.removeItem(keyOf(id));
+}
+
+// Starts the test player: a copy of the child's progress, to try things from where the child is, or a
+// fresh start, to see the first launch. The child's own progress is not touched.
+export function startTestPlayer(C, day, { copy = true } = {}) {
+  const P = copy ? loadProgress(C, day, 'main') : newProgress(C, day);
+  saveProgress(P, 'test');
+  switchPlayer('test');
 }
 
 export function exportProgress(P, day) {

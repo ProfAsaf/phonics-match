@@ -41,7 +41,7 @@ export function planSession(C, P, { day, mode = 'solo', seed, audioOK = () => tr
   const rng = makeRng(seed ?? `${day}#${P.sessionCount}`);
   const enabled = cfg.activities.filter(a => P.settings.enabled[a] !== false && (P.settings.items[a] ?? cfg.items[a]) > 0);
   const S = {
-    day, mode, rng, audioOK,
+    day, mode, rng, audioOK, step: P.step,
     newLetters: enabled.includes('soundMatch') ? chooseNewLetters(C, P, cfg, audioOK) : [],
     introduced: new Set(),
     order: [], queues: {}, act: 0, idx: 0, half: 1,
@@ -301,7 +301,8 @@ export function finishSession(C, P0, S) {
   P.seasonGoals += S.game.goals[0] + S.game.goals[1];
   const scored = S.stats.scored[0] + S.stats.scored[1];
   const firstTry = S.stats.firstTry[0] + S.stats.firstTry[1];
-  P.sessions.push({ day: S.day, mode: S.mode, scored, firstTry, goals: [...S.game.goals], items: S.presented.size });
+  // The step he started the match in: the match is a level in that world on the map.
+  P.sessions.push({ day: S.day, mode: S.mode, step: S.step ?? P0.step, scored, firstTry, goals: [...S.game.goals], items: S.presented.size });
   for (const r of P.recycle) {
     if (r.since < P.sessionCount && S.presented.has(`${r.activity}|${r.key}`)) r.remaining--;
   }

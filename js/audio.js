@@ -231,12 +231,13 @@ export class AudioEngine {
   }
 
   // ---- Synthesized sounds: music and effects, never speech.
-  tone(freq, when, dur, type = 'sine', gain = 0.2) {
+  tone(freq, when, dur, type = 'sine', gain = 0.2, slideTo = null) {
     if (!this.ctx || !Number.isFinite(freq) || !Number.isFinite(when)) return;
     const osc = this.ctx.createOscillator();
     const env = this.ctx.createGain();
     osc.type = type;
-    osc.frequency.value = freq;
+    osc.frequency.setValueAtTime(freq, when);
+    if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, when + dur);
     env.gain.setValueAtTime(0.0001, when);
     env.gain.linearRampToValueAtTime(gain, when + 0.012);
     env.gain.exponentialRampToValueAtTime(0.0001, when + dur);
@@ -246,7 +247,7 @@ export class AudioEngine {
     this.track(osc);
   }
 
-  noise(when, dur, { gain = 0.2, type = 'bandpass', freq = 1500, q = 1 } = {}) {
+  noise(when, dur, { gain = 0.2, type = 'bandpass', freq = 1500, q = 1, freqTo = null, attack = 0 } = {}) {
     if (!this.ctx) return;
     if (!this.noiseBuffer) {
       this.noiseBuffer = this.ctx.createBuffer(1, this.ctx.sampleRate, this.ctx.sampleRate);
@@ -257,13 +258,18 @@ export class AudioEngine {
     const filter = this.ctx.createBiquadFilter();
     const env = this.ctx.createGain();
     src.buffer = this.noiseBuffer;
+    src.loop = true; // the buffer is one second; long effects loop it
     filter.type = type;
-    filter.frequency.value = freq;
+    filter.frequency.setValueAtTime(freq, when);
+    if (freqTo) filter.frequency.exponentialRampToValueAtTime(freqTo, when + dur);
     filter.Q.value = q;
-    env.gain.setValueAtTime(gain, when);
+    if (attack) {
+      env.gain.setValueAtTime(0.0001, when);
+      env.gain.exponentialRampToValueAtTime(gain, when + attack);
+    } else env.gain.setValueAtTime(gain, when);
     env.gain.exponentialRampToValueAtTime(0.0001, when + dur);
     src.connect(filter).connect(env).connect(this.out);
-    src.start(when);
+    src.start(when, Math.random() * 0.5);
     src.stop(when + dur + 0.02);
     this.track(src);
   }
@@ -298,8 +304,49 @@ export class AudioEngine {
       this.kick(t);
       this.noise(t + 0.02, 0.18, { gain: 0.06, freq: 900, q: 0.6 });
     } else if (name === 'whistle') {
-      this.tone(2100, t, 0.22, 'square', 0.05);
-      this.tone(2100, t + 0.28, 0.5, 'square', 0.05);
+      // a referee's whistle: two blasts with a trill
+      for (const [at, len] of [[0, 0.16], [0.24, 0.36]]) {
+        const o = this.ctx.createOscillator(), lfo = this.ctx.createOscillator(), depth = this.ctx.createGain(), g = this.ctx.createGain();
+        o.frequency.value = 2900;
+        lfo.frequency.value = 38;
+        depth.gain.value = 140;
+        lfo.connect(depth).connect(o.frequency);
+        g.gain.setValueAtTime(0.0001, t + at);
+        g.gain.exponentialRampToValueAtTime(0.09, t + at + 0.02);
+        g.gain.setValueAtTime(0.09, t + at + len - 0.04);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + at + len);
+        o.connect(g).connect(this.out);
+        o.start(t + at);
+        lfo.start(t + at);
+        o.stop(t + at + len + 0.02);
+        lfo.stop(t + at + len + 0.02);
+        this.track(o);
+      }
+    } else if (name === 'kick') {
+      this.tone(160, t, 0.18, 'sine', 0.55, 48);
+      this.noise(t, 0.06, { gain: 0.25, type: 'lowpass', freq: 1800 });
+    } else if (name === 'touch') {
+      this.tone(210, t, 0.08, 'sine', 0.16, 90);
+    } else if (name === 'whoosh') {
+      this.noise(t, 0.4, { gain: 0.12, type: 'bandpass', freq: 380, freqTo: 2600, q: 1.3, attack: 0.18 });
+    } else if (name === 'net') {
+      this.noise(t, 0.4, { gain: 0.16, type: 'highpass', freq: 2600, attack: 0.006 });
+    } else if (name === 'cheer') {
+      // the crowd
+      this.noise(t, 2.8, { gain: 0.18, freq: 1100, q: 0.5, attack: 0.3 });
+      this.noise(t + 0.05, 2.5, { gain: 0.14, type: 'lowpass', freq: 520, attack: 0.35 });
+      this.noise(t + 0.2, 1.6, { gain: 0.04, freq: 2300, q: 2, attack: 0.2 });
+    } else if (name === 'hop') {
+      this.tone(380, t, 0.16, 'triangle', 0.09, 900);
+    } else if (name === 'land') {
+      this.noise(t, 0.09, { gain: 0.14, type: 'lowpass', freq: 500 });
+    } else if (name === 'bounce') {
+      this.tone(240, t, 0.07, 'sine', 0.16, 120);
+    } else if (name === 'sparkle') {
+      [0, 4, 7, 12, 16].forEach((st, i) => this.tone(1046.5 * 2 ** (st / 12), t + i * 0.06, 0.3, 'triangle', 0.08));
+    } else if (name === 'boom') {
+      this.noise(t, 0.5, { gain: 0.2, type: 'lowpass', freq: 900, freqTo: 120, attack: 0.005 });
+      this.noise(t + 0.05, 0.6, { gain: 0.03, type: 'highpass', freq: 4000, attack: 0.05 });
     } else if (name === 'goal') {
       [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => this.tone(f, t + i * 0.09, 0.3, 'triangle', 0.16));
       this.noise(t, 1.2, { gain: 0.08, freq: 1200, q: 0.3 });

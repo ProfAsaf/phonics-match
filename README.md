@@ -12,11 +12,14 @@ Then open http://localhost:8321/. The first launch runs the sound check, team an
 
 ## His progress
 
-- **His player**: at first launch he picks a striker, a goalkeeper, a fox, or a robot: blocky pixel characters in his team color. Existing progress keeps going; he is just asked to pick once.
-- **The world map** on the home screen: each day his player walks a path past six levels (one per activity, in the usual order), the halftime show, and the trophy. Each step he moves up is a new world with its own scenery: meadow, river, forest, snow, beach.
-- **The levels**: each activity plays over its own animated block scene in a Minecraft-like pixel style (the stadium, the chess castle, the crystal mine, the workshop, the sky islands, the night stadium), with the pitch and his goals at the top as before. The art is original, made in code. Between levels the map comes back and his player walks to the next stop.
+- **His player**: at first launch he picks a boy, a girl, a robot, or a friendly zombie, all in his team color. Existing progress keeps going; he is just asked to pick once.
+- **The world map** is home: a winding path through his worlds, one per step (meadow, river, forest, snow, beach). Every match is a level on the path with a flag in his color. The next world waits under clouds; signing the queen opens its gate.
+- **The match is one run** through the day's stops: the stadium, the chess castle, the crystal cave, the halftime show, the workshop, the sky islands, the night stadium, and the trophy. Questions rise on a card from the bottom; each right answer dribbles the ball toward that stop's goal, and three in a row score.
 - **His letter gems** (the gem button on home): gold when mastered, blue while learning, "?" until he meets the letter. Tap a gem to hear its sound.
-- **The parent area** starts with "Where he is": his world, step, players signed, letters, and what comes next.
+- **The parent area** starts with "Who's playing" and "Where he is": his world, step, players signed, letters, and what comes next.
+- **A test player**: in the parent area, tap "Test from his place" (or "Test from the beginning") to try anything without changing his progress. A "Test player" label shows until you tap "Back to" him.
+
+The art is from Kenney (kenney.nl), free and public domain (CC0): see `art/LICENSE.txt`. The fonts are Fredoka and Andika, under the SIL Open Font License (`fonts/`).
 
 ## Audio
 
@@ -62,6 +65,8 @@ npm test
 ## Where things are
 
 - `content/`: the word bank, nonsense words, sentences and chants, prompts, sounds, levels, and your own headlines (`custom-sentences.json`).
-- `js/`: the game. Pure logic is in `mastery.js`, `choose.js`, `session.js`, `stats.js`, and `journey.js` (the day's trip and his worlds); the pixel art is in `pixel.js` (blocks, players, pieces, the world map, the level scenes, and the goal); the screens are in `app.js`, `activities.js`, and `parent.js`.
+- `js/`: the game. Pure logic is in `mastery.js`, `choose.js`, `session.js`, `stats.js`, and `journey.js` (the day's stops and the map's worlds and levels). The drawn world is `scene.js` (the canvas and its frame loop), `map.js` (the world map), `run.js` (the day's run), and `art.js` (loading Kenney's images, plus the ball, goals, chess pieces, and blocky friends drawn in code). The screens are in `app.js`, `activities.js`, and `parent.js`.
+- `art/`: Kenney's images (CC0). After adding or removing any, run `node tools/art-index.mjs` so the offline cache lists them.
+- `fonts/`: Fredoka and Andika, with their licenses.
 - `tools/`: the studio server, the nonsense-word generator, the content check, and the icon maker.
 - `nonsense-review.md`: the one-time review sheet for the nonsense words.
