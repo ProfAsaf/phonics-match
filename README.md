@@ -10,6 +10,12 @@ node tools/studio-server.mjs
 
 Then open http://localhost:8321/. The first launch runs the sound check, team and color picks, and the placement sweep. Hold the gear in the top-left corner for three seconds to open the parent area.
 
+## His progress
+
+- **The season map** on the home screen: each level is a world, each step a row of its ten players (signing a player fills a block; the queen at the end is the promotion), the letter-sounds are ore blocks (gold when mastered, "?" until found), and the cup is the level check that opens the next world. The ball marks the next player to sign.
+- **The block world** (the brick button on home, and after every match): each goal is one block to place, and every pictured word in his word book is a kind of block, picked by reading its printed name. Tap a placed block to lift it and tap a space to move it; tap it twice to hear its name. The world grows at 10, 25, 50, and 100 words.
+- **The parent area** starts with "Where he is": his world, step, players signed, letters, and what comes next.
+
 ## Audio
 
 - **Words, sentences, prompts, and commentary** come with a free AI voice (Kokoro, open source), made on a computer and published with the site in `audio/`. Words are spoken from their letters, sound by sound, so every vowel is the short one the game teaches and nonsense words come out exactly as spelled.
@@ -54,6 +60,6 @@ npm test
 ## Where things are
 
 - `content/`: the word bank, nonsense words, sentences and chants, prompts, sounds, levels, and your own headlines (`custom-sentences.json`).
-- `js/`: the game. Pure logic is in `mastery.js`, `choose.js`, `session.js`, and `stats.js`; the screens are in `app.js`, `activities.js`, and `parent.js`.
+- `js/`: the game. Pure logic is in `mastery.js`, `choose.js`, `session.js`, `stats.js`, `journey.js` (the season map), and `world.js` (the block world); the screens are in `app.js`, `activities.js`, and `parent.js`.
 - `tools/`: the studio server, the nonsense-word generator, the content check, and the icon maker.
 - `nonsense-review.md`: the one-time review sheet for the nonsense words.

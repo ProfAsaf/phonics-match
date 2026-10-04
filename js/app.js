@@ -1,8 +1,11 @@
-// The game: the start screen and sound check, first-launch setup, home, the match with its
-// halftime chant and full-time sum, the squad album, and the word book (SPEC.md, "Session flow"
-// and "Game layer"). The block world is a later addition.
+// The game: the start screen and sound check, first-launch setup, home with the season map, the
+// match with its halftime chant and full-time sum, the block world, the squad album, and the word
+// book (SPEC.md, "Session flow" and "Game layer").
 import { CONFIG as cfg } from './config.js';
 import { loadContent, clip, PIECE_SYMBOL, stepLE } from './content.js';
+import { journey, nextSlot } from './journey.js';
+import { worldSize, blockKinds, blocksLeft, place, move, blockAt } from './world.js';
+import { makeRng } from './rng.js';
 import { AudioEngine } from './audio.js';
 import { playChant } from './music.js';
 import { today } from './mastery.js';
@@ -156,9 +159,10 @@ function home() {
   const stats = h('div', { class: 'home-stats' },
     h('button', { class: 'stat', 'aria-label': 'Word book', onclick: book }, '📖', h('b', {}, P.wordBook.length)),
     h('div', { class: 'stat' }, '⚽', h('b', {}, P.seasonGoals)),
-    h('button', { class: 'stat', 'aria-label': 'Squad', onclick: album }, h('span', { class: 'kit' }, PIECE_SYMBOL.pawn), h('b', {}, squadValue)));
+    h('button', { class: 'stat', 'aria-label': 'Squad', onclick: album }, h('span', { class: 'kit' }, PIECE_SYMBOL.pawn), h('b', {}, squadValue)),
+    h('button', { class: 'stat', 'aria-label': 'Block world', onclick: () => blockWorld().then(home) }, '🧱', h('b', {}, blocksLeft(P))));
   const confirm = confirmButton();
-  screen('home', crest, [h('div', { class: 'choices row2' }, solo, together), stats], [confirm]);
+  screen('home', crest, [seasonMap(), stats, h('div', { class: 'choices row2' }, solo, together)], [confirm]);
   const ask = () => state.audio.say(() => state.audio.prompt('who'));
   setReplay(ask);
   if (P.lastSessionDay !== state.day) ask();
@@ -213,7 +217,132 @@ async function match(mode) {
   save();
   applySettings();
   await afterMatch(S);
+  // After full time he builds with the blocks his goals earned (outside the ten minutes).
+  if (blocksLeft(state.P) > 0 && blockKinds(C, state.P).length) await blockWorld();
   home();
+}
+
+// ---- The season map: his world, each step a row of its players with the queen at the end, the
+// cup match (the level check) that opens the next world, and the letter-sounds as ore blocks.
+// Only letters, numbers, and pictures, so nothing on it needs reading (ground rule 5).
+function seasonMap() {
+  const { C, P } = state;
+  const { worlds, current: w } = journey(C, P);
+  const next = worlds.find(x => x.level === w.level + 1);
+  const cup = h('div', { class: `map-row cup-row${w.check.passed ? ' won' : w.check.due ? ' due' : ''}` },
+    h('span', { class: 'cup' }, '🏆'),
+    next && h('span', { class: `portal ${next.biome}` }, w.check.passed ? next.level : '🔒'));
+  const steps = [...w.steps].reverse().map(s => {
+    const here = s.status === 'current' ? nextSlot(s) : -1;
+    return h('div', { class: `map-row step ${s.status}` },
+      h('span', { class: 'map-vowel' }, s.vowel ?? ''),
+      h('div', { class: 'mslots' }, s.players.map((p, i) => playerBlock(p, s, i === here))));
+  });
+  const ores = h('div', { class: 'ores' }, w.letters.map(oreBlock));
+  return h('div', { class: `map ${w.biome}` }, h('span', { class: 'map-badge' }, w.level), cup, steps, ores);
+}
+
+function playerBlock(p, step, here) {
+  const queenWaiting = p.piece === 'queen' && !p.signed;
+  const cls = ['pblock', p.signed && 'signed', here && 'here', queenWaiting && (step.queenReady ? 'queen-ready' : 'queen-later')].filter(Boolean).join(' ');
+  const el = h('button', { class: cls, 'aria-label': p.signed ? p.word : 'Player' }, h('span', { class: 'kit' }, PIECE_SYMBOL[p.piece]));
+  if (p.signed) {
+    el.addEventListener('click', () => {
+      state.audio.stop();
+      state.audio.play(clip.word(p.word));
+    });
+  }
+  return el;
+}
+
+function oreBlock(l) {
+  const el = h('button', { class: `ore ${l.state}`, 'aria-label': l.state === 'new' ? 'Not found yet' : l.letter }, l.state === 'new' ? '?' : l.letter);
+  if (l.state !== 'new') {
+    el.addEventListener('click', () => {
+      state.audio.stop();
+      state.audio.play(clip.sound(l.sound));
+    });
+  }
+  return el;
+}
+
+// ---- The block world: after a match, and any time from home. Every goal is one block to place.
+// The palette shows each kind as its printed word in shuffled order, so he reads "log" to pick
+// the log; a placed block says its name when tapped twice. Blocks can be moved at any time.
+async function blockWorld() {
+  const { C } = state;
+  const size = worldSize(state.P.wordBook.length);
+  const kinds = makeRng(`${state.day}:${state.P.sessionCount}:world`).shuffle(blockKinds(C, state.P));
+  let chosen = null; // a kind picked from the palette
+  let lifted = null; // a placed block being moved
+  const left = h('b', {}, blocksLeft(state.P));
+  const cells = [];
+  const grid = h('div', { class: 'world-grid' });
+  for (let y = size.rows - 1; y >= 0; y--) {
+    for (let x = 0; x < size.cols; x++) {
+      const el = h('button', { class: 'wcell', 'aria-label': 'Space' });
+      el.addEventListener('click', () => tapCell(x, y));
+      cells.push({ x, y, el });
+      grid.append(el);
+    }
+  }
+  const words = kinds.map(k => {
+    const el = h('button', { class: 'pword' }, k);
+    el.addEventListener('click', () => {
+      chosen = chosen === k ? null : k;
+      lifted = null;
+      state.audio.effect('tap');
+      draw();
+    });
+    return { k, el };
+  });
+  const draw = () => {
+    for (const c of cells) {
+      const kind = blockAt(state.P.world, c.x, c.y);
+      c.el.textContent = kind ? C.byWord.get(kind)?.picture ?? '' : '';
+      c.el.classList.toggle('wblock', !!kind);
+      c.el.classList.toggle('lifted', !!lifted && lifted.x === c.x && lifted.y === c.y);
+    }
+    const none = blocksLeft(state.P) === 0;
+    for (const w of words) {
+      w.el.classList.toggle('selected', w.k === chosen);
+      w.el.classList.toggle('empty', none);
+    }
+    left.textContent = blocksLeft(state.P);
+  };
+  const tapCell = (x, y) => {
+    const kind = blockAt(state.P.world, x, y);
+    if (kind && lifted?.x === x && lifted?.y === y) {
+      lifted = null;
+      state.audio.stop();
+      state.audio.play(clip.word(kind));
+    } else if (kind) {
+      lifted = { x, y };
+      chosen = null;
+      state.audio.effect('tap');
+    } else if (lifted) {
+      state.P.world = move(state.P.world, size, lifted, { x, y });
+      lifted = null;
+      save();
+      state.audio.effect('tap');
+    } else if (chosen && blocksLeft(state.P) > 0) {
+      state.P.world = place(state.P.world, size, x, y, chosen);
+      save();
+      state.audio.effect('pass');
+      if (blocksLeft(state.P) === 0) chosen = null;
+    }
+    draw();
+  };
+  const back = h('button', { class: 'confirm', 'aria-label': 'Home', disabled: false }, '🏠');
+  screen('world', h('div', { class: 'squad-value' }, '🧱', left),
+    [h('div', { class: 'world-wrap' }, h('div', { class: 'world-sky', style: { '--cols': size.cols } }, grid, h('div', { class: 'world-ground' }))),
+      h('div', { class: 'palette' }, words.map(w => w.el))], [back]);
+  const ask = () => state.audio.say(() => state.audio.prompt('world'));
+  setReplay(ask);
+  ask();
+  draw();
+  await tapped(back);
+  state.audio.stop();
 }
 
 async function showEvents(events, pitch, S) {

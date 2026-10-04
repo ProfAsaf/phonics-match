@@ -421,3 +421,46 @@ test('the AI voice makes every clip except the letter sounds and his shout; nons
   assert.match(jobs.find(j => j.id === 'w-lom').instructions, /rhymes with "mom"/);
   assert.ok(jobs.every(j => j.text && j.instructions));
 });
+
+// ---- The season map and the block world
+test('the season map shows the current world and step, signed players, and letters as ores', async () => {
+  const { journey, nextSlot, whereHeIs } = await import('../js/journey.js');
+  const P = placedChild(['a', 'm', 's', 't']);
+  let map = journey(C, P);
+  assert.equal(map.current.level, 1);
+  const first = map.current.steps[0];
+  assert.equal(first.status, 'current');
+  assert.equal(first.signed, 0);
+  assert.equal(nextSlot(first), 0);
+  assert.ok(map.current.letters.some(l => l.letter === 'm' && l.state === 'learning'));
+  assert.ok(map.current.letters.some(l => l.state === 'new'), 'unknown letters still to find');
+  assert.equal(map.worlds.find(w => w.level === 3).status, 'later', 'levels 3 to 6 are locked worlds');
+  P.signed.push(first.players[0].word, first.players[1].word);
+  map = journey(C, P);
+  assert.equal(map.current.steps[0].signed, 2);
+  assert.equal(nextSlot(map.current.steps[0]), 2);
+  P.step = C.steps[1].step;
+  map = journey(C, P);
+  assert.deepEqual(map.current.steps.map(s => s.status), ['done', 'current']);
+  assert.ok(whereHeIs(C, P)[0].startsWith('World 1'));
+});
+
+test('the block world grows with the word book, and each goal is one block to place', async () => {
+  const { worldSize, place, move, blocksLeft, blockAt, blockKinds } = await import('../js/world.js');
+  assert.deepEqual(worldSize(0), { cols: 8, rows: 6 });
+  assert.deepEqual(worldSize(10), { cols: 10, rows: 7 });
+  assert.deepEqual(worldSize(100), { cols: 16, rows: 10 });
+  const P = newProgress(C, DAY0);
+  P.seasonGoals = 2;
+  P.wordBook = ['log', 'sun', 'mat'].filter(k => C.byWord.has(k));
+  assert.ok(blockKinds(C, P).every(k => C.byWord.get(k).picture), 'only pictured words are blocks');
+  const size = worldSize(P.wordBook.length);
+  P.world = place(P.world, size, 0, 0, 'sun');
+  assert.equal(blocksLeft(P), 1);
+  assert.equal(place(P.world, size, 0, 0, 'log'), P.world, 'a filled cell takes no second block');
+  assert.equal(place(P.world, size, 8, 0, 'log'), P.world, 'nothing goes outside the world');
+  P.world = move(P.world, size, { x: 0, y: 0 }, { x: 3, y: 2 });
+  assert.equal(blockAt(P.world, 0, 0), null);
+  assert.equal(blockAt(P.world, 3, 2), 'sun');
+  assert.equal(blocksLeft(P), 1, 'moving costs nothing');
+});

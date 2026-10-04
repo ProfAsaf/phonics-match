@@ -12,7 +12,7 @@ export function newProgress(C, day) {
     version: 1, created: day, settings: defaultSettings(), team: null, placementDone: false,
     step: C.steps[0].step, records: {}, sessions: [], sessionCount: 0, recycle: [], seasonGoals: 0,
     wordBook: [], signed: [], queenReady: {}, levelPassed: {}, levelCheckDue: null, levelChecks: [],
-    sightIntroduced: [], headlines: {}, lastUsed: {}, lastSessionDay: null,
+    sightIntroduced: [], headlines: {}, lastUsed: {}, lastSessionDay: null, world: { cells: {} },
   };
   return upgradeProgress(C, progress);
 }
@@ -20,7 +20,7 @@ export function newProgress(C, day) {
 // Fills in any field or record a newer version of the game or its content expects.
 export function upgradeProgress(C, P) {
   const fresh = { settings: defaultSettings(), recycle: [], wordBook: [], signed: [], queenReady: {}, levelPassed: {},
-    levelChecks: [], sightIntroduced: [], headlines: {}, lastUsed: {}, sessions: [], records: {} };
+    levelChecks: [], sightIntroduced: [], headlines: {}, lastUsed: {}, sessions: [], records: {}, world: { cells: {} } };
   for (const [k, v] of Object.entries(fresh)) P[k] ??= v;
   P.settings = { ...defaultSettings(), ...P.settings };
   P.settings.items = { ...defaultSettings().items, ...P.settings.items };

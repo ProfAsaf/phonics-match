@@ -9,6 +9,7 @@ import { levelCheckWords, applyLevelCheck } from './session.js';
 import { letterState } from './choose.js';
 import { saveProgress, exportProgress, parseImport, clearProgress } from './storage.js';
 import { openRecorder } from './recorder.js';
+import { whereHeIs } from './journey.js';
 import { h, sleep } from './ui.js';
 
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
@@ -37,6 +38,7 @@ export function openParent(state, { onClose, runPlacement }) {
         h('div', {}, h('h1', {}, P.settings.childName ? `${P.settings.childName}'s phonics` : 'Phonics'),
           h('div', { class: 'muted' }, `Step ${P.step} · ${plural(P.sessionCount, 'match', 'matches')} played`)),
         h('button', { class: 'pclose', onclick: close }, 'Close')),
+      section('Where he is', whereHeIs(C, P).map(line => h('p', { class: 'where' }, line))),
       section('Next step', h('p', { class: 'next' }, nextStep(C, P, state.day)),
         levelCheckButton()),
       section('Skills', skillRows()),

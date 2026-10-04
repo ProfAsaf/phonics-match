@@ -603,3 +603,94 @@ button {
   .top { min-height: 66px; }
   .bottom { min-height: 98px; }
 }
+
+/* ---- Home: the season map. Blocky and pixel-style, with no names, characters, or art from any
+   real game. Each step is a row of its players; the queen at the end is the promotion. */
+.home .stage { gap: clamp(10px, 2.2vh, 24px); justify-content: flex-start; padding-top: 4px; }
+.home .who { width: clamp(96px, 26vmin, 190px); height: clamp(92px, 20vmin, 160px); font-size: clamp(44px, 11vmin, 88px); }
+.home .who.two { width: clamp(132px, 36vmin, 260px); }
+.home .home-stats { gap: 8px; flex-wrap: nowrap; }
+.home .stat { min-width: 0; min-height: 60px; padding: 0 10px; font-size: 22px; gap: 6px; }
+.map {
+  position: relative;
+  width: min(100%, 560px);
+  padding: 10px 10px 30px 10px;
+  border-radius: 10px;
+  background: #bfe6ff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: inset 0 -16px 0 #8b5a2b, inset 0 -22px 0 #4e9a2f, 0 3px 0 rgba(0, 0, 0, 0.12);
+}
+.map.forest { background: #a9d9c4; }
+.map-badge {
+  position: absolute; top: -10px; left: -8px; z-index: 1;
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 800; color: #fff; background: var(--kit); border-radius: 4px;
+  box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.25), inset 3px 3px 0 rgba(255, 255, 255, 0.3);
+}
+.map-row { display: flex; align-items: center; gap: 8px; }
+.map-vowel { width: 30px; flex: none; text-align: center; font-family: var(--print); font-size: 30px; font-weight: 700; color: #1f4e79; }
+.mslots { flex: 1; display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
+.pblock {
+  aspect-ratio: 1; position: relative; border-radius: 3px; font-size: clamp(14px, 4vmin, 26px);
+  display: flex; align-items: center; justify-content: center;
+  background: #c9ced4; box-shadow: inset -3px -3px 0 #a3aab2, inset 3px 3px 0 #e3e7ea;
+}
+.pblock .kit { color: #9aa3ad; }
+.pblock.signed { background: #8fd16a; box-shadow: inset -3px -3px 0 #5fa83c, inset 3px 3px 0 #b5ea8f; }
+.pblock.signed .kit { color: var(--kit); }
+.pblock.here { outline: 3px solid var(--kit); outline-offset: 1px; }
+.pblock.here::after { content: "⚽"; position: absolute; top: -15px; font-size: 14px; animation: bounce 0.9s ease-in-out infinite; }
+.pblock.queen-later { background: #f4ecd2; box-shadow: inset 0 0 0 2px #d9b44a; }
+.pblock.queen-ready { background: var(--gold); box-shadow: inset 0 0 0 2px #b58900; animation: glow 1.1s ease-in-out infinite; }
+.map-row.step.ahead { opacity: 0.5; }
+.cup-row { justify-content: center; gap: 14px; }
+.cup { font-size: 30px; filter: grayscale(1); opacity: 0.55; }
+.cup-row.due .cup { filter: none; opacity: 1; animation: bounce 1s ease-in-out infinite; }
+.cup-row.won .cup { filter: none; opacity: 1; }
+.portal {
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 3px;
+  font-size: 20px; font-weight: 800; color: #fff; background: #7b2cbf;
+  box-shadow: inset -4px -4px 0 #5a189a, inset 4px 4px 0 #9d4edd;
+}
+.ores { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; padding-top: 4px; }
+.ore {
+  width: clamp(28px, 7.4vmin, 40px); height: clamp(28px, 7.4vmin, 40px); border-radius: 3px;
+  font-family: var(--print); font-size: clamp(18px, 4.8vmin, 26px); color: #f4f4f4;
+  display: flex; align-items: center; justify-content: center;
+  background: #7d848c; box-shadow: inset -3px -3px 0 #5d636a, inset 3px 3px 0 #9aa1a8;
+}
+.ore.mastered { background: #e9c46a; color: #5b3a00; box-shadow: inset -3px -3px 0 #c89b2e, inset 3px 3px 0 #ffe8a3; }
+.ore.new { background: #d5dade; color: #a1a9b1; box-shadow: inset 0 0 0 2px #b9c0c7; }
+@media (max-height: 720px) {
+  .home .who { height: 84px; font-size: 44px; }
+  .map { gap: 4px; padding-bottom: 26px; }
+}
+
+/* ---- The block world: sky, ground, and his blocks. Words stay in the clear print font. */
+.world-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; display: flex; }
+.world-sky {
+  --cell: clamp(36px, calc((min(100vw, 980px) - 40px) / var(--cols, 8)), 64px);
+  margin: 0 auto; background: #bfe6ff; border-radius: 8px; overflow: hidden; padding-top: 6px;
+}
+.world-grid { display: grid; grid-template-columns: repeat(var(--cols), var(--cell)); grid-auto-rows: var(--cell); }
+.wcell { width: var(--cell); height: var(--cell); border-radius: 2px; }
+.wcell:active { background: #ffffff66; }
+.wblock {
+  font-size: calc(var(--cell) * 0.6); line-height: 1;
+  background: #f3e2c0; box-shadow: inset -4px -4px 0 #d8c39a, inset 4px 4px 0 #fff4dd;
+}
+.wblock.lifted { outline: 4px solid var(--kit); outline-offset: -4px; transform: translateY(-4px); }
+.world-ground {
+  height: calc(var(--cell) * 1.1);
+  background: linear-gradient(#6fbf4a 0 20%, #4e9a2f 20% 28%, #8b5a2b 28%);
+}
+.palette { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 760px; }
+.pword {
+  font-family: var(--print); font-size: clamp(26px, 6vmin, 38px); min-height: 64px; min-width: 64px; padding: 0 16px;
+  background: #c8a46b; border-radius: 6px; box-shadow: inset -5px -5px 0 #a5824c, inset 5px 5px 0 #dcbf8c;
+}
+.pword.selected { outline: 5px solid var(--kit); }
+.pword.empty { opacity: 0.45; }
+.where { margin: 0 0 6px; }

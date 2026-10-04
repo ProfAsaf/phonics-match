@@ -30,6 +30,7 @@
     { "id": "full-time", "text": "Full time! How many goals in all?" },
     { "id": "new-player", "text": "You signed a new player!" },
     { "id": "queen", "text": "The queen joins your team. You moved up!" },
+    { "id": "world", "text": "Build your world! Read a block's name to pick it, then tap where it goes." },
     { "id": "level-check", "text": "Read each word to your grown-up." },
     { "id": "nice", "text": "Nice!", "praise": true },
     { "id": "yes", "text": "Yes!", "praise": true },

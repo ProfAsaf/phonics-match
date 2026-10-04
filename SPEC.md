@@ -376,3 +376,33 @@ The block world is a later addition, built only after all seven stages work. The
 - Timed fluency measures.
 - Accounts, sync, or multiple profiles.
 - Image files in place of emoji.
+
+## Changes after version 1
+
+Decided with the parent in October 2026. Where these conflict with an earlier section, they win; the eight ground rules still hold.
+
+### Audio
+
+- Words, sentences, prompts, and commentary use a free AI voice (Kokoro, open source), made on a computer and published in audio/. Ground rule 3 still holds: an AI voice cannot say a bare sound well, so the 24 letter sounds are a parent's recordings, or a file of a teacher's recordings imported in the recorder and kept on the device, never published. His goal shout is his own recording.
+
+### The season map
+
+- The home screen shows his season as a blocky map. Each level is a world: grasslands, then forest, with later levels shown locked.
+- Each step is a row of its ten players. Signing a player fills its block, and the queen at the end of the row is the promotion. A ball marks the next player to sign.
+- Each letter-sound of the world is an ore block: "?" until he meets it, stone while learning, gold when mastered. Tapping a found ore plays its sound.
+- The cup is the level check. Passing it opens the portal to the next world.
+- The map shows only letters, numbers, and pictures (ground rule 5). The parent area starts with the same picture in words: his world, step, players signed, letters, and what comes next.
+
+### The block world
+
+- Built now rather than later, as specified in "The block world". Every goal of his season is one block, so goals scored before it existed are waiting as blocks. It opens after full time when he has blocks to place and from a button on the home screen.
+
+### Check-ups (next stage)
+
+- Every two weeks and at each level check, about five minutes, run by the parent. Four parts mirror the first-grade DIBELS measures: letter sounds, segmenting a spoken word, reading nonsense words, and reading a short decodable story. The items are the game's own, not DIBELS probes.
+- Each part runs one minute, timed on the parent's screen only; he never sees a timer (ground rule 7). The parent scores what he says aloud (ground rule 1). He sees it as a cup match, with no score.
+- Results show as his own trend lines, one per part, with no benchmarks or comparisons. This replaces "Timed fluency measures" under "Out of scope for version 1".
+
+### Levels 3 to 6
+
+- Still later: built when he nears the end of level 2. The map shows them as locked worlds until then.
