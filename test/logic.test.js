@@ -422,45 +422,55 @@ test('the AI voice makes every clip except the letter sounds and his shout; nons
   assert.ok(jobs.every(j => j.text && j.instructions));
 });
 
-// ---- The season map and the block world
-test('the season map shows the current world and step, signed players, and letters as ores', async () => {
-  const { journey, nextSlot, whereHeIs } = await import('../js/journey.js');
-  const P = placedChild(['a', 'm', 's', 't']);
-  let map = journey(C, P);
-  assert.equal(map.current.level, 1);
-  const first = map.current.steps[0];
-  assert.equal(first.status, 'current');
-  assert.equal(first.signed, 0);
-  assert.equal(nextSlot(first), 0);
-  assert.ok(map.current.letters.some(l => l.letter === 'm' && l.state === 'learning'));
-  assert.ok(map.current.letters.some(l => l.state === 'new'), 'unknown letters still to find');
-  assert.equal(map.worlds.find(w => w.level === 3).status, 'later', 'levels 3 to 6 are locked worlds');
-  P.signed.push(first.players[0].word, first.players[1].word);
-  map = journey(C, P);
-  assert.equal(map.current.steps[0].signed, 2);
-  assert.equal(nextSlot(map.current.steps[0]), 2);
-  P.step = C.steps[1].step;
-  map = journey(C, P);
-  assert.deepEqual(map.current.steps.map(s => s.status), ['done', 'current']);
-  assert.ok(whereHeIs(C, P)[0].startsWith('World 1'));
+// ---- The world map: the day's trip and his worlds
+test('the day is a trip past the six activities in order, with halftime after three and the trophy last', async () => {
+  const { STOPS, stopOf, stopStates, HALFTIME_STOP, TROPHY_STOP } = await import('../js/journey.js');
+  const { STOP_KINDS } = await import('../js/pixel.js');
+  assert.deepEqual(STOPS.map(s => s.kind), STOP_KINDS, 'every stop has its drawn badge');
+  assert.deepEqual(STOPS.filter(s => s.activity).map(s => s.activity), CONFIG.activities, 'levels follow the session order');
+  assert.ok(STOPS.slice(0, HALFTIME_STOP).every(s => CONFIG.firstHalf.includes(s.activity)), 'halftime falls after the first half');
+  assert.equal(TROPHY_STOP, STOPS.length - 1);
+  const order = CONFIG.activities.filter(a => a !== 'buildIt'); // say Build it is turned off
+  const states = stopStates(order, new Set([0, 1]), 2);
+  assert.deepEqual(states.slice(0, 5), ['done', 'done', 'next', 'ahead', 'skip']);
+  assert.equal(stopOf('readAloud'), 6);
 });
 
-test('the block world grows with the word book, and each goal is one block to place', async () => {
-  const { worldSize, place, move, blocksLeft, blockAt, blockKinds } = await import('../js/world.js');
-  assert.deepEqual(worldSize(0), { cols: 8, rows: 6 });
-  assert.deepEqual(worldSize(10), { cols: 10, rows: 7 });
-  assert.deepEqual(worldSize(100), { cols: 16, rows: 10 });
-  const P = newProgress(C, DAY0);
-  P.seasonGoals = 2;
-  P.wordBook = ['log', 'sun', 'mat'].filter(k => C.byWord.has(k));
-  assert.ok(blockKinds(C, P).every(k => C.byWord.get(k).picture), 'only pictured words are blocks');
-  const size = worldSize(P.wordBook.length);
-  P.world = place(P.world, size, 0, 0, 'sun');
-  assert.equal(blocksLeft(P), 1);
-  assert.equal(place(P.world, size, 0, 0, 'log'), P.world, 'a filled cell takes no second block');
-  assert.equal(place(P.world, size, 8, 0, 'log'), P.world, 'nothing goes outside the world');
-  P.world = move(P.world, size, { x: 0, y: 0 }, { x: 3, y: 2 });
-  assert.equal(blockAt(P.world, 0, 0), null);
-  assert.equal(blockAt(P.world, 3, 2), 'sun');
-  assert.equal(blocksLeft(P), 1, 'moving costs nothing');
+test('each step is a new world with its own scenery, and the parent sees where he is', async () => {
+  const { worldFor, whereHeIs } = await import('../js/journey.js');
+  const { THEME_NAMES, pixelMapSVG, routeAt, ROUTE } = await import('../js/pixel.js');
+  const worlds = C.steps.map(s => worldFor(C, s.step));
+  assert.deepEqual(worlds.map(w => w.number), C.steps.map((_, i) => i + 1));
+  assert.ok(worlds.every(w => THEME_NAMES.includes(w.theme)));
+  assert.equal(new Set(worlds.map(w => w.theme)).size, Math.min(worlds.length, THEME_NAMES.length), 'neighboring worlds look different');
+  for (const w of worlds) assert.ok(pixelMapSVG({ theme: w.theme, world: w.number }).startsWith('<svg'));
+  assert.deepEqual(routeAt(2, 0).map(Math.round), ROUTE[2], 'the walk starts on the stop');
+  assert.deepEqual(routeAt(2, 1).map(Math.round), ROUTE[3], 'and ends on the next one');
+  const P = placedChild(['a', 'm', 's', 't']);
+  const first = C.squad.players.filter(p => p.step === P.step);
+  P.signed.push(first[0].word, first[1].word);
+  const lines = whereHeIs(C, P);
+  assert.ok(lines[0].startsWith('World 1'));
+  assert.ok(lines[0].includes(`2 of ${first.length} players`));
+});
+
+test('every level has an animated pixel scene, and the goal celebration is drawn', async () => {
+  const { pixelLevelSVG, pixelGoalSVG, CHARACTERS, pixelPlayer } = await import('../js/pixel.js');
+  const { STOPS } = await import('../js/journey.js');
+  for (const s of STOPS) {
+    const markup = pixelLevelSVG(s.kind, { kit: '#1d6fd8', signed: ['pawn', 'knight'] });
+    assert.ok(markup.startsWith('<svg') && markup.includes('<animate'), `${s.kind} moves`);
+  }
+  assert.ok(pixelGoalSVG('#1d6fd8', 'fox').includes('<animateTransform'));
+  for (const c of CHARACTERS) assert.ok(pixelPlayer(c, '#1d6fd8', 6, { walk: true }).includes('<animateTransform'), `${c} walks`);
+});
+
+test('every prompt cue plays two real notes, whatever its hash', async () => {
+  const { hash } = await import('../js/rng.js');
+  const PENTATONIC = [0, 2, 4, 7, 9];
+  for (const id of Object.keys(C.prompts)) {
+    const h = hash(id) >>> 0;
+    for (const n of [h % 5, (h >>> 4) % 5]) assert.ok(Number.isFinite(523.25 * 2 ** (PENTATONIC[n] / 12)), `${id} plays a note`);
+  }
+  assert.ok(Object.keys(C.prompts).some(id => ((hash(id) >>> 0) >> 4) % 5 < 0), 'a signed shift breaks some cues, which is why the game uses an unsigned one');
 });

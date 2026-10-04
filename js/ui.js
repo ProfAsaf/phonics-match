@@ -2,6 +2,7 @@
 // the parent corner, the pitch, and celebrations. Nothing on a child screen is written
 // instruction (ground rule 4); every target is at least 64 px (ground rule 8).
 import { PIECE_SYMBOL } from './content.js';
+import { pixelPiece, PIXEL_ICONS } from './pixel.js';
 
 export function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
@@ -43,7 +44,7 @@ export function flash(el, ms = 450, cls = 'lit') {
 }
 
 export function confirmButton() {
-  return h('button', { class: 'confirm', 'aria-label': 'Go', disabled: true }, h('span', {}, '⚽'));
+  return h('button', { class: 'confirm', 'aria-label': 'Go', disabled: true }, ballIcon('confirm-ball'));
 }
 
 export function speakerButton(i) {
@@ -148,24 +149,33 @@ export function confetti(n = 40) {
   }));
 }
 
+// A chess piece card, drawn in his kit color (a gray silhouette until the player is signed).
 export function pieceEl(piece, { signed = true, number = null, name = null, small = false } = {}) {
+  const symbol = h('span', { class: 'symbol' });
+  symbol.innerHTML = `<svg viewBox="0 0 8 10" shape-rendering="crispEdges">${pixelPiece(piece, 'currentColor', 1)}</svg>`;
   return h('div', { class: `piece ${signed ? 'signed' : 'silhouette'}${small ? ' small' : ''}` },
-    h('span', { class: 'symbol' }, PIECE_SYMBOL[piece]),
+    symbol,
     number != null && h('span', { class: 'number' }, number),
     name && h('span', { class: 'name' }, name));
 }
+
+const ballIcon = cls => {
+  const el = h('span', { class: cls });
+  el.innerHTML = PIXEL_ICONS.ball;
+  return el;
+};
 
 // The progress path: the pitch. Each item fills a slot; a pass puts a teammate there.
 export class Pitch {
   constructor() {
     this.slots = h('div', { class: 'slots' });
-    this.ball = h('div', { class: 'pball' }, '⚽');
+    this.ball = ballIcon('pball');
     this.goalCount = h('b', {}, '0');
     this.el = h('div', { class: 'pitch' },
       h('div', { class: 'line mid' }), h('div', { class: 'ring' }),
       h('div', { class: 'net left' }), h('div', { class: 'net right' }),
       this.slots, this.ball,
-      h('div', { class: 'scoreboard' }, '⚽', this.goalCount));
+      h('div', { class: 'scoreboard' }, ballIcon('sb-ball'), this.goalCount));
     this.done = 0;
     this.total = 1;
   }

@@ -385,17 +385,17 @@ Decided with the parent in October 2026. Where these conflict with an earlier se
 
 - Words, sentences, prompts, and commentary use a free AI voice (Kokoro, open source), made on a computer and published in audio/. Ground rule 3 still holds: an AI voice cannot say a bare sound well, so the 24 letter sounds are a parent's recordings, or a file of a teacher's recordings imported in the recorder and kept on the device, never published. His goal shout is his own recording.
 
-### The season map
+### The world map and the levels
 
-- The home screen shows his season as a blocky map. Each level is a world: grasslands, then forest, with later levels shown locked.
-- Each step is a row of its ten players. Signing a player fills its block, and the queen at the end of the row is the promotion. A ball marks the next player to sign.
-- Each letter-sound of the world is an ore block: "?" until he meets it, stone while learning, gold when mastered. Tapping a found ore plays its sound.
-- The cup is the level check. Passing it opens the portal to the next world.
-- The map shows only letters, numbers, and pictures (ground rule 5). The parent area starts with the same picture in words: his world, step, players signed, letters, and what comes next.
-
-### The block world
-
-- Built now rather than later, as specified in "The block world". Every goal of his season is one block, so goals scored before it existed are waiting as blocks. It opens after full time when he has blocks to place and from a button on the home screen.
+- Pictures stay emoji for words, but the game layer is pixel art in a blocky, Minecraft-like style: textured blocks (grass, dirt, stone, planks, ores), blocky players, square clouds, and motion in pixel steps. All of it is original SVG made in code, with no image files, and nothing copied from any real game (no textures, creatures, characters, or names).
+- At first launch he picks his player from four blocky characters, all in his kit color: a striker, a goalkeeper, a fox, and a robot. They swing their arms and legs as they walk.
+- Home is a world map. Each day his player walks a path past eight stops: one level per activity in the session's fixed order, the halftime show after the first three, and the trophy at full time. The order never changes, so the routine stays familiar.
+- Each level plays over its own animated block scene: the stadium (Sound match, with his signed players cheering in the stands), the chess castle (Blend it, with pieces hopping on a plank chessboard), the crystal mine (Find the sound, where a pickaxe cracks an ore block into square bits), the workshop (Build it), the sky islands (Read and find), and the night stadium (Read aloud, with square fireworks). The halftime show holds the chant and the trophy the full-time sum. Motion stays mostly at the top and bottom of the screen, and the questions sit on a frosted panel.
+- Between levels the map comes back and his player walks to the next stop, in about a second; a tap skips the walk. Passes, goals, the halves, and the full-time sum work as before.
+- Each step he moves up is a new world with its own scenery: meadow, river, forest, snow, beach, and around again. Signing the queen moves him to the next world.
+- His letter gems show every letter-sound: gold when mastered, blue while learning, "?" until he meets it. Tapping a found gem plays its sound.
+- The parent area starts with "Where he is": his world, step, players signed, letters, and what comes next.
+- The block world described in "The block world" is dropped.
 
 ### Check-ups (next stage)
 

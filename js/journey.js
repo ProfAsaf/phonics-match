@@ -1,60 +1,51 @@
-// The season map on the home screen: each level is a world, each step a row of its players (the
-// queen at the end is the promotion), each letter-sound an ore block, and the level check the cup
-// match that opens the next world. Pure: everything is derived from the content and his progress.
+// The day's trip and his season, for the world map (SPEC.md, "Changes after version 1"). Each day
+// his player walks past six levels, one per activity in the session's fixed order, with the
+// halftime show after the first three and the trophy at full time. Each step he moves up is a new
+// world with its own scenery. Pure: everything is derived from the content and his progress.
 import { letterState } from './choose.js';
 import { isVowel } from './content.js';
 
-// Levels 3 to 6 show as locked worlds until their content exists.
-export const WORLDS = [
-  { level: 1, biome: 'grass', name: 'Grasslands' },
-  { level: 2, biome: 'forest', name: 'Forest' },
-  { level: 3, biome: 'desert', name: 'Desert' },
-  { level: 4, biome: 'snow', name: 'Snowy peaks' },
-  { level: 5, biome: 'cave', name: 'Caves' },
-  { level: 6, biome: 'sky', name: 'Sky islands' },
+export const STOPS = [
+  { kind: 'stadium', activity: 'soundMatch' },
+  { kind: 'castle', activity: 'blendIt' },
+  { kind: 'mine', activity: 'findSound' },
+  { kind: 'show' }, // halftime: the chant
+  { kind: 'workshop', activity: 'buildIt' },
+  { kind: 'islands', activity: 'readFind' },
+  { kind: 'night', activity: 'readAloud' },
+  { kind: 'trophy' }, // full time
 ];
+export const HALFTIME_STOP = 3;
+export const TROPHY_STOP = 7;
+export const stopOf = activity => STOPS.findIndex(s => s.activity === activity);
 
-export function journey(C, P) {
-  const here = C.stepIndex[P.step];
-  const worlds = WORLDS.map(w => {
-    const stepsHere = C.steps.filter(s => s.level === w.level);
-    const steps = stepsHere.map(s => {
-      const at = C.stepIndex[s.step];
-      const players = C.squad.players.filter(p => p.step === s.step)
-        .map(p => ({ word: p.word, piece: p.piece, number: p.number, signed: P.signed.includes(p.word) }));
-      return {
-        step: s.step,
-        vowel: s.letters.find(isVowel) ?? null,
-        status: at < here ? 'done' : at === here ? 'current' : 'ahead',
-        players,
-        signed: players.filter(p => p.signed).length,
-        queenReady: !!P.queenReady[s.step],
-      };
-    });
-    const letters = stepsHere.flatMap(s => s.letters).map(l => ({ letter: l, sound: C.letterSound[l], state: letterState(P, l) }));
-    const built = steps.length > 0;
-    const status = !built ? 'later'
-      : steps.some(s => s.status === 'current') ? 'current'
-        : steps.every(s => s.status === 'done') ? 'done' : 'ahead';
-    return { ...w, built, steps, letters, check: { due: P.levelCheckDue === w.level, passed: !!P.levelPassed[w.level] }, status };
-  });
-  return { worlds, current: worlds.find(w => w.status === 'current') ?? worlds.find(w => w.built) };
+// How each stop looks on the map: done, the next one, still ahead, or skipped today.
+export function stopStates(order, done, next) {
+  return STOPS.map((s, i) => (done.has(i) ? 'done' : i === next ? 'next' : s.activity && !order.includes(s.activity) ? 'skip' : 'ahead'));
 }
 
-// The next slot to fill in a step: the first player not yet signed, in the order they line up.
-export const nextSlot = step => step.players.findIndex(p => !p.signed);
+// Each step is a world: meadow, river, forest, snow, beach, and around again.
+export const WORLD_THEMES = ['meadow', 'river', 'forest', 'snow', 'beach'];
+export function worldFor(C, step) {
+  const i = C.stepIndex[step] ?? 0;
+  return { number: i + 1, theme: WORLD_THEMES[i % WORLD_THEMES.length] };
+}
 
 // For the parent dashboard: where he is and what comes next, in plain words.
 export function whereHeIs(C, P) {
-  const { current } = journey(C, P);
-  const step = current.steps.find(s => s.status === 'current') ?? current.steps.at(-1);
-  const count = state => current.letters.filter(l => l.state === state).length;
+  const step = C.steps[C.stepIndex[P.step]];
+  const world = worldFor(C, P.step);
+  const players = C.squad.players.filter(p => p.step === P.step);
+  const signed = players.filter(p => P.signed.includes(p.word)).length;
+  const levelLetters = C.steps.filter(s => s.level === step.level).flatMap(s => s.letters);
+  const count = state => levelLetters.filter(l => letterState(P, l) === state).length;
+  const vowel = step.letters.find(isVowel);
   const lines = [
-    `World ${current.level} (${current.name}), step ${step.step}${step.vowel ? `, short ${step.vowel}` : ''}: ${step.signed} of ${step.players.length} players signed.`,
-    `Letter sounds in this world: ${count('mastered')} mastered, ${count('learning')} learning, ${count('new')} not started.`,
+    `World ${world.number} (the ${world.theme}), step ${step.step}${vowel ? `, short ${vowel}` : ''}: ${signed} of ${players.length} players signed.`,
+    `Letter sounds in level ${step.level}: ${count('mastered')} mastered, ${count('learning')} learning, ${count('new')} not started.`,
   ];
-  if (current.check.due) lines.push(`The level ${current.level} check (the cup match) is due: run it from Settings.`);
-  else if (step.queenReady) lines.push('The queen is ready: signing her moves him up to the next step.');
-  else lines.push('The queen comes out when this step\'s real and nonsense words are both mastered.');
+  if (P.levelCheckDue === step.level) lines.push(`The level ${step.level} check is due: run it from Settings.`);
+  else if (P.queenReady[P.step]) lines.push('The queen is ready: signing her moves him up to the next world.');
+  else lines.push("The queen comes out when this step's real and nonsense words are both mastered; then he moves to the next world.");
   return lines;
 }

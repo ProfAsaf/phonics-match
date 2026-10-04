@@ -12,8 +12,10 @@ Then open http://localhost:8321/. The first launch runs the sound check, team an
 
 ## His progress
 
-- **The season map** on the home screen: each level is a world, each step a row of its ten players (signing a player fills a block; the queen at the end is the promotion), the letter-sounds are ore blocks (gold when mastered, "?" until found), and the cup is the level check that opens the next world. The ball marks the next player to sign.
-- **The block world** (the brick button on home, and after every match): each goal is one block to place, and every pictured word in his word book is a kind of block, picked by reading its printed name. Tap a placed block to lift it and tap a space to move it; tap it twice to hear its name. The world grows at 10, 25, 50, and 100 words.
+- **His player**: at first launch he picks a striker, a goalkeeper, a fox, or a robot: blocky pixel characters in his team color. Existing progress keeps going; he is just asked to pick once.
+- **The world map** on the home screen: each day his player walks a path past six levels (one per activity, in the usual order), the halftime show, and the trophy. Each step he moves up is a new world with its own scenery: meadow, river, forest, snow, beach.
+- **The levels**: each activity plays over its own animated block scene in a Minecraft-like pixel style (the stadium, the chess castle, the crystal mine, the workshop, the sky islands, the night stadium), with the pitch and his goals at the top as before. The art is original, made in code. Between levels the map comes back and his player walks to the next stop.
+- **His letter gems** (the gem button on home): gold when mastered, blue while learning, "?" until he meets the letter. Tap a gem to hear its sound.
 - **The parent area** starts with "Where he is": his world, step, players signed, letters, and what comes next.
 
 ## Audio
@@ -60,6 +62,6 @@ npm test
 ## Where things are
 
 - `content/`: the word bank, nonsense words, sentences and chants, prompts, sounds, levels, and your own headlines (`custom-sentences.json`).
-- `js/`: the game. Pure logic is in `mastery.js`, `choose.js`, `session.js`, `stats.js`, `journey.js` (the season map), and `world.js` (the block world); the screens are in `app.js`, `activities.js`, and `parent.js`.
+- `js/`: the game. Pure logic is in `mastery.js`, `choose.js`, `session.js`, `stats.js`, and `journey.js` (the day's trip and his worlds); the pixel art is in `pixel.js` (blocks, players, pieces, the world map, the level scenes, and the goal); the screens are in `app.js`, `activities.js`, and `parent.js`.
 - `tools/`: the studio server, the nonsense-word generator, the content check, and the icon maker.
 - `nonsense-review.md`: the one-time review sheet for the nonsense words.

@@ -223,15 +223,16 @@ export class AudioEngine {
 
   async cue(id) {
     if (!this.ctx) return;
-    const h = hash(id);
+    const h = hash(id) >>> 0;
     const t = this.now() + 0.03;
-    [h % 5, (h >> 4) % 5].forEach((n, i) => this.tone(523.25 * 2 ** (PENTATONIC[n] / 12), t + i * 0.13, 0.12, 'triangle', 0.2));
+    // Unsigned shifts throughout: a signed one turned large hashes negative, and the cue crashed.
+    [h % 5, (h >>> 4) % 5].forEach((n, i) => this.tone(523.25 * 2 ** (PENTATONIC[n] / 12), t + i * 0.13, 0.12, 'triangle', 0.2));
     await this.until(t + 0.32);
   }
 
   // ---- Synthesized sounds: music and effects, never speech.
   tone(freq, when, dur, type = 'sine', gain = 0.2) {
-    if (!this.ctx) return;
+    if (!this.ctx || !Number.isFinite(freq) || !Number.isFinite(when)) return;
     const osc = this.ctx.createOscillator();
     const env = this.ctx.createGain();
     osc.type = type;

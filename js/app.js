@@ -1,11 +1,13 @@
-// The game: the start screen and sound check, first-launch setup, home with the season map, the
-// match with its halftime chant and full-time sum, the block world, the squad album, and the word
-// book (SPEC.md, "Session flow" and "Game layer").
+// The game: the start screen and sound check, first-launch setup (team, kit color, and player),
+// home on the world map, the match as a trip past six levels with the halftime show and the
+// trophy, the squad album, the word book, and his letter gems (SPEC.md, "Session flow", "Game
+// layer", and "Changes after version 1").
 import { CONFIG as cfg } from './config.js';
-import { loadContent, clip, PIECE_SYMBOL, stepLE } from './content.js';
-import { journey, nextSlot } from './journey.js';
-import { worldSize, blockKinds, blocksLeft, place, move, blockAt } from './world.js';
-import { makeRng } from './rng.js';
+import { loadContent, clip, stepLE } from './content.js';
+import { STOPS, HALFTIME_STOP, TROPHY_STOP, stopOf, stopStates, worldFor } from './journey.js';
+import {
+  pixelMapSVG, pixelLevelSVG, pixelGoalSVG, pixelPlayer, pixelGrownUp, PIXEL_ICONS, pawnIcon, letterGem, routeAt, ROUTE, CHARACTERS,
+} from './pixel.js';
 import { AudioEngine } from './audio.js';
 import { playChant } from './music.js';
 import { today } from './mastery.js';
@@ -33,6 +35,16 @@ const replay = () => {
   state.audio.stop();
   state.replay?.();
 };
+const kit = () => state.P.team?.color ?? KIT_COLORS[0];
+const player = () => state.P.character ?? CHARACTERS[0];
+
+// Drawn art (SVG markup) as an element.
+function art(markup, cls) {
+  const el = h('div', { class: cls });
+  el.innerHTML = markup;
+  return el;
+}
+const figure = markup => art(`<svg viewBox="-36 -126 72 130" shape-rendering="crispEdges">${markup}</svg>`, 'figure');
 
 function applySettings() {
   state.audio.placeholders = state.P.settings.placeholders;
@@ -56,11 +68,13 @@ function topBar(middle = null) {
     replayButton(replay));
 }
 
-function screen(name, middle, stageKids = [], bottomKids = []) {
+// A screen, optionally over a drawn, animated scene.
+function screen(name, middle, stageKids = [], bottomKids = [], { scene = null } = {}) {
   state.screen = name;
   const stage = h('div', { class: 'stage' }, stageKids);
   const bottom = h('div', { class: 'bottom' }, bottomKids);
-  const root = mount(h('div', { class: `screen ${name}` }, topBar(middle), stage, bottom));
+  const el = h('div', { class: `screen ${name}` }, topBar(middle), stage, bottom);
+  const root = mount(scene ? h('div', { class: 'scene-wrap' }, art(scene, 'scene-bg'), el) : el);
   return { root, stage, bottom };
 }
 
@@ -75,10 +89,17 @@ function activityContext(stage, bottom, mode = 'solo') {
   };
 }
 
+function crest() {
+  const { C, P } = state;
+  const teamWord = C.byWord.get(P.team?.word);
+  const readable = teamWord && stepLE(C, teamWord.step, P.step) && teamWord.letters.every(l => letterState(P, l) !== 'new');
+  return h('div', { class: 'crest' }, teamWord?.picture ?? art(PIXEL_ICONS.ball, 'ico'), readable && h('span', { class: 'crest-word' }, teamWord.word));
+}
+
 // ---- Start: a tap unlocks audio, then the sound check plays a clip and waits for his tap,
 // since the iPhone's silent switch can mute web audio.
 function startScreen() {
-  const ball = h('button', { class: 'start-ball', 'aria-label': 'Start' }, '⚽');
+  const ball = h('button', { class: 'start-ball', 'aria-label': 'Start' }, art(PIXEL_ICONS.ball, 'ball-art'));
   const hint = h('div', { class: 'sound-hint' });
   screen('start', null, [ball, hint]);
   setReplay(null);
@@ -99,7 +120,7 @@ function startScreen() {
   }, { once: true });
 }
 
-// ---- First launch: he names the team with a picture and picks the kit color.
+// ---- First launch: he names the team with a picture, picks the kit color, and picks his player.
 async function setup() {
   const teams = TEAM_PICTURES.filter(k => state.C.byWord.get(k)?.picture)
     .map(k => [k, h('button', { class: 'card pic team' }, state.C.byWord.get(k).picture)]);
@@ -126,7 +147,23 @@ async function setup() {
   state.P.team = { word: team, color };
   save();
   applySettings();
+  await pickPlayer();
   await placement();
+}
+
+// His player walks the world map and scores the goals. Asked once; existing progress is kept.
+async function pickPlayer() {
+  const cards = CHARACTERS.map(c => [c, h('button', { class: 'card player', 'aria-label': cap(c) }, figure(pixelPlayer(c, kit(), 6)))]);
+  const confirm = confirmButton();
+  screen('setup', state.P.team ? crest() : null, [h('div', { class: 'choices grid-players' }, cards.map(c => c[1]))], [confirm]);
+  const ask = () => state.audio.say(() => state.audio.prompt('pick-player'));
+  setReplay(ask);
+  ask();
+  state.P.character = await pick(cards, confirm, () => {
+    state.audio.stop();
+    state.audio.effect('tap');
+  });
+  save();
 }
 
 // ---- Placement: a one-time Sound match sweep over every letter in levels 1 and 2.
@@ -146,23 +183,34 @@ async function placement() {
   save();
 }
 
-// ---- Home: two picture buttons, "Just me" and "With a grown-up". The choice only changes how
-// Read aloud is scored. The app never asks for a second session.
+// ---- Home: the world map for his current step, his counters, and two picture buttons, "Just me"
+// and "With a grown-up" (the choice only changes how Read aloud is scored). After today's match
+// the map shows every stop done. The app never asks for a second session.
+function mapSVG(stops, at) {
+  const world = worldFor(state.C, state.P.step);
+  return pixelMapSVG({ theme: world.theme, kit: kit(), character: player(), stops, at, world: world.number });
+}
+
 function home() {
   const { C, P } = state;
-  const teamWord = C.byWord.get(P.team?.word);
-  const readable = teamWord && stepLE(C, teamWord.step, P.step) && teamWord.letters.every(l => letterState(P, l) !== 'new');
-  const crest = h('div', { class: 'crest' }, teamWord?.picture ?? '⚽', readable && h('span', { class: 'crest-word' }, teamWord.word));
-  const solo = h('button', { class: 'card who', 'aria-label': 'Just me' }, '🧒');
-  const together = h('button', { class: 'card who two', 'aria-label': 'With a grown-up' }, '🧒', '🧑');
+  if (!P.character) {
+    pickPlayer().then(home);
+    return;
+  }
+  const doneToday = P.lastSessionDay === state.day;
+  const map = art(mapSVG(STOPS.map(() => (doneToday ? 'done' : 'ahead')), doneToday ? ROUTE.length - 1 : 0), 'map-wrap');
   const squadValue = P.signed.reduce((n, k) => n + (cfg.pieceValues[C.squad.byWord[k]?.piece] ?? 0), 0);
+  const found = C.letters.filter(l => letterState(P, l) !== 'new').length;
+  const chip = (markup, n, label, onclick) => h(onclick ? 'button' : 'div', { class: 'chip-stat', 'aria-label': label, onclick }, art(markup, 'ico'), h('b', {}, n));
   const stats = h('div', { class: 'home-stats' },
-    h('button', { class: 'stat', 'aria-label': 'Word book', onclick: book }, '📖', h('b', {}, P.wordBook.length)),
-    h('div', { class: 'stat' }, '⚽', h('b', {}, P.seasonGoals)),
-    h('button', { class: 'stat', 'aria-label': 'Squad', onclick: album }, h('span', { class: 'kit' }, PIECE_SYMBOL.pawn), h('b', {}, squadValue)),
-    h('button', { class: 'stat', 'aria-label': 'Block world', onclick: () => blockWorld().then(home) }, '🧱', h('b', {}, blocksLeft(P))));
+    chip(PIXEL_ICONS.ball, P.seasonGoals, 'Goals'),
+    chip(PIXEL_ICONS.book, P.wordBook.length, 'Word book', book),
+    chip(pawnIcon(kit()), squadValue, 'Squad', album),
+    chip(PIXEL_ICONS.gem, found, 'Letter gems', gems));
+  const solo = h('button', { class: 'card who', 'aria-label': 'Just me' }, figure(pixelPlayer(player(), kit(), 6)));
+  const together = h('button', { class: 'card who two', 'aria-label': 'With a grown-up' }, figure(pixelPlayer(player(), kit(), 6)), figure(pixelGrownUp(6)));
   const confirm = confirmButton();
-  screen('home', crest, [seasonMap(), stats, h('div', { class: 'choices row2' }, solo, together)], [confirm]);
+  screen('home', crest(), [stats, map], [solo, confirm, together]);
   const ask = () => state.audio.say(() => state.audio.prompt('who'));
   setReplay(ask);
   if (P.lastSessionDay !== state.day) ask();
@@ -172,7 +220,69 @@ function home() {
   }).then(match);
 }
 
+// ---- The trip: between levels the map comes back and his player walks to the next stop. Any
+// tap skips the walk.
+async function walk(stops, from, to) {
+  const map = art(mapSVG(stops, from), 'map-wrap');
+  screen('trip', crest(), [map], []);
+  setReplay(null);
+  const hero = map.querySelector('#hero');
+  const flip = hero?.querySelector('.hero-flip');
+  const pose = walking => {
+    hero?.querySelector('.pose-stand')?.setAttribute('display', walking ? 'none' : 'inline');
+    hero?.querySelector('.pose-walk')?.setAttribute('display', walking ? 'inline' : 'none');
+  };
+  pose(true);
+  let skip = false;
+  const onTap = () => { skip = true; };
+  document.addEventListener('pointerdown', onTap);
+  await sleep(300);
+  const ease = t => (t < 0.5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t));
+  const place = (seg, t) => {
+    const [x, y] = routeAt(seg, ease(t));
+    hero.setAttribute('transform', `translate(${x.toFixed(1)} ${(y - 4).toFixed(1)})`);
+  };
+  for (let seg = from; seg < to && hero; seg++) {
+    flip?.setAttribute('transform', ROUTE[seg + 1][0] < ROUTE[seg][0] ? 'scale(-1 1)' : '');
+    const t0 = performance.now();
+    await new Promise(resolve => {
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        place(seg, 1);
+        resolve();
+      };
+      const frame = now => {
+        if (finished) return;
+        const t = skip ? 1 : Math.min(1, (now - t0) / 650);
+        place(seg, t);
+        if (t < 1) requestAnimationFrame(frame);
+        else finish();
+      };
+      requestAnimationFrame(frame);
+      setTimeout(finish, 950); // even if the screen isn't drawing frames (the app in the background)
+    });
+  }
+  flip?.setAttribute('transform', '');
+  pose(false);
+  state.audio.effect('tap');
+  await sleep(skip ? 120 : 450);
+  document.removeEventListener('pointerdown', onTap);
+}
+
+// A level: the activity's questions on a frosted panel over its animated scene, with the pitch
+// (passes and goals) in the top bar. His signed players cheer in the stadium.
+function levelScreen(activity, pitch) {
+  const kind = STOPS[stopOf(activity)].kind;
+  const signed = state.P.signed.map(k => state.C.squad.byWord[k]?.piece).filter(Boolean);
+  const panel = h('div', { class: 'panel' });
+  const view = screen(`level ${kind}`, pitch.el, [panel], [], { scene: pixelLevelSVG(kind, { kit: kit(), signed }) });
+  return { ...view, panel };
+}
+
 // ---- The match: two halves, a pass for every first-try right answer, a goal for three in a row.
+// Each activity is a level on the day's trip.
 async function match(mode) {
   const { C } = state;
   const S = planSession(C, state.P, { day: state.day, mode, audioOK: id => state.audio.available(id) });
@@ -183,166 +293,67 @@ async function match(mode) {
   const ids = new Set([...Object.keys(C.prompts).map(clip.prompt), ...C.commentary.map((_, i) => clip.commentary(i)), clip.shout]);
   for (const a of S.order) for (const item of S.queues[a]) for (const id of itemClips(C, item)) ids.add(id);
   for (const t of chant.lines.flat()) ids.add(clip.word(t.word));
-  screen('loading', null, [h('div', { class: 'loading' }, '⚽')]);
+  screen('loading', null, [art(PIXEL_ICONS.ball, 'loading ball-art')]);
   await state.audio.prepare([...ids]);
 
   const pitch = new Pitch();
-  const view = screen('match', pitch.el);
-  const ctx = activityContext(view.stage, view.bottom, mode);
   pitch.half(halfTotal(S, 1));
-  state.audio.effect('whistle');
-  await sleep(700);
+  const done = new Set(); // stops finished today
+  let at = 0; // the route point his player stands on
+  const go = async stop => {
+    await walk(stopStates(S.order, done, stop), at, stop + 1);
+    at = stop + 1;
+  };
 
   state.session = S;
   let item = currentItem(S);
+  let current = null;
+  let ctx = null;
   while (item) {
     state.item = item;
-    if (atHalftime(S)) {
-      await halftimeChant(chant);
-      halftime(C, state.P, S);
-      state.screen = 'match';
-      mount(view.root);
-      pitch.half(halfTotal(S, 2));
+    if (item.activity !== current) {
+      if (current) done.add(stopOf(current));
+      if (atHalftime(S)) {
+        await go(HALFTIME_STOP);
+        await halftimeChant(chant);
+        halftime(C, state.P, S);
+        done.add(HALFTIME_STOP);
+        pitch.half(halfTotal(S, 2));
+      }
+      await go(stopOf(item.activity));
+      const view = levelScreen(item.activity, pitch);
+      ctx = activityContext(view.panel, view.bottom, mode);
+      if (!current) {
+        state.audio.effect('whistle');
+        await sleep(700);
+      }
+      current = item.activity;
     }
-    const out = await RUNNERS[item.activity](ctx, item);
-    const result = scoreItem(C, state.P, S, item, out, cfg);
-    state.P = result.P;
-    save(); // after every item
-    pitch.resize(halfTotal(S, S.half));
-    await showEvents(result.events, pitch, S);
+    let out = null;
+    try {
+      out = await RUNNERS[item.activity](ctx, item);
+    } catch (e) {
+      // An unexpected error skips this item rather than freezing the match.
+      console.error(`${item.activity} failed`, e);
+      state.audio.stop();
+    }
+    if (out) {
+      const result = scoreItem(C, state.P, S, item, out, cfg);
+      state.P = result.P;
+      save(); // after every item
+      pitch.resize(halfTotal(S, S.half));
+      await showEvents(result.events, pitch, S);
+    }
     item = advance(C, state.P, S);
   }
+  done.add(stopOf(current));
+  await go(TROPHY_STOP);
   await fullTime(S);
   state.P = finishSession(C, state.P, S);
   save();
   applySettings();
   await afterMatch(S);
-  // After full time he builds with the blocks his goals earned (outside the ten minutes).
-  if (blocksLeft(state.P) > 0 && blockKinds(C, state.P).length) await blockWorld();
   home();
-}
-
-// ---- The season map: his world, each step a row of its players with the queen at the end, the
-// cup match (the level check) that opens the next world, and the letter-sounds as ore blocks.
-// Only letters, numbers, and pictures, so nothing on it needs reading (ground rule 5).
-function seasonMap() {
-  const { C, P } = state;
-  const { worlds, current: w } = journey(C, P);
-  const next = worlds.find(x => x.level === w.level + 1);
-  const cup = h('div', { class: `map-row cup-row${w.check.passed ? ' won' : w.check.due ? ' due' : ''}` },
-    h('span', { class: 'cup' }, '🏆'),
-    next && h('span', { class: `portal ${next.biome}` }, w.check.passed ? next.level : '🔒'));
-  const steps = [...w.steps].reverse().map(s => {
-    const here = s.status === 'current' ? nextSlot(s) : -1;
-    return h('div', { class: `map-row step ${s.status}` },
-      h('span', { class: 'map-vowel' }, s.vowel ?? ''),
-      h('div', { class: 'mslots' }, s.players.map((p, i) => playerBlock(p, s, i === here))));
-  });
-  const ores = h('div', { class: 'ores' }, w.letters.map(oreBlock));
-  return h('div', { class: `map ${w.biome}` }, h('span', { class: 'map-badge' }, w.level), cup, steps, ores);
-}
-
-function playerBlock(p, step, here) {
-  const queenWaiting = p.piece === 'queen' && !p.signed;
-  const cls = ['pblock', p.signed && 'signed', here && 'here', queenWaiting && (step.queenReady ? 'queen-ready' : 'queen-later')].filter(Boolean).join(' ');
-  const el = h('button', { class: cls, 'aria-label': p.signed ? p.word : 'Player' }, h('span', { class: 'kit' }, PIECE_SYMBOL[p.piece]));
-  if (p.signed) {
-    el.addEventListener('click', () => {
-      state.audio.stop();
-      state.audio.play(clip.word(p.word));
-    });
-  }
-  return el;
-}
-
-function oreBlock(l) {
-  const el = h('button', { class: `ore ${l.state}`, 'aria-label': l.state === 'new' ? 'Not found yet' : l.letter }, l.state === 'new' ? '?' : l.letter);
-  if (l.state !== 'new') {
-    el.addEventListener('click', () => {
-      state.audio.stop();
-      state.audio.play(clip.sound(l.sound));
-    });
-  }
-  return el;
-}
-
-// ---- The block world: after a match, and any time from home. Every goal is one block to place.
-// The palette shows each kind as its printed word in shuffled order, so he reads "log" to pick
-// the log; a placed block says its name when tapped twice. Blocks can be moved at any time.
-async function blockWorld() {
-  const { C } = state;
-  const size = worldSize(state.P.wordBook.length);
-  const kinds = makeRng(`${state.day}:${state.P.sessionCount}:world`).shuffle(blockKinds(C, state.P));
-  let chosen = null; // a kind picked from the palette
-  let lifted = null; // a placed block being moved
-  const left = h('b', {}, blocksLeft(state.P));
-  const cells = [];
-  const grid = h('div', { class: 'world-grid' });
-  for (let y = size.rows - 1; y >= 0; y--) {
-    for (let x = 0; x < size.cols; x++) {
-      const el = h('button', { class: 'wcell', 'aria-label': 'Space' });
-      el.addEventListener('click', () => tapCell(x, y));
-      cells.push({ x, y, el });
-      grid.append(el);
-    }
-  }
-  const words = kinds.map(k => {
-    const el = h('button', { class: 'pword' }, k);
-    el.addEventListener('click', () => {
-      chosen = chosen === k ? null : k;
-      lifted = null;
-      state.audio.effect('tap');
-      draw();
-    });
-    return { k, el };
-  });
-  const draw = () => {
-    for (const c of cells) {
-      const kind = blockAt(state.P.world, c.x, c.y);
-      c.el.textContent = kind ? C.byWord.get(kind)?.picture ?? '' : '';
-      c.el.classList.toggle('wblock', !!kind);
-      c.el.classList.toggle('lifted', !!lifted && lifted.x === c.x && lifted.y === c.y);
-    }
-    const none = blocksLeft(state.P) === 0;
-    for (const w of words) {
-      w.el.classList.toggle('selected', w.k === chosen);
-      w.el.classList.toggle('empty', none);
-    }
-    left.textContent = blocksLeft(state.P);
-  };
-  const tapCell = (x, y) => {
-    const kind = blockAt(state.P.world, x, y);
-    if (kind && lifted?.x === x && lifted?.y === y) {
-      lifted = null;
-      state.audio.stop();
-      state.audio.play(clip.word(kind));
-    } else if (kind) {
-      lifted = { x, y };
-      chosen = null;
-      state.audio.effect('tap');
-    } else if (lifted) {
-      state.P.world = move(state.P.world, size, lifted, { x, y });
-      lifted = null;
-      save();
-      state.audio.effect('tap');
-    } else if (chosen && blocksLeft(state.P) > 0) {
-      state.P.world = place(state.P.world, size, x, y, chosen);
-      save();
-      state.audio.effect('pass');
-      if (blocksLeft(state.P) === 0) chosen = null;
-    }
-    draw();
-  };
-  const back = h('button', { class: 'confirm', 'aria-label': 'Home', disabled: false }, '🏠');
-  screen('world', h('div', { class: 'squad-value' }, '🧱', left),
-    [h('div', { class: 'world-wrap' }, h('div', { class: 'world-sky', style: { '--cols': size.cols } }, grid, h('div', { class: 'world-ground' }))),
-      h('div', { class: 'palette' }, words.map(w => w.el))], [back]);
-  const ask = () => state.audio.say(() => state.audio.prompt('world'));
-  setReplay(ask);
-  ask();
-  draw();
-  await tapped(back);
-  state.audio.stop();
 }
 
 async function showEvents(events, pitch, S) {
@@ -363,13 +374,14 @@ async function showEvents(events, pitch, S) {
   }
 }
 
-// A goal: two seconds at most, and a tap skips it. His own shout rotates with the commentary.
+// A goal: his player shoots and the net shakes, two seconds at most, and a tap skips it. His own
+// shout rotates with the commentary.
 async function goal(S) {
   const n = state.P.seasonGoals + S.game.goals[0] + S.game.goals[1];
   const id = n % 2 ? clip.shout : clip.commentary(Math.floor(n / 2) % Math.max(1, state.C.commentary.length));
   state.audio.effect('goal');
   state.audio.play(id);
-  await celebrate(h('div', { class: 'goal-anim' }, h('span', { class: 'goal-ball' }, '⚽'), h('span', { class: 'goal-net' }, '🥅'), confetti()), {
+  await celebrate(h('div', { class: 'goal-anim' }, art(pixelGoalSVG(kit(), player()), 'goal-art'), confetti()), {
     ms: cfg.celebrationSeconds * 1000, onSkip: () => state.audio.stop(),
   });
 }
@@ -382,30 +394,30 @@ async function signing(e) {
   });
 }
 
-// Signing the queen is the ceremony for moving up.
+// Signing the queen is the ceremony for moving up to the next world.
 async function promotion() {
   state.audio.effect('goal');
   state.audio.prompt('queen');
-  await celebrate(h('div', { class: 'promotion' }, h('div', { class: 'crown' }, '👑'), pieceEl('queen'), confetti(60)), {
+  await celebrate(h('div', { class: 'promotion' }, art(PIXEL_ICONS.crown, 'crown-art'), pieceEl('queen'), confetti(60)), {
     ms: 3500, cls: 'gold', onSkip: () => state.audio.stop(),
   });
 }
 
 function bookFlash() {
-  const el = h('div', { class: 'book-flash' }, '📖 +1');
+  const el = h('div', { class: 'book-flash' }, art(PIXEL_ICONS.book, 'ico'), '+1');
   document.body.append(el);
   setTimeout(() => el.remove(), 1200);
 }
 
-// ---- Halftime: the team chant, twice. First each word's clip plays on its beat; then only the
-// music plays and he sings. A ball bounces from word to word.
+// ---- Halftime: the team chant on the halftime-show stage, twice. First each word's clip plays on
+// its beat; then only the music plays and he sings. A ball bounces from word to word.
 async function halftimeChant(chant) {
   const { audio } = state;
   const words = chant.lines.map(line => line.map(t => h('span', { class: 'cw' }, t.text)));
-  const ball = h('div', { class: 'chant-ball' }, '⚽');
+  const ball = art(PIXEL_ICONS.ball, 'chant-ball');
   const lyrics = h('div', { class: 'lyrics' }, words.map(ws => h('div', { class: 'cline' }, ws)), ball);
   const next = confirmButton();
-  screen('halftime', null, [lyrics], [next]);
+  screen('halftime', null, [h('div', { class: 'panel' }, lyrics)], [next], { scene: pixelLevelSVG('show') });
   const bounce = (li, wi) => {
     for (const el of words.flat()) el.classList.remove('on');
     const el = words[li][wi];
@@ -430,12 +442,12 @@ async function halftimeChant(chant) {
   audio.stop();
 }
 
-// ---- Full time: the two halves as a sum. He taps the total; the answer shows either way and
-// goes into his season goals.
+// ---- Full time, at the trophy: the two halves as a sum. He taps the total; the answer shows
+// either way and goes into his season goals.
 async function fullTime(S) {
   const [a, b] = S.game.goals;
   const total = a + b;
-  const balls = n => h('div', { class: 'balls' }, Array.from({ length: n }, () => h('span', {}, '⚽')));
+  const balls = n => h('div', { class: 'balls' }, Array.from({ length: n }, () => art(PIXEL_ICONS.ball, 'ico')));
   const answer = h('b', { class: 'answer' }, '?');
   const sum = h('div', { class: 'sum' },
     h('div', { class: 'term' }, h('b', {}, a), balls(a)), h('span', { class: 'op' }, '+'),
@@ -443,7 +455,8 @@ async function fullTime(S) {
   const options = [total - 1, total, total + 1, total + 2].filter(n => n >= 0).slice(0, 3).sort(() => Math.random() - 0.5);
   const choices = options.map(n => [n, h('button', { class: 'card num' }, n)]);
   const confirm = confirmButton();
-  const { stage } = screen('fulltime', null, [sum, h('div', { class: 'choices row3' }, choices.map(c => c[1]))], [confirm]);
+  const panel = h('div', { class: 'panel' }, sum, h('div', { class: 'choices row3' }, choices.map(c => c[1])));
+  screen('fulltime', null, [panel], [confirm], { scene: pixelLevelSVG('trophy') });
   const ask = () => state.audio.say(() => state.audio.prompt('full-time'));
   setReplay(ask);
   state.audio.effect('whistle');
@@ -458,7 +471,7 @@ async function fullTime(S) {
   if (picked === total) state.audio.effect('goal');
   const before = state.P.seasonGoals;
   const season = h('b', {}, before);
-  stage.append(h('div', { class: 'season' }, '⚽', season));
+  panel.append(h('div', { class: 'season' }, art(PIXEL_ICONS.ball, 'ico'), season));
   for (let n = before + 1; n <= before + total; n++) {
     await sleep(Math.max(80, 600 / Math.max(1, total)));
     season.textContent = n;
@@ -473,9 +486,16 @@ async function afterMatch(S) {
     const p = state.C.squad.byWord[k];
     return pieceEl(p.piece, { number: p.number, name: cap(k), small: true });
   });
-  await celebrate(h('div', { class: 'after card' }, h('div', { class: 'after-players' }, players), S.booked.length > 0 && h('div', { class: 'after-book' }, `📖 +${S.booked.length}`)), {
+  await celebrate(h('div', { class: 'after card' }, h('div', { class: 'after-players' }, players),
+    S.booked.length > 0 && h('div', { class: 'after-book' }, art(PIXEL_ICONS.book, 'ico'), `+${S.booked.length}`)), {
     ms: 3000,
   });
+}
+
+function backHome() {
+  const back = h('button', { class: 'confirm', 'aria-label': 'Home', disabled: false }, art(PIXEL_ICONS.home, 'confirm-ball'));
+  back.addEventListener('click', home);
+  return back;
 }
 
 // ---- The squad album: every step's players, with silhouettes for the unsigned. The king is
@@ -493,10 +513,8 @@ function album() {
     if (signed) el.addEventListener('click', () => state.audio.play(clip.word(p.word)));
     return el;
   })));
-  const back = h('button', { class: 'confirm', 'aria-label': 'Home', disabled: false }, '🏠');
-  back.addEventListener('click', home);
-  screen('album', h('div', { class: 'squad-value' }, h('span', { class: 'kit' }, PIECE_SYMBOL.pawn), sum),
-    [h('div', { class: 'scroll' }, h('div', { class: 'album-row captain' }, pieceEl('king', { number: 1 })), rows)], [back]);
+  screen('album', h('div', { class: 'squad-value' }, art(pawnIcon(kit()), 'ico'), sum),
+    [h('div', { class: 'scroll' }, h('div', { class: 'album-row captain' }, pieceEl('king', { number: 1 })), rows)], [backHome()]);
   setReplay(null);
 }
 
@@ -507,9 +525,28 @@ function book() {
     const w = C.byWord.get(k);
     return h('button', { class: 'card bword', onclick: () => state.audio.play(clip.word(w.word)) }, w.picture && h('span', { class: 'bpic' }, w.picture), w.word);
   });
-  const back = h('button', { class: 'confirm', 'aria-label': 'Home', disabled: false }, '🏠');
-  back.addEventListener('click', home);
-  screen('book', h('div', { class: 'squad-value' }, '📖', P.wordBook.length), [h('div', { class: 'scroll book-grid' }, words)], [back]);
+  screen('book', h('div', { class: 'squad-value' }, art(PIXEL_ICONS.book, 'ico'), P.wordBook.length), [h('div', { class: 'scroll book-grid' }, words)], [backHome()]);
+  setReplay(null);
+}
+
+// ---- His letter gems: gold when mastered, blue while learning, "?" until he meets the letter.
+// Tapping a found gem plays its sound.
+function gems() {
+  const { C, P } = state;
+  const cells = C.letters.map(l => {
+    const st = letterState(P, l);
+    const el = h('button', { class: `gemcell ${st}`, 'aria-label': st === 'new' ? 'Not found yet' : l });
+    el.innerHTML = letterGem(l, st);
+    if (st !== 'new') {
+      el.addEventListener('click', () => {
+        state.audio.stop();
+        state.audio.play(clip.sound(C.letterSound[l]));
+      });
+    }
+    return el;
+  });
+  const found = C.letters.filter(l => letterState(P, l) !== 'new').length;
+  screen('gems', h('div', { class: 'squad-value' }, art(PIXEL_ICONS.gem, 'ico'), found), [h('div', { class: 'scroll gem-grid' }, cells)], [backHome()]);
   setReplay(null);
 }
 
