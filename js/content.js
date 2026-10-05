@@ -1,9 +1,34 @@
 // The content index: loads content/*.json and derives what the game needs: steps and letters,
 // each word's blend shape, decodability, neighbors, the squad, and the list of every audio clip.
+// A "letter" is a letter or a letter group taught as one sound (sh, ck, a_e, ee, ing).
 export const VOWELS = ['a', 'e', 'i', 'o', 'u'];
-export const isVowel = letter => VOWELS.includes(letter);
+const VOWEL_GROUPS = ['a_e', 'i_e', 'o_e', 'u_e', 'ee', 'ea', 'ai', 'ay', 'oa', 'ow', 'ar', 'or', 'er', 'ir', 'ur'];
+export const isVowel = letter => VOWELS.includes(letter) || VOWEL_GROUPS.includes(letter);
 
-const FILES = ['sounds', 'levels', 'words', 'nonsense', 'sentences', 'prompts', 'custom-sentences'];
+// How a word is printed: its letters in order, each with the index of the letter group it belongs
+// to. The e of a split vowel (the a_e in make) comes after the next group and has no dot of its own.
+export function spell(w) {
+  const parts = [];
+  let pending = null;
+  w.letters.forEach((g, i) => {
+    if (g.includes('_')) {
+      const [v, e] = g.split('_');
+      parts.push({ text: v, g: i, letter: g });
+      pending = { text: e, g: i, letter: g, silent: true };
+      return;
+    }
+    parts.push({ text: g, g: i, letter: g });
+    if (pending) {
+      parts.push(pending);
+      pending = null;
+    }
+  });
+  if (pending) parts.push(pending);
+  return parts;
+}
+export const spelling = w => spell(w).map(p => p.text).join('');
+
+const FILES = ['sounds', 'levels', 'words', 'nonsense', 'sentences', 'prompts', 'custom-sentences', 'passages'];
 
 export async function loadContent(base = 'content/') {
   const raw = {};
@@ -23,6 +48,8 @@ export function buildIndex(raw) {
   C.sounds = raw.sounds.sounds;
   C.soundById = Object.fromEntries(C.sounds.map(s => [s.id, s]));
   C.letterSound = raw.sounds.letters;
+  C.alternates = raw.sounds.alternates ?? {};
+  C.noSoundMatch = new Set(raw.sounds.noSoundMatch ?? []);
   C.levels = raw.levels.levels;
   C.steps = C.levels.flatMap(l => l.steps.map(s => ({ ...s, level: l.level })));
   C.stepIndex = Object.fromEntries(C.steps.map((s, i) => [s.step, i]));
@@ -41,10 +68,14 @@ export function buildIndex(raw) {
   C.pictured = C.words.filter(w => w.picture);
   C.nonsense = C.words.filter(w => !w.real);
 
-  C.sightWords = raw.sentences.sightWords;
+  // Sight words: each from its step on (a bare word belongs to the first step).
+  const sight = raw.sentences.sightWords.map(s => (typeof s === 'string' ? { word: s, step: C.steps[0].step } : s));
+  C.sightWords = sight.map(s => s.word);
+  C.sightStep = Object.fromEntries(sight.map(s => [s.word, s.step]));
   C.sentences = raw.sentences.sentences.map(s => ({ ...s, custom: false }));
   C.custom = (raw['custom-sentences']?.sentences ?? []).map(s => ({ ...s, custom: true }));
   C.chants = raw.sentences.chants;
+  C.passages = raw.passages?.passages ?? []; // the check-up stories
   C.prompts = Object.fromEntries((raw.prompts?.prompts ?? []).map(p => [p.id, p]));
   C.commentary = raw.prompts?.commentary ?? [];
   C.squad = buildSquad(C);
@@ -96,7 +127,7 @@ export const PIECE_SYMBOL = {
 function buildSquad(C) {
   const players = [];
   C.steps.forEach((s, si) => {
-    const words = C.nonsense.filter(w => w.step === s.step && !w.levelCheck).map(w => w.key).sort();
+    const words = C.nonsense.filter(w => w.step === s.step && !w.levelCheck && !w.checkup).map(w => w.key).sort();
     // The last word is the queen; with fewer than ten words, pawns are dropped first.
     const pieces = words.length >= PIECES.length
       ? [...Array(words.length - PIECES.length).fill('pawn'), ...PIECES]
@@ -123,7 +154,11 @@ const HOW_TO_SAY = {
   stop: 'Short and clipped, with as little "uh" as possible.',
 };
 
+const NAMES = { ay: 'a', ee: 'e', ie: 'i', oa: 'o', ue: 'u' };
 export function soundHint(s) {
+  if (NAMES[s.id]) return `The vowel says its name: ${NAMES[s.id]}, as in ${s.example}.`;
+  if (['ar', 'or', 'er'].includes(s.id)) return `The vowel with r, as in ${s.example}. Hold it for one second.`;
+  if (['iz', 'ing', 'id'].includes(s.id)) return `The ending, as in ${s.example}: "${s.id === 'iz' ? 'iz' : s.id === 'ing' ? 'ing' : 'id'}".`;
   if (s.id === 'h') return 'Just a breath, with no vowel after. As in hat.';
   if (s.id === 'w' || s.id === 'y') return `Quick, with no vowel after. As in ${s.example}.`;
   if (s.id === 'ks') return 'Short, like the end of box.';
@@ -147,7 +182,7 @@ export function clipList(C) {
   add(clip.shout, 'Goal commentary', 'His own goal shout', { kind: 'shout', hint: 'Let him record this one himself, any shout he likes.', caption: 'goal shout' });
   for (const sw of C.sightWords) add(clip.word(sw), 'Sight words', sw, { kind: 'sight' });
   for (const s of C.steps) {
-    for (const w of C.words.filter(x => x.step === s.step)) {
+    for (const w of C.words.filter(x => x.step === s.step && !x.checkup)) { // check-up words are only read, never heard
       const hint = w.real
         ? (w.oralOnly ? 'Spoken only; never printed.' : '')
         : `Nonsense word: rhymes with ${w.rhyme}.${w.levelCheck ? ' Held back for the level check.' : ''}`;

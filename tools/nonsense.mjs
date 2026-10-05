@@ -8,6 +8,9 @@
 // dropped, with its reason in EXCLUDED. Words in content/words.json are dropped automatically.
 // Survivors with a faint association are kept but FLAGGED, and chosen only when clean ones run out.
 //
+// Levels 3 and up (letter pairs, blends, silent e, vowel teams, endings) don't fit these rules: their
+// words were hand-picked once and are kept as they are each time this runs.
+//
 // Run: node tools/nonsense.mjs   (refuses to overwrite a list marked "reviewed" unless given --force)
 
 import { writeFileSync } from 'node:fs';
@@ -16,6 +19,9 @@ import { loadContent, readJson, contentDir, isVowel } from './content.mjs';
 const PLAY_PER_STEP = 10;
 // Five per level, held back for the level check. Step 1A has no a-words to spare (see review sheet).
 const CHECK_PER_STEP = { '1A': 0, '1B': 5, '2A': 1, '2B': 2, '2C': 2 };
+// Held back for the check-ups' one-minute nonsense-word read: as many as the step can spare, up to
+// this many, clean ones first. Step 1A has none to spare, so its check-ups read its play words.
+const CHECKUP_PER_STEP = 15;
 const ENDINGS = ['b', 'd', 'g', 'm', 'n', 'p', 't'];
 const SPEC_EXAMPLES = ['mip', 'fim', 'tig', 'lom', 'nup', 'teg'];
 const LEVEL2_CONSONANTS = ['j', 'k', 'v', 'w', 'y', 'z'];
@@ -134,9 +140,11 @@ try {
 
 const excluded = parseExcluded();
 const bank = new Set(c.words.map(w => w.word.toLowerCase()));
+const cvcSteps = c.steps.filter(s => s.vowel); // levels 1 and 2: one short vowel per step
+const later = c.nonsense.filter(w => !cvcSteps.some(s => s.step === w.step)); // hand-picked, kept as is
 const seen = new Set();
 const perStep = [];
-for (const step of c.steps) {
+for (const step of cvcSteps) {
   const level = step.level;
   const consonants = Object.keys(c.letterStep).filter(l => !isVowel(l) && c.stepIndex[c.letterStep[l]] <= c.stepIndex[step.step]);
   const out = { step: step.step, vowel: step.vowel, level, clean: [], flagged: [], excluded: {} };
@@ -165,20 +173,23 @@ for (const s of perStep) {
   const rest = [...s.clean, ...s.flagged].filter(w => !s.play.includes(w));
   s.check = choose(rest, CHECK_PER_STEP[s.step] ?? 0, checkPicked[s.level] ??= [], s.level);
   checkPicked[s.level].push(...s.check);
-  s.spares = rest.filter(w => !s.check.includes(w)).sort();
+  const left = rest.filter(w => !s.check.includes(w));
+  s.checkup = choose(left, CHECKUP_PER_STEP, [], s.level);
+  s.spares = left.filter(w => !s.checkup.includes(w)).sort();
 }
 
-const entry = (w, step, check) => {
+const entry = (w, step, held) => {
   const e = { word: w, letters: [...w], sounds: [...w].map(l => c.sounds.letters[l]), real: false, step, rhyme: RHYMES[w.slice(1)] };
-  if (check) e.levelCheck = true;
+  if (held) e[held] = true;
   return e;
 };
-const entries = perStep.flatMap(s => [
-  ...[...s.play].sort().map(w => entry(w, s.step, false)),
-  ...[...s.check].sort().map(w => entry(w, s.step, true)),
-]);
+const entries = [...perStep.flatMap(s => [
+  ...[...s.play].sort().map(w => entry(w, s.step, null)),
+  ...[...s.check].sort().map(w => entry(w, s.step, 'levelCheck')),
+  ...[...s.checkup].sort().map(w => entry(w, s.step, 'checkup')),
+]), ...later];
 const line = e => '    ' + JSON.stringify(e).replace(/":/g, '": ').replace(/,"/g, ', "').replace(/^\{/, '{ ').replace(/\}$/, ' }');
-const about = 'Nonsense words, made by tools/nonsense.mjs and reviewed once by a parent. Each step\'s play words are its ten squad players. levelCheck words are held back from normal play for the parent\'s level check. rhyme is the hint shown on the recording page.';
+const about = 'Nonsense words, made by tools/nonsense.mjs and reviewed once by a parent. Each step\'s play words are its ten squad players. levelCheck words are held back from normal play for the parent\'s level check, and checkup words for the check-ups\' one-minute read. rhyme is the hint shown on the recording page.';
 writeFileSync(new URL('nonsense.json', contentDir),
   '{\n  "about": ' + JSON.stringify(about) + ',\n  "reviewed": false,\n  "words": [\n' + entries.map(line).join(',\n') + '\n  ]\n}\n');
 
@@ -192,7 +203,7 @@ const md = [
   '',
   'Please check each word once. It should be something he cannot already know: not a real word, a name, an abbreviation, slang, a sound-alike of a real word, or anything rude. Read it aloud using its rhyme. Strike any you don\'t want and a spare takes its place.',
   '',
-  'Each step\'s ten play words become its ten squad players. The level-check words are never used in normal play; they are saved for the 10-word read-aloud check that unlocks the next level.',
+  'Each step\'s ten play words become its ten squad players. The level-check words are never used in normal play; they are saved for the 10-word read-aloud check that unlocks the next level. The check-up words are saved for the one-minute nonsense-word read in the check-ups.',
   '',
 ];
 for (const s of perStep) {
@@ -203,7 +214,16 @@ for (const s of perStep) {
   }
   md.push(table(s.play), '');
   if (s.check.length) md.push(`**Held back for the level ${s.level} check:**`, '', table(s.check), '');
+  if (s.checkup.length) md.push('**Held back for the check-ups:**', '', table(s.checkup), '');
   md.push(`**Spares:** ${s.spares.length ? s.spares.map(w => FLAGGED[w] ? `${w} (${FLAGGED[w]})` : w).join(', ') : 'none'}`, '');
+}
+// The hand-picked words of levels 3 and up, by step.
+for (const st of c.steps.filter(s => !s.vowel)) {
+  const words = later.filter(w => w.step === st.step);
+  if (!words.length) continue;
+  const list = kind => words.filter(kind).map(w => w.word).sort().join(', ');
+  md.push(`## ${st.step}: ${st.name}`, '', `Play: ${list(w => !w.levelCheck && !w.checkup)}`, '', `Held back for the check-ups: ${list(w => w.checkup)}`, '');
+  if (words.some(w => w.levelCheck)) md.push(`Held back for the level ${st.level} check: ${list(w => w.levelCheck)}`, '');
 }
 md.push('## Candidates left out', '', 'Every candidate the rules allowed, and why it was dropped.', '');
 for (const s of perStep) {
@@ -216,6 +236,6 @@ for (const s of perStep) {
 writeFileSync(new URL('../nonsense-review.md', contentDir), md.join('\n'));
 
 for (const s of perStep) {
-  console.log(`${s.step}: ${s.clean.length} clean + ${s.flagged.length} flagged | play ${s.play.join(' ')} | check ${s.check.join(' ') || '-'} | spares ${s.spares.length}`);
+  console.log(`${s.step}: ${s.clean.length} clean + ${s.flagged.length} flagged | play ${s.play.join(' ')} | check ${s.check.join(' ') || '-'} | checkup ${s.checkup.length} | spares ${s.spares.length}`);
 }
 console.log(`${entries.length} words written to content/nonsense.json; review sheet at nonsense-review.md`);

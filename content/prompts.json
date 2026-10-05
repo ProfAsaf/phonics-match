@@ -35,12 +35,24 @@
     { "id": "new-player", "text": "You signed a new player!" },
     { "id": "queen", "text": "The queen joins your team. You moved up!" },
     { "id": "level-check", "text": "Read each word to your grown-up." },
+    { "id": "cup-match", "text": "It's the cup match! Show your grown-up your best reading." },
+    { "id": "cup-letters", "text": "Look at each letter. Say its sound." },
+    { "id": "cup-segment", "text": "Listen to each word. Then say each sound in it." },
+    { "id": "cup-nonsense", "text": "These are silly made-up words. Read each one. Say the sounds, or read the whole word." },
+    { "id": "cup-story", "text": "Read the story out loud. Do your best reading!" },
+    { "id": "cup-won", "text": "You won the cup!" },
+    { "id": "surprise", "text": "A surprise! You can use it today." },
+    { "id": "locker", "text": "Your locker! Pick a ball, a hat, and a goal dance." },
+    { "id": "locked", "text": "Score more goals to unlock this one!" },
+    { "id": "unlocked", "text": "Something new for your locker!" },
     { "id": "nice", "text": "Nice!", "praise": true },
     { "id": "yes", "text": "Yes!", "praise": true },
     { "id": "great", "text": "Great play!", "praise": true }
   ],
   "commentary": [
     "What a pass!", "Goal! What a shot!", "Back of the net!", "The crowd goes wild!", "What a team!",
-    "Top corner!", "Unstoppable!", "Brilliant play!", "What a strike!", "They score again!"
+    "Top corner!", "Unstoppable!", "Brilliant play!", "What a strike!", "They score again!",
+    "Golazo!", "Into the net!", "What a kick!", "Nobody can stop it!", "Super shot!",
+    "The keeper had no chance!", "Amazing!", "That was awesome!", "Goal of the day!", "Look at that!"
   ]
 }

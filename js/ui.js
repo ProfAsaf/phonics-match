@@ -1,7 +1,7 @@
 // DOM helpers and the pieces every child screen shares: the replay button, the kick button (the
 // confirm step), the parent corner, celebrations, and chess-piece cards. Nothing on a child screen
 // is written instruction (ground rule 4); every target is at least 64 px (ground rule 8).
-import { ballSVG, ICONS, pieceSVG, kitPiece } from './art.js';
+import { ballSVG, ballPicture, ICONS, pieceSVG, kitPiece } from './art.js';
 
 export function h(tag, attrs = {}, ...kids) {
   const el = document.createElement(tag);
@@ -36,19 +36,28 @@ export function tapped(el) {
   return new Promise(resolve => el.addEventListener('click', resolve, { once: true }));
 }
 
-// Lights an element for a moment.
+// Lights an element for a moment, with its partner (the e of a split vowel lights with its a).
 export function flash(el, ms = 450, cls = 'lit') {
   if (!el) return;
-  el.classList.add(cls);
-  setTimeout(() => el.classList.remove(cls), ms);
+  for (const x of [el, el.partner]) {
+    if (!x) continue;
+    x.classList.add(cls);
+    setTimeout(() => x.classList.remove(cls), ms);
+  }
 }
 
 export const icon = (name, cls = 'ico') => h('span', { class: cls, html: ICONS[name] });
-export const ballIcon = (cls = 'ico') => h('span', { class: cls, html: ballSVG() });
+export const ballIcon = (cls = 'ico', style = 'classic') => (style === 'classic'
+  ? h('span', { class: cls, html: ballSVG() })
+  : h('span', { class: cls }, h('img', { src: ballPicture(style), alt: '', draggable: 'false' })));
+
+// His ball, the one he picked in his locker (or today's surprise), on the kick button.
+let kickBall = 'classic';
+export const setKickBall = style => { kickBall = style; };
 
 // The confirm step is kicking the ball: he picks an answer, then kicks.
 export function confirmButton() {
-  return h('button', { class: 'confirm', 'aria-label': 'Kick', disabled: true }, ballIcon('confirm-ball'));
+  return h('button', { class: 'confirm', 'aria-label': 'Kick', disabled: true }, ballIcon('confirm-ball', kickBall));
 }
 
 const SPEAKER_COLORS = ['#ffe08a', '#b5e3ff', '#ffc1b8', '#c9f2c7'];
@@ -93,9 +102,10 @@ export function pick(choices, confirm, onSelect) {
   });
 }
 
-// The parent area opens only after a three-second press, so a child never stumbles in.
-export function parentCorner(open) {
-  const el = h('button', { class: 'corner', 'aria-label': 'Grown-ups: press and hold' }, h('span', {}, '⚙︎'));
+// The parent area opens only after a three-second press, so a child never stumbles in. A gold dot
+// means a check-up is due.
+export function parentCorner(open, { due = false } = {}) {
+  const el = h('button', { class: `corner${due ? ' due' : ''}`, 'aria-label': 'Grown-ups: press and hold' }, h('span', {}, '⚙︎'));
   let timer = null;
   const cancel = () => {
     clearTimeout(timer);

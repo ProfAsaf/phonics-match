@@ -8,6 +8,7 @@ export const CONFIG = {
   firstHalf: ['soundMatch', 'blendIt', 'findSound'],
   items: { soundMatch: 6, blendIt: 5, findSound: 5, buildIt: 4, readFind: 6, readAloud: 6 },
   nonsenseShare: { readFind: 2 / 6, readAloud: 2 / 6 }, // four real, two nonsense
+  currentStepShare: 0.6, // of the words read, the share from his current step; the rest review earlier steps
 
   // Seconds of silence between clips.
   gaps: { blend: 0.7, coach: 0.12, slow: 0.7, fast: 0.3 },
@@ -41,6 +42,8 @@ export const CONFIG = {
   promptCueAfterSessions: 3,
   parentHintSessions: 3,
   levelCheck: { real: 5, nonsense: 5, pass: 8 },
+  // The check-ups: four one-minute parts, every two weeks once he has played a couple of matches.
+  checkup: { everyDays: 14, afterMatches: 2, seconds: 60, nonsenseAtLeast: 10 },
   pieceValues: { pawn: 1, knight: 3, bishop: 3, rook: 5, queen: 9 },
   wordBookMilestones: [10, 25, 50, 100],
 

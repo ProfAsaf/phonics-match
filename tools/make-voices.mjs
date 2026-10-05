@@ -1,7 +1,8 @@
 // Makes the AI voice clips (everything except the letter sounds and his goal shout) with Kokoro,
 // a free open-source voice that runs on this computer, and adds them to audio/ like recordings.
-// Words are spoken from their letters, sound by sound, so every vowel is the short one the game
-// teaches, and nonsense words come out exactly as spelled. Sentences and prompts are read as text.
+// Words are spoken from their sounds, so every vowel is the one the game teaches (short, long, or
+// with r), and nonsense words come out exactly as spelled. Two-syllable words (speak: text),
+// sentences, and prompts are read as text.
 // (An AI voice can't say a bare letter sound well; those come from a real voice.)
 //
 //   node tools/make-voices.mjs --setup       one time: a Python environment and the voice model
@@ -15,7 +16,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir, homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { buildIndex, isVowel } from '../js/content.js';
+import { buildIndex } from '../js/content.js';
 import { voiceJobs } from '../js/voices.js';
 import { processTake } from '../js/takes.js';
 
@@ -62,15 +63,19 @@ const read = name => {
 };
 const C = buildIndex(Object.fromEntries(['sounds', 'levels', 'words', 'nonsense', 'sentences', 'prompts', 'custom-sentences'].map(n => [n, read(n)])));
 
-// How Kokoro spells each letter's taught sound; it matches Kokoro's own reading of regular words,
-// except j: written as two symbols (dʒ), Kokoro drops the j's hiss and "jet" sounds like "yet".
+// How Kokoro spells each sound; it matches Kokoro's own reading of regular words, except j and ch:
+// written as two symbols (dʒ, tʃ), Kokoro drops the hiss and "jet" sounds like "yet".
 const SOUNDS = {
-  a: 'æ', e: 'ɛ', i: 'ɪ', o: 'ɑː', u: 'ʌ', b: 'b', c: 'k', d: 'd', f: 'f', g: 'ɡ', h: 'h', j: 'ʤ', k: 'k', l: 'l',
-  m: 'm', n: 'n', p: 'p', r: 'ɹ', s: 's', t: 't', v: 'v', w: 'w', x: 'ks', y: 'j', z: 'z', ck: 'k', ll: 'l',
+  a: 'æ', e: 'ɛ', i: 'ɪ', o: 'ɑː', u: 'ʌ', b: 'b', d: 'd', f: 'f', g: 'ɡ', h: 'h', j: 'ʤ', k: 'k', l: 'l',
+  m: 'm', n: 'n', p: 'p', r: 'ɹ', s: 's', t: 't', v: 'v', w: 'w', ks: 'ks', y: 'j', z: 'z',
+  sh: 'ʃ', ch: 'ʧ', th: 'θ', dh: 'ð', kw: 'kw', ng: 'ŋ', ngk: 'ŋk',
+  ay: 'eɪ', ie: 'aɪ', oa: 'oʊ', ue: 'juː', oo: 'uː', ee: 'iː', ar: 'ɑːɹ', or: 'ɔːɹ', er: 'ɜː',
+  iz: 'ᵻz', ing: 'ɪŋ', id: 'ᵻd',
 };
+// The stress mark goes before the first vowel sound (in you, before the vowel: jˈuː).
 const phonemesFor = w => {
-  const vowel = w.letters.findIndex(isVowel);
-  return w.letters.map((l, i) => (i === vowel ? 'ˈ' : '') + SOUNDS[l]).join('') + '.';
+  const vowel = w.sounds.findIndex(s => C.soundById[s]?.kind === 'vowel');
+  return w.sounds.map((s, i) => (i !== vowel ? SOUNDS[s] : s === 'ue' ? 'jˈuː' : `ˈ${SOUNDS[s]}`)).join('') + '.';
 };
 // Unhurried, for a beginning reader: Kokoro's normal pace reads a short sentence in under a second.
 const SPEED = { word: 0.85, sentence: 0.7, prompt: 0.85, lively: 1.0 };
@@ -112,7 +117,7 @@ const jobs = voiceJobs(C)
     const kind = kindOf[j.id];
     const speed = kind === 'sentence' ? SPEED.sentence : kind === 'commentary' || C.prompts[j.id.slice(2)]?.praise ? SPEED.lively
       : kind === 'prompt' ? SPEED.prompt : SPEED.word;
-    return { id: j.id, text: j.text, speed, ...(w ? { phonemes: phonemesFor(w) } : {}) };
+    return { id: j.id, text: j.text, speed, ...(w && w.speak !== 'text' ? { phonemes: phonemesFor(w) } : {}) };
   });
 if (!jobs.length) {
   console.log('Every clip already has audio. Add --redo to remake the AI ones.');

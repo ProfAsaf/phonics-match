@@ -1,5 +1,5 @@
 {
-  "about": "The 24 recorded sounds for levels 1 and 2, and the sound each letter makes. kind: vowel and continuous sounds can be stretched; stop and quick sounds cannot. A word whose first sound is vowel or continuous counts as continuous-first in Blend it; the rest are stop-first.",
+  "about": "Every recorded sound, and the sound each letter or letter group makes. kind: vowel and continuous sounds can be stretched; stop and quick sounds cannot. A word whose first sound is vowel or continuous counts as continuous-first in Blend it; the rest are stop-first. alternates are second sounds a letter group takes from a given step on (th in this, s in dogs, ed in jumped and filled). noSoundMatch: groups with more than one sound, never asked alone; they count as known once their step comes.",
   "sounds": [
     { "id": "b", "kind": "stop", "example": "bat" },
     { "id": "d", "kind": "stop", "example": "dog" },
@@ -24,11 +24,43 @@
     { "id": "e", "kind": "vowel", "example": "bed" },
     { "id": "i", "kind": "vowel", "example": "itch" },
     { "id": "o", "kind": "vowel", "example": "octopus" },
-    { "id": "u", "kind": "vowel", "example": "up" }
+    { "id": "u", "kind": "vowel", "example": "up" },
+    { "id": "sh", "kind": "continuous", "example": "ship" },
+    { "id": "ch", "kind": "stop", "example": "chip" },
+    { "id": "th", "kind": "continuous", "example": "thin" },
+    { "id": "dh", "kind": "continuous", "example": "this" },
+    { "id": "kw", "kind": "stop", "example": "quit" },
+    { "id": "ng", "kind": "continuous", "example": "ring" },
+    { "id": "ngk", "kind": "stop", "example": "pink" },
+    { "id": "ay", "kind": "vowel", "example": "cake" },
+    { "id": "ie", "kind": "vowel", "example": "bike" },
+    { "id": "oa", "kind": "vowel", "example": "home" },
+    { "id": "ue", "kind": "vowel", "example": "cute" },
+    { "id": "oo", "kind": "vowel", "example": "tube" },
+    { "id": "ee", "kind": "vowel", "example": "feet" },
+    { "id": "ar", "kind": "vowel", "example": "car" },
+    { "id": "or", "kind": "vowel", "example": "fork" },
+    { "id": "er", "kind": "vowel", "example": "her" },
+    { "id": "iz", "kind": "vowel", "example": "wishes" },
+    { "id": "ing", "kind": "vowel", "example": "jumping" },
+    { "id": "id", "kind": "vowel", "example": "rested" }
   ],
   "letters": {
     "a": "a", "b": "b", "c": "k", "d": "d", "e": "e", "f": "f", "g": "g", "h": "h", "i": "i",
     "j": "j", "k": "k", "l": "l", "m": "m", "n": "n", "o": "o", "p": "p", "r": "r", "s": "s",
-    "t": "t", "u": "u", "v": "v", "w": "w", "x": "ks", "y": "y", "z": "z"
-  }
+    "t": "t", "u": "u", "v": "v", "w": "w", "x": "ks", "y": "y", "z": "z",
+    "sh": "sh", "ch": "ch", "th": "th", "wh": "w", "ck": "k", "ff": "f", "ll": "l", "ss": "s", "zz": "z", "qu": "kw",
+    "ng": "ng", "nk": "ngk",
+    "a_e": "ay", "i_e": "ie", "o_e": "oa", "u_e": "ue",
+    "ee": "ee", "ea": "ee", "ai": "ay", "ay": "ay", "oa": "oa", "ow": "oa",
+    "ar": "ar", "or": "or", "er": "er", "ir": "er", "ur": "er",
+    "es": "iz", "ing": "ing", "ed": "id"
+  },
+  "alternates": {
+    "th": { "dh": "3B" },
+    "u_e": { "oo": "5C" },
+    "s": { "z": "7A" },
+    "ed": { "t": "7B", "d": "7B" }
+  },
+  "noSoundMatch": ["ed"]
 }

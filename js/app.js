@@ -1,15 +1,19 @@
 // The game: the start screen and sound check, first-launch setup (team, kit color, and player), home
 // on the world map, the match as one run past the day's stops with the halftime show and the trophy,
-// the squad album, the word book, and his letter gems (SPEC.md, "Session flow", "Game layer", and
-// "Changes after version 1"). The world is drawn on one canvas behind the page; the questions sit on a
+// the squad album, the word book, his letter gems, his locker, and the check-ups' cup match (SPEC.md,
+// "Session flow", "Game layer", and "Changes after version 1"). The world is drawn on one canvas behind the page; the questions sit on a
 // card that rises from the bottom.
 import { CONFIG as cfg } from './config.js';
 import { loadContent, clip, stepLE } from './content.js';
-import { STOPS, HALFTIME_STOP, TROPHY_STOP, stopOf, worldFor, mapWorlds, hereLevel } from './journey.js';
+import { STOPS, HALFTIME_STOP, TROPHY_STOP, stopOf, worldFor, mapWorlds, hereLevel, LEVELS_PER_WORLD } from './journey.js';
+import { checkupDue } from './checkup.js';
+import { cupMatch } from './cup.js';
+import { GEAR, dayLook, gearOf, pickGear, sawLocker, lockerNews, newlyUnlocked, unlockedGear } from './variety.js';
+import { drawWithHat, celebrationFrame } from './gear.js';
 import { Scene } from './scene.js';
 import { MapView, mapImages } from './map.js';
 import { RunView, runImages } from './run.js';
-import { loadImages, CHARACTERS, characterFrame, characterImages, ICONS } from './art.js';
+import { loadImages, CHARACTERS, characterFrame, characterImages, ICONS, ballPicture } from './art.js';
 import { AudioEngine } from './audio.js';
 import { playChant } from './music.js';
 import { today } from './mastery.js';
@@ -24,6 +28,7 @@ import { RUNNERS, placementItem } from './activities.js';
 import { openParent } from './parent.js';
 import {
   h, mount, sleep, tapped, confirmButton, pick, parentCorner, replayButton, caption, celebrate, confetti, pieceEl, icon, ballIcon, setKickHint,
+  setKickBall,
 } from './ui.js';
 
 const state = { C: null, P: null, audio: null, day: today(), replay: null, screen: null, scene: null, map: null, mapKey: '', run: null, kicks: 0 };
@@ -32,7 +37,9 @@ const KIT_COLORS = ['#e63946', '#1d6fd8', '#f77f00', '#7b2cbf', '#ff4fa3', '#e0b
 const TRAIL_ICONS = ['ball', 'rook', 'gem', 'music', 'hammer', 'cloud', 'moon', 'trophy'];
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const LOCAL = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
-const AUTO = LOCAL && new URLSearchParams(location.search).has('auto'); // plays itself, for testing
+const PARAMS = new URLSearchParams(location.search);
+const AUTO = LOCAL && PARAMS.has('auto'); // plays itself, for testing (with &cup, it runs a check-up)
+const CUP_SECONDS = LOCAL && Number(PARAMS.get('secs')) > 0 ? Number(PARAMS.get('secs')) : null; // shorter parts, for testing
 
 const save = () => saveProgress(state.P);
 const setReplay = fn => { state.replay = fn; };
@@ -47,19 +54,21 @@ function applySettings() {
   state.audio.placeholders = state.P.settings.placeholders;
   state.audio.useCues = state.P.sessionCount >= cfg.promptCueAfterSessions;
   document.documentElement.style.setProperty('--kit', kit());
+  setKickBall(gearOf(state.P).ball);
 }
 
 // His player as a picture for the page, in his kit color.
 const portraits = new Map();
-function portrait(ch, pose = 'idle', colors = kit()) {
-  const key = `${ch}|${pose}|${colors}`;
+function portrait(ch, pose = 'idle', colors = kit(), hat = ch === 'grownup' ? 'none' : gearOf(state.P).hat) {
+  const key = `${ch}|${pose}|${colors}|${hat}`;
   if (!portraits.has(key)) {
     const fr = characterFrame(ch, pose, ch === 'grownup' ? null : colors);
     if (!fr) return '';
     const cv = document.createElement('canvas');
+    const top = hat === 'none' ? 0 : 50; // room above the head for a tall hat
     cv.width = 192;
-    cv.height = 256;
-    cv.getContext('2d').drawImage(fr, 0, 0);
+    cv.height = 256 + top;
+    drawWithHat(cv.getContext('2d'), ch, pose, ch === 'grownup' ? null : colors, 96, 256 + top, 1, false, hat);
     portraits.set(key, cv.toDataURL());
   }
   return portraits.get(key);
@@ -67,6 +76,7 @@ function portrait(ch, pose = 'idle', colors = kit()) {
 const figure = (ch, pose) => h('img', { class: 'figure', src: portrait(ch, pose), alt: '', draggable: 'false' });
 
 function topBar(middle = null) {
+  const due = state.screen === 'home' && checkupDue(state.C, state.P, state.day).due;
   return h('div', { class: 'top' },
     parentCorner(() => openParent(state, {
       onClose: () => {
@@ -77,7 +87,8 @@ function topBar(middle = null) {
         await placement();
         home();
       },
-    })),
+      startCheckup,
+    }), { due }),
     h('div', { class: 'top-mid' }, middle),
     replayButton(replay));
 }
@@ -111,17 +122,36 @@ function crest() {
 
 // ---- The world behind the page
 function ensureMap({ sync = true } = {}) {
+  const { C, P } = state;
   const key = `${player()}|${kit()}`;
-  const worlds = mapWorlds(state.C, state.P);
+  const worlds = mapWorlds(C, P);
   if (!state.map || state.mapKey !== key) {
-    state.map = new MapView({ worlds, character: player(), kit: kit() });
+    state.map = new MapView({ worlds, character: player(), kit: kit(), hat: gearOf(P).hat });
     state.mapKey = key;
   } else {
     state.map.setWorlds(worlds, { sync });
     if (sync) state.map.placeHere();
   }
+  state.map.hat = gearOf(P).hat;
+  // A small cup beside the level of each check-up, and a gold one by his player when one is due.
+  const cups = (P.checkups ?? []).filter(c => c.step in C.stepIndex)
+    .map(c => ({ world: C.stepIndex[c.step], level: Math.min(c.played ?? 0, LEVELS_PER_WORLD - 1) }));
+  state.map.setCups(cups, checkupDue(C, P, state.day).due);
   if (state.scene.view !== state.map) state.scene.show(state.map);
   return state.map;
+}
+
+// ---- The check-up, started by the grown-up from the parent area on the home screen.
+function startCheckup() {
+  // The day's weather and keepers, but no chest: the cup match is kept simple.
+  const look = { ...dayLook(state.P, { day: state.day, theme: worldFor(state.C, state.P.step).theme, characters: CHARACTERS }), chest: null };
+  return cupMatch(state, {
+    player, kit, save, setReplay, replay, ensureMap, seconds: CUP_SECONDS, look, gear: gearOf(state.P),
+    home: () => {
+      state.autoDone = AUTO;
+      home();
+    },
+  });
 }
 
 // ---- Start: a tap unlocks audio, then the sound check plays a clip and waits for his tap,
@@ -234,11 +264,14 @@ function home() {
   const squadValue = P.signed.reduce((n, k) => n + (cfg.pieceValues[C.squad.byWord[k]?.piece] ?? 0), 0);
   const found = C.letters.filter(l => letterState(P, l) !== 'new').length;
   const chip = (ico, n, label, onclick) => h(onclick ? 'button' : 'div', { class: 'chip-stat', 'aria-label': label, onclick }, ico, h('b', {}, n));
+  const lockerChip = chip(icon('jersey', 'ico jersey'), unlockedGear(P).length, 'Locker', locker);
+  if (lockerNews(P).length) lockerChip.classList.add('news');
   const stats = h('div', { class: 'home-stats' },
     chip(ballIcon(), P.seasonGoals, 'Goals'),
     chip(icon('book'), P.wordBook.length, 'Word book', book),
     chip(icon('rook'), squadValue, 'Squad', album),
-    chip(icon('gem'), found, 'Letter gems', gems));
+    chip(icon('gem'), found, 'Letter gems', gems),
+    lockerChip);
   const solo = h('button', { class: 'card who', 'aria-label': 'Just me' }, figure(player(), 'idle'));
   const together = h('button', { class: 'card who two', 'aria-label': 'With a grown-up' }, figure(player(), 'idle'), figure('grownup', 'idle'));
   const confirm = confirmButton();
@@ -250,8 +283,17 @@ function home() {
     state.audio.stop();
     state.audio.prompt(mode === 'solo' ? 'just-me' : 'grown-up');
   }).then(match);
-  if (AUTO && !state.autoDone) setTimeout(() => { solo.click(); setTimeout(() => confirm.click(), 900); }, 3500);
-  else if (AUTO) setTimeout(() => { document.title = 'done'; }, 2500);
+  if (AUTO && !state.autoDone && PARAMS.has('cup')) setTimeout(startCheckup, 2500);
+  else if (AUTO && !state.autoDone) setTimeout(() => { solo.click(); setTimeout(() => confirm.click(), 900); }, 3500);
+  else if (AUTO && PARAMS.has('locker') && !state.autoLocker) {
+    // the locker after the match, for the test recording
+    state.autoLocker = true;
+    setTimeout(() => {
+      locker();
+      setTimeout(() => document.querySelectorAll('.locker-row.celebration .locker-item')[3]?.click(), 2500);
+      setTimeout(() => { document.title = 'done'; }, 6500);
+    }, 1500);
+  } else if (AUTO) setTimeout(() => { document.title = 'done'; }, 2500);
 }
 
 // ---- The card: the questions rise on it from the bottom, over the ground.
@@ -294,7 +336,10 @@ function runHud(run) {
       if (run.at >= 0) run.frame(run.at, card.offsetHeight);
     },
     down() { card.classList.remove('up'); },
-    here(i) { stops.forEach((el, k) => el.classList.toggle('here', k === i)); },
+    here(i) {
+      stops.forEach((el, k) => el.classList.toggle('here', k === i));
+      card.dataset.stop = i; // each stop dresses the card its own way
+    },
     done(i) { stops[i]?.classList.add('done'); },
     meter(n) { dots.forEach((d, k) => d.classList.toggle('on', k < n)); },
     goals(n) {
@@ -352,8 +397,16 @@ async function match(mode) {
 
   const skip = STOPS.map((s, i) => (s.activity && !S.order.includes(s.activity) ? i : -1)).filter(i => i >= 0);
   const followers = state.P.signed.map(k => C.squad.byWord[k]?.piece).filter(Boolean).slice(-3);
-  const run = new RunView({ character: player(), kit: kit(), theme: world.theme, skip, followers });
+  const played = STOPS.map((s, i) => (s.activity && S.order.includes(s.activity) ? i : -1)).filter(i => i >= 0);
+  const look = dayLook(state.P, { day: state.day, theme: world.theme, stops: played, characters: CHARACTERS });
+  const goalsBefore = state.P.seasonGoals;
+  const run = new RunView({ character: player(), kit: kit(), theme: world.theme, skip, followers, look, gear: gearOf(state.P) });
   run.tempo = state.P.settings.tempo;
+  // The chest's surprise: a voice, and today's ball on the kick button.
+  run.onChest = item => {
+    state.audio.prompt('surprise');
+    if (item.kind === 'ball') setKickBall(item.id);
+  };
   state.run = run;
   state.scene.show(run);
   const hud = runHud(run);
@@ -412,7 +465,7 @@ async function match(mode) {
   hud.done(TROPHY_STOP);
   state.P = finishSession(C, state.P, S);
   save();
-  applySettings();
+  applySettings(); // back to his own ball on the kick button
 
   // Back to the map: a flag on today's level, and he walks on (or through the gate).
   await state.scene.circle(0, run.playerPoint());
@@ -423,6 +476,7 @@ async function match(mode) {
   mount(h('div', { class: 'screen blank' }));
   await state.scene.circle(1, map.playerPoint());
   await afterMatch(S);
+  await unlocks(newlyUnlocked(goalsBefore, state.P.seasonGoals));
   const was = worldsBefore.findIndex(w => w.state === 'here');
   const now = map.worlds.findIndex(w => w.state === 'here');
   if (was >= 0 && now > was) {
@@ -630,7 +684,7 @@ function book() {
 // Tapping a found gem plays its sound.
 function gems() {
   const { C, P } = state;
-  const cells = C.letters.map(l => {
+  const cells = C.letters.filter(l => !C.noSoundMatch.has(l)).map(l => {
     const st = letterState(P, l);
     const gem = st === 'mastered' ? 'gemYellow' : 'gemBlue';
     const el = h('button', { class: `gemcell ${st}`, 'aria-label': st === 'new' ? 'Not found yet' : l },
@@ -648,6 +702,90 @@ function gems() {
   setReplay(null);
 }
 
+// ---- His locker: balls, hats, and goal celebrations. Goals unlock them; each locked one shows the goal
+// count that opens it, so he can see how close he is. Tapping one he has picks it.
+function gearPreview(g, { big = false } = {}) {
+  if (g.kind === 'ball') return h('img', { class: 'gear-pic', src: ballPicture(g.id), alt: '', draggable: 'false' });
+  if (g.kind === 'hat') return h('img', { class: 'gear-pic', src: portrait(player(), 'idle', kit(), g.id), alt: '', draggable: 'false' });
+  // A celebration: his player in the move, drawn on a little canvas; tapping plays it.
+  const size = big ? 220 : 120;
+  const cv = h('canvas', { class: 'gear-pic', width: size * 2, height: size * 2.2 });
+  const draw = t => {
+    const c = cv.getContext('2d');
+    const f = celebrationFrame(g.id, t);
+    c.clearRect(0, 0, cv.width, cv.height);
+    // Big enough to see the move; jumps and slides are scaled down to stay on the card.
+    const k = (size * 2) / 250, x = cv.width / 2 + (f.dx ?? 0) * k * 0.5, y = cv.height - 12 * k + (f.dy ?? 0) * k * 0.5;
+    c.fillStyle = 'rgba(20,40,80,0.12)';
+    c.beginPath();
+    c.ellipse(cv.width / 2, cv.height - 12 * k, 60 * k, 12 * k, 0, 0, Math.PI * 2);
+    c.fill();
+    c.save();
+    if (f.rot) {
+      c.translate(x, y - 120 * k);
+      c.rotate(f.rot);
+      c.translate(-x, -(y - 120 * k));
+    }
+    drawWithHat(c, player(), f.pose, kit(), x, y, k, !!f.flip, gearOf(state.P).hat, t);
+    c.restore();
+  };
+  draw(0.6);
+  cv.play = () => {
+    const t0 = performance.now();
+    const step = () => {
+      const t = (performance.now() - t0) / 1000;
+      draw(Math.min(t, 2));
+      if (t < 2.2 && cv.isConnected) requestAnimationFrame(step);
+      else draw(0.6);
+    };
+    requestAnimationFrame(step);
+  };
+  return cv;
+}
+
+function locker() {
+  state.P = sawLocker(state.P);
+  save();
+  const goals = state.P.seasonGoals;
+  const mine = gearOf(state.P);
+  const heads = { ball: ballIcon('ico'), hat: icon('crown', 'ico'), celebration: icon('star', 'ico') };
+  const rows = ['ball', 'hat', 'celebration'].flatMap(kind => [h('div', { class: 'locker-head' }, heads[kind]), h('div', { class: `locker-row ${kind}` }, GEAR.filter(g => g.kind === kind).map(g => {
+    const open = goals >= g.goals;
+    const pic = gearPreview(g);
+    const el = h('button', { class: `card locker-item${open ? '' : ' locked'}${mine[kind] === g.id ? ' chosen' : ''}`, 'aria-label': g.id },
+      pic, !open && h('span', { class: 'need' }, icon('lock', 'ico lock'), ballIcon(), g.goals));
+    el.addEventListener('click', () => {
+      state.audio.stop();
+      if (!open) {
+        state.audio.prompt('locked');
+        return;
+      }
+      state.audio.effect('tap');
+      if (kind === 'celebration') pic.play?.();
+      state.P = pickGear(state.P, kind, g.id);
+      save();
+      applySettings();
+      for (const other of el.parentElement.children) other.classList.toggle('chosen', other === el);
+    });
+    return el;
+  }))]);
+  screen('locker', h('div', { class: 'squad-value' }, ballIcon(), goals), [h('div', { class: 'sheet scroll locker' }, rows)], [backHome()]);
+  const ask = () => state.audio.say(() => state.audio.prompt('locker'));
+  setReplay(ask);
+  ask();
+}
+
+// New gear after a match: each one shown big, with a cheer.
+async function unlocks(list) {
+  for (const g of list.slice(0, 3)) {
+    state.audio.effect('sign');
+    state.audio.prompt('unlocked');
+    const pic = gearPreview(g, { big: true });
+    setTimeout(() => pic.play?.(), 300);
+    await celebrate(h('div', { class: 'unlock card' }, pic, confetti(30)), { ms: 3000, onSkip: () => state.audio.stop() });
+  }
+}
+
 // ---- Playing itself, for testing on this computer: it answers most items right.
 function autoPlay() {
   const click = el => el && !el.disabled && el.click();
@@ -662,6 +800,16 @@ function autoPlay() {
       else if (first) click(first);
       await sleep(500);
       busy = false;
+      return;
+    }
+    if (state.screen === 'cup') {
+      busy = true;
+      try {
+        await autoCup();
+      } finally {
+        await sleep(700);
+        busy = false;
+      }
       return;
     }
     if (state.screen !== 'run') return;
@@ -698,6 +846,26 @@ function autoPlay() {
       busy = false;
     }
   }, 400);
+}
+
+// The grown-up's side of a check-up, for testing: most answers right, the last word near the end.
+async function autoCup() {
+  const strip = document.querySelector('.qcard.cup.up .pstrip');
+  if (!strip) return;
+  const btn = sel => strip.querySelector(`.pbtn${sel}`);
+  const words = [...document.querySelectorAll('.cup-text .sw')];
+  if (btn('.go')) return btn('.go').click();
+  if (words.length && strip.textContent.includes('Tap the last word')) {
+    if (!document.querySelector('.sw.last')) words[Math.floor(words.length * 0.7)].click();
+    return btn('.yes').click();
+  }
+  if (words.length) return Math.random() < 0.15 ? strip.querySelector('.pbtn:first-child').click() : null;
+  const chips = [...strip.querySelectorAll('.pchip')];
+  if (chips.length && Math.random() < 0.3) {
+    chips.slice(0, chips.length - 1).forEach(c => c.click());
+    return strip.querySelector('.pbtn:first-child').click();
+  }
+  (Math.random() < 0.85 ? btn('.yes') : btn('.no') ?? btn('.yes'))?.click();
 }
 
 // When playing itself, every sound is logged with the wall clock, so a screen recording of the test

@@ -1,27 +1,198 @@
 {
-  "about": "Sight words, read-aloud sentences (the match headline, with its emoji), and one chant verse per step. Every other word must be in words.json at the sentence's step or earlier. In a chant, {Name} is a squad player's name and {act} or {Act} is one word from act, the same in every slot; a capital means the word starts a sentence. Tunes are public-domain nursery melodies, one word per note.",
-  "sightWords": ["the", "a", "I", "is", "his", "to"],
+  "about": "Sight words (each usable from its step on, and shown and spoken before the first sentence that uses it), read-aloud sentences (the match headline, with its emoji), and two chant verses per step, sung in turn. Every other word must be in words.json at the sentence's step or earlier. In a chant, {Name} is a squad player's name and {act} or {Act} is one word from act, the same in every slot; a capital means the word starts a sentence. Tunes are public-domain nursery melodies, one word per note.",
+  "sightWords": [
+    { "word": "the", "step": "1A" },
+    { "word": "a", "step": "1A" },
+    { "word": "I", "step": "1A" },
+    { "word": "is", "step": "1A" },
+    { "word": "his", "step": "1A" },
+    { "word": "to", "step": "1A" },
+    { "word": "of", "step": "2A" },
+    { "word": "was", "step": "2A" },
+    { "word": "you", "step": "2A" },
+    { "word": "he", "step": "2A" },
+    { "word": "she", "step": "2A" },
+    { "word": "we", "step": "2A" },
+    { "word": "me", "step": "2A" },
+    { "word": "be", "step": "2A" },
+    { "word": "go", "step": "2A" },
+    { "word": "no", "step": "2A" },
+    { "word": "so", "step": "2A" },
+    { "word": "do", "step": "2A" },
+    { "word": "are", "step": "2A" },
+    { "word": "said", "step": "2A" },
+    { "word": "my", "step": "2A" },
+    { "word": "by", "step": "2A" },
+    { "word": "they", "step": "3A" },
+    { "word": "have", "step": "3A" },
+    { "word": "what", "step": "3A" },
+    { "word": "from", "step": "3A" },
+    { "word": "one", "step": "3A" },
+    { "word": "two", "step": "3A" },
+    { "word": "put", "step": "3A" },
+    { "word": "look", "step": "3A" },
+    { "word": "who", "step": "3A" },
+    { "word": "there", "step": "3A" },
+    { "word": "where", "step": "3A" },
+    { "word": "here", "step": "3A" },
+    { "word": "all", "step": "3A" },
+    { "word": "were", "step": "3A" },
+    { "word": "come", "step": "4A" },
+    { "word": "some", "step": "4A" },
+    { "word": "want", "step": "4A" },
+    { "word": "could", "step": "4A" },
+    { "word": "would", "step": "4A" },
+    { "word": "your", "step": "4A" },
+    { "word": "their", "step": "4A" },
+    { "word": "again", "step": "4A" },
+    { "word": "any", "step": "4A" },
+    { "word": "many", "step": "4A" },
+    { "word": "give", "step": "4A" },
+    { "word": "live", "step": "4A" },
+    { "word": "out", "step": "4A" },
+    { "word": "down", "step": "4A" },
+    { "word": "now", "step": "4A" },
+    { "word": "how", "step": "4A" },
+    { "word": "saw", "step": "4A" },
+    { "word": "once", "step": "5A" },
+    { "word": "does", "step": "5A" },
+    { "word": "goes", "step": "5A" },
+    { "word": "every", "step": "5A" },
+    { "word": "very", "step": "5A" },
+    { "word": "done", "step": "5A" },
+    { "word": "love", "step": "5A" },
+    { "word": "other", "step": "5A" },
+    { "word": "only", "step": "5A" },
+    { "word": "people", "step": "6A" },
+    { "word": "water", "step": "6A" },
+    { "word": "been", "step": "6A" },
+    { "word": "mother", "step": "6A" },
+    { "word": "father", "step": "6A" },
+    { "word": "brother", "step": "6A" },
+    { "word": "friend", "step": "6A" },
+    { "word": "school", "step": "6A" },
+    { "word": "laugh", "step": "6A" },
+    { "word": "buy", "step": "6A" },
+    { "word": "wood", "step": "6A" },
+    { "word": "fire", "step": "6A" },
+    { "word": "because", "step": "7A" },
+    { "word": "eight", "step": "7A" },
+    { "word": "pretty", "step": "7A" },
+    { "word": "great", "step": "7A" }
+  ],
   "sentences": [
     { "text": "The cat sat.", "step": "1A", "emoji": "🐱" },
     { "text": "A rat can rap.", "step": "1A", "emoji": "🐀🎤" },
     { "text": "A bat had a hat.", "step": "1A", "emoji": "🦇🎩" },
     { "text": "Dad had a nap.", "step": "1A", "emoji": "😴" },
+    { "text": "The man had a map.", "step": "1A", "emoji": "🗺️" },
+    { "text": "A ram had a cap.", "step": "1A", "emoji": "🐏🧢" },
+    { "text": "Dad and Pam ran!", "step": "1A", "emoji": "🏃" },
+    { "text": "A cat sat at a fan.", "step": "1A", "emoji": "🐱" },
     { "text": "The pig is big.", "step": "1B", "emoji": "🐷" },
     { "text": "A pig hid in a bin.", "step": "1B", "emoji": "🐷🗑️" },
     { "text": "His cat sat in a pan.", "step": "1B", "emoji": "🐱🍳" },
     { "text": "I hit it in!", "step": "1B", "emoji": "⚽🥅" },
+    { "text": "A big cat bit a fig.", "step": "1B", "emoji": "🐱" },
+    { "text": "Sit, pig, sit!", "step": "1B", "emoji": "🐷" },
+    { "text": "Tim can dig a big pit.", "step": "1B", "emoji": "⛏️" },
+    { "text": "A pin is in his hat.", "step": "1B", "emoji": "📌🎩" },
     { "text": "A dog sat on a log.", "step": "2A", "emoji": "🐶🪵" },
     { "text": "The fox got in a box.", "step": "2A", "emoji": "🦊📦" },
     { "text": "The pig had a wig.", "step": "2A", "emoji": "🐷🎀" },
     { "text": "Mom ran to the hot dog.", "step": "2A", "emoji": "🌭😋" },
+    { "text": "Kim got a big box.", "step": "2A", "emoji": "📦" },
+    { "text": "Mom got a mop.", "step": "2A", "emoji": "🧹" },
+    { "text": "The fox can win!", "step": "2A", "emoji": "🦊🏆" },
+    { "text": "Tom had a hot pot.", "step": "2A", "emoji": "🍲" },
     { "text": "A bug is on the rug.", "step": "2B", "emoji": "🐛" },
     { "text": "The pup dug up a bun.", "step": "2B", "emoji": "🐶🍞" },
     { "text": "A cub is in the tub.", "step": "2B", "emoji": "🐻🛁" },
     { "text": "Mom had fun in the mud.", "step": "2B", "emoji": "🤣" },
+    { "text": "Gus can run in the sun.", "step": "2B", "emoji": "☀️" },
+    { "text": "A bug is in his cup!", "step": "2B", "emoji": "🐛" },
+    { "text": "Hop on the bus!", "step": "2B", "emoji": "🚌" },
+    { "text": "Yum, a hot bun!", "step": "2B", "emoji": "🍞" },
     { "text": "Ben fed his pet hen.", "step": "2C", "emoji": "🐔" },
     { "text": "A hen is in bed.", "step": "2C", "emoji": "🐔🛏️" },
     { "text": "The red jet got wet.", "step": "2C", "emoji": "✈️💦" },
-    { "text": "Ten men sat on a web.", "step": "2C", "emoji": "🕸️😂" }
+    { "text": "Ten men sat on a web.", "step": "2C", "emoji": "🕸️😂" },
+    { "text": "Meg got a red pen.", "step": "2C", "emoji": "🖊️" },
+    { "text": "Get it in the net!", "step": "2C", "emoji": "⚽🥅" },
+    { "text": "The vet fed the pup.", "step": "2C", "emoji": "🐶" },
+    { "text": "Yes! The jet is up!", "step": "2C", "emoji": "✈️" },
+    { "text": "A fish is in the dish!", "step": "3A", "emoji": "🐟" },
+    { "text": "I wish I had a ship!", "step": "3A", "emoji": "🚢" },
+    { "text": "Hush! The pup is in bed.", "step": "3A", "emoji": "🐶" },
+    { "text": "Mom got cash at the shop.", "step": "3A", "emoji": "💵" },
+    { "text": "This bath is hot!", "step": "3B", "emoji": "🛀" },
+    { "text": "When can I do math?", "step": "3B", "emoji": "🧮" },
+    { "text": "Then a moth hid in the shed.", "step": "3B", "emoji": "🦋" },
+    { "text": "Which dog is that?", "step": "3B", "emoji": "🐶" },
+    { "text": "The duck is sick.", "step": "3C", "emoji": "🦆" },
+    { "text": "Kick it to the hill!", "step": "3C", "emoji": "⛰️" },
+    { "text": "A bell is in the shell.", "step": "3C", "emoji": "🐚" },
+    { "text": "Quack! The chick ran off!", "step": "3C", "emoji": "🐤" },
+    { "text": "The king can sing!", "step": "3D", "emoji": "🤴" },
+    { "text": "I think the ring is pink.", "step": "3D", "emoji": "💍" },
+    { "text": "Bang! The tank hit a log.", "step": "3D", "emoji": "💥" },
+    { "text": "Sing a long song with me!", "step": "3D", "emoji": "🎵" },
+    { "text": "Stop the sled!", "step": "4A", "emoji": "🛷" },
+    { "text": "We can clap and swim.", "step": "4A", "emoji": "👏" },
+    { "text": "A black cat sat on a block.", "step": "4A", "emoji": "🐈‍⬛" },
+    { "text": "Plug it in, Dad!", "step": "4A", "emoji": "🔌" },
+    { "text": "The frog is on the drum.", "step": "4B", "emoji": "🐸" },
+    { "text": "A crab had a dress!", "step": "4B", "emoji": "🦀" },
+    { "text": "Grab the truck!", "step": "4B", "emoji": "🚚" },
+    { "text": "Drip, drop, drip!", "step": "4B", "emoji": "💧" },
+    { "text": "The ant is in the tent!", "step": "4C", "emoji": "🐜" },
+    { "text": "Jump in the sand!", "step": "4C", "emoji": "🏖️" },
+    { "text": "A gift is on the desk.", "step": "4C", "emoji": "🎁" },
+    { "text": "The wind is fast!", "step": "4C", "emoji": "💨" },
+    { "text": "The snake had a cake!", "step": "5A", "emoji": "🐍" },
+    { "text": "Make a wave!", "step": "5A", "emoji": "🌊" },
+    { "text": "A whale came to the lake.", "step": "5A", "emoji": "🐋" },
+    { "text": "Skate on the lake!", "step": "5A", "emoji": "⛸️" },
+    { "text": "I like to ride a bike!", "step": "5B", "emoji": "🚲" },
+    { "text": "The kite is white.", "step": "5B", "emoji": "🪁" },
+    { "text": "Time to hide!", "step": "5B", "emoji": "🙈" },
+    { "text": "I got a prize!", "step": "5B", "emoji": "🏆" },
+    { "text": "The dog got a bone.", "step": "5C", "emoji": "🦴" },
+    { "text": "The mule is cute!", "step": "5C", "emoji": "🐴" },
+    { "text": "Hope you like the cone!", "step": "5C", "emoji": "🍦" },
+    { "text": "I woke up at home.", "step": "5C", "emoji": "🏠" },
+    { "text": "A bee is in the tree!", "step": "6A", "emoji": "🐝" },
+    { "text": "Three sheep can sleep.", "step": "6A", "emoji": "🐑" },
+    { "text": "Eat a peach at the beach!", "step": "6A", "emoji": "🍑" },
+    { "text": "The queen had tea.", "step": "6A", "emoji": "👸" },
+    { "text": "The snail is in the rain.", "step": "6B", "emoji": "🐌" },
+    { "text": "Play with me!", "step": "6B", "emoji": "🧸" },
+    { "text": "The train is late.", "step": "6B", "emoji": "🚆" },
+    { "text": "Paint a sail!", "step": "6B", "emoji": "⛵" },
+    { "text": "The goat is in the boat!", "step": "6C", "emoji": "🐐" },
+    { "text": "Snow, snow, snow!", "step": "6C", "emoji": "❄️" },
+    { "text": "Show me the toad.", "step": "6C", "emoji": "🐸" },
+    { "text": "I see a coat on the road.", "step": "6C", "emoji": "🧥" },
+    { "text": "A shark is in the dark!", "step": "6D", "emoji": "🦈" },
+    { "text": "The car is in the barn.", "step": "6D", "emoji": "🚗" },
+    { "text": "Corn on a fork!", "step": "6D", "emoji": "🌽" },
+    { "text": "A star for you!", "step": "6D", "emoji": "⭐" },
+    { "text": "The bird is first!", "step": "6E", "emoji": "🐦" },
+    { "text": "Her shirt is green.", "step": "6E", "emoji": "👕" },
+    { "text": "Turn, turn, turn!", "step": "6E", "emoji": "🔄" },
+    { "text": "The girl can surf.", "step": "6E", "emoji": "🏄" },
+    { "text": "Cats and dogs!", "step": "7A", "emoji": "🐱" },
+    { "text": "The foxes had boxes.", "step": "7A", "emoji": "🦊" },
+    { "text": "Ducks can swim.", "step": "7A", "emoji": "🦆" },
+    { "text": "Bugs in the dishes!", "step": "7A", "emoji": "🐛" },
+    { "text": "The dog is jumping!", "step": "7B", "emoji": "🐶" },
+    { "text": "It rained and rained.", "step": "7B", "emoji": "🌧️" },
+    { "text": "I am fishing.", "step": "7B", "emoji": "🎣" },
+    { "text": "We played in the snow.", "step": "7B", "emoji": "⛄" },
+    { "text": "A rocket at sunset!", "step": "7C", "emoji": "🚀" },
+    { "text": "We had a picnic.", "step": "7C", "emoji": "🧺" },
+    { "text": "The chipmunk had popcorn!", "step": "7C", "emoji": "🐿️" },
+    { "text": "Look at the rainbow!", "step": "7C", "emoji": "🌈" }
   ],
   "chants": [
     {
@@ -30,10 +201,20 @@
       "lines": ["Tap, tap, tap!", "Bam, bam, bam!", "{Name} can tap, {Name} can pat, tap, tap,", "bam, bam, bam!"]
     },
     {
+      "step": "1A",
+      "tune": "Rain, Rain, Go Away",
+      "lines": ["Tap, tap, tap, {Name}, tap!", "Tap, tap, tap, and bam, bam, bam!"]
+    },
+    {
       "step": "1B",
       "tune": "Twinkle, Twinkle, Little Star",
       "lines": ["{Act} it, {act} it, {act} it, {Name}.", "Rip it, rip it, rip it in."],
       "act": ["tap", "hit", "tip", "pat"]
+    },
+    {
+      "step": "1B",
+      "tune": "Old MacDonald Had a Farm",
+      "lines": ["{Name} can hit it, hit it in,", "it is in, it is!"]
     },
     {
       "step": "2A",
@@ -42,14 +223,120 @@
       "act": ["lob", "zap", "tap", "hit"]
     },
     {
+      "step": "2A",
+      "tune": "Hot Cross Buns",
+      "lines": ["Hop, hop, hop!", "Jog, jog, jog!", "{Name} can hop, {Name} can jog, hop, hop,", "jog, jog, jog!"]
+    },
+    {
       "step": "2B",
       "tune": "Rain, Rain, Go Away",
       "lines": ["Run, run, {Name}, run, run!", "It is fun to run, run, run!"]
     },
     {
+      "step": "2B",
+      "tune": "Twinkle, Twinkle, Little Star",
+      "lines": ["Up, up, up, it is up, {Name},", "run, run, run, and it is fun!"]
+    },
+    {
       "step": "2C",
       "tune": "Old MacDonald Had a Farm",
       "lines": ["Get it, get it, get it, {Name},", "get it in the net!"]
+    },
+    {
+      "step": "2C",
+      "tune": "Bingo",
+      "lines": ["{Name} can get it in the net, yes!", "Yes, yes, yes, it is in, yes!"]
+    },
+    {
+      "step": "3A",
+      "tune": "Hot Cross Buns",
+      "lines": ["Chop, chop, chop!", "Rush, rush, rush!", "{Name} can rush, {Name} can chop, rush, rush,", "chop, chop, chop!"]
+    },
+    {
+      "step": "3B",
+      "tune": "Rain, Rain, Go Away",
+      "lines": ["Whip it, whip it, {Name}!", "Then it is in! That is that!"]
+    },
+    {
+      "step": "3C",
+      "tune": "Twinkle, Twinkle, Little Star",
+      "lines": ["{Act} it, {act} it, {act} it, {Name},", "kick it, kick it, kick it in!"],
+      "act": ["kick", "pass", "hit", "tap"]
+    },
+    {
+      "step": "3D",
+      "tune": "Old MacDonald Had a Farm",
+      "lines": ["Sing it, sing it, sing it, {Name},", "sing a long, long song!"]
+    },
+    {
+      "step": "4A",
+      "tune": "Bingo",
+      "lines": ["{Name} can spin it, flip it, snap it.", "Spin it! Flip it! Snap it! Stop!"]
+    },
+    {
+      "step": "4B",
+      "tune": "Hot Cross Buns",
+      "lines": ["Drum, drum, drum!", "Grab, grab, grab!", "{Name} can drum, {Name} can grab, drum, drum,", "grab, grab, grab!"]
+    },
+    {
+      "step": "4C",
+      "tune": "Rain, Rain, Go Away",
+      "lines": ["Jump it, kick it, {Name}!", "Kick it fast and it is in!"]
+    },
+    {
+      "step": "5A",
+      "tune": "Twinkle, Twinkle, Little Star",
+      "lines": ["Make it, take it, shake it, {Name},", "save it, save it, what a game!"]
+    },
+    {
+      "step": "5B",
+      "tune": "Old MacDonald Had a Farm",
+      "lines": ["Ride it, ride it, ride it, {Name},", "ride it, side to side!"]
+    },
+    {
+      "step": "5C",
+      "tune": "Bingo",
+      "lines": ["Home, home, home, {Name} can kick it home!", "Hope, hope, hope that it goes home!"]
+    },
+    {
+      "step": "6A",
+      "tune": "Rain, Rain, Go Away",
+      "lines": ["Feet, feet, kick it, {Name}!", "Kick it deep and keep it in!"]
+    },
+    {
+      "step": "6B",
+      "tune": "Hot Cross Buns",
+      "lines": ["Play, play, play!", "Stay, stay, stay!", "{Name} can play, {Name} can stay, play, play,", "stay, stay, stay!"]
+    },
+    {
+      "step": "6C",
+      "tune": "Twinkle, Twinkle, Little Star",
+      "lines": ["Throw it, throw it, throw it, {Name},", "row the boat and grow, grow, grow!"]
+    },
+    {
+      "step": "6D",
+      "tune": "Old MacDonald Had a Farm",
+      "lines": ["Start it, start it, start it, {Name},", "kick it for a star!"]
+    },
+    {
+      "step": "6E",
+      "tune": "Bingo",
+      "lines": ["{Name} can turn it, turn it, turn it.", "First, first, first! {Name} is first, yes!"]
+    },
+    {
+      "step": "7A",
+      "tune": "Rain, Rain, Go Away",
+      "lines": ["Jumps and jumps, {Name} jumps!", "Dogs and cats and pigs and frogs!"]
+    },
+    {
+      "step": "7B",
+      "tune": "Hot Cross Buns",
+      "lines": ["Kicking, kicking, kicking!", "Jumping, jumping, jumping!", "{Name} is kicking, {Name} is jumping, kicking, kicking,", "jumping, jumping, jumping!"]
+    },
+    {
+      "step": "7C",
+      "tune": "Twinkle, Twinkle, Little Star",
+      "lines": ["{Name} can kick it in the net,", "zigzag, zigzag, zigzag, and it is in!"]
     }
   ]
 }

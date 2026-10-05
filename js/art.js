@@ -138,29 +138,109 @@ function poly(c, x, y, r, n, rot) {
   c.fill();
 }
 
-export function drawBall(c, x, y, r, angle) {
+// The ball designs he can unlock (js/variety.js). patch lists the colors of the six patches, in turn.
+export const BALL_STYLES = {
+  classic: { base: '#fbfcfd', patch: ['#2f3542'], seam: '#2f3542' },
+  gold: { base: '#ffd23f', patch: ['#c98a00'], seam: '#d99a10', glint: true },
+  rainbow: { base: '#ffffff', patch: ['#8338ec', '#ef476f', '#ff9f1c', '#ffd23f', '#06d6a0', '#3a86ff'], seam: '#c9ced6' },
+  beach: { wedges: ['#ef476f', '#ffffff', '#3a86ff', '#ffd23f', '#ffffff', '#06d6a0'] },
+  star: { base: '#2b4bb0', star: '#ffd23f' },
+  fire: { base: '#ff6b1a', patch: ['#ffd23f'], seam: '#ffb23b', glow: 'rgba(255,140,40,' },
+  ice: { base: '#e3f7ff', patch: ['#7cc9ef'], seam: '#a9def7', glint: true },
+  galaxy: { base: '#2a1b5c', dots: true },
+  block: { pixels: ['#3fae5a', '#2f8f47', '#8b5a2b', '#6f4521'] },
+};
+
+function star(c, x, y, r, rot) {
+  c.beginPath();
+  for (let k = 0; k < 10; k++) {
+    const a = rot + (k * Math.PI) / 5, rr = k % 2 ? r * 0.45 : r;
+    c.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr);
+  }
+  c.closePath();
+  c.fill();
+}
+
+export function drawBall(c, x, y, r, angle, style = 'classic') {
+  const s = BALL_STYLES[style] ?? BALL_STYLES.classic;
   c.save();
   c.translate(x, y);
+  if (s.glow) {
+    const g = c.createRadialGradient(0, 0, r * 0.8, 0, 0, r * 2);
+    g.addColorStop(0, `${s.glow}0.45)`);
+    g.addColorStop(1, `${s.glow}0)`);
+    c.fillStyle = g;
+    c.fillRect(-r * 2, -r * 2, r * 4, r * 4);
+  }
   c.beginPath();
   c.arc(0, 0, r, 0, TAU);
-  c.fillStyle = '#fbfcfd';
+  c.fillStyle = s.base ?? '#fbfcfd';
   c.fill();
   c.save();
   c.clip();
   c.rotate(angle);
-  c.fillStyle = '#2f3542';
-  c.strokeStyle = '#2f3542';
-  c.lineWidth = r * 0.09;
-  poly(c, 0, 0, r * 0.37, 5, -Math.PI / 2);
-  for (let k = 0; k < 5; k++) {
-    const a = -Math.PI / 2 + (k * TAU) / 5;
+  if (s.wedges) {
+    s.wedges.forEach((col, k) => {
+      c.fillStyle = col;
+      c.beginPath();
+      c.moveTo(0, 0);
+      c.arc(0, 0, r * 1.1, (k * TAU) / 6, ((k + 1) * TAU) / 6);
+      c.closePath();
+      c.fill();
+    });
+    c.fillStyle = '#ffffff';
     c.beginPath();
-    c.moveTo(Math.cos(a) * r * 0.37, Math.sin(a) * r * 0.37);
-    c.lineTo(Math.cos(a) * r * 0.8, Math.sin(a) * r * 0.8);
-    c.stroke();
-    poly(c, Math.cos(a) * r * 1.06, Math.sin(a) * r * 1.06, r * 0.36, 5, a + Math.PI);
+    c.arc(0, 0, r * 0.2, 0, TAU);
+    c.fill();
+  } else if (s.star) {
+    c.fillStyle = s.star;
+    star(c, 0, 0, r * 0.42, -Math.PI / 2);
+    for (let k = 0; k < 5; k++) {
+      const a = -Math.PI / 2 + (k * TAU) / 5;
+      star(c, Math.cos(a) * r * 0.95, Math.sin(a) * r * 0.95, r * 0.34, a);
+    }
+  } else if (s.dots) {
+    c.fillStyle = 'rgba(255,110,200,0.45)';
+    c.beginPath();
+    c.ellipse(r * 0.1, r * 0.05, r * 0.8, r * 0.3, 0.5, 0, TAU);
+    c.fill();
+    c.fillStyle = 'rgba(120,170,255,0.4)';
+    c.beginPath();
+    c.ellipse(-r * 0.2, -r * 0.2, r * 0.5, r * 0.22, -0.4, 0, TAU);
+    c.fill();
+    c.fillStyle = '#ffffff';
+    for (let k = 0; k < 16; k++) {
+      const a = k * 2.399, d = r * Math.sqrt((k + 0.5) / 16) * 0.95;
+      c.fillRect(Math.cos(a) * d, Math.sin(a) * d, r * (k % 4 ? 0.07 : 0.12), r * (k % 4 ? 0.07 : 0.12));
+    }
+  } else if (s.pixels) {
+    const n = 5, cell = (2 * r) / n;
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        c.fillStyle = s.pixels[(j < 2 ? 0 : 2) + ((i * 7 + j * 3) % 2)];
+        c.fillRect(-r + i * cell, -r + j * cell, cell + 0.5, cell + 0.5);
+      }
+    }
+  } else {
+    c.fillStyle = s.patch[0];
+    c.strokeStyle = s.seam;
+    c.lineWidth = r * 0.09;
+    poly(c, 0, 0, r * 0.37, 5, -Math.PI / 2);
+    for (let k = 0; k < 5; k++) {
+      const a = -Math.PI / 2 + (k * TAU) / 5;
+      c.beginPath();
+      c.moveTo(Math.cos(a) * r * 0.37, Math.sin(a) * r * 0.37);
+      c.lineTo(Math.cos(a) * r * 0.8, Math.sin(a) * r * 0.8);
+      c.stroke();
+      c.fillStyle = s.patch[(k + 1) % s.patch.length];
+      poly(c, Math.cos(a) * r * 1.06, Math.sin(a) * r * 1.06, r * 0.36, 5, a + Math.PI);
+    }
   }
   c.restore();
+  if (s.glint) {
+    c.fillStyle = 'rgba(255,255,255,0.85)';
+    star(c, -r * 0.42, -r * 0.42, r * 0.22, 0);
+  }
   // One flat shade on the lower right. It follows the light, not the spin.
   c.save();
   c.beginPath();
@@ -174,6 +254,19 @@ export function drawBall(c, x, y, r, angle) {
   c.fill('evenodd');
   c.restore();
   c.restore();
+}
+
+// A ball design as a picture for the page (the kick button, the locker), cached.
+const ballPics = new Map();
+export function ballPicture(style, px = 160) {
+  const key = `${style}|${px}`;
+  if (!ballPics.has(key)) {
+    const cv = document.createElement('canvas');
+    cv.width = cv.height = px;
+    drawBall(cv.getContext('2d'), px / 2, px / 2, px * 0.46, -0.25, style);
+    ballPics.set(key, cv.toDataURL());
+  }
+  return ballPics.get(key);
 }
 
 export function ballSVG() {
@@ -556,6 +649,7 @@ export const ICONS = {
   trophy: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v5a5 5 0 0 1-10 0zM10.2 14.6h3.6v3.2h3.2V21H7v-3.2h3.2zM4 4h3v3.5A3 3 0 0 1 4 4.5zM20 4h-3v3.5A3 3 0 0 0 20 4.5z" fill="#f4b400"/></svg>',
   crown: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8.5l4.6 3.8L12 5l4.4 7.3L21 8.5 19 18H5z" fill="#ffd23f"/><path d="M5 18h14v2.6H5z" fill="#e8a900"/><circle cx="3" cy="8" r="1.6" fill="#ffd23f"/><circle cx="12" cy="4.6" r="1.6" fill="#ffd23f"/><circle cx="21" cy="8" r="1.6" fill="#ffd23f"/></svg>',
   rook: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 21h13v-2.6h-13zM7.4 17.6h9.2l-.9-7.6H8.3zM6.6 9.2h10.8V4.4h-2.5v2.1h-1.9V4.4H11v2.1H9.1V4.4H6.6z" fill="#7a72c9"/></svg>',
+  jersey: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.2 3 3 5.8l1.9 4.6 2.6-1V21h9V9.4l2.6 1L21 5.8 15.8 3c-.6 1.6-2 2.6-3.8 2.6S8.8 4.6 8.2 3z" fill="currentColor"/><path d="M12 5.6c1.8 0 3.2-1 3.8-2.6l1.2.6c-.8 2-2.7 3.3-5 3.3s-4.2-1.3-5-3.3l1.2-.6c.6 1.6 2 2.6 3.8 2.6z" fill="rgba(255,255,255,0.55)"/></svg>',
   // A pointing hand, for showing him where to tap.
   hand: '<svg viewBox="0 0 64 72" aria-hidden="true"><path d="M27 66c-3 0-5-2-5-5V43c-1 1-3 2-5 2-3 0-5-2-5-4-1 1-2 1-4 1-3 0-5-2-5-5V26c0-9 7-16 16-16h12c6 0 10 3 13 8l9 14c1 2 1 5-2 6-2 1-4 0-6-2l-2-3v28c0 3-2 5-4 5H27z" transform="rotate(180 32 38)" fill="#ffffff" stroke="#1f2a37" stroke-width="3.2" stroke-linejoin="round"/></svg>',
 };

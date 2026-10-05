@@ -11,8 +11,8 @@ export function newProgress(C, day) {
   const progress = {
     version: 1, created: day, settings: defaultSettings(), team: null, placementDone: false,
     step: C.steps[0].step, records: {}, sessions: [], sessionCount: 0, recycle: [], seasonGoals: 0,
-    wordBook: [], signed: [], queenReady: {}, levelPassed: {}, levelCheckDue: null, levelChecks: [],
-    sightIntroduced: [], headlines: {}, lastUsed: {}, lastSessionDay: null, character: null,
+    wordBook: [], signed: [], queenReady: {}, levelPassed: {}, levelCheckDue: null, levelCheckDueDay: null, levelChecks: [],
+    sightIntroduced: [], headlines: {}, lastUsed: {}, lastSessionDay: null, character: null, checkups: [],
   };
   return upgradeProgress(C, progress);
 }
@@ -20,7 +20,7 @@ export function newProgress(C, day) {
 // Fills in any field or record a newer version of the game or its content expects.
 export function upgradeProgress(C, P) {
   const fresh = { settings: defaultSettings(), recycle: [], wordBook: [], signed: [], queenReady: {}, levelPassed: {},
-    levelChecks: [], sightIntroduced: [], headlines: {}, lastUsed: {}, sessions: [], records: {} };
+    levelChecks: [], sightIntroduced: [], headlines: {}, lastUsed: {}, sessions: [], records: {}, checkups: [] };
   for (const [k, v] of Object.entries(fresh)) P[k] ??= v;
   P.settings = { ...defaultSettings(), ...P.settings };
   P.settings.items = { ...defaultSettings().items, ...P.settings.items };
@@ -229,7 +229,10 @@ export function scoreItem(C, P0, S, item, out, cfg = CONFIG) {
       break;
     }
   }
-  if (item.record?.startsWith('dec:')) checkStep(C, P, events, cfg);
+  if (item.record?.startsWith('dec:')) {
+    checkStep(C, P, events, cfg);
+    if (events.some(e => e.type === 'levelCheckDue')) P.levelCheckDueDay = S.day; // a check-up comes with it
+  }
 
   // The game layer: every first-try correct answer is a pass; three in a row make a goal.
   if (pass) {
@@ -318,10 +321,11 @@ export function finishSession(C, P0, S) {
 // ---- Placement: a one-time Sound match sweep over every letter in levels 1 and 2 (rule 1).
 export function placementItems(C, seed) {
   const rng = makeRng(seed);
-  return rng.shuffle(C.letters).map(letter => {
+  const letters = placementLetters(C);
+  return rng.shuffle(letters).map(letter => {
     const sound = C.letterSound[letter];
     const others = [];
-    for (const x of rng.shuffle(C.letters)) {
+    for (const x of rng.shuffle(letters)) {
       if (others.length === 3) break;
       if (x !== letter && C.letterSound[x] !== sound && !others.some(o => C.letterSound[o] === C.letterSound[x])) others.push(x);
     }
@@ -329,11 +333,14 @@ export function placementItems(C, seed) {
   });
 }
 
+// The sweep covers the single letters of levels 1 and 2; letter groups (sh, ee) come in later.
+export const placementLetters = C => C.letters.filter(l => C.steps[C.stepIndex[C.letterStep[l]]].level <= 2);
+
 // Letters he gets right start as learning; the rest stay new, except the few that always start
 // as learning so there are words from the first session.
 export function applyPlacement(C, P0, results, day, cfg = CONFIG) {
   const P = structuredClone(P0);
-  for (const l of C.letters) {
+  for (const l of placementLetters(C)) {
     const id = recId.letter(l);
     if (results[l]) P.records[id] = applyAttempt(P.records[id], { day, hit: true, activity: 'placement' }, cfg);
     else if (cfg.placementAlwaysLearning.includes(l) && P.records[id].state === 'new') P.records[id] = { ...P.records[id], state: 'learning' };
@@ -346,7 +353,10 @@ export function applyPlacement(C, P0, results, day, cfg = CONFIG) {
 export function levelCheckWords(C, level, seed, cfg = CONFIG) {
   const rng = makeRng(seed);
   const steps = C.steps.filter(s => s.level === level).map(s => s.step);
-  const real = rng.shuffle(C.real.filter(w => steps.includes(w.step) && w.letters.length === 3)).slice(0, cfg.levelCheck.real);
+  // Real words from the level's steps: three-letter ones in the first levels, whatever the level teaches after.
+  const fromLevel = C.real.filter(w => steps.includes(w.step));
+  const short = fromLevel.filter(w => w.letters.length === 3);
+  const real = rng.shuffle(short.length >= cfg.levelCheck.real ? short : fromLevel).slice(0, cfg.levelCheck.real);
   const nonsense = rng.shuffle(C.nonsense.filter(w => w.levelCheck && steps.includes(w.step))).slice(0, cfg.levelCheck.nonsense);
   return rng.shuffle([...real, ...nonsense]).map(w => w.key);
 }
@@ -365,11 +375,13 @@ export function applyLevelCheck(C, P0, level, results, day, cfg = CONFIG) {
   return { P, score, pass };
 }
 
-// The verse for this match: the newest one unlocked, with a player's name and an action word that
-// change every match so he has to read the line (SPEC.md, "The team chant").
+// The verse for this match: one of the newest unlocked, taking turns, with a player's name and an
+// action word that change every match so he has to read the line (SPEC.md, "The team chant").
 export function chantFor(C, P, matchNumber) {
   const verses = C.chants.filter(v => C.stepIndex[v.step] <= C.stepIndex[P.step]);
-  const verse = verses.at(-1) ?? C.chants[0];
+  // The newest step's verses, in turn from match to match.
+  const newest = verses.filter(v => v.step === verses.at(-1)?.step);
+  const verse = newest.length ? newest[matchNumber % newest.length] : C.chants[0];
   // Signed players first; otherwise any player whose letters he has met (ground rule 5).
   const reachable = C.squad.players.filter(p => C.stepIndex[p.step] <= C.stepIndex[P.step]);
   const readable = p => [...p.word].every(l => letterState(P, l) !== 'new');

@@ -1,16 +1,17 @@
 // Offline play from the home screen (SPEC.md, "Technical requirements"): caches the whole game and
-// every recorded clip in audio/manifest.json and every image in art/index.json. Bump VERSION on each
-// release so phones pick it up.
-const VERSION = 11;
+// every image in art/index.json at install, then every clip in audio/manifest.json in the background,
+// so an update is ready at once; a clip played before then is kept as it is fetched. Bump VERSION on
+// each release so phones pick it up.
+const VERSION = 12;
 const CACHE = `phonics-v${VERSION}`;
 const FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/game.css', 'fonts/fredoka.woff2', 'fonts/andika-400.woff2', 'fonts/andika-700.woff2',
-  'js/activities.js', 'js/app.js', 'js/art.js', 'js/audio.js', 'js/choose.js', 'js/clipstore.js', 'js/config.js', 'js/content.js', 'js/journey.js',
+  'js/activities.js', 'js/app.js', 'js/art.js', 'js/audio.js', 'js/checkup.js', 'js/choose.js', 'js/clipstore.js', 'js/config.js', 'js/content.js', 'js/cup.js', 'js/gear.js', 'js/journey.js',
   'js/map.js', 'js/run.js', 'js/scene.js',
   'js/mastery.js', 'js/mic.js', 'js/music.js', 'js/parent.js', 'js/recorder.js', 'js/rng.js', 'js/session.js', 'js/stats.js',
-  'js/storage.js', 'js/takes.js', 'js/ui.js', 'js/voices.js',
+  'js/storage.js', 'js/takes.js', 'js/ui.js', 'js/variety.js', 'js/voices.js',
   'content/sounds.json', 'content/levels.json', 'content/words.json', 'content/nonsense.json',
-  'content/sentences.json', 'content/prompts.json', 'content/custom-sentences.json',
+  'content/sentences.json', 'content/prompts.json', 'content/custom-sentences.json', 'content/passages.json',
   'audio/manifest.json', 'art/index.json', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png',
 ];
 
@@ -18,8 +19,6 @@ self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
     await cache.addAll(FILES);
-    const manifest = await (await fetch('audio/manifest.json', { cache: 'no-store' })).json();
-    await cache.addAll(Object.values(manifest.clips ?? {}).map(file => `audio/${file}`));
     const art = await (await fetch('art/index.json', { cache: 'no-store' })).json();
     await cache.addAll(art.files.map(file => `art/${file}`));
     await self.skipWaiting();
@@ -31,7 +30,24 @@ self.addEventListener('activate', event => {
     for (const key of await caches.keys()) if (key !== CACHE) await caches.delete(key);
     await self.clients.claim();
   })());
+  event.waitUntil(cacheAudio());
 });
+
+// The clips, a few at a time, skipping any already kept. A clip that fails now is fetched when played.
+async function cacheAudio() {
+  try {
+    const cache = await caches.open(CACHE);
+    const manifest = await (await fetch('audio/manifest.json', { cache: 'no-store' })).json();
+    const files = Object.values(manifest.clips ?? {}).map(file => `audio/${file}`);
+    for (let i = 0; i < files.length; i += 20) {
+      const batch = [];
+      for (const f of files.slice(i, i + 20)) if (!(await cache.match(f))) batch.push(f);
+      await Promise.all(batch.map(f => cache.add(f).catch(() => {})));
+    }
+  } catch {
+    // offline now; clips are kept as they are played
+  }
+}
 
 // Cache first; anything new from the network is kept for next time.
 self.addEventListener('fetch', event => {

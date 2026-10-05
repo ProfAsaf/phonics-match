@@ -1,29 +1,47 @@
 // Item choice for each activity (SPEC.md, "Activities" and "Mastery model" rules 2-4).
 // Pure: progress P, session S, and a seeded rng come in; plain item objects come out.
 import { recId, isDue, hitRate } from './mastery.js';
-import { clip, isVowel, diffPositions, neighbors, scopeLetters, stepLE, tokenize } from './content.js';
+import { clip, isVowel, VOWELS as VOWEL_LETTERS, diffPositions, neighbors, scopeLetters, stepLE, tokenize } from './content.js';
 
 export const POSITIONS = ['first', 'last', 'middle']; // Find the sound asks them in this order
 export const positionName = (i, n) => (i === 0 ? 'first' : i === n - 1 ? 'last' : 'middle');
 
 // ---- What he knows
 export const letterState = (P, l) => P.records[recId.letter(l)]?.state ?? 'new';
-// Letters this session introduces count as known when planning, since Sound match comes first.
-export const knowsLetter = (P, S, l) => letterState(P, l) !== 'new' || S.newLetters.includes(l);
+// Letters this session introduces count as known when planning, since Sound match comes first. A
+// group with more than one sound (ed) is never asked alone, so it counts as known from its step on.
+export const knowsLetter = (P, S, l, C = null) => letterState(P, l) !== 'new' || S.newLetters.includes(l)
+  || (!!C && C.noSoundMatch.has(l) && stepLE(C, C.letterStep[l], P.step));
 export const isQueenWord = (C, key) => C.squad.byWord[key]?.piece === 'queen';
 
-// Level-check words never appear in play. A queen stays hidden until her step is ready.
+// Level-check and check-up words never appear in play. A queen stays hidden until her step is ready.
 export function withheld(C, P, w) {
-  if (w.levelCheck) return true;
+  if (w.levelCheck || w.checkup) return true;
   return isQueenWord(C, w.key) && !P.queenReady[w.step] && !P.signed.includes(w.key);
 }
 
 // Rule 3: a printed word is from his step or an earlier one, and he has met every letter in it.
 export function printable(C, P, S, w) {
-  return !w.oralOnly && stepLE(C, w.step, P.step) && w.letters.every(l => knowsLetter(P, S, l)) && !withheld(C, P, w);
+  return !w.oralOnly && stepLE(C, w.step, P.step) && w.letters.every(l => knowsLetter(P, S, l, C)) && !withheld(C, P, w);
 }
 
 const wordAudio = (S, w) => S.audioOK(clip.word(w.word)) && w.sounds.every(s => S.audioOK(clip.sound(s)));
+
+// Spoken-only tasks may use any word, whatever its spelling, but only with sounds from the first two
+// levels or sounds he has been taught since: ship waits for sh.
+export function soundsInScope(C, P) {
+  const out = new Set();
+  for (const l of C.letters) {
+    const st = C.letterStep[l];
+    if (C.steps[C.stepIndex[st]].level <= 2 || stepLE(C, st, P.step)) out.add(C.letterSound[l]);
+  }
+  for (const alts of Object.values(C.alternates ?? {})) for (const [s, st] of Object.entries(alts)) if (stepLE(C, st, P.step)) out.add(s);
+  return out;
+}
+const oralOK = (C, P) => {
+  const ok = soundsInScope(C, P);
+  return w => w.sounds.every(s => ok.has(s));
+};
 export const eligibleReal = (C, P, S) => C.real.filter(w => printable(C, P, S, w) && wordAudio(S, w));
 export const eligibleNonsense = (C, P, S) => C.nonsense.filter(w => printable(C, P, S, w) && wordAudio(S, w));
 
@@ -40,10 +58,10 @@ export function readyQueen(C, P, S) {
 export function chooseNewLetters(C, P, cfg, audioOK = () => true) {
   const step = C.steps[C.stepIndex[P.step]];
   const queen = C.squad.players.find(p => p.step === P.step && p.piece === 'queen');
-  const queenLetters = P.queenReady[P.step] && queen ? [...queen.word] : [];
+  const queenLetters = P.queenReady[P.step] && queen ? C.byWord.get(queen.word)?.letters ?? [] : [];
   const rank = l => (l === step.vowel ? 0 : queenLetters.includes(l) ? 1 : cfg.priorityLetters.includes(l) ? 2 : 3);
   return scopeLetters(C, P.step)
-    .filter(l => letterState(P, l) === 'new' && audioOK(clip.sound(C.letterSound[l])))
+    .filter(l => !C.noSoundMatch.has(l) && letterState(P, l) === 'new' && audioOK(clip.sound(C.letterSound[l])))
     .sort((a, b) => rank(a) - rank(b) || C.letters.indexOf(a) - C.letters.indexOf(b))
     .slice(0, cfg.newLettersPerSession);
 }
@@ -128,7 +146,7 @@ const uniqByKey = list => list.filter((x, i) => list.findIndex(y => y.key === x.
 // ---- 1. Sound match
 export function buildSoundMatch(C, P, S, rng, n, cfg, opts = {}) {
   const cands = scopeLetters(C, P.step)
-    .filter(l => knowsLetter(P, S, l) && S.audioOK(clip.sound(C.letterSound[l])))
+    .filter(l => !C.noSoundMatch.has(l) && knowsLetter(P, S, l) && S.audioOK(clip.sound(C.letterSound[l])))
     .map(l => ({ key: l, group: l, letter: l }));
   const byKey = new Map(cands.map(c => [c.key, c]));
   const fresh = S.newLetters.filter(l => byKey.has(l) && !S.introduced.has(l));
@@ -155,7 +173,7 @@ export function buildSoundMatch(C, P, S, rng, n, cfg, opts = {}) {
 // Wrong choices: letters he has confused before, then look-alikes and sound-alikes, then letters he
 // knows. Never two letters with the same sound, so c and k never appear together.
 function letterDistractors(C, P, S, letter, count, rng, cfg) {
-  const pool = scopeLetters(C, P.step);
+  const pool = scopeLetters(C, P.step).filter(l => !C.noSoundMatch.has(l));
   const out = [];
   const add = x => {
     if (out.length >= count || x === letter || out.includes(x) || !pool.includes(x)) return;
@@ -184,7 +202,8 @@ export function soundMatchItem(C, P, S, rng, letter, form, cfg, intro = false) {
 
 // ---- 2. Blend it: any pictured word, since nothing is printed (SPEC.md, "Word bank").
 export function buildBlendIt(C, P, S, rng, n, cfg, opts = {}) {
-  const cands = C.pictured.filter(w => wordAudio(S, w)).map(w => ({ key: w.key, group: recId.blend(w.shape), w }));
+  const heard = oralOK(C, P);
+  const cands = C.pictured.filter(w => heard(w) && wordAudio(S, w)).map(w => ({ key: w.key, group: recId.blend(w.shape), w }));
   const byKey = new Map(cands.map(c => [c.key, c]));
   const picks = pickMix(cands, n, rng, cfg, {
     force: opts.easy ? [] : (opts.recycled ?? []).map(k => byKey.get(k)).filter(Boolean),
@@ -213,7 +232,8 @@ export function blendItem(C, rng, w) {
 
 // ---- 3. Find the sound: three different sounds, and no x (SPEC.md, "The letter x").
 export function buildFindSound(C, P, S, rng, n, cfg, opts = {}) {
-  const words = C.oral.filter(w => w.sounds.length === 3 && new Set(w.sounds).size === 3 && !w.sounds.includes('ks') && wordAudio(S, w));
+  const heard = oralOK(C, P);
+  const words = C.oral.filter(w => w.sounds.length === 3 && new Set(w.sounds).size === 3 && !w.sounds.includes('ks') && heard(w) && wordAudio(S, w));
   const cands = words.flatMap(w => [0, 1, 2].map(i => {
     const pos = positionName(i, 3);
     return { key: `${w.key}:${pos}`, group: recId.seg(pos), w, index: i, pos };
@@ -241,7 +261,8 @@ export function findItem(rng, w, index) {
 
 // ---- 4. Build it
 export function buildBuildIt(C, P, S, rng, n, cfg, opts = {}) {
-  const cands = eligibleReal(C, P, S).filter(w => w.letters.length === 3).map(w => ({ key: w.key, group: w.key, w }));
+  // Words of three or four letter groups: ship is three blocks, frog four, make three (m, a_e, k).
+  const cands = eligibleReal(C, P, S).filter(w => w.letters.length >= 3 && w.letters.length <= 4 && !w.split).map(w => ({ key: w.key, group: w.key, w }));
   const byKey = new Map(cands.map(c => [c.key, c]));
   const picks = pickMix(cands, n, rng, cfg, {
     force: opts.easy ? [] : (opts.recycled ?? []).map(k => byKey.get(k)).filter(Boolean),
@@ -252,22 +273,26 @@ export function buildBuildIt(C, P, S, rng, n, cfg, opts = {}) {
   return picks.map(c => buildItem(C, P, S, rng, c.w, cfg));
 }
 
-// The tray: the word's letters plus two or three extras, always including one other vowel.
+// The tray: the word's letters plus two or three extras, always including one other vowel. No extra
+// ever sounds like a letter in the word or another extra: with c and k, or ai and ay, both in the
+// tray, hearing the word could not tell him which one it uses.
 export function buildItem(C, P, S, rng, w, cfg) {
-  const known = scopeLetters(C, P.step).filter(l => knowsLetter(P, S, l));
+  const known = scopeLetters(C, P.step).filter(l => knowsLetter(P, S, l) && !C.noSoundMatch.has(l));
+  const sounds = new Set(w.letters.map(l => C.letterSound[l]));
+  const fits = l => l && !w.letters.includes(l) && known.includes(l) && !sounds.has(C.letterSound[l]);
   const vowel = w.letters.find(isVowel);
-  const otherVowels = known.filter(l => isVowel(l) && l !== vowel);
+  const otherVowels = known.filter(l => isVowel(l) && l !== vowel && fits(l));
   // Before he knows a second vowel, the extra vowel is the next one he will meet.
-  const extras = [otherVowels.length ? rng.pick(otherVowels) : C.letters.find(l => isVowel(l) && l !== vowel)];
-  const hasK = w.letters.some(l => C.letterSound[l] === 'k');
+  const extras = [otherVowels.length ? rng.pick(otherVowels) : C.letters.find(l => VOWEL_LETTERS.includes(l) && l !== vowel)];
+  for (const x of extras) if (x) sounds.add(C.letterSound[x]);
   const similar = w.letters.flatMap(l => [...cfg.lookAlikes, ...cfg.soundAlikes].filter(g => g.includes(l)).flat());
   const confused = w.letters.flatMap(l => Object.keys(P.records[recId.letter(l)]?.confusions ?? {}));
   const total = 2 + rng.int(2);
   for (const l of [...rng.shuffle(similar), ...rng.shuffle(confused), ...rng.shuffle(known)]) {
     if (extras.length >= total) break;
-    if (!l || isVowel(l) || w.letters.includes(l) || extras.includes(l) || !known.includes(l)) continue;
-    if (C.letterSound[l] === 'k' && (hasK || extras.some(x => C.letterSound[x] === 'k'))) continue; // never c and k together
+    if (isVowel(l) || extras.includes(l) || !fits(l)) continue;
     extras.push(l);
+    sounds.add(C.letterSound[l]);
   }
   const tray = rng.shuffle([...w.letters, ...extras.filter(Boolean)]).map((letter, id) => ({ id, letter }));
   return { activity: 'buildIt', key: w.key, word: w.key, letters: [...w.letters], tray, answer: [...w.letters] };
@@ -325,7 +350,7 @@ function mixRealAndNonsense(C, P, S, rng, n, cfg, opts, activity, makeItem, pict
   const nonPool = eligibleNonsense(C, P, S);
   const queen = readyQueen(C, P, S);
   const recycled = (opts.recycled ?? []).map(k => C.byWord.get(k)).filter(Boolean);
-  const pick = (pool, k, real, force) => {
+  const mix = (pool, k, real, force) => {
     const cands = pool.map(w => ({ key: w.key, group: recId.dec(w.step, real), w }));
     const keys = new Set(cands.map(c => c.key));
     return pickMix(cands, k, rng, cfg, {
@@ -334,6 +359,16 @@ function mixRealAndNonsense(C, P, S, rng, n, cfg, opts, activity, makeItem, pict
       bucket: c => wordBucket(P, S, c.w, c.group),
       ease: c => wordEase(P, c.w, c.group),
     }).map(c => c.w);
+  };
+  // Most words come from his current step, so a new pattern gets enough practice to master in a week
+  // or so; the rest review the steps before it, spread across them. Easy material is spread as before.
+  const pick = (pool, k, real, force) => {
+    const here = pool.filter(w => w.step === P.step);
+    const kHere = opts.easy ? 0 : Math.min(here.length, Math.round(k * cfg.currentStepShare));
+    const first = kHere ? mix(here, kHere, real, force) : [];
+    const chosen = new Set(first.map(w => w.key));
+    const rest = mix(pool.filter(w => !chosen.has(w.key)), k - first.length, real, force.filter(w => !chosen.has(w.key)));
+    return [...first, ...rest];
   };
   // A ready queen is in the nonsense pool already; forcing her in makes her name come up this match.
   const nNon = !nonPool.length ? 0 : realPool.length ? Math.round(n * cfg.nonsenseShare[activity]) : n;
@@ -350,8 +385,8 @@ export function pickSentence(C, P, S) {
   const readable = [...C.custom, ...C.sentences]
     .filter(s => S.audioOK(clip.sentence(s.text)))
     .map(s => ({ s, tokens: tokenize(C, s.text) }))
-    .filter(({ tokens }) => tokens.every(t => t.sight || (t.entry?.real && !t.entry.oralOnly && stepLE(C, t.entry.step, P.step)
-      && t.entry.letters.every(l => knowsLetter(P, S, l)))));
+    .filter(({ tokens }) => tokens.every(t => (t.sight ? stepLE(C, C.sightStep[t.sight], P.step)
+      : t.entry?.real && !t.entry.oralOnly && stepLE(C, t.entry.step, P.step) && t.entry.letters.every(l => knowsLetter(P, S, l, C)))));
   if (!readable.length) return null;
   const stepOf = ({ tokens }) => Math.max(0, ...tokens.map(t => (t.entry ? C.stepIndex[t.entry.step] : 0)));
   const used = x => P.headlines[x.s.text] ?? '';

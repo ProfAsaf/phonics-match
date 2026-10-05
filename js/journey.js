@@ -4,7 +4,6 @@
 // moves up is a new world with its own scenery. Pure: everything comes from the content and his
 // progress, so the tests can check it.
 import { letterState } from './choose.js';
-import { isVowel } from './content.js';
 
 export const STOPS = [
   { kind: 'stadium', activity: 'soundMatch' },
@@ -20,8 +19,8 @@ export const HALFTIME_STOP = 3;
 export const TROPHY_STOP = 7;
 export const stopOf = activity => STOPS.findIndex(s => s.activity === activity);
 
-// Each step is a world: meadow, river, forest, snow, beach, and around again.
-export const WORLD_THEMES = ['meadow', 'river', 'forest', 'snow', 'beach'];
+// Each step is a world with its own scenery: twelve kinds, so none comes back until the thirteenth.
+export const WORLD_THEMES = ['meadow', 'river', 'forest', 'snow', 'beach', 'desert', 'jungle', 'autumn', 'mountain', 'mushroom', 'town', 'volcano'];
 export function worldFor(C, step) {
   const i = C.stepIndex[step] ?? 0;
   return { number: i + 1, theme: WORLD_THEMES[i % WORLD_THEMES.length] };
@@ -90,13 +89,12 @@ export function whereHeIs(C, P) {
   const signed = players.filter(p => P.signed.includes(p.word)).length;
   const levelLetters = C.steps.filter(s => s.level === step.level).flatMap(s => s.letters);
   const count = state => levelLetters.filter(l => letterState(P, l) === state).length;
-  const vowel = step.letters.find(isVowel);
   const played = playsByStep(C, P)[P.step] ?? 0;
   const lines = [
-    `World ${world.number} (the ${world.theme}), step ${step.step}${vowel ? `, short ${vowel}` : ''}: ${played} ${played === 1 ? 'match' : 'matches'} played here, ${signed} of ${players.length} players signed.`,
+    `World ${world.number} (the ${world.theme}), step ${step.step}, ${step.name}: ${played} ${played === 1 ? 'match' : 'matches'} played here, ${signed} of ${players.length} players signed.`,
     `Letter sounds in level ${step.level}: ${count('mastered')} mastered, ${count('learning')} learning, ${count('new')} not started.`,
   ];
-  if (P.levelCheckDue === step.level) lines.push(`The level ${step.level} check is due: run it from Settings.`);
+  if (P.levelCheckDue === step.level) lines.push(`The level ${step.level + 1} check is due: it runs at the end of the next check-up, or on its own with the button below.`);
   else if (P.queenReady[P.step]) lines.push('The queen is ready: signing her opens the gate to the next world.');
   else lines.push("The queen comes out when this step's real and nonsense words are both mastered; signing her opens the gate to the next world.");
   return lines;

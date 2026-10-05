@@ -1,0 +1,117 @@
+{
+  "about": "Short stories for the check-up's one-minute read. Each one is decodable at its step: every word is a sight word taught by then or a word-bank entry from that step or earlier (names need their capital). Levels 1 and 2 have two per step, used in turn; later steps have one. No endings like -s or -ing until those are taught.",
+  "passages": [
+    {
+      "id": "sam-and-the-cat", "step": "1A", "emoji": "🐱",
+      "text": "Sam had a cat. The cat had a hat. Sam had a map. The cat sat at the map. Sam ran. The cat ran. Dad had a pan. Dad had ham. Sam and the cat had ham. The cat is a bad cat! The cat had a nap."
+    },
+    {
+      "id": "the-rat-can-rap", "step": "1A", "emoji": "🐀🎤",
+      "text": "A rat had a cap. The rat ran to a man. The man had a fan and a hat. The rat sat at the fan. Tap, tap, tap! The rat can rap. The man had a bag. The man ran. The rat ran. A cat sat at the bag. The rat is sad. Pam had a mat. The rat had a nap at the mat."
+    },
+    {
+      "id": "the-pig-in-the-pit", "step": "1B", "emoji": "🐷",
+      "text": "Tim had a big pig. The pig hid in a bin. Tim can dig a pit. The pig sat in the pit. Is it a pig in a pit? It is! Tim had a fig. The pig bit the fig. Tim had a sip. The pig had a sip. Tim and his pig had a nap."
+    },
+    {
+      "id": "i-hit-it-in", "step": "1B", "emoji": "⚽🥅",
+      "text": "Sam ran. Tim ran. I ran. Tim had a tap. Sam had a tap. I hit it, and it is in! It is a big hit! Dad had his cap. Dad had a fan. Dad can fan Sam and Tim. Tim had a sip. Sam had a sip. I had a sip."
+    },
+    {
+      "id": "the-fox-in-the-box", "step": "2A", "emoji": "🦊📦",
+      "text": "A fox got in a box. The box sat on a log. A dog ran to the log. The dog can hop, hop, hop. The fox can hop. The fox hid in the box. Is the fox in the box? It is! Mom had a pot. The pot is hot. The dog and the fox sat on a mat. Mom got the fox a hot dog!"
+    },
+    {
+      "id": "kim-can-win", "step": "2A", "emoji": "⚽🏆",
+      "text": "Kim and Tom jog to the top. Kim can zip. Tom can zap. Kim hit it to Tom. Tom hit it to Kim. Kim hit it in! It is a win! Mom got Kim a hot dog. Tom got a pop. Kim had a nap in the van. Tom had a nap on a mat."
+    },
+    {
+      "id": "the-pup-and-the-bug", "step": "2B", "emoji": "🐶🐛",
+      "text": "A pup sat in the sun. A bug sat on a rug. The pup ran to the bug. The bug hid in a cup. The pup dug and dug. The pup got mud on the rug. Mom got the pup. The pup sat in a tub. The pup had fun in the tub! The bug sat on the pup. Yum, a bun! The pup and the bug had a bun in the sun."
+    },
+    {
+      "id": "run-gus-run", "step": "2B", "emoji": "🏃⚽",
+      "text": "Gus can run. Gus and his pup run to the hut. The pup can run up and up. Gus hit it to the pup. The pup hit it to Gus. Gus hit it, but it is not in. Gus hit it in! It is fun to run! Gus got a bun. The pup got a hug. Gus and the pup sat in the sun. The sun is hot. Gus had a sip. The pup had a sip in a cup."
+    },
+    {
+      "id": "ben-and-his-hen", "step": "2C", "emoji": "🐔🛏️",
+      "text": "Ben had a pet hen. The red hen sat in a pen. Ben fed the hen. The hen sat on a net. The net is wet, and the hen got wet! Ben got the hen. Ben set the hen on his bed. Can a hen nap in a bed? Yes! Ben and his hen had a nap. Mom met the hen in the bed. The hen is a fun pet. Get up, hen! Get up, Ben!"
+    },
+    {
+      "id": "meg-hit-it-in", "step": "2C", "emoji": "⚽🥅",
+      "text": "Meg and Ben jog to the net. Meg had a red top. Ben had a red cap. Meg hit it to Ben. Ben hit it to Meg. Meg hit it in the net! Yes! Ten men in a van get up and hop. It is a big win! Ben and Meg get a hug. The sun is set. Ben and Meg get in the van. Ben is wet. Meg is wet. It is fun to get wet!"
+    },
+    {
+      "id": "the-fish-shop", "step": "3A", "emoji": "🐟🏪",
+      "text": "Mom and Sam got to the fish shop. The shop had a big fish in a tub. Sam had a wish. He had to get a fish! Mom got the fish and a dish. Sam set the dish on the rug. The fish had a sip. The pup ran to the dish. Hush, pup! The fish is his. Sam and the pup had a nap. The fish had a nap in the dish."
+    },
+    {
+      "id": "the-moth-in-the-bath", "step": "3B", "emoji": "🛀🦋",
+      "text": "Tim had a hot bath. Then a moth got in the bath! The moth got wet. Tim got the moth with a cup. The moth was not sad. Tim set the moth on the path in the sun. The moth sat and sat. Then the moth got up, up, up! When Tim got in bed, a moth sat on his hat. Which moth is that? It is the moth from the bath!"
+    },
+    {
+      "id": "the-duck-and-the-chick", "step": "3C", "emoji": "🦆🐤",
+      "text": "A duck and a chick sat on a hill. Quack, quack! The duck had a bell. The chick had a kick at the bell, and the bell was in the mud! The duck was sad. The chick ran to get the bell. It was in a big mess of mud. The chick got the bell and ran back up the hill. The duck said quack! The duck and the chick had a kiss. What luck!"
+    },
+    {
+      "id": "the-king-can-sing", "step": "3D", "emoji": "🤴🎵",
+      "text": "The king had a pink ring and a long song. The king can sing his song! His pup can sing. The king and the pup sang and sang. The pup sang with a honk. Honk, honk! The king had to think. Is that a song? The king got a bell. Bang, bang! The pup sang a long honk. Thank you, pup! That is a fun song. Sing it with me, said the king."
+    },
+    {
+      "id": "the-black-sled", "step": "4A", "emoji": "🛷",
+      "text": "Kim had a black sled. Kim got on the sled at the top of the hill. Zip! The sled can spin and spin. Kim did not stop. Snap! The sled hit a big rock. Kim did a flip! Kim got up. Kim was glad. Kim had a snack and a sip. Then Kim got on the sled at the top of the hill and did it again! Spin, spin, stop!"
+    },
+    {
+      "id": "the-frog-and-the-crab", "step": "4B", "emoji": "🐸🦀",
+      "text": "A frog sat on a log in the grass. A crab ran up to the frog. Grab it! The crab had a drum. Drum, drum, drum! The frog did a trick. The frog can hop and flip. The crab can drum and grin. Drip, drop! It was wet. The frog and the crab hid in a truck. The truck had trash in it! The frog and the crab had a fresh snack in the truck. What a trip!"
+    },
+    {
+      "id": "at-camp", "step": "4C", "emoji": "⛺",
+      "text": "Dad and Meg went to camp. Dad had a tent. Meg had a lamp and a gift. The wind was fast. The tent went up! Meg had to help Dad. They set the tent in the sand at a pond. An ant got in the tent. Meg did not jump. Meg said it is just an ant. The ant went back to the sand. At last, Dad and Meg had a rest. Camp is the best!"
+    },
+    {
+      "id": "the-snake-at-the-lake", "step": "5A", "emoji": "🐍🎂",
+      "text": "A snake came to the lake. The snake had a cake! Make a wave, said a whale in the lake. The snake gave the whale some cake. The whale gave the snake a game. They had fun at the lake. Then it got late. The snake had to go back to the cave. The snake will come back to the lake. The whale will save some cake!"
+    },
+    {
+      "id": "the-white-kite", "step": "5B", "emoji": "🪁",
+      "text": "Ben had a white kite. It was time to get the kite up. The wind was fine. Ben ran and ran. The kite was up! It went up and up, up to the pine. Then the kite was stuck in the pine. Ben had to hike up the hill. Ben had a smile. He got the kite. Ben ran and the kite went up again. It was a fine time with the kite!"
+    },
+    {
+      "id": "the-lost-bone", "step": "5C", "emoji": "🦴",
+      "text": "Gus had a dog. The dog had a bone. The dog dug a hole and hid the bone. Then the dog had a nap. The dog woke up. Where is the bone? The dog had to hope. He dug and dug. Is it in this hole? No! Gus had a cone. The dog had a lick of the cone. Then the dog dug up the bone at last! The dog was so cute with the bone. Home at last!"
+    },
+    {
+      "id": "the-bee-and-the-queen", "step": "6A", "emoji": "🐝👸",
+      "text": "A bee had a dream. The bee had to see the queen. The bee went to a green tree. The queen sat in the tree. She had a cup of tea. The bee had a seed and a peach. The bee gave the queen the peach. Eat it, said the bee. The queen had a sweet treat. Then the bee and the queen had a sleep in the tree. What a sweet dream! The bee will see the queen again."
+    },
+    {
+      "id": "the-snail-in-the-rain", "step": "6B", "emoji": "🐌🌧️",
+      "text": "A snail had to wait and wait. It was a gray day. Then the rain came. Drip, drip! The snail can play in the rain! The snail went on the trail. The snail had a long way to go. A train came on the rail. The snail had to stay on the trail. The snail did not get hit. The snail had a rest in the hay. Then the snail went on and on. What a day!"
+    },
+    {
+      "id": "the-goat-in-the-boat", "step": "6C", "emoji": "🐐🛶",
+      "text": "A goat had a boat. The goat had a coat and a bowl of toast. The goat had to row the boat on the lake. The goat can row! The wind did blow. The boat went slow, then fast. Show me the toad, said the goat. The toad sat on a log. The toad got in the boat. The goat and the toad had the toast. Then it did snow! The goat and the toad had to row home in the snow."
+    },
+    {
+      "id": "the-shark-and-the-star", "step": "6D", "emoji": "🦈⭐",
+      "text": "A shark swam in the dark. The shark had a wish for a star. The shark swam north, far from the park. A fish said to look up. A star was up in the dark! The star said to swim up to it. The shark swam up, up, up. The star sat on the shark. Then the shark and the star swam in the dark. The shark was not sad. What a smart shark!"
+    },
+    {
+      "id": "the-bird-and-the-girl", "step": "6E", "emoji": "🐦👧",
+      "text": "A girl had a bird. The bird can chirp. Chirp, chirp! The girl had a shirt and a skirt. The bird sat on her shirt. The girl and the bird went to the park. The bird can turn and turn. The bird had to go first. Then the girl had a turn. The bird did not get hurt. They had a fun day. The girl and the bird got home at dusk. Chirp, said the bird. That was the best day!"
+    },
+    {
+      "id": "cats-and-dogs", "step": "7A", "emoji": "🐱🐶",
+      "text": "Six cats and six dogs went to the park. The cats had hats, and the dogs had socks! The dogs and cats ran and ran. The cats sat in boxes. The dogs had wishes. They had to get the cats. The cats ran up two trees. The dogs sat and had peaches. Then the cats came back to the dogs. The cats and dogs had a rest in the sun. The cats had a nap in the boxes, and the dogs had a nap in the beds."
+    },
+    {
+      "id": "camping", "step": "7B", "emoji": "🏕️",
+      "text": "We went camping! Dad was resting in the tent. Mom was fishing in the pond. I was jumping and kicking. Then it rained and rained. We played in the tent. Mom painted a fish. Dad was singing. Then the rain ended. We helped Dad get wood for the fire, and we fished with Mom. We had fish at camp. Mom and Dad were singing and I was reading. It was the best day of camping!"
+    },
+    {
+      "id": "the-picnic", "step": "7C", "emoji": "🧺",
+      "text": "We had a picnic at sunset. Mom had a basket with a hotdog and a cupcake. A chipmunk came up to the picnic. The chipmunk had popcorn! Then a big rocket went up in the sunset. Look! A rainbow! We sat on the hilltop. The chipmunk sat in the backpack. It was the best picnic until the rain came. We ran to the van with the basket. We were not upset. What a picnic!"
+    }
+  ]
+}

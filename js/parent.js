@@ -2,14 +2,15 @@
 // dashboard, settings, and backup (SPEC.md, "Parent view"). No percentiles, grade equivalents, or
 // comparisons appear here or anywhere else.
 import { CONFIG as cfg } from './config.js';
-import { clip, tokenize, stepLE, levelOf } from './content.js';
+import { clip, tokenize, stepLE, levelOf, spelling } from './content.js';
 import { FAMILIES, recId } from './mastery.js';
-import { familyCounts, topConfusions, realVsNonsense, history, nextStep, FAMILY_NAMES } from './stats.js';
+import { familyCounts, topConfusions, realVsNonsense, history, nextStep, roadmap, FAMILY_NAMES } from './stats.js';
 import { levelCheckWords, applyLevelCheck } from './session.js';
 import { letterState } from './choose.js';
 import { saveProgress, loadProgress, exportProgress, parseImport, clearProgress, activePlayer, switchPlayer, startTestPlayer } from './storage.js';
 import { openRecorder } from './recorder.js';
 import { whereHeIs } from './journey.js';
+import { checkupDue, checkupSeries } from './checkup.js';
 import { h, sleep } from './ui.js';
 
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
@@ -19,7 +20,7 @@ const ACTIVITY_NAMES = {
   buildIt: 'Build it', readFind: 'Read and find', readAloud: 'Read aloud',
 };
 
-export function openParent(state, { onClose, runPlacement }) {
+export function openParent(state, { onClose, runPlacement, startCheckup }) {
   const { C } = state;
   state.audio.stop();
   const overlay = h('div', { class: 'parent' });
@@ -43,6 +44,8 @@ export function openParent(state, { onClose, runPlacement }) {
       section('Where he is', whereHeIs(C, P).map(line => h('p', { class: 'where' }, line))),
       section('Next step', h('p', { class: 'next' }, nextStep(C, P, state.day)),
         levelCheckButton()),
+      section('Check-ups', checkups()),
+      section('The road through first grade', road()),
       section('Skills', skillRows()),
       section('Letter sounds', letterGrid()),
       section('Top confusions, last two weeks', confusions()),
@@ -133,16 +136,93 @@ export function openParent(state, { onClose, runPlacement }) {
   function practice() {
     const hist = history(state.P);
     const points = hist.sessions.filter(s => s.accuracy != null).slice(-30);
+    return [h('p', {}, `${plural(hist.days, 'day', 'days')} practiced. First-try accuracy per match:`),
+      spark(points.map(p => p.accuracy), { top: 1, ref: 0.6 }),
+      h('div', { class: 'muted' }, 'The dashed line is 60%.')];
+  }
+
+  // A small line of values; top is the value at the top edge, ref an optional dashed line.
+  function spark(values, { top = Math.max(1, ...values) * 1.15, ref = null } = {}) {
     const w = 300;
     const hgt = 60;
-    const xy = points.map((p, i) => `${points.length > 1 ? (i * w) / (points.length - 1) : w / 2},${hgt - p.accuracy * hgt}`).join(' ');
+    const xy = values.map((v, i) => [values.length > 1 ? (i * w) / (values.length - 1) : w / 2, hgt - (v / top) * hgt]);
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', `-4 -4 ${w + 8} ${hgt + 8}`);
+    svg.setAttribute('viewBox', `-6 -6 ${w + 12} ${hgt + 12}`);
     svg.setAttribute('class', 'spark');
-    svg.innerHTML = `<line x1="0" x2="${w}" y1="${hgt * 0.4}" y2="${hgt * 0.4}" class="ref"/>`
-      + (points.length ? `<polyline points="${xy}"/>` : '');
-    return [h('p', {}, `${plural(hist.days, 'day', 'days')} practiced. First-try accuracy per match:`), svg,
-      h('div', { class: 'muted' }, 'The dashed line is 60%.')];
+    svg.innerHTML = (ref != null ? `<line x1="0" x2="${w}" y1="${hgt - (ref / top) * hgt}" y2="${hgt - (ref / top) * hgt}" class="ref"/>` : '')
+      + (values.length > 1 ? `<polyline points="${xy.map(p => p.join(',')).join(' ')}"/>` : '')
+      + xy.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.5"/>`).join('');
+    return svg;
+  }
+
+  // The seven levels, which cover the phonics of first grade, and where he is on them. The finish
+  // estimate is his own pace carried forward, not a comparison with anyone.
+  function road() {
+    const r = roadmap(C, state.P, state.day);
+    const mark = { done: '✓', here: '▶', ahead: '·' };
+    const month = d => new Date(`${d}T12:00`).toLocaleDateString(undefined, { month: 'long' });
+    const pace = r.perStep
+      ? `So far a step has taken him about ${Math.round(r.perStep)} matches, and he plays about ${Math.round(r.perWeek)} a week.${r.finish ? ` At that pace, the last step would come around ${month(r.finish)}.` : ''}`
+      : 'After a few steps, his own pace shows here.';
+    return [
+      h('p', { class: 'muted' }, 'Levels 1 to 7 cover the phonics of first grade: short vowels, letter pairs like sh and ck, blends, silent e, vowel teams and vowels with r, and endings and two-syllable words, with about 75 sight words along the way.'),
+      h('ol', { class: 'road' }, r.levels.map(l => h('li', { class: l.steps.some(s => s.state === 'here') ? 'here' : '' },
+        h('b', {}, `Level ${l.level}: `), l.summary,
+        h('div', { class: 'road-steps' }, l.steps.map(s => h('span', { class: `rs ${s.state}`, title: s.name }, `${mark[s.state]} ${s.step}`)))))),
+      h('p', {}, `${r.left} ${r.left === 1 ? 'step' : 'steps'} to go, counting this one. ${pace}`),
+    ];
+  }
+
+  // The check-ups: when the next one is due, the button to start it, and his own trend lines.
+  function checkups() {
+    const P = state.P;
+    const due = checkupDue(C, P, state.day);
+    const day = d => new Date(`${d}T12:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    const status = !due.due
+      ? (due.next ? `The next one is due ${day(due.next)}.` : `The first one comes due after ${plural(cfg.checkup.afterMatches, 'match', 'matches')}.`)
+      : due.why === 'level' ? `Due now: the level ${due.level + 1} check is waiting, and it runs at the end of the check-up.`
+        : due.why === 'first' ? 'Due now: the first one, a starting point for the trend lines.'
+          : 'Due now: two weeks since the last one.';
+    const start = state.screen === 'home'
+      ? h('button', { class: `pbig${due.due ? ' due' : ''}`, onclick: () => { overlay.remove(); startCheckup(); } }, due.due ? 'Start the check-up' : 'Run a check-up now')
+      : h('p', { class: 'muted' }, 'Check-ups start from the home screen.');
+    const kids = [h('p', { class: 'next' }, status), start,
+      h('p', { class: 'muted' }, 'About five minutes, with you beside him: four one-minute parts (letter sounds, the sounds in a spoken word, made-up words, and a short story). You score on the gray strip at the bottom; he sees a cup match with no score and no clock. These lines show only his own results over time.')];
+    const s = checkupSeries(P);
+    if (!s.letters.length && !s.story.length && !s.nonsense.length && !s.segmenting.length) return kids;
+    // The newest number first; the line once there are two check-ups to join.
+    const trend = (label, series, unit, extra = null) => {
+      if (!series.length) return null;
+      const last = series.at(-1);
+      const earlier = series.slice(-5, -1).map(p => `${day(p.day)}: ${p.value}`).join(' · ');
+      return h('div', { class: 'trend' },
+        h('div', { class: 'trend-head' }, h('b', {}, label), h('span', { class: 'trend-now' }, last.value), h('span', { class: 'muted' }, `${unit}, ${day(last.day)}`)),
+        series.length > 1 && spark(series.map(p => p.value)),
+        earlier && h('div', { class: 'muted' }, `Before: ${earlier}`), extra);
+    };
+    const whole = s.whole.length ? h('div', { class: 'muted' }, `Whole words read right: ${s.whole.at(-1).value} a minute`) : null;
+    kids.push(
+      trend('Letter sounds', s.letters, 'right a minute'),
+      trend('Sounds in a word', s.segmenting, 'sounds a minute'),
+      trend('Made-up words', s.nonsense, 'letter sounds a minute', whole),
+      trend('Reading a story', s.story, 'words right a minute'),
+      checkupTable());
+    return kids;
+  }
+
+  function checkupTable() {
+    const rows = (state.P.checkups ?? []).slice(-8).reverse();
+    const cell = v => h('td', {}, v ?? '–');
+    return h('div', { class: 'table-scroll' }, h('table', { class: 'acts cups' },
+      h('tr', {}, ['Date', 'Step', 'Letters', 'Sounds', 'Made-up', 'Story', 'Level'].map(t => h('th', {}, t))),
+      rows.map(c => h('tr', {},
+        cell(c.day.slice(5)), cell(c.step),
+        cell(c.parts.letters ? `${c.parts.letters.perMinute}` : null),
+        cell(c.parts.segmenting ? `${c.parts.segmenting.perMinute}` : null),
+        cell(c.parts.nonsense ? `${c.parts.nonsense.perMinute} (${c.parts.nonsense.wholePerMinute} whole)` : null),
+        cell(c.parts.story ? `${c.parts.story.wcpm} (${c.parts.story.accuracy}%)` : null),
+        cell(c.levelCheck?.of ? `${c.levelCheck.score}/${c.levelCheck.of}${c.levelCheck.pass ? ' ✓' : ''}` : c.partial ? 'stopped' : null)))),
+      h('p', { class: 'muted' }, 'Per minute. Made-up: letter sounds, with whole words in brackets. Story: words read right, with the share read right.'));
   }
 
   function levelCheckButton() {
@@ -164,7 +244,7 @@ export function openParent(state, { onClose, runPlacement }) {
       const answer = await new Promise(resolve => {
         overlay.replaceChildren(h('div', { class: 'check' },
           h('div', { class: 'muted' }, `Level ${level + 1} check · word ${i + 1} of ${words.length}. Did the word come out right?`),
-          h('div', { class: 'check-word' }, w.letters.join('')),
+          h('div', { class: 'check-word' }, spelling(w)),
           h('div', { class: 'pbtns' },
             h('button', { class: 'pbtn', onclick: () => resolve(true) }, 'Read it'),
             h('button', { class: 'pbtn', onclick: () => resolve(false) }, 'Missed it'))));
@@ -190,7 +270,7 @@ export function openParent(state, { onClose, runPlacement }) {
       P.settings.childName = name.value.trim();
       save();
     });
-    const step = h('select', {}, C.steps.map(s => h('option', { value: s.step, selected: s.step === P.step }, `${s.step}: short ${s.vowel}`)));
+    const step = h('select', {}, C.steps.map(s => h('option', { value: s.step, selected: s.step === P.step }, `${s.step}: ${s.name}`)));
     step.addEventListener('change', () => {
       P.step = step.value;
       save();

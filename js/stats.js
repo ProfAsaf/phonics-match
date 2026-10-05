@@ -42,6 +42,27 @@ export function history(P) {
   };
 }
 
+// The road through first grade's phonics: every level and step, where he is, and his own pace so far.
+// The estimate comes from his own matches only: how many a step has taken him, and how often he plays.
+export function roadmap(C, P, day) {
+  const here = C.stepIndex[P.step];
+  const levels = C.levels.filter(l => l.steps.length).map(l => ({
+    level: l.level, summary: l.summary,
+    steps: l.steps.map(s => ({ step: s.step, name: s.name, state: C.stepIndex[s.step] < here ? 'done' : C.stepIndex[s.step] === here ? 'here' : 'ahead' })),
+  }));
+  // Matches per finished step: the days between first reaching each step and the next.
+  const firstMatch = {};
+  P.sessions.forEach((s, i) => { if (s.step) firstMatch[s.step] ??= i; });
+  const spans = C.steps.slice(0, here).map((s, i) => (firstMatch[C.steps[i + 1].step] ?? null) - (firstMatch[s.step] ?? null))
+    .filter(n => Number.isFinite(n) && n > 0);
+  const perStep = spans.length >= 3 ? spans.slice(-6).reduce((a, b) => a + b, 0) / Math.min(6, spans.length) : null;
+  const since = addDays(day, -13);
+  const perWeek = P.sessions.filter(s => s.day >= since).length / 2;
+  const left = C.steps.length - here;
+  const weeks = perStep && perWeek > 0 ? (left * perStep) / perWeek : null;
+  return { levels, perStep, perWeek, left, finish: weeks ? addDays(day, Math.round(weeks * 7)) : null };
+}
+
 // One plain sentence about what comes next.
 export function nextStep(C, P, day) {
   const step = C.steps[C.stepIndex[P.step]];
@@ -51,7 +72,7 @@ export function nextStep(C, P, day) {
     const next = C.steps[C.stepIndex[P.step] + 1];
     return next
       ? `Step ${P.step} is mastered. The queen comes out next match, and signing her moves up to step ${next.step}.`
-      : `Step ${P.step} is mastered. Levels 3 and up are not built yet.`;
+      : `Step ${P.step} is mastered: that is the last step of first grade's phonics.`;
   }
   if (!P.sessions.length) return 'Play the first match to see where to focus.';
   const since = addDays(day, -6);
@@ -65,5 +86,5 @@ export function nextStep(C, P, day) {
     return { f, n, rate: n ? hits / n : 1 };
   }).filter(x => x.n >= 5).sort((a, b) => a.rate - b.rate);
   if (week[0] && week[0].rate < 0.75) return `${FAMILY_NAMES[week[0].f]} is the weak spot this week.`;
-  return `Working on step ${P.step}: short ${step.vowel} words.`;
+  return `Working on step ${P.step}: ${step.name}.`;
 }

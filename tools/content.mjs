@@ -28,7 +28,8 @@ export function loadContent() {
   const sentences = readJson('sentences.json');
   const prompts = optional('prompts.json') ?? { prompts: [], commentary: [] };
   const custom = optional('custom-sentences.json')?.sentences ?? [];
-  return { sounds, levels, steps, stepIndex, letterStep, soundStep, words, nonsense, sentences, prompts, custom };
+  const passages = optional('passages.json')?.passages ?? [];
+  return { sounds, levels, steps, stepIndex, letterStep, soundStep, words, nonsense, sentences, prompts, custom, passages };
 }
 
 // The first step by which every letter of a word has been introduced. An oral-only word is

@@ -1,26 +1,70 @@
 {
-  "about": "Levels and steps in teaching order. Each step lists the letters it introduces; a word belongs to the first step by which all its letters have been introduced. Levels 3 to 6 are placeholders so the format can hold them later.",
+  "about": "Levels and steps in teaching order, through the end of first grade. Each step lists the letters and letter groups (graphemes) it introduces, and a name for the parent screens. A word belongs to the first step by which all its letters have been introduced, unless it names a later step itself: blends, endings, and two-syllable words bring no new letters, so their words carry their step. a_e is the split vowel in make; endings (es, ing, ed) are taught as units.",
   "levels": [
     {
       "level": 1,
       "summary": "Short a, then short i; consonants b, c, d, f, g, h, l, m, n, p, r, s, t",
       "steps": [
-        { "step": "1A", "vowel": "a", "letters": ["a", "b", "c", "d", "f", "g", "h", "l", "m", "n", "p", "r", "s", "t"] },
-        { "step": "1B", "vowel": "i", "letters": ["i"] }
+        { "step": "1A", "name": "short a", "vowel": "a", "letters": ["a", "b", "c", "d", "f", "g", "h", "l", "m", "n", "p", "r", "s", "t"] },
+        { "step": "1B", "name": "short i", "vowel": "i", "letters": ["i"] }
       ]
     },
     {
       "level": 2,
       "summary": "Short o, then u, then e; consonants j, k, v, w, x, y, z",
       "steps": [
-        { "step": "2A", "vowel": "o", "letters": ["o", "j", "k", "v", "w", "x", "y", "z"] },
-        { "step": "2B", "vowel": "u", "letters": ["u"] },
-        { "step": "2C", "vowel": "e", "letters": ["e"] }
+        { "step": "2A", "name": "short o", "vowel": "o", "letters": ["o", "j", "k", "v", "w", "x", "y", "z"] },
+        { "step": "2B", "name": "short u", "vowel": "u", "letters": ["u"] },
+        { "step": "2C", "name": "short e", "vowel": "e", "letters": ["e"] }
       ]
     },
-    { "level": 3, "summary": "sh, ch, th, wh, ck, qu; doubled ff, ll, ss, zz", "steps": [] },
-    { "level": 4, "summary": "Consonant blends, first and last", "steps": [] },
-    { "level": 5, "summary": "Silent e", "steps": [] },
-    { "level": 6, "summary": "Common vowel teams", "steps": [] }
+    {
+      "level": 3,
+      "summary": "Letter pairs: sh, ch, th, wh, ck, ff, ll, ss, zz, qu, ng, nk",
+      "steps": [
+        { "step": "3A", "name": "sh and ch", "letters": ["sh", "ch"] },
+        { "step": "3B", "name": "th and wh", "letters": ["th", "wh"] },
+        { "step": "3C", "name": "ck, ff, ll, ss, zz, and qu", "letters": ["ck", "ff", "ll", "ss", "zz", "qu"] },
+        { "step": "3D", "name": "ng and nk", "letters": ["ng", "nk"] }
+      ]
+    },
+    {
+      "level": 4,
+      "summary": "Consonant blends, first and last",
+      "steps": [
+        { "step": "4A", "name": "blends with s and l (stop, clap)", "letters": [] },
+        { "step": "4B", "name": "blends with r (frog, trip)", "letters": [] },
+        { "step": "4C", "name": "blends at the end (best, hand, jump)", "letters": [] }
+      ]
+    },
+    {
+      "level": 5,
+      "summary": "Silent e: make, bike, home, cute",
+      "steps": [
+        { "step": "5A", "name": "a with silent e (make)", "letters": ["a_e"] },
+        { "step": "5B", "name": "i with silent e (bike)", "letters": ["i_e"] },
+        { "step": "5C", "name": "o and u with silent e (home, cute)", "letters": ["o_e", "u_e"] }
+      ]
+    },
+    {
+      "level": 6,
+      "summary": "Vowel teams and vowels with r: ee, ea, ai, ay, oa, ow, ar, or, er, ir, ur",
+      "steps": [
+        { "step": "6A", "name": "ee and ea (feet, eat)", "letters": ["ee", "ea"] },
+        { "step": "6B", "name": "ai and ay (rain, play)", "letters": ["ai", "ay"] },
+        { "step": "6C", "name": "oa and ow (boat, snow)", "letters": ["oa", "ow"] },
+        { "step": "6D", "name": "ar and or (car, fork)", "letters": ["ar", "or"] },
+        { "step": "6E", "name": "er, ir, and ur (her, bird, fur)", "letters": ["er", "ir", "ur"] }
+      ]
+    },
+    {
+      "level": 7,
+      "summary": "Endings (dogs, wishes, jumping, jumped) and two-syllable words (sunset)",
+      "steps": [
+        { "step": "7A", "name": "endings -s and -es (cats, dogs, wishes)", "letters": ["es"] },
+        { "step": "7B", "name": "endings -ing and -ed (jumping, jumped)", "letters": ["ing", "ed"] },
+        { "step": "7C", "name": "two-syllable words (sunset, picnic)", "letters": [] }
+      ]
+    }
   ]
 }

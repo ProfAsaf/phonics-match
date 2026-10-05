@@ -2,9 +2,10 @@
 // scenery. Every match is a level on the path: played levels carry a flag in his kit color, his
 // player stands on today's, and the worlds ahead wait under clouds until signing the queen opens the
 // gate. Drawn on the scene's canvas; the buttons and counters are page elements on top.
-import { img, size, drawCharacter, characterImages, drawAnimal, drawPiece, kitPiece, drawSnowman, drawPalm, drawCrab, TAU, shade } from './art.js';
+import { img, size, drawCharacter, characterImages, drawAnimal, drawPiece, kitPiece, drawSnowman, drawPalm, drawCrab, drawTrophy, TAU, shade } from './art.js';
 import { LEVELS_PER_WORLD, MAP_WORLD, levelSpot, gateSpot, hereLevel, flagged } from './journey.js';
 import { clamp, lerp, hash, easeInOut } from './scene.js';
+import { drawWithHat, drawBigMushroom, drawPumpkin, drawVolcano, drawLava } from './gear.js';
 
 const THEMES = {
   meadow: {
@@ -32,6 +33,41 @@ const THEMES = {
     trees: [], animals: [],
     mix: { palm: 0.07, shell: 0.06, rock: 0.03, crab: 0.012, tuft: 0.04 },
   },
+  desert: {
+    ground: '#f0cf8c', patch: '#e6c078', light: '#f7dca2', path: '#fff0cc', edge: '#d9b676',
+    trees: ['bg/tree16', 'bg/tree18', 'bg/tree19'], animals: [],
+    mix: { tree: 0.06, rock: 0.05, palm: 0.015, tuft: 0.02 }, landmarks: ['pyramid', 'pyramid', 'temple'],
+  },
+  jungle: {
+    ground: '#62b455', patch: '#52a447', light: '#76c467', path: '#ecdcab', edge: '#c9b07a',
+    trees: ['bg/tree23', 'bg/tree25', 'bg/tree05', 'bg/tree34'], animals: ['pig', 'chicken'],
+    mix: { tree: 0.14, palm: 0.08, bush: 0.16, plant: 0.03, flower: 0.06 }, river: true, critters: 'frog',
+  },
+  autumn: {
+    ground: '#cfbf68', patch: '#c3b05a', light: '#ddd07e', path: '#f3e3b6', edge: '#d0b47e',
+    trees: ['bg/tree01', 'bg/tree07', 'bg/tree29', 'bg/tree05'], animals: ['pig', 'sheep', 'chicken'],
+    mix: { tree: 0.15, bush: 0.05, pumpkin: 0.03, tuft: 0.1, house: 0.015, fence: 0.03 },
+  },
+  mountain: {
+    ground: '#93c26c', patch: '#84b55e', light: '#a6cf80', path: '#ead9aa', edge: '#c9b07a',
+    trees: ['bg/tree02', 'bg/tree03', 'bg/tree09', 'bg/tree10', 'bg/tree11', 'bg/tree31', 'bg/tree32'], animals: ['sheep', 'cow'],
+    mix: { tree: 0.2, rock: 0.1, tuft: 0.06 }, landmarks: ['peak', 'peak'],
+  },
+  mushroom: {
+    ground: '#c7b6e6', patch: '#b8a3dd', light: '#d6c8ee', path: '#f6ecda', edge: '#d3c0a6',
+    trees: [], animals: [],
+    mix: { bigmushroom: 0.08, mushroom: 0.08, plant: 0.05, flower: 0.08 }, critters: 'snail',
+  },
+  town: {
+    ground: '#a9d97b', patch: '#99cd6b', light: '#bce391', path: '#f3e3b6', edge: '#d8c08e',
+    trees: ['bg/tree23', 'bg/tree25', 'bg/tree05'], animals: ['pig', 'chicken'],
+    mix: { house: 0.08, tree: 0.08, fence: 0.04, flower: 0.08 }, landmarks: ['tower', 'castle'],
+  },
+  volcano: {
+    ground: '#6f6763', patch: '#615955', light: '#7d7570', path: '#cdb89a', edge: '#a8927a',
+    trees: ['bg/tree29'], animals: [],
+    mix: { rock: 0.1, tree: 0.04, lava: 0.05 }, landmarks: ['volcano', 'volcano'],
+  },
 };
 const FLOWER = ['#ffffff', '#ffd23f', '#ff8fab', '#b98cff'];
 const STEP = 18; // path samples between two spots
@@ -41,6 +77,7 @@ export function mapImages(character) {
   return [
     ...characterImages(character), ...characterImages('zombie'),
     ...trees, 'bg/house_beige_front', 'bg/house_beige_side', 'bg/house_grey_front', 'bg/fence', 'bg/tower_grey', 'bg/tower_beige',
+    'bg/piramid', 'bg/temple', 'tile/plant', 'tile/cactus',
     'bg/castle_grey', 'bg/castle_beige', 'bg/grass1', 'bg/grass2', 'bg/grass4', 'bg/grass6',
     ...[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `bg/cloud${n}`),
     'tile/bush', 'tile/rock', 'tile/mushroom', 'critter/bee', 'critter/bee_move', 'critter/frog', 'critter/frog_move', 'critter/snail', 'critter/fishBlue',
@@ -63,11 +100,14 @@ function spline(pts) {
 }
 
 export class MapView {
-  constructor({ worlds, character, kit }) {
+  constructor({ worlds, character, kit, hat = 'none' }) {
     this.character = character;
     this.kit = kit;
+    this.hat = hat;
     this.cam = { y: 0, vy: 0, drag: null, idle: 0 };
     this.time = 0;
+    this.cups = []; // past check-ups: a small cup beside the level he was on
+    this.cupDue = false; // a check-up is due: a gold cup waits beside his player
     this.setWorlds(worlds);
     const at = this.spotIndex(this.hereWorld, hereLevel(this.worlds[this.hereWorld]));
     this.player = { s: at * STEP, walking: false, anim: 0, flip: false };
@@ -95,6 +135,12 @@ export class MapView {
       this.clouds = worlds.map(w => ({ open: w.state === 'done' || w.state === 'here' ? 1 : 0 }));
       this.gates = worlds.map(w => ({ open: w.state === 'done' ? 1 : 0 }));
     }
+  }
+
+  // cups: [{ world, level }] for each check-up he has done.
+  setCups(cups, due) {
+    this.cups = cups;
+    this.cupDue = due;
   }
 
   // His player on today's level, with the camera on him.
@@ -141,11 +187,12 @@ export class MapView {
       for (let gx = -340; gx <= 340; gx += 42) {
         const x = gx + (rand() - 0.5) * 30, y = gy + (rand() - 0.5) * 30;
         if (w.theme === 'beach' && x > this.shoreAt(y) - 30) continue;
+        if (th.river && [0, 1].some(n => Math.abs(y - this.riverY(i, n)) < 26)) continue;
         const d = this.distToPath(x, y, ...near);
         let r = rand();
         for (const [kind, p] of kinds) {
           if ((r -= p) >= 0) continue;
-          const big = ['tree', 'house', 'palm', 'fence', 'snowman'].includes(kind);
+          const big = ['tree', 'house', 'palm', 'fence', 'snowman', 'bigmushroom'].includes(kind);
           if (d < (big ? 62 : 36) || (kind === 'ice' && d < 50)) break;
           if (kind === 'ice') ground.push({ x, y, rx: 26 + rand() * 30, ry: 10 + rand() * 10, col: '#d6ecfa' });
           else items.push({ kind, x, y, v: rand(), name: kind === 'tree' ? th.trees[Math.floor(rand() * th.trees.length)] : null });
@@ -169,6 +216,18 @@ export class MapView {
       items.push({ kind: 'zombie', x: spot.x + 46, y: spot.y + 6 });
     }
     if (w.theme === 'meadow') items.push({ kind: 'stadium', x: 205, y: lerp(top, bottom, 0.62) });
+    if (th.critters === 'frog') for (let k = 0; k < 3; k++) critters.push({ kind: 'frog', x: (rand() - 0.5) * 520, y: this.riverY(i, k % 2) + (rand() - 0.5) * 40, ph: rand() * TAU });
+    if (th.critters === 'snail') for (let k = 0; k < 3; k++) critters.push({ kind: 'snail', x: (rand() - 0.5) * 520, y: lerp(top + 100, bottom - 100, rand()), ph: rand() * TAU });
+    // A landmark or two, off the path: pyramids, peaks, a tower, the volcano.
+    (th.landmarks ?? []).forEach((kind, k) => {
+      for (let n = 0; n < 60; n++) {
+        // close enough to show on a phone, clear of the path
+        const x = (k % 2 ? 1 : -1) * (120 + rand() * 80), y = lerp(top + 140, bottom - 140, (k + 0.5 + (rand() - 0.5) * 0.8) / th.landmarks.length);
+        if (this.distToPath(x, y, ...near) < 78) continue;
+        items.push({ kind, x, y, v: rand() });
+        break;
+      }
+    });
     return { items, ground, animals, critters };
   }
 
@@ -312,7 +371,8 @@ export class MapView {
         c.ellipse(this.X(p.x), this.Y(p.y), p.rx * u, p.ry * u, 0, 0, TAU);
         c.fill();
       }
-      if (w.theme === 'river') for (const n of [0, 1]) this.drawRiver(c, i, n);
+      if (w.theme === 'river' || th.river) for (const n of [0, 1]) this.drawRiver(c, i, n);
+      if (w.theme === 'volcano') for (const p of this.deco[i].items) if (p.kind === 'lava') drawLava(c, this.X(p.x), this.Y(p.y), (16 + p.v * 14) * u, (7 + p.v * 5) * u, this.time + p.v * 6);
       if (w.theme === 'beach') this.drawSea(c, i);
     });
     this.drawPath(c);
@@ -328,8 +388,14 @@ export class MapView {
       const g = gateSpot(i);
       things.push({ y: g.y + 4, draw: () => this.drawGate(c, w, i) });
     });
+    for (const cup of this.cups) {
+      if (!visible[cup.world]) continue;
+      const s = levelSpot(cup.world, Math.min(cup.level, LEVELS_PER_WORLD - 1));
+      things.push({ y: s.y - 1, draw: () => this.drawCup(c, s.x - 27, s.y - 1, 0.2) });
+    }
     const p = this.pathAt(this.player.s);
     things.push({ y: p.y + 2, draw: () => this.drawPlayer(c, p) });
+    if (this.cupDue && !this.player.walking) things.push({ y: p.y + 3, draw: () => this.drawCup(c, p.x + 30, p.y + 3, 0.3, true) });
     things.sort((a, b) => a.y - b.y);
     for (const t of things) t.draw();
     this.drawBurst(c);
@@ -533,6 +599,32 @@ export class MapView {
         break;
       }
       case 'palm': drawPalm(c, x, y, u * 0.5, this.time + o.v * 5); break;
+      case 'bigmushroom': drawBigMushroom(c, x, y, u * (0.42 + o.v * 0.18), [330, 280, 20, 200][Math.floor(o.v * 4)]); break;
+      case 'plant': pic('tile/plant', 0.34); break;
+      case 'pumpkin': drawPumpkin(c, x, y, u * 0.55); break;
+      case 'lava': break; // drawn flat on the ground with the world
+      case 'pyramid': pic('bg/piramid', 0.42 + o.v * 0.12); break;
+      case 'temple': pic('bg/temple', 0.4); break;
+      case 'tower': pic('bg/tower_beige', 0.42); break;
+      case 'castle': pic('bg/castle_beige', 0.4); break;
+      case 'volcano': drawVolcano(c, x, y, u * 0.42, this.time); break;
+      case 'peak': {
+        // a snowy mountain top
+        c.fillStyle = '#8b97a8';
+        c.beginPath();
+        c.moveTo(x - 70 * u, y); c.lineTo(x, y - 90 * u); c.lineTo(x + 70 * u, y);
+        c.fill();
+        c.fillStyle = '#76828f';
+        c.beginPath();
+        c.moveTo(x, y - 90 * u); c.lineTo(x + 70 * u, y); c.lineTo(x + 12 * u, y);
+        c.fill();
+        c.fillStyle = '#ffffff';
+        c.beginPath();
+        c.moveTo(x - 24 * u, y - 59 * u); c.lineTo(x, y - 90 * u); c.lineTo(x + 24 * u, y - 59 * u);
+        c.lineTo(x + 10 * u, y - 64 * u); c.lineTo(x, y - 56 * u); c.lineTo(x - 10 * u, y - 64 * u);
+        c.fill();
+        break;
+      }
       case 'snowman': drawSnowman(c, x, y, u * 0.62); break;
       case 'crab': drawCrab(c, x + Math.sin(this.time * 0.7 + o.v * 9) * 14 * u, y, u * 0.6, this.time); break;
       case 'shell': {
@@ -672,7 +764,26 @@ export class MapView {
     const pose = pl.walking ? `walk${Math.floor(pl.anim) % 8}` : 'idle';
     const bob = pl.walking ? 0 : Math.sin(this.time * 2.5) * 0.6 * u;
     this.shadow(c, x, y + 2 * u, 16);
-    drawCharacter(c, this.character, pose, this.kit, x, y + 2 * u + bob, 0.3 * u, pl.flip);
+    drawWithHat(c, this.character, pose, this.kit, x, y + 2 * u + bob, 0.3 * u, pl.flip, this.hat, this.time);
+  }
+
+  // A cup on the map: small for a check-up done, larger and glowing for one that is due.
+  drawCup(c, mx, my, k, due = false) {
+    const u = this.u, x = this.X(mx), y = this.Y(my);
+    this.shadow(c, x, y + 1 * u, due ? 12 : 8);
+    if (due) {
+      const pulse = 0.5 + 0.5 * Math.sin(this.time * 3);
+      const r = (30 + pulse * 8) * u;
+      const g = c.createRadialGradient(x, y - 22 * u, 2 * u, x, y - 22 * u, r);
+      g.addColorStop(0, 'rgba(255, 226, 120, 0.85)');
+      g.addColorStop(1, 'rgba(255, 226, 120, 0)');
+      c.fillStyle = g;
+      c.beginPath();
+      c.arc(x, y - 22 * u, r, 0, TAU);
+      c.fill();
+    }
+    const bob = due ? Math.sin(this.time * 3) * 2.5 * u : 0;
+    drawTrophy(c, x, y + bob, k * u, this.time);
   }
 
   drawBurst(c) {

@@ -14,6 +14,7 @@ export function voiceJobs(C) {
     id, text, instructions: `Say this one English word once, clearly, at a normal pace, ${TEACHER}. It is an ordinary word, not an abbreviation. Say nothing else.`,
   });
   for (const w of C.words) {
+    if (w.checkup) continue; // only read, never heard
     if (w.real) word(clip.word(w.word), w.word);
     else {
       jobs.push({

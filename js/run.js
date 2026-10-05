@@ -2,12 +2,18 @@
 // His player runs from stop to stop. At an activity stop the camera frames him and that stop's goal
 // above the question card: each pass dribbles the ball one step closer, the third in a row shoots,
 // and a miss sends the ball back to the start mark (SPEC.md, "The match"). The sky goes from morning
-// to night across the day, and the world he is in sets the ground, trees, weather, and friends.
+// to night across the day, and the world he is in sets the ground, trees, weather, and friends. The day's
+// look (js/variety.js) adds its own weather, visitors in the sky, rival keepers, and a mystery chest;
+// his gear sets his ball, his hat, and his goal celebration.
 import {
-  IMG, img, size, tinted, drawCharacter, characterImages, drawBall, goalBack, goalFront, GOAL, GOAL_STYLES,
+  IMG, img, size, tinted, drawCharacter, characterImages, CHARACTERS, drawBall, goalBack, goalFront, GOAL, GOAL_STYLES,
   drawPiece, PIECE_COLORS, kitPiece, drawCrystals, drawAnimal, drawBat, drawCrab, drawSnowman, drawPalm, drawTrophy, TAU, shade,
 } from './art.js';
-import { clamp, lerp, smooth, easeBack, hash } from './scene.js';
+import { clamp, lerp, smooth, easeBack, easeOut, hash } from './scene.js';
+import {
+  drawWithHat, drawHat, celebrationFrame, drawChest, drawBalloon, drawPlane, drawBirds, drawKite, drawBlimp, drawUfo,
+  drawRocket, drawRainbow, drawButterfly, drawBigMushroom, drawPumpkin, drawVolcano,
+} from './gear.js';
 
 const T = 64;
 const STEP = 52, KICK = 112, RUN = 540, GRAV = 2600;
@@ -34,6 +40,8 @@ const ISLAND_START = seg('islands').x0, ISLAND_END = seg('islands').x1;
 export const ANCHORS = [1380, 3980, 6800, 8700, 10900, 13300, 15700, 17350];
 const STOP_SEG = ['stadium', 'castle', 'cave', 'show', 'workshop', 'islands', 'night', 'trophy'];
 const GOAL_STYLE = ['white', 'stone', 'wood', null, 'wood', 'white', 'white', null];
+// The check-up's cup match starts here, just inside the night stadium.
+export const CUP_START = seg('night').x0 + 250;
 // Floating islands in the sky; bridges between them.
 const ISLANDS = [[ISLAND_START + 250, ISLAND_START + 600], [ANCHORS[5] - 350, ANCHORS[5] + 300], [ISLAND_END - 500, ISLAND_END - 250]];
 
@@ -46,40 +54,86 @@ const SKY = {
 const NIGHT = { islands: 0.35, landing: 0.6, night: 1, trophy: 1, workshop: 0.15, cliff: 0.25 };
 const HILLS = {
   meadow: ['#8bcf69', '#a9dd8a'], river: ['#86cc6a', '#a2d98a'], forest: ['#5fae58', '#7fc06b'], snow: ['#dbe9f6', '#eef5fb'], beach: ['#e8cf8f', '#f3e0aa'],
+  desert: ['#e6bd7f', '#f0cf96'], jungle: ['#4c9a45', '#62b157'], autumn: ['#c8a24d', '#d9b964'], mountain: ['#8ea9c0', '#a6bed2'],
+  mushroom: ['#b49ddc', '#c9b6e8'], town: ['#9bd073', '#b2dc8b'], volcano: ['#5a4844', '#6f5953'],
 };
-const GROUND = { meadow: 'grass', river: 'grass', forest: 'grass', snow: 'snow', beach: 'sand' };
+const GROUND = {
+  meadow: 'grass', river: 'grass', forest: 'grass', snow: 'snow', beach: 'sand',
+  desert: 'sand', jungle: 'grass', autumn: 'grass', mountain: 'grass', mushroom: 'grass', town: 'grass', volcano: 'ash',
+};
 const TREES = {
   meadow: ['bg/tree05', 'bg/tree34', 'bg/tree23', 'bg/tree02'],
   river: ['bg/tree23', 'bg/tree25', 'bg/tree05', 'bg/tree34'],
   forest: ['bg/tree02', 'bg/tree03', 'bg/tree09', 'bg/tree11', 'bg/tree01', 'bg/tree07', 'bg/tree20', 'bg/tree21'],
   snow: ['bg/tree04', 'bg/tree12', 'bg/tree15', 'bg/tree22', 'bg/tree33', 'bg/tree35'],
   beach: ['palm', 'palm', 'bg/tree16', 'palm', 'bg/tree18'],
+  desert: ['bg/tree16', 'bg/tree18', 'bg/tree19', 'palm', 'bg/tree19'],
+  jungle: ['palm', 'bg/tree23', 'palm', 'bg/tree25', 'bg/tree34', 'palm'],
+  autumn: ['bg/tree01', 'bg/tree07', 'bg/tree29', 'bg/tree01', 'bg/tree05', 'bg/tree07'],
+  mountain: ['bg/tree02', 'bg/tree03', 'bg/tree09', 'bg/tree10', 'bg/tree11', 'bg/tree31', 'bg/tree32'],
+  mushroom: ['bigmushroom', 'bigmushroom', 'bg/tree23', 'bigmushroom'],
+  town: ['bg/tree23', 'house', 'bg/tree25', 'bg/tree05', 'house'],
+  volcano: ['bg/tree29', 'bg/tree29', 'rock'],
 };
-const ANIMALS = { meadow: ['pig', 'cow', 'sheep', 'chicken'], river: ['cow', 'sheep', 'chicken'], forest: ['pig', 'sheep', 'chicken'], snow: ['sheep'], beach: [] };
+// Each world dresses the castle and the cave its own way: an ice castle in the snow, a sandcastle by
+// the sea, a mossy one in the forest; blue, coral, or green crystals.
+const CASTLE_LOOK = {
+  meadow: { roof: ['#e2574c', '#b8443b'] },
+  river: { roof: ['#3a86ff', '#2a6fd6'] },
+  forest: { tint: 'rgba(110,170,80,0.28)', roof: ['#5aae46', '#3f8a33'] },
+  snow: { tint: 'rgba(205,238,255,0.55)', roof: ['#9ad8f5', '#6bbfe6'] },
+  beach: { tint: 'rgba(242,206,140,0.6)', roof: ['#f4a261', '#d4843f'] },
+  desert: { tint: 'rgba(235,190,120,0.6)', roof: ['#e07a3a', '#bf602a'] },
+  jungle: { tint: 'rgba(90,160,70,0.35)', roof: ['#3f9a4a', '#2f7a3a'] },
+  autumn: { tint: 'rgba(230,150,80,0.28)', roof: ['#b5542d', '#8f3f20'] },
+  mountain: { roof: ['#5b7fa6', '#476689'] },
+  mushroom: { tint: 'rgba(255,170,220,0.35)', roof: ['#b06ce0', '#8c4fc0'] },
+  town: { roof: ['#e2574c', '#b8443b'] },
+  volcano: { tint: 'rgba(50,30,30,0.5)', roof: ['#a8322b', '#7f241f'] },
+};
+const CRYSTAL_HUES = {
+  meadow: [190, 285, 160, 320, 205], river: [190, 175, 215, 240, 165], forest: [125, 95, 150, 70, 140],
+  snow: [195, 205, 185, 215, 200], beach: [340, 15, 45, 300, 170], desert: [40, 30, 50, 20, 300],
+  jungle: [130, 160, 100, 180, 140], autumn: [25, 40, 10, 300, 45], mountain: [200, 260, 180, 220, 280],
+  mushroom: [300, 280, 320, 260, 330], town: [190, 285, 160, 320, 205], volcano: [10, 20, 0, 30, 350],
+};
+const ANIMALS = {
+  meadow: ['pig', 'cow', 'sheep', 'chicken'], river: ['cow', 'sheep', 'chicken'], forest: ['pig', 'sheep', 'chicken'], snow: ['sheep'], beach: [],
+  desert: [], jungle: ['pig', 'chicken'], autumn: ['pig', 'sheep', 'chicken'], mountain: ['sheep', 'cow'], mushroom: [], town: ['pig', 'chicken', 'cow'], volcano: [],
+};
+// What sits in the countryside lane, past the crate.
+const LANE_THING = { snow: 'snowman', beach: 'crab', desert: 'cactus', autumn: 'pumpkin', volcano: 'rock', mushroom: 'mushroom' };
 
 export function runImages(character, theme) {
   return [
-    ...characterImages(character), ...characterImages('zombie'),
-    ...['grass', 'snow', 'sand', 'stone'].flatMap(g => [`tile/${g}-top`, `tile/${g}-fill`]), 'tile/brick', 'tile/brick-brown', 'tile/torch1', 'tile/torch2',
+    ...CHARACTERS.flatMap(characterImages), // his player, and the rival keepers
+    ...['grass', 'snow', 'sand', 'stone', 'dirt'].flatMap(g => [`tile/${g}-top`, `tile/${g}-fill`]), 'tile/brick', 'tile/brick-brown', 'tile/torch1', 'tile/torch2',
+    'tile/cactus', 'bg/piramid', 'bg/temple',
     'tile/bush', 'tile/rock', 'tile/fence', 'tile/sign', 'tile/tuft', 'tile/mushroom', 'tile/window', 'tile/crate', 'tile/bridge', 'tile/ladder',
     'item/gemBlue', 'item/gemGreen', 'item/gemRed', 'item/gemYellow', 'item/flagRed1', 'item/flagRed2', 'item/flagBlue1', 'item/flagBlue2',
     'item/flagYellow1', 'item/flagYellow2', 'item/flagGreen1', 'item/flagGreen2', 'item/star',
     ...[1, 2, 3, 5, 7].map(n => `bg/cloud${n}`), 'bg/sun', 'bg/moon_full', 'bg/house_beige_front', 'bg/house_beige_side', 'bg/house_grey_front', 'bg/house_grey_side',
     'far/castle', 'far/tower', 'far/mountain1', 'far/mountain2', 'far/mountain3', 'far/pointy_mountains',
-    ...TREES[theme].filter(t => t !== 'palm'), 'critter/bee', 'critter/bee_move', 'critter/mouse', 'critter/mouse_move', 'critter/fishBlue',
+    ...(TREES[theme] ?? []).filter(t => t.startsWith('bg/')), 'critter/bee', 'critter/bee_move', 'critter/mouse', 'critter/mouse_move', 'critter/fishBlue',
   ];
 }
 
 export class RunView {
-  constructor({ character, kit, theme = 'meadow', skip = [], followers = [] }) {
+  constructor({ character, kit, theme = 'meadow', skip = [], followers = [], startX = START_X, look = null, gear = {} }) {
     this.character = character;
     this.kit = kit;
     this.theme = theme;
+    this.look = look ?? { weather: null, sky: [], night: null, keeper: null, chest: null };
+    this.gear = { ball: 'classic', hat: 'none', celebration: 'cheer', ...gear };
+    this.today = {}; // the chest's surprise, for the rest of the match
+    const kp = this.look.keeper;
+    this.keepers = ANCHORS.map((_, i) => (GOAL_STYLE[i] && kp ? { ch: kp.characters[i % kp.characters.length], color: kp.color, diveT: -99 } : null));
+    this.chest = this.look.chest ? { ...this.look.chest, openT: -1 } : null;
     this.ground = GROUND[theme] ?? 'grass';
     this.skip = new Set(skip); // stop indices with nothing to play today
-    this.player = { x: START_X, y: 0, v: 0, vy: 0, air: false, anim: 0, goal: null, dribble: false, sprint: 0, kickT: -99, cheer: false, back: false, ground: 0 };
+    this.player = { x: startX, y: 0, v: 0, vy: 0, air: false, anim: 0, goal: null, dribble: false, sprint: 0, kickT: -99, cheer: false, back: false, ground: 0 };
     this.ball = { x: 0, y: 0, r: 15, spin: 0, mode: 'hidden', vx: 0, vy: 0, flight: null, stop: -1 };
-    this.cam = { cx: START_X + 110, zoom: 1, gy: 0.64 };
+    this.cam = { cx: startX + 110, zoom: 1, gy: 0.64 };
     this.view = { mode: 'follow', cx: 0, zoom: 1, gy: 0.64 };
     this.particles = [];
     this.glows = [];
@@ -92,7 +146,7 @@ export class RunView {
     this.streak = 0;
     this.at = -1; // the stop he is at
     this.bulge = ANCHORS.map(() => -99);
-    this.followers = followers.slice(-3).map((kind, k) => ({ kind, x: START_X - 70 - k * 52, y: 0, vy: 0, hop: 0, k }));
+    this.followers = followers.slice(-3).map((kind, k) => ({ kind, x: startX - 70 - k * 52, y: 0, vy: 0, hop: 0, k }));
     this.skipper = null;
     this.dustT = 0;
     this.dark = document.createElement('canvas');
@@ -110,14 +164,15 @@ export class RunView {
     // The countryside lanes: bushes, a fence, a sign, a crate to hop, and the friends.
     const lane = seg('lane');
     P.push({ t: 'bush', x: lane.x0 + 40 }, { t: 'fence', x: lane.x0 + 130 }, { t: 'fence', x: lane.x0 + 194 }, { t: 'sign', x: lane.x0 + 280 },
-      { t: 'crate', x: lane.x0 + 390 }, { t: 'tuft', x: lane.x0 + 470 }, { t: th === 'snow' ? 'snowman' : th === 'beach' ? 'crab' : 'mushroom', x: lane.x0 + 520 });
+      { t: 'crate', x: lane.x0 + 390 }, { t: 'tuft', x: lane.x0 + 470 }, { t: LANE_THING[th] ?? 'mushroom', x: lane.x0 + 520 });
     P.push({ t: 'gate', x: seg('castle').x0 }, { t: 'block', x: seg('castle').x0 + 430 });
     const rocky = seg('rocky');
     P.push({ t: 'tuft', x: rocky.x0 + 100 }, { t: 'bush', x: rocky.x0 + 150 }, { t: 'rock', x: rocky.x0 + 320 });
     for (let x = MOUTH_X + 120, k = 0; x < CAVE_END - 200; x += 200 + rand() * 110, k++) {
       const a = ANCHORS[2];
       if ((x > a - KICK - 2 * STEP - 120 && x < a + GOAL.d + 70) || Math.abs(x - (MOUTH_X + 500)) < 80) continue;
-      P.push({ t: 'crystal', x, hue: [190, 285, 160, 320, 205][k % 5], s: 0.85 + rand() * 0.4 });
+      const hues = CRYSTAL_HUES[th] ?? CRYSTAL_HUES.meadow;
+      P.push({ t: 'crystal', x, hue: hues[k % hues.length], s: 0.85 + rand() * 0.4 });
     }
     P.push({ t: 'pick', x: MOUTH_X + 500 }, { t: 'cart', x: CAVE_END - 330 });
     P.push({ t: 'stage', x: ANCHORS[3] }, { t: 'lights', x: seg('show').x0 + 200 }, { t: 'lights', x: ANCHORS[3] + 520 });
@@ -216,6 +271,7 @@ export class RunView {
     this.time += dt;
     this.updatePlayer(dt);
     this.updateBall(dt);
+    this.updateExtras(dt);
     this.updateFollowers(dt);
     this.updateFriends(dt);
     this.updateCamera(dt);
@@ -279,6 +335,16 @@ export class RunView {
       b.x += dx;
       b.spin += dx / b.r;
       b.y = -b.r + (p.y < 0 && !p.air ? p.y : 0);
+    } else if (b.mode === 'juggle') {
+      // a keepy-up: off his foot and back down onto it
+      const t = clamp((this.time - b.j0) / 0.62, 0, 1);
+      b.x += (p.x + 38 - b.x) * Math.min(1, dt * 16);
+      b.y = -b.r - 150 * 4 * t * (1 - t);
+      b.spin += dt * 9;
+      if (t >= 1) {
+        b.mode = 'feet';
+        this.scene.audio?.effect('touch');
+      }
     } else if (b.mode === 'flight') {
       const f = b.flight;
       const t = clamp((this.time - f.t0) / f.dur, 0, 1);
@@ -317,6 +383,32 @@ export class RunView {
         const target = p.x + 38;
         b.vx = (target - b.x) * 3;
         if (Math.abs(target - b.x) < 4) b.mode = 'feet';
+      }
+    }
+  }
+
+  // A celebration's extras (dust, music notes, fireworks), and sparks behind the fire ball.
+  updateExtras(dt) {
+    const p = this.player, cel = p.celebrate;
+    if (cel) {
+      const t = this.time - cel.t0, f = celebrationFrame(cel.id, Math.min(t, 2));
+      if (f.fx === 'dust' && Math.random() < dt * 24) this.puff(p.x + f.dx + 20, 0, 1);
+      if (f.fx === 'notes' && Math.random() < dt * 5) {
+        this.particles.push({ kind: 'note', x: p.x + f.dx + (Math.random() - 0.5) * 50, y: -150, vx: (Math.random() - 0.5) * 40, vy: -70, life: 1.2, max: 1.2, size: 22, color: ['#ef476f', '#3a86ff', '#ffd23f', '#06d6a0'][Math.floor(Math.random() * 4)] });
+      }
+      if (f.fx === 'fireworks') {
+        const { H } = this.scene, top = -(this.view.gy * H) / (this.scene.S * this.view.zoom);
+        for (const [at, dx, hue] of [[0.3, -90, 10], [0.7, 60, 200], [1.1, -20, 300]]) {
+          if (t >= at && cel.fx < at) this.fireworks(p.x + dx, top * 0.55, hue);
+        }
+      }
+      cel.fx = t;
+    }
+    const b = this.ball;
+    if (this.ballStyle() === 'fire' && b.mode !== 'hidden' && b.mode !== 'net') {
+      const fast = b.mode === 'flight' || b.mode === 'drop' || b.mode === 'roll' || p.v > 60;
+      if (fast && Math.random() < dt * 40) {
+        this.particles.push({ kind: 'fire', x: b.x - 6, y: b.y + (Math.random() - 0.5) * 10, vx: -60 - Math.random() * 60, vy: -40 - Math.random() * 40, life: 0.35, max: 0.35, size: 5, color: Math.random() < 0.5 ? '#ffb23b' : '#ff6b1a' });
       }
     }
   }
@@ -441,7 +533,7 @@ export class RunView {
       right = ANCHORS[i] + 230;
     } else {
       left = this.spotFor(i, 0) - 80;
-      right = ANCHORS[i] + GOAL.d + 40;
+      right = ANCHORS[i] + GOAL.d + (this.chest?.stop === i ? 100 : 40);
     }
     v.mode = 'frame';
     v.zoom = clamp(W / (S * (right - left)), 0.6, 1.05);
@@ -451,6 +543,11 @@ export class RunView {
 
   // Runs to stop i, carrying the ball if a move is on. The camera frames the stop as he arrives.
   async toStop(i, cardH) {
+    // A chest he didn't open with a goal opens as he leaves its stop: nothing is ever lost.
+    if (this.chest && this.chest.stop === this.at && this.chest.openT < 0) {
+      this.openChest();
+      await this.scene.wait(1.3);
+    }
     this.at = -1;
     this.view.mode = 'follow';
     const x = this.spotFor(i);
@@ -483,6 +580,16 @@ export class RunView {
     await this.moveTo(this.spotFor(i), { speed: 230, dribble: true });
   }
 
+  // In the cup match, each answer is a keepy-up, right or wrong: the check-up shows no score.
+  touch() {
+    const b = this.ball;
+    if (b.mode !== 'feet') return;
+    this.player.kickT = this.time;
+    this.scene.audio?.effect('touch');
+    b.mode = 'juggle';
+    b.j0 = this.time;
+  }
+
   // A miss ends the move: the ball rolls back to the start mark and he jogs after it.
   async miss(i) {
     if (this.streak === 0) return;
@@ -500,6 +607,7 @@ export class RunView {
     v.cx = ANCHORS[i] - KICK / 2 + GOAL.d / 2;
     await this.scene.wait(0.45);
     this.player.kickT = this.time;
+    if (this.keepers[i]) this.keepers[i].diveT = this.time + 0.2; // a dive, just too late
     await this.scene.wait(0.13);
     this.scene.audio?.effect('kick');
     this.scene.audio?.effect('whoosh');
@@ -511,12 +619,17 @@ export class RunView {
     });
     this.bulge[i] = this.time;
     this.scene.audio?.effect('net');
+    if (this.chest?.stop === i) this.openChest();
     this.celebrate(i);
     cheer?.();
-    this.player.cheer = true;
+    const id = this.today.celebration ?? this.gear.celebration;
+    this.player.celebrate = { id, t0: this.time, fx: 0 };
     this.cheering = true;
     await this.waitOrTap(2);
-    this.player.cheer = false;
+    // He stays where the celebration took him, then jogs back.
+    const end = celebrationFrame(id, Math.min(2, this.time - this.player.celebrate.t0));
+    this.player.x += end.dx;
+    this.player.celebrate = null;
     this.cheering = false;
     this.goalText = -99;
     this.streak = 0;
@@ -546,6 +659,22 @@ export class RunView {
       this.sparkles(ANCHORS[i] + GOAL.d * 0.4, -90, 14, 160);
       this.scene.audio?.effect('sparkle');
     }
+  }
+
+  // The mystery chest opens: the day's surprise floats up and is his for the rest of the match.
+  openChest() {
+    const ch = this.chest;
+    if (!ch || ch.openT >= 0) return;
+    ch.openT = this.time;
+    const x = ANCHORS[ch.stop] + GOAL.d + 62;
+    this.sparkles(x, -50, 18, 90);
+    this.scene.audio?.effect('sparkle');
+    this.today[ch.item.kind] = ch.item.id;
+    this.onChest?.(ch.item);
+  }
+
+  ballStyle() {
+    return this.today.ball ?? this.gear.ball;
   }
 
   // A new player signs: the chess piece runs in and joins the ones following him.
@@ -615,6 +744,7 @@ export class RunView {
     const night = this.nightAt();
     this.drawSky(c, w, night);
     this.drawClouds(c, night);
+    this.drawVisitors(c, w, night);
     this.drawFar(c, w, night);
     this.drawHills(c, w, 0.32, 1, 120, 40, 260, 1.7, night);
     this.drawHills(c, w, 0.45, 0, 60, 28, 190, 4.1, night);
@@ -631,6 +761,7 @@ export class RunView {
     for (const p of this.props) if (p.x > L.left - 300 && p.x < L.right + 300) this.drawProp(c, L, p);
     this.drawMountains(c, L);
     this.drawFriends(c, L);
+    this.drawChestProp(c, L);
     ANCHORS.forEach((ax, i) => {
       const style = GOAL_STYLE[i];
       if (!style || ax < L.left - 200 || ax > L.right + 100) return;
@@ -638,6 +769,7 @@ export class RunView {
       const bulge = age >= 0 && age < 1.4 ? Math.exp(-age * 4) * Math.cos(age * 16) : 0;
       const gx = L.X(ax), g = L.Y(0);
       goalBack(c, gx, g, L.u, GOAL_STYLES[style], bulge);
+      if (this.keepers[i]) this.drawKeeper(c, L, i, this.keepers[i]);
       if (this.ball.mode === 'net' && this.ball.stop === i) this.drawBall(c, L);
       goalFront(c, gx, g, L.u, GOAL_STYLES[style]);
     });
@@ -723,7 +855,8 @@ export class RunView {
   farColor(key, night) {
     const base = { stadium: '#aedcf2', lane: '#b6e1f4', castle: '#c6bdec', rocky: '#c6d3e6', dusk: '#f2b9a0', show: '#e9a8b4', village: '#c39fd4', workshop: '#b28fd0' }[key];
     if (!base) return null;
-    const themed = this.theme === 'snow' ? shade(base, 0.35) : this.theme === 'beach' ? shade(base, 0.1) : base;
+    const tint = { snow: 0.35, beach: 0.1, desert: 0.12, mushroom: 0.15, mountain: -0.05, volcano: -0.35 }[this.theme] ?? 0;
+    const themed = shade(base, tint);
     return night > 0.3 ? shade(themed, -0.45 * night) : themed;
   }
 
@@ -742,6 +875,28 @@ export class RunView {
       }
     }
     c.globalAlpha = 1;
+    // The desert has pyramids on the horizon; the volcano world, its volcano.
+    const open = 1 - (w.cave ?? 0) - (w.islands ?? 0) - (w.night ?? 0) * 0.3;
+    if (this.theme === 'desert' && open > 0.05) {
+      const L2 = this.layer(0.12);
+      c.globalAlpha = open * 0.9;
+      for (let i = Math.floor(L2.left / 900) - 1; i <= Math.ceil(L2.right / 900) + 1; i++) {
+        const name = hash(i + 77) < 0.6 ? 'bg/piramid' : 'bg/temple', [iw, ih] = size(name);
+        if (!iw) continue;
+        const im = night > 0.3 ? tinted(name, shade('#c9a874', -0.45 * night)) : IMG[name];
+        const sc = (0.9 + hash(i + 78) * 0.4) * L2.u;
+        c.drawImage(im, L2.X(i * 900 + hash(i + 79) * 300), L2.Y(10) - ih * sc, iw * sc, ih * sc);
+      }
+      c.globalAlpha = 1;
+    }
+    if (this.theme === 'volcano' && open > 0.05) {
+      const L2 = this.layer(0.1);
+      c.globalAlpha = open;
+      for (let i = Math.floor(L2.left / 1400) - 1; i <= Math.ceil(L2.right / 1400) + 1; i++) {
+        drawVolcano(c, L2.X(i * 1400 + 500), L2.Y(10), L2.u * (0.9 + hash(i + 31) * 0.3), this.time + i);
+      }
+      c.globalAlpha = 1;
+    }
     // The beach world has the sea on the horizon.
     if (this.theme === 'beach') {
       const L2 = this.layer(0.25);
@@ -828,7 +983,12 @@ export class RunView {
       const name = names[Math.floor(hash(i + 500) * names.length)], x = L.X(i * 120 + hash(i + 503) * 60), y = L.Y(10);
       const sc = (0.75 + hash(i + 502) * 0.5) * L.u;
       if (name === 'palm') drawPalm(c, x, y, sc * 1.1, this.time + i);
-      else {
+      else if (name === 'bigmushroom') drawBigMushroom(c, x, y, sc * 1.25, [330, 280, 20, 200][((i % 4) + 4) % 4]);
+      else if (name === 'house' || name === 'rock') {
+        const pic = name === 'house' ? (hash(i + 900) < 0.5 ? 'bg/house_beige_front' : 'bg/house_grey_front') : 'tile/rock';
+        const [iw, ih] = size(pic), k = name === 'house' ? sc * 0.9 : sc * 1.4;
+        if (iw) img(c, pic, x - (iw * k) / 2, y - ih * k, iw * k, ih * k);
+      } else {
         const [iw, ih] = size(name);
         if (iw) img(c, name, x - (iw * sc) / 2, y - ih * sc, iw * sc, ih * sc);
       }
@@ -1005,16 +1165,24 @@ export class RunView {
     for (let col = 1; col < 4; col++) for (let r = 0; r < TOWER; r++) brick(col, r);
     brick(1, TOWER);
     brick(3, TOWER);
+    const look = CASTLE_LOOK[this.theme] ?? CASTLE_LOOK.meadow;
+    if (look.tint) {
+      // the world's stone: tinted over the bricks only
+      x.globalCompositeOperation = 'source-atop';
+      x.fillStyle = look.tint;
+      x.fillRect(0, -top, W, top + 12);
+      x.globalCompositeOperation = 'source-over';
+    }
     if (win?.naturalWidth) for (const r of [5, 8]) x.drawImage(win, 2 * BT, -(r + 1) * BT + 6, BT, BT);
     const roofY = -(TOWER + 1) * BT + 6;
-    x.fillStyle = '#e2574c';
+    x.fillStyle = look.roof[0];
     x.beginPath();
     x.moveTo(BT - 6, roofY);
     x.lineTo(2.5 * BT, roofY - ROOFH);
     x.lineTo(4 * BT + 6, roofY);
     x.closePath();
     x.fill();
-    x.fillStyle = '#b8443b';
+    x.fillStyle = look.roof[1];
     x.beginPath();
     x.moveTo(2.5 * BT, roofY - ROOFH);
     x.lineTo(4 * BT + 6, roofY);
@@ -1243,7 +1411,7 @@ export class RunView {
         const sy = Math.floor(L.Y(r * T));
         let name;
         if (kind === 'checker') name = r < 2 ? 'tile/brick' : 'tile/stone-fill';
-        else if (kind === 'stone') name = r === 0 ? 'tile/stone-top' : 'tile/stone-fill';
+        else if (kind === 'stone' || kind === 'ash') name = r === 0 ? 'tile/stone-top' : 'tile/stone-fill';
         else name = r === 0 ? `tile/${kind}-top` : r < 3 ? `tile/${kind}-fill` : 'tile/stone-fill';
         img(c, name, sx, sy, sw, sw);
         if (kind === 'checker' && r < 2 && (col + r) % 2) {
@@ -1254,6 +1422,9 @@ export class RunView {
       }
       if (kind === 'stone') {
         c.fillStyle = 'rgba(30,22,70,0.36)';
+        c.fillRect(sx, Math.floor(L.Y(0)), sw, this.scene.Hd);
+      } else if (kind === 'ash') {
+        c.fillStyle = 'rgba(70,30,20,0.35)';
         c.fillRect(sx, Math.floor(L.Y(0)), sw, this.scene.Hd);
       }
     }
@@ -1355,6 +1526,8 @@ export class RunView {
       case 'rock': pic('tile/rock', 1.1 * T, 1.1 * T, 4); break;
       case 'ladder': pic('tile/ladder', 0.9 * T, 1.8 * T); break;
       case 'snowman': drawSnowman(c, X, G, u); break;
+      case 'cactus': pic('tile/cactus', 0.9 * T, 0.9 * T, 2); break;
+      case 'pumpkin': drawPumpkin(c, X, G, u * 1.3); break;
       case 'crab': break;
       case 'corner': {
         c.fillStyle = '#f2f2f2';
@@ -1590,6 +1763,145 @@ export class RunView {
     }
   }
 
+  // The rival keeper: ready in the goal mouth; on a shot he dives, just too late, lies dazed for a
+  // moment, and gets back up. He never saves one.
+  drawKeeper(c, L, i, kp) {
+    const t = this.time - kp.diveT, k = 0.4 * L.u;
+    let x = ANCHORS[i] + 36, y = 0, rot = 0, pose = 'idle', dazed = false;
+    if (t >= 0 && t < 0.3) {
+      const u = t / 0.3;
+      pose = 'jump';
+      rot = -1.4 * easeOut(u);
+      x -= 30 * u;
+      y = -36 * Math.sin(u * Math.PI) + 20 * u;
+    } else if (t >= 0.3 && t < 1.7) {
+      pose = 'fall';
+      rot = -1.4;
+      x -= 30;
+      y = 20;
+      dazed = true;
+    } else if (t >= 1.7 && t < 2.1) {
+      const u = (t - 1.7) / 0.4;
+      rot = -1.4 * (1 - easeOut(u));
+      x -= 30 * (1 - u);
+      y = 20 * (1 - u);
+    } else {
+      x += Math.sin(this.time * 2.2 + i) * 4;
+      if (Math.floor(this.time * 0.5 + i) % 3 === 0) pose = Math.floor(this.time * 4) % 2 ? 'walk1' : 'walk5';
+    }
+    const X = L.X(x), Y = L.Y(y), cy = Y - 60 * L.u;
+    this.shadowAt(c, X, L.Y(0), (dazed ? 34 : 22) * L.u);
+    c.save();
+    c.translate(X, cy);
+    c.rotate(rot);
+    c.translate(-X, -cy);
+    drawCharacter(c, kp.ch, pose, kp.color, X, Y, k, true);
+    c.restore();
+    if (dazed) {
+      for (let s = 0; s < 3; s++) {
+        const a = this.time * 5 + (s * TAU) / 3;
+        c.fillStyle = '#ffd23f';
+        c.beginPath();
+        const sx = X - 46 * L.u + Math.cos(a) * 16 * L.u, sy = cy - 26 * L.u + Math.sin(a) * 5 * L.u;
+        for (let p = 0; p < 10; p++) {
+          const pa = (p * Math.PI) / 5, rr = (p % 2 ? 2.4 : 5.5) * L.u;
+          c.lineTo(sx + Math.cos(pa) * rr, sy + Math.sin(pa) * rr);
+        }
+        c.fill();
+      }
+    }
+  }
+
+  // The mystery chest beside one stop's goal, and the surprise rising out of it.
+  drawChestProp(c, L) {
+    const ch = this.chest;
+    if (!ch) return;
+    const x = ANCHORS[ch.stop] + GOAL.d + 62;
+    if (x < L.left - 100 || x > L.right + 100) return;
+    const open = ch.openT < 0 ? 0 : clamp((this.time - ch.openT) / 0.5, 0, 1);
+    this.shadowAt(c, L.X(x), L.Y(0), 28 * L.u);
+    drawChest(c, L.X(x), L.Y(0), L.u * 0.95, open, this.time);
+    if (ch.openT < 0) return;
+    const age = this.time - ch.openT;
+    if (age > 2.6) return;
+    const rise = easeOut(clamp(age / 0.9, 0, 1)), a = age > 2 ? 1 - (age - 2) / 0.6 : 1;
+    const ix = L.X(x), iy = L.Y(-40 - rise * 90);
+    c.save();
+    c.globalAlpha = a;
+    const glow = c.createRadialGradient(ix, iy, 2, ix, iy, 46 * L.u);
+    glow.addColorStop(0, 'rgba(255,240,170,0.9)');
+    glow.addColorStop(1, 'rgba(255,240,170,0)');
+    c.fillStyle = glow;
+    c.fillRect(ix - 46 * L.u, iy - 46 * L.u, 92 * L.u, 92 * L.u);
+    const item = ch.item;
+    if (item.kind === 'ball') drawBall(c, ix, iy, 18 * L.u, age * 3, item.id);
+    else if (item.kind === 'hat') {
+      c.translate(ix, iy + 14 * L.u);
+      drawHat(c, item.id, 46 * L.u, this.kit, this.time);
+    } else {
+      c.fillStyle = '#ffd23f';
+      c.beginPath();
+      for (let p = 0; p < 10; p++) {
+        const pa = -Math.PI / 2 + (p * Math.PI) / 5 + age, rr = (p % 2 ? 9 : 22) * L.u;
+        c.lineTo(ix + Math.cos(pa) * rr, iy + Math.sin(pa) * rr);
+      }
+      c.fill();
+    }
+    c.restore();
+  }
+
+  // Visitors in the sky: two by day, one at night, each passing over its own part of the run.
+  drawVisitors(c, w, night) {
+    const f = 0.12, L = this.layer(f), t = this.time;
+    const kit = this.kit, other = shade(kit, 0.55);
+    const at = (cx, drift, span) => cx * f + ((((t * drift) % span) + span) % span) - span / 2;
+    const day = 1 - night;
+    const places = [[1500, this.look.sky?.[0]], [11400, this.look.sky?.[1]]];
+    for (const [cx, kind] of places) {
+      if (!kind || day < 0.05) continue;
+      c.globalAlpha = Math.min(1, day * 1.2) * (1 - (w.cave ?? 0));
+      if (kind === 'balloon') drawBalloon(c, L.X(at(cx, 6, 700)), L.Y(-330), L.u * 0.9, [kit, '#ffd23f'], t);
+      else if (kind === 'plane') drawPlane(c, L.X(at(cx, 70, 1100)), L.Y(-420), L.u * 0.8, kit, t);
+      else if (kind === 'birds') drawBirds(c, L.X(at(cx, 34, 900)), L.Y(-380), L.u, t);
+      else if (kind === 'blimp') drawBlimp(c, L.X(at(cx, 9, 800)), L.Y(-400), L.u * 0.9, kit, t);
+      else if (kind === 'kite') {
+        const K = this.layer(0.5), kx = cx * 0.5 + 900 * 0.5;
+        drawKite(c, K.X(kx), K.Y(-260), K.X(kx + 120), K.Y(0), K.u, [kit, other], t);
+      }
+    }
+    c.globalAlpha = 1;
+    if (night > 0.3 && this.look.night) {
+      c.globalAlpha = Math.min(1, (night - 0.3) * 2);
+      const cx = 15200;
+      if (this.look.night === 'ufo') drawUfo(c, L.X(at(cx, 4, 500)), L.Y(-380), L.u * 0.9, t);
+      else if (this.look.night === 'rocket') {
+        const cyc = (t % 14) / 14;
+        drawRocket(c, L.X(cx * f + 120), L.Y(-40 - cyc * 600), L.u * 0.8, t);
+      } else {
+        for (let k = 0; k < 2; k++) {
+          const cyc = ((t + k * 3.7) % 6) / 6;
+          if (cyc > 0.25) continue;
+          const u = cyc / 0.25, sx = L.X(cx * f - 200 + k * 260 + u * 220), sy = L.Y(-480 + k * 60 + u * 120);
+          const g = c.createLinearGradient(sx, sy, sx - 70 * L.u, sy - 38 * L.u);
+          g.addColorStop(0, `rgba(255,255,240,${1 - u})`);
+          g.addColorStop(1, 'rgba(255,255,240,0)');
+          c.strokeStyle = g;
+          c.lineWidth = 3 * L.u;
+          c.beginPath();
+          c.moveTo(sx, sy);
+          c.lineTo(sx - 70 * L.u, sy - 38 * L.u);
+          c.stroke();
+        }
+      }
+      c.globalAlpha = 1;
+    }
+    // After rain, a rainbow from halftime on.
+    if (this.look.weather === 'rain' && this.cam.cx > ANCHORS[3] - 400 && day > 0.1) {
+      const R = this.layer(0.06);
+      drawRainbow(c, R.X(this.cam.cx * 0.06 + 120), R.Y(40), 420 * R.u, clamp((this.cam.cx - ANCHORS[3] + 400) / 800, 0, 0.75) * day);
+    }
+  }
+
   shadowAt(c, x, y, r) {
     c.fillStyle = 'rgba(20,30,50,0.16)';
     c.beginPath();
@@ -1601,6 +1913,7 @@ export class RunView {
   pose() {
     const p = this.player, kickAge = this.time - p.kickT;
     if (kickAge >= 0 && kickAge < 0.55) return kickAge < 0.13 ? 'walk3' : 'kick';
+    if (p.celebrate) return celebrationFrame(p.celebrate.id, this.time - p.celebrate.t0).pose;
     if (p.cheer) return Math.floor(this.time * 4.5) % 2 ? 'cheer1' : 'cheer0';
     if (p.air) return p.vy < 0 ? 'jump' : 'fall';
     if (p.v > 25) {
@@ -1612,17 +1925,25 @@ export class RunView {
 
   drawPlayer(c, L) {
     const p = this.player, k = 0.5 * L.u;
-    const bob = p.cheer ? Math.abs(Math.sin(this.time * 9)) * 16 : 0;
-    const x = L.X(p.x), y = L.Y(p.y - bob);
+    const kicking = this.time - p.kickT >= 0 && this.time - p.kickT < 0.55;
+    const cel = p.celebrate && !kicking ? celebrationFrame(p.celebrate.id, this.time - p.celebrate.t0) : null;
+    const bob = cel ? -cel.dy : p.cheer ? Math.abs(Math.sin(this.time * 9)) * 16 : 0;
+    const x = L.X(p.x + (cel?.dx ?? 0)), y = L.Y(p.y - bob);
     const lift = clamp(-(p.y + p.ground - bob) / 120, 0, 1);
     this.shadowAt(c, x, L.Y(-p.ground), 30 * L.u * (1 - lift * 0.5));
     c.save();
-    if (!p.cheer && p.v < 25 && !p.air) {
+    if (cel?.rot) {
+      const cy = y - 120 * k;
+      c.translate(x, cy);
+      c.rotate(cel.rot);
+      c.translate(-x, -cy);
+    } else if (!cel && !p.cheer && p.v < 25 && !p.air) {
       c.translate(x, y);
       c.scale(1, 1 + 0.012 * Math.sin(this.time * 3));
       c.translate(-x, -y);
     }
-    drawCharacter(c, this.character, this.pose(), this.kit, x, y, k, p.back);
+    const hat = this.today.hat ?? this.gear.hat;
+    drawWithHat(c, this.character, this.pose(), this.kit, x, y, k, cel ? !!cel.flip : p.back, hat, this.time);
     c.restore();
   }
 
@@ -1635,7 +1956,7 @@ export class RunView {
     c.beginPath();
     c.ellipse(x, L.Y(0) - 1, r * (1 - h * 0.5), r * 0.3 * (1 - h * 0.5), 0, 0, TAU);
     c.fill();
-    drawBall(c, x, y, r, b.spin);
+    drawBall(c, x, y, r, b.spin, this.ballStyle());
   }
 
   drawFollowers(c, L) {
@@ -1675,6 +1996,19 @@ export class RunView {
           c.lineTo(x + Math.cos(ang) * rr, y + Math.sin(ang) * rr);
         }
         c.fill();
+      } else if (p.kind === 'note') {
+        // a music note: a round head and a stem with a flag
+        c.globalAlpha = Math.min(1, p.life * 2);
+        c.fillStyle = p.color;
+        c.beginPath();
+        c.ellipse(x, y, s * 0.3, s * 0.22, -0.4, 0, TAU);
+        c.fill();
+        c.fillRect(x + s * 0.2, y - s * 0.75, s * 0.09, s * 0.75);
+        c.beginPath();
+        c.moveTo(x + s * 0.29, y - s * 0.75);
+        c.quadraticCurveTo(x + s * 0.6, y - s * 0.6, x + s * 0.5, y - s * 0.35);
+        c.lineTo(x + s * 0.29, y - s * 0.5);
+        c.fill();
       } else if (p.kind === 'gem') {
         c.globalAlpha = Math.min(1, p.life * 2);
         c.save();
@@ -1702,21 +2036,86 @@ export class RunView {
     c.globalAlpha = 1;
   }
 
-  // Snow in the snow world, leaves in the forest, bees in the meadow.
+  // The day's weather, from his world's own kinds (js/variety.js): snow, leaves, rain until halftime,
+  // petals on the wind, butterflies, fireflies after dark, or sparkles in the cold.
   drawWeather(c, L) {
     const { Wd, Hd } = this.scene;
     const inside = this.cam.cx > MOUTH_X && this.cam.cx < CAVE_END;
     if (inside) return;
-    if (this.theme === 'snow') {
+    const weather = this.look.weather ?? { snow: 'snow', forest: 'leaves' }[this.theme] ?? 'clear';
+    const t = this.time;
+    if (weather === 'rain' && this.cam.cx < ANCHORS[3] - 200) {
+      c.strokeStyle = 'rgba(210,228,255,0.6)';
+      c.lineWidth = 1.6 * L.u;
+      c.beginPath();
+      for (let k = 0; k < 90; k++) {
+        const x = (((hash(k) * Wd - t * 120 * L.u - this.cam.cx * 0.5 * L.u) % Wd) + Wd) % Wd;
+        const y = (hash(k + 31) * Hd + t * (620 + (k % 5) * 60) * L.u) % Hd;
+        c.moveTo(x, y);
+        c.lineTo(x - 5 * L.u, y + 18 * L.u);
+      }
+      c.stroke();
+      c.fillStyle = 'rgba(60,80,110,0.08)';
+      c.fillRect(0, 0, Wd, Hd);
+    } else if (weather === 'wind') {
+      for (let k = 0; k < 22; k++) {
+        const x = (((hash(k) * Wd + t * (180 + k * 9) * L.u - this.cam.cx * 0.4 * L.u) % Wd) + Wd) % Wd;
+        const y = hash(k + 7) * Hd * 0.75 + Math.sin(t * 2 + k) * 24 * L.u;
+        c.save();
+        c.translate(x, y);
+        c.rotate(t * 3 + k);
+        c.fillStyle = k % 3 ? '#ffd1dc' : '#ffffff';
+        c.beginPath();
+        c.ellipse(0, 0, 5 * L.u, 3 * L.u, 0, 0, TAU);
+        c.fill();
+        c.restore();
+      }
+    } else if (weather === 'butterflies') {
+      for (let k = 0; k < 5; k++) {
+        const base = Math.floor(this.cam.cx / 700) * 700 + k * 260;
+        const x = base + Math.cos(t * 0.7 + k * 2) * 90, y = -70 - k * 16 + Math.sin(t * 1.6 + k) * 30;
+        if (x < L.left - 30 || x > L.right + 30) continue;
+        drawButterfly(c, L.X(x), L.Y(y), L.u * 0.9, ['#ffd23f', '#ff8fab', '#7cc9ef', '#b98cff', '#ff9f1c'][k], t + k);
+      }
+    } else if (weather === 'fireflies' && this.nightAt() > 0.2) {
+      for (let k = 0; k < 18; k++) {
+        const x = ((hash(k) * Wd + Math.sin(t * 0.5 + k) * 40 * L.u - this.cam.cx * 0.6 * L.u) % Wd + Wd) % Wd;
+        const y = Hd * (0.25 + hash(k + 3) * 0.45) + Math.sin(t * 0.9 + k * 2) * 20 * L.u;
+        const a = 0.4 + 0.6 * Math.abs(Math.sin(t * 2 + k));
+        this.glows.push({ x, y, r: 16 * L.u, col: 'rgba(220,255,120,', a: a * 0.6 });
+        c.fillStyle = `rgba(240,255,170,${a})`;
+        c.beginPath();
+        c.arc(x, y, 2.4 * L.u, 0, TAU);
+        c.fill();
+      }
+    } else if (weather === 'embers') {
+      for (let k = 0; k < 30; k++) {
+        const x = ((hash(k) * Wd + Math.sin(t + k) * 30 * L.u - this.cam.cx * 0.5 * L.u) % Wd + Wd) % Wd;
+        const y = Hd - ((hash(k + 5) * Hd + t * (40 + (k % 5) * 16) * L.u) % Hd);
+        const a = 0.5 + 0.5 * Math.sin(t * 4 + k);
+        c.fillStyle = `rgba(255,${120 + (k % 4) * 30},40,${a})`;
+        c.fillRect(x, y, 2.6 * L.u, 2.6 * L.u);
+      }
+    } else if (weather === 'sparkle') {
+      for (let k = 0; k < 26; k++) {
+        const x = ((hash(k) * Wd - this.cam.cx * 0.3 * L.u) % Wd + Wd) % Wd, y = hash(k + 9) * Hd * 0.8;
+        const a = Math.max(0, Math.sin(t * 2.5 + k * 1.7));
+        c.fillStyle = `rgba(255,255,255,${a})`;
+        c.fillRect(x - 0.5 * L.u, y - 4 * L.u, 1.2 * L.u, 8 * L.u);
+        c.fillRect(x - 4 * L.u, y - 0.5 * L.u, 8 * L.u, 1.2 * L.u);
+      }
+    }
+    if (weather === 'snow' || weather === 'heavy') {
+      const n = weather === 'heavy' ? 150 : 70;
       c.fillStyle = 'rgba(255,255,255,0.85)';
-      for (let k = 0; k < 70; k++) {
+      for (let k = 0; k < n; k++) {
         const x = (hash(k) * Wd + Math.sin(this.time * 0.8 + k) * 30 * L.u - this.cam.cx * 0.3 * L.u) % Wd;
         const y = (hash(k + 50) * Hd + this.time * (40 + (k % 5) * 12) * L.u) % Hd;
         c.beginPath();
-        c.arc(x < 0 ? x + Wd : x, y, (1.5 + (k % 3)) * L.u, 0, TAU);
+        c.arc(x < 0 ? x + Wd : x, y, (1.5 + (k % 3) + (weather === 'heavy' ? 1 : 0)) * L.u, 0, TAU);
         c.fill();
       }
-    } else if (this.theme === 'forest') {
+    } else if (weather === 'leaves' || (this.theme === 'forest' && weather !== 'rain')) {
       for (let k = 0; k < 14; k++) {
         const x = ((hash(k) * Wd - this.cam.cx * 0.4 * L.u) % Wd + Wd) % Wd + Math.sin(this.time + k) * 20 * L.u;
         const y = (hash(k + 9) * Hd * 0.7 + this.time * (30 + k * 3) * L.u) % (Hd * 0.75);

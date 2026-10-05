@@ -204,16 +204,17 @@ Show these notes on the recording page. Clean sounds matter more than anything e
 
 ## Content
 
-Build levels 1 and 2 now. Levels 3 to 6 are listed so the data format can hold them later.
+Levels 1 and 2 were built first; levels 3 to 7, added in October 2026, carry him through the end of first grade (see "Levels 3 to 7" under "Changes after version 1").
 
 | Level | New letter-sounds | Examples |
 | --- | --- | --- |
 | 1 | Short a, then short i; consonants b, c, d, f, g, h, l, m, n, p, r, s, t | map, fan, sit, pin; nonsense: mip, fim |
 | 2 | Short o, then u, then e; consonants j, k, v, w, x, y, z | hot, sun, bed; nonsense: lom, nup, teg |
-| 3 | sh, ch, th, wh, ck, qu; doubled ff, ll, ss, zz | ship, chat, duck, bell |
+| 3 | sh, ch, th, wh, ck, qu; doubled ff, ll, ss, zz; ng, nk | ship, chat, duck, bell, ring, pink |
 | 4 | Consonant blends, first and last | stop, frog, clap, best |
-| 5 | Silent e | make, bike, hope, cute |
-| 6 | Common vowel teams | rain, boat, feet |
+| 5 | Silent e | make, bike, home, cute |
+| 6 | Vowel teams and vowels with r: ee, ea, ai, ay, oa, ow, ar, or, er, ir, ur | feet, rain, boat, car, bird |
+| 7 | Endings -s, -es, -ing, -ed, and two-syllable words | dogs, wishes, jumping, sunset |
 
 Each vowel is its own step: 1A (a), 1B (i), 2A (o), 2B (u), 2C (e). A step's words mix in every earlier vowel, because telling the vowels apart is the hard part.
 
@@ -371,7 +372,6 @@ The block world is a later addition, built only after all seven stages work. The
 
 ### Out of scope for version 1
 
-- Content for levels 3 to 6.
 - Speech recognition and text-to-speech.
 - Timed fluency measures.
 - Accounts, sync, or multiple profiles.
@@ -404,12 +404,49 @@ Revised with the parent in October 2026, replacing the pixel-block version.
 - **A test player.** In the parent area, a grown-up can switch to a test player, started from the child's place or from the beginning, and try anything without changing the child's progress. A small "Test player" label shows until they switch back.
 - The block world described in "The block world" is dropped.
 
-### Check-ups (next stage)
+### Variety
 
-- Every two weeks and at each level check, about five minutes, run by the parent. Four parts mirror the first-grade DIBELS measures: letter sounds, segmenting a spoken word, reading nonsense words, and reading a short decodable story. The items are the game's own, not DIBELS probes.
-- Each part runs one minute, timed on the parent's screen only; he never sees a timer (ground rule 7). The parent scores what he says aloud (ground rule 1). He sees it as a cup match, with no score.
-- Results show as his own trend lines, one per part, with no benchmarks or comparisons. This replaces "Timed fluency measures" under "Out of scope for version 1".
+Added with the parent in October 2026, so the daily game doesn't wear thin. The routine stays fixed: the same stops in the same order, so he always knows what comes next. What surrounds it changes.
 
-### Levels 3 to 6
+- **Each match brings its own look,** chosen from the day and the match number (js/variety.js):
+  - **Weather** from his world's own kinds: butterflies, rain that clears to a rainbow at halftime, petals on the wind, falling leaves, fireflies after dark, snow, or sparkles in the cold.
+  - **Visitors in the sky:** two by day (a hot-air balloon, a plane with a ribbon, birds, a kite, a blimp) and one at night (a friendly UFO, shooting stars, a rocket).
+  - **Rival keepers** in every goal, in another team's color. A keeper dives just too late and lies dazed for a moment; he never saves one (ground rule 7).
+  - **A mystery chest** beside one stop's goal. A goal there opens it, or it opens as he leaves the stop, so nothing is lost. It holds a surprise to use for the rest of the match: usually a taste of something still locked.
+- **His locker.** Goals unlock balls, hats, and goal celebrations, one at a time and a different kind each time, quickly at first and then about every five to eight matches, across a school year. Each locked one shows the goal count that opens it. He picks what he uses; his hat shows on the map and his ball on the kick button. New gear is shown big after the match, and a gold dot on the locker button marks it until he looks.
+- **Places look like themselves.** Each stop dresses the question card in its own tint and edge, with the print left plain. Each world restyles the castle and the cave: an ice castle in the snow, a sandcastle by the sea, mossy stone in the forest, and crystals in the world's colors.
+- **More words to hear and say:** eight headlines per step, two chant verses per step sung in turn, and twenty goal commentary lines.
 
-- Still later: built when he nears the end of level 2. The map shows them as locked worlds until then.
+### Check-ups
+
+About five minutes, run by the parent. Four parts mirror the first-grade DIBELS measures, with the game's own items, not DIBELS probes.
+
+- **When.** The first comes after his second match. Then one comes every two weeks, and one whenever the level check comes due; that level check runs at the end of the check-up. While one is due, a gold cup waits beside his player on the map and a gold dot sits on the grown-ups' corner. The parent starts it from the parent area. Each check-up leaves a small cup beside the level he was on.
+- **Four one-minute parts:**
+  1. **Letter sounds.** One letter at a time, drawn from every letter through the end of level 2 (or through his level, once past it), so the trend compares like with like. The parent taps ✓ or ✗.
+  2. **Sounds in a word.** The game says a word of three or more sounds, and he says each sound. The parent taps the sounds he said on their own, or All right.
+  3. **Made-up words.** Nonsense words from his step and earlier, held back from play for check-ups. The parent taps Read it (the whole word came out right, even after sounding it out) or the letters he said right. Step 1A has no words to spare, so its check-ups top up with play words, unsigned players first.
+  4. **A story.** A decodable story at his step, using only letters he has met; each step has two, used in turn (content/passages.json). The parent taps "Missed a word" for each error, then the last word read when time is up. Finishing early is scaled to a minute.
+- **What he sees.** A cup match in the night stadium. Each answer is a keepy-up, right or wrong; each part ends with a goal; at the end he climbs the podium with the cup. The parent scores what he says (ground rule 1) on a gray strip along the card's bottom edge. The clock is small gray text on that strip, so he never sees a timer (ground rule 7). A whistle ends each minute.
+- **Results.** Per minute: letter sounds right; sounds said right; letter sounds and whole words read right in made-up words; and words read right in the story, with the share read right. The parent area shows each as his own trend line, plus a table, with no benchmarks or comparisons. This replaces "Timed fluency measures" under "Out of scope for version 1".
+
+### Levels 3 to 7: through the end of first grade
+
+Added with the parent in October 2026 so the game covers the phonics first graders are expected to read by June (the Common Core first-grade foundational skills): letter pairs, blends, silent e, vowel teams and vowels with r, endings, two-syllable words, and the common irregular words.
+
+- **Eighteen more steps** (content/levels.json), each a world on the map:
+  - Level 3: 3A sh and ch, 3B th and wh, 3C ck, ff, ll, ss, zz, and qu, 3D ng and nk.
+  - Level 4: 4A blends with s and l, 4B blends with r, 4C blends at the end.
+  - Level 5: 5A a with silent e, 5B i with silent e, 5C o and u with silent e.
+  - Level 6: 6A ee and ea, 6B ai and ay, 6C oa and ow, 6D ar and or, 6E er, ir, and ur.
+  - Level 7: 7A endings -s and -es, 7B -ing and -ed, 7C two-syllable words.
+- **Letter groups.** A letter group taught as one sound (sh, ck, ee, ing) is a "letter" everywhere: one dot under it when reading, one block in Build it, its own record in the mastery model, and its own card in Sound match. A split vowel is written a_e: in make the dots fall under m, a, and k, and an arc joins the e to its a. A word lists its letter groups and their sounds, so ch-ar-t and m-a_e-k need no special cases.
+- **Second sounds.** A few groups have a second sound from a given step: th in this (3B), u_e in tube (5C), s in dogs (7A), and ed in jumped and filled (7B). ed is never asked alone in Sound match; it counts as known once 7B comes.
+- **Words that bring no new letters** (blends, endings, two-syllable words) name their own step, so stop waits for 4A even though s, t, o, and p were taught long before. A two-syllable word shows a small gap where its second syllable starts, and the voice reads it as a whole word.
+- **Content per step:** about 25 to 35 real words, pictured where an emoji fits; ten made-up words for the squad and ten held back for check-ups, plus five per level for the level check (hand-picked once from generated candidates and listed in nonsense-review.md); four headlines; a chant verse; and a check-up story. Everything printed is decodable at its step (tools/check-content.mjs checks every word).
+- **Sight words** come in by step, about 75 in all: the, a, I, is, his, to in level 1; of, was, you, said, are and others in level 2; they, have, what, there, where and others in level 3; and so on through because and eight in level 7. Each is introduced, shown and spoken, before the first sentence that uses it.
+- **Spoken-only tasks** (Blend it, Find the sound) use words with sounds from the first two levels or sounds he has been taught since, so ship never comes up before sh.
+- **Pace.** About three in five words read in a match come from his current step and the rest review the steps before it, so a new pattern gets enough practice to master in about a week of matches. tools/pacing.mjs simulates whole seasons: a child who gets about nine in ten right finishes all 23 steps in about 140 matches, within a school year from October to June; a test keeps it so.
+- **New sounds to record:** sh, ch, th (thin), th (this), qu (kw), ng, nk, the long vowels a, e, i, o, u (cake, feet, bike, home, cute), oo (tube), ar, or, er, and the endings -es (iz), -ing, and -ed (id). As with the alphabet sounds, these come from a real voice: the parent's recordings or an imported file. Until then a placeholder tone with a caption plays, if placeholders are on.
+- **Parent view.** "The road through first grade" lists the levels and steps, where he is, and his own pace carried forward to an estimated finish, with no comparison to anyone else.
+- **Twelve kinds of world**: meadow, river, forest, snow, beach, desert, jungle, autumn, mountain, mushroom land, town, and volcano, each with its own ground, trees, landmarks, weather, castle stone, and crystals.

@@ -2,33 +2,52 @@
 // item, waits for his answer, coaches a miss, and returns what happened for scoring.
 //
 // ctx: { C, cfg, audio, stage, bottom, setReplay(fn), mode, childName, sessions, onSight(words) }
-import { clip } from './content.js';
+import { clip, spell, spelling } from './content.js';
 import { h, sleep, flash, pick, confirmButton, speakerButton, tapped, icon } from './ui.js';
 
 const entry = (ctx, key) => ctx.C.byWord.get(key);
 const PRAISE = ['nice', 'yes', 'great'];
 
-// Letters with a dot under each. A touched dot lights up silently, unless onDot plays its sound.
-function lettersWithDots(letters, onDot) {
-  return letters.map((l, i) => {
-    const dot = onDot === false ? null : h('span', { class: 'dot' });
+// A word's letters with a dot under each letter group (sh, ck, ee get one dot). The e of a split vowel
+// has a little arc back to its vowel instead, and lights with it. A touched dot lights up silently,
+// unless onDot plays its sound. Returns the nodes in print order and cols[i], letter group i.
+function lettersWithDots(parts, onDot, gapAt = null) {
+  const cols = [];
+  const nodes = parts.map(p => {
+    const dot = onDot === false || p.silent ? null : h('span', { class: 'dot' });
     dot?.addEventListener('pointerdown', e => {
       e.preventDefault();
       e.stopPropagation();
       flash(dot, 500);
-      onDot?.(i, l);
+      onDot?.(p.g, p.letter);
     });
     // Touching a dot is part of reading, not tapping the word, except while a parent marks letters.
     dot?.addEventListener('click', e => {
       if (!dot.closest('.marking')) e.stopPropagation();
     });
-    return h('span', { class: 'col' }, h('span', { class: 'letter' }, l), dot);
+    const cls = `col${p.silent ? ' silent' : ''}${!p.silent && p.g === gapAt ? ' gap' : ''}`;
+    const el = h('span', { class: cls }, h('span', { class: 'letter' }, p.text), p.silent ? h('span', { class: 'arc' }) : dot);
+    if (p.silent) cols[p.g].partner = el;
+    else cols[p.g] = el;
+    return el;
   });
+  // Once the word is on screen, each arc runs from its e back to its vowel, whatever the letters' widths.
+  requestAnimationFrame(() => {
+    for (const vowel of cols) {
+      const e = vowel?.partner;
+      if (!e?.isConnected) continue;
+      const a = vowel.getBoundingClientRect(), b = e.getBoundingClientRect();
+      e.style.setProperty('--span', `${b.left + b.width / 2 - (a.left + a.width / 2)}px`);
+    }
+  });
+  return { nodes, cols };
 }
 
+// A two-syllable word shows a little gap where its second syllable starts (w.split).
 function wordView(ctx, key, onDot) {
-  const cols = lettersWithDots(entry(ctx, key).letters, onDot);
-  return { el: h('div', { class: 'word' }, cols), cols };
+  const w = entry(ctx, key);
+  const { nodes, cols } = lettersWithDots(spell(w), onDot, w.split ?? null);
+  return { el: h('div', { class: 'word' }, nodes), cols };
 }
 
 function boxesFor(n) {
@@ -116,7 +135,7 @@ export async function soundMatch(ctx, item) {
 
   if (item.form === 'forward') {
     // He hears a sound and taps its letter. The letters stay silent: hearing them would give it away.
-    const choices = item.choices.map(l => [l, h('button', { class: 'card letter-card' }, l)]);
+    const choices = item.choices.map(l => [l, h('button', { class: `card letter-card${l.length > 1 ? ' long' : ''}` }, l)]);
     const answerEl = choices.find(([l]) => l === item.answer)[1];
     const play = full => audio.say(() => audio.prompt('sound-match', { full }), () => audio.play(sound));
     const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, icon('speaker', 'ico spk-target')), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], () => play(true));
@@ -132,7 +151,7 @@ export async function soundMatch(ctx, item) {
     });
   }
   // Reverse: he sees a letter and picks its sound from three speakers, the direction reading uses.
-  const target = h('div', { class: 'target card big-letter' }, item.letter);
+  const target = h('div', { class: `target card big-letter${item.letter.length > 1 ? ' long' : ''}` }, item.letter);
   const choices = item.choices.map((s, i) => [s, speakerButton(i)]);
   const play = full => audio.say(() => audio.prompt('sound-match-rev', { full }));
   const confirm = setUp(ctx, [target, h('div', { class: 'choices row3' }, choices.map(c => c[1]))], () => play(true));
@@ -152,7 +171,7 @@ export async function soundMatch(ctx, item) {
 // A new letter-sound enters: he sees the letter and hears it twice before his first try.
 async function meetLetter(ctx, letter, sound) {
   const { audio } = ctx;
-  const card = h('div', { class: 'target card big-letter new' }, letter);
+  const card = h('div', { class: `target card big-letter new${letter.length > 1 ? ' long' : ''}` }, letter);
   const next = confirmButton();
   ctx.stage.replaceChildren(card);
   ctx.bottom.replaceChildren(next);
@@ -212,7 +231,7 @@ export async function buildIt(ctx, item) {
   const n = item.letters.length;
   const slots = Array.from({ length: n }, () => h('button', { class: 'slot block', 'aria-label': 'Box' }));
   const product = h('div', { class: 'product' });
-  const tiles = item.tray.map(t => ({ ...t, el: h('button', { class: 'tile block' }, t.letter) }));
+  const tiles = item.tray.map(t => ({ ...t, el: h('button', { class: `tile block${t.letter.length > 1 ? ' long' : ''}` }, t.letter) }));
   const confirm = confirmButton();
   const placed = Array(n).fill(null);
   const firstTiles = Array(n).fill(null); // what is scored: the first tile placed in each box
@@ -225,6 +244,7 @@ export async function buildIt(ctx, item) {
     t.el.classList.add('used');
     slots[i].textContent = t.letter;
     slots[i].classList.add('filled');
+    slots[i].classList.toggle('long', t.letter.length > 1);
     audio.stop();
     audio.play(clip.sound(C.letterSound[t.letter])); // a placed tile plays its sound
     refresh();
@@ -253,7 +273,7 @@ export async function buildIt(ctx, item) {
       if (confirm.disabled) return;
       confirm.removeEventListener('click', go);
       confirm.disabled = true;
-      resolve(placed.map(p => p.letter).join(''));
+      resolve(placed.map(p => p.letter).join('|'));
     };
     confirm.addEventListener('click', go);
   });
@@ -263,13 +283,16 @@ export async function buildIt(ctx, item) {
     if (w.picture) {
       product.textContent = w.picture;
       product.classList.add('made');
+    } else if (w.letters.some(l => l.includes('_'))) {
+      product.textContent = spelling(w); // the blocks m, a_e, k make the word make
+      product.classList.add('made', 'spelled');
     }
     audio.effect('pass');
     await audio.play(clip.word(w.word));
     await sleep(500);
   };
 
-  if (await submit() === item.letters.join('')) {
+  if (await submit() === item.letters.join('|')) {
     await craft();
     return { correct: true, firstTiles };
   }
@@ -283,11 +306,12 @@ export async function buildIt(ctx, item) {
     }
   });
   await audio.say(() => audio.prompt('try-again'));
-  if (await submit() !== item.letters.join('')) {
+  if (await submit() !== item.letters.join('|')) {
     item.letters.forEach((l, i) => {
       unplace(i);
       slots[i].textContent = l;
       slots[i].classList.add('filled');
+      slots[i].classList.toggle('long', l.length > 1);
     });
     await audio.say(() => audio.prompt('here-it-is'), () => slowThenFast(ctx, w, slots));
   }
@@ -329,26 +353,26 @@ export async function readFind(ctx, item) {
     return { ...result, helpLetters: [...help] };
   }
   // A nonsense word: he hears it and taps its printed form. The printed choices stay silent.
-  const choices = item.choices.map(k => [k, h('button', { class: 'card word-card' }, entry(ctx, k).letters.join(''))]);
+  const choices = item.choices.map(k => [k, h('button', { class: 'card word-card' }, spelling(entry(ctx, k)))]);
   const coachCard = h('div', { class: 'coach-card' });
   const play = full => audio.say(() => audio.prompt('hear-find', { full }), () => audio.play(clip.word(w.word)));
   const confirm = setUp(ctx, [h('div', { class: 'target speaker-target' }, icon('speaker', 'ico spk-target'), coachCard), h('div', { class: 'choices grid4' }, choices.map(c => c[1]))], () => play(true));
   await play(false);
-  const spell = () => {
-    const cols = lettersWithDots(w.letters, false);
-    coachCard.replaceChildren(h('div', { class: 'word' }, cols));
+  const showWord = () => {
+    const { nodes, cols } = lettersWithDots(spell(w), false);
+    coachCard.replaceChildren(h('div', { class: 'word' }, nodes));
     coachCard.classList.add('show');
     return cols;
   };
   return runChoice(ctx, {
     choices, confirm, answer: item.answer,
     coach: async () => {
-      await showThePlay(ctx, w, spell());
+      await showThePlay(ctx, w, showWord());
       await sleep(400);
       coachCard.classList.remove('show');
     },
     slow: async () => {
-      await slowThenFast(ctx, w, spell());
+      await slowThenFast(ctx, w, showWord());
       coachCard.classList.remove('show');
     },
   });
@@ -425,8 +449,9 @@ async function headline(ctx, item) {
   if (item.newSight.length) ctx.onSight(item.newSight);
   const tokens = item.tokens.map(t => {
     if (t.sight || !t.word) return h('span', { class: 'tok sight' }, t.text);
-    const letters = [...t.text.replace(/[^A-Za-z]/g, '')];
-    return h('span', { class: 'tok' }, h('span', { class: 'word inline' }, lettersWithDots(letters)), t.text.replace(/[A-Za-z']/g, ''));
+    const parts = spell(entry(ctx, t.word)).map(p => ({ ...p }));
+    if (/^[A-Z]/.test(t.text)) parts[0].text = parts[0].text.charAt(0).toUpperCase() + parts[0].text.slice(1);
+    return h('span', { class: 'tok' }, h('span', { class: 'word inline' }, lettersWithDots(parts).nodes), t.text.replace(/[A-Za-z']/g, ''));
   });
   const sentence = h('div', { class: 'sentence' }, tokens);
   const emoji = h('div', { class: 'headline-emoji' }, item.emoji);

@@ -18,7 +18,7 @@ import { voiceJobs } from '../js/voices.js';
 
 const read = name => JSON.parse(readFileSync(new URL(`../content/${name}.json`, import.meta.url), 'utf8'));
 const C = buildIndex(Object.fromEntries(
-  ['sounds', 'levels', 'words', 'nonsense', 'sentences', 'prompts', 'custom-sentences'].map(n => [n, read(n)]),
+  ['sounds', 'levels', 'words', 'nonsense', 'sentences', 'prompts', 'custom-sentences', 'passages'].map(n => [n, read(n)]),
 ));
 const DAY0 = '2026-10-05';
 
@@ -488,4 +488,132 @@ test('every prompt cue plays two real notes, whatever its hash', async () => {
     for (const n of [h % 5, (h >>> 4) % 5]) assert.ok(Number.isFinite(523.25 * 2 ** (PENTATONIC[n] / 12)), `${id} plays a note`);
   }
   assert.ok(Object.keys(C.prompts).some(id => ((hash(id) >>> 0) >> 4) % 5 < 0), 'a signed shift breaks some cues, which is why the game uses an unsigned one');
+});
+// ---- Check-ups
+test('a check-up comes due after two matches, then every two weeks, and when the level check is waiting', async () => {
+  const { checkupDue, applyCheckup } = await import('../js/checkup.js');
+  let P = placedChild();
+  assert.equal(checkupDue(C, P, DAY0).due, false, 'not before he has played');
+  P.sessionCount = 2;
+  assert.deepEqual([checkupDue(C, P, DAY0).due, checkupDue(C, P, DAY0).why], [true, 'first']);
+  P = applyCheckup(C, P, { day: DAY0, step: P.step, level: 1, parts: { letters: { perMinute: 20 } }, levelCheck: null, partial: false });
+  assert.equal(checkupDue(C, P, addDays(DAY0, 13)).due, false);
+  assert.deepEqual(checkupDue(C, P, addDays(DAY0, 14)), { due: true, why: 'weeks', level: null, next: addDays(DAY0, 14) });
+  const stopped = applyCheckup(C, P, { day: addDays(DAY0, 14), step: P.step, level: 1, parts: { letters: { perMinute: 9 } }, levelCheck: null, partial: true });
+  assert.equal(checkupDue(C, stopped, addDays(DAY0, 14)).due, true, 'a check-up stopped early still leaves one due');
+  Object.assign(P, { levelCheckDue: 1, levelCheckDueDay: addDays(DAY0, 3) });
+  assert.deepEqual([checkupDue(C, P, addDays(DAY0, 3)).why, checkupDue(C, P, addDays(DAY0, 3)).level], ['level', 1]);
+  const words = levelCheckWords(C, 1, 'lc');
+  P = applyCheckup(C, P, { day: addDays(DAY0, 4), step: P.step, level: 1, parts: {}, levelCheck: { level: 1 }, partial: false },
+    { levelResults: words.map((_, i) => i < 9) });
+  assert.equal(P.levelPassed[1], true, 'nine of ten passes the level check inside the check-up');
+  assert.equal(P.levelCheckDue, null);
+  assert.equal(P.checkups.at(-1).levelCheck.score, 9);
+  assert.equal(checkupDue(C, P, addDays(DAY0, 5)).due, false);
+});
+
+test('check-up items: every letter of levels 1 and 2, spoken words without x, held-back made-up words, and a story he can read', async () => {
+  const { checkupPlan, storyFor, applyCheckup } = await import('../js/checkup.js');
+  const P = placedChild();
+  P.step = '2C';
+  const plan = checkupPlan(C, P, { day: DAY0, seed: 'cup' });
+  const { placementLetters } = await import('../js/session.js');
+  assert.deepEqual([...new Set(plan.letters)].sort(), [...placementLetters(C)].sort(), 'all 26 letters of levels 1 and 2');
+  assert.ok(plan.letters.length >= 60);
+  plan.letters.forEach((l, i) => assert.notEqual(l, plan.letters[i - 1], 'no letter twice in a row'));
+  for (const key of plan.segmenting) {
+    const w = C.byWord.get(key);
+    assert.ok(w.real && !w.name && w.sounds.length >= 3 && !w.sounds.includes('ks'), `${key} can be segmented`);
+  }
+  const checkupWords = C.nonsense.filter(w => w.checkup && C.stepIndex[w.step] <= C.stepIndex['2C']).map(w => w.key).sort();
+  assert.deepEqual([...plan.nonsense].sort(), checkupWords, 'at 2C, every held-back check-up word');
+  for (const w of C.nonsense.filter(x => x.checkup)) assert.ok(!printable(C, P, { newLetters: [] }, w), `${w.key} never appears in play`);
+  assert.equal(C.passages.find(p => p.id === plan.story).step, '2C');
+  const next = applyCheckup(C, P, { day: DAY0, step: '2C', level: 2, parts: { story: { passage: plan.story, wcpm: 30 } }, levelCheck: null, partial: false });
+  assert.notEqual(storyFor(C, next), plan.story, 'the two stories of a step take turns');
+
+  // At step 1A there are no words to spare: play words fill in, unsigned first, never the queen.
+  const early = placedChild();
+  early.signed = ['bab'];
+  const items = checkupPlan(C, early, { day: DAY0, seed: 'cup' }).nonsense;
+  const spare = C.nonsense.filter(w => w.step === '1A' && !w.checkup && !w.levelCheck && C.squad.byWord[w.key]?.piece !== 'queen').length;
+  assert.equal(items.length, Math.min(CONFIG.checkup.nonsenseAtLeast, spare));
+  assert.ok(items.every(k => C.byWord.get(k).step === '1A' && C.squad.byWord[k]?.piece !== 'queen'));
+  assert.ok(!items.includes('bab') || items.indexOf('bab') === items.length - 1, 'a signed player comes last, if at all');
+
+  // Words he would print must use letters he has met (ground rule 5).
+  const fresh = applyPlacement(C, newProgress(C, DAY0), {}, DAY0);
+  const firstPlan = checkupPlan(C, fresh, { day: DAY0, seed: 'cup' });
+  for (const k of firstPlan.nonsense) assert.ok(C.byWord.get(k).letters.every(l => CONFIG.placementAlwaysLearning.includes(l)), `${k} uses only letters he has met`);
+  assert.equal(firstPlan.story, null, 'no story until he has met the letters of one');
+});
+
+test('check-up scores are counts in the minute; finishing early scales to a minute', async () => {
+  const { scoreLetters, scoreSegmenting, scoreNonsense, scoreStory, checkupSeries, applyCheckup } = await import('../js/checkup.js');
+  const letters = scoreLetters([{ g: 'a', hit: true }, { g: 'b', hit: false }, { g: 'c', hit: true }], 60);
+  assert.deepEqual([letters.correct, letters.tried, letters.perMinute], [2, 3, 2]);
+  const seg = scoreSegmenting([{ word: 'cat', got: 3, of: 3 }, { word: 'dog', got: 1, of: 3 }], 60);
+  assert.equal(seg.perMinute, 4);
+  const non = scoreNonsense([{ word: 'jom', sounds: 3, of: 3, whole: true }, { word: 'fot', sounds: 2, of: 3, whole: false }], 30, { finished: true });
+  assert.deepEqual([non.sounds, non.whole, non.perMinute, non.wholePerMinute], [5, 1, 10, 2]);
+  const id = C.passages[0].id;
+  const timed = scoreStory(C, id, { last: 29, errors: 3, seconds: 60 });
+  assert.deepEqual([timed.read, timed.right, timed.wcpm, timed.accuracy], [30, 27, 27, 90]);
+  const n = C.passages[0].text.split(/\s+/).length;
+  const quick = scoreStory(C, id, { last: n - 1, errors: 2, seconds: 40, finished: true });
+  assert.equal(quick.wcpm, Math.round(((n - 2) * 60) / 40));
+  let P = placedChild();
+  P = applyCheckup(C, P, { day: DAY0, step: '1A', level: 1, parts: { letters, story: timed }, levelCheck: null, partial: false });
+  P = applyCheckup(C, P, { day: addDays(DAY0, 14), step: '1A', level: 1, parts: { letters: { ...letters, perMinute: 9 } }, levelCheck: null, partial: false });
+  const s = checkupSeries(P);
+  assert.deepEqual(s.letters.map(p => p.value), [2, 9]);
+  assert.deepEqual(s.story.map(p => p.value), [27]);
+  assert.equal(P.checkups[0].played, 0, 'saved with the level he was on, for its cup on the map');
+});
+
+// ---- Variety
+test('goals unlock gear in order; locked picks are refused; the locker dot shows what is new', async () => {
+  const { GEAR, gearOf, pickGear, newlyUnlocked, nextUnlock, lockerNews, sawLocker, isUnlocked } = await import('../js/variety.js');
+  let P = placedChild();
+  assert.deepEqual(gearOf(P), { ball: 'classic', hat: 'none', celebration: 'cheer' });
+  for (let i = 1; i < GEAR.length; i++) assert.ok(GEAR[i].goals >= GEAR[i - 1].goals, 'thresholds only go up');
+  for (const kind of ['ball', 'hat', 'celebration']) assert.ok(GEAR.some(g => g.kind === kind && g.goals === 0), `a ${kind} from the start`);
+  assert.equal(pickGear(P, 'ball', 'gold').gear, undefined, 'a locked ball cannot be picked');
+  P.seasonGoals = 31;
+  assert.deepEqual(newlyUnlocked(0, 31).map(g => g.id), ['slide', 'cap', 'gold']);
+  assert.equal(nextUnlock(P).id, 'spin');
+  P = pickGear(P, 'ball', 'gold');
+  assert.equal(gearOf(P).ball, 'gold');
+  assert.ok(isUnlocked(P, 'hat', 'cap') && !isUnlocked(P, 'hat', 'party'));
+  assert.equal(lockerNews(P).length, 3);
+  assert.equal(lockerNews(sawLocker(P)).length, 0, 'opening the locker clears the dot');
+  P.gear.hat = 'wizard';
+  assert.equal(gearOf(P).hat, 'none', 'anything not unlocked falls back to the default');
+});
+
+test("each match brings its own look: the world's weather, two sky visitors, rival keepers, and a chest at a played stop", async () => {
+  const { dayLook, DAY_SKY, NIGHT_SKY, RIVALS } = await import('../js/variety.js');
+  const P = placedChild();
+  P.team = { word: 'fox', color: '#1d6fd8' };
+  P.character = 'boy';
+  const a = dayLook(P, { day: DAY0, theme: 'snow', stops: [0, 2, 6] });
+  assert.deepEqual(a, dayLook(P, { day: DAY0, theme: 'snow', stops: [0, 2, 6] }), 'the same day and match give the same look');
+  assert.ok(['snow', 'heavy', 'sparkle'].includes(a.weather));
+  assert.equal(a.sky.length, 2);
+  assert.ok(a.sky.every(k => DAY_SKY.includes(k)) && NIGHT_SKY.includes(a.night));
+  assert.ok(RIVALS.includes(a.keeper.color) && a.keeper.color !== P.team.color, 'the rivals wear another color');
+  assert.ok(!a.keeper.characters.includes('boy'), 'his own player is never the keeper');
+  assert.ok([0, 2, 6].includes(a.chest.stop));
+  const looks = Array.from({ length: 30 }, (_, n) => dayLook({ ...P, sessionCount: n }, { day: DAY0, theme: 'meadow' }));
+  assert.ok(new Set(looks.map(l => `${l.weather}|${l.sky.join()}|${l.chest.stop}`)).size > 15, 'looks vary from match to match');
+  const items = looks.map(l => l.chest.item);
+  assert.ok(items.some(i => i.locked), 'the chest often lets him try something still locked');
+});
+
+test('the chant takes turns between the verses of his newest step', () => {
+  const P = placedChild();
+  const verses = C.chants.filter(v => v.step === P.step);
+  assert.ok(verses.length >= 2);
+  const seen = new Set([0, 1, 2, 3].map(n => chantFor(C, P, n).verse.tune));
+  assert.equal(seen.size, verses.length);
 });
