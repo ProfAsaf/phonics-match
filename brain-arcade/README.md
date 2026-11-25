@@ -70,4 +70,12 @@ The UI test uses the Chromium that Playwright installs, saves screenshots to `%T
 
 ## Publishing
 
-Bump `VERSION` in `sw.js` on every release so installed copies pick up the new files.
+The game is live at **https://profasaf.github.io/phonics-match/brain-arcade/**. It is served from a `brain-arcade/` folder in the Phonics Match repo (ProfAsaf/phonics-match); this folder stays the source. To release:
+
+1. Bump `VERSION` in `sw.js` so installed copies pick up the new files.
+2. Copy the site over, then commit and push only that folder from the phonics repo:
+
+```bash
+node tools/publish.mjs
+cd ../phonics && git add brain-arcade && git commit -m "Brain Arcade: ..." && git push
+```
