@@ -42,4 +42,47 @@ export const store = {
     this.load();
   },
   resetAll() { localStorage.removeItem(KEY); this.load(); },
+  // A setup code: {"players":[{name, grade, avatar, color, school:{ixl, dibels}}]}. Adds new players and
+  // updates the grade and school scores of ones with the same name (their progress is kept).
+  mergeSetup(text) {
+    const clean = String(text).replace(/[“”]/g, '"').replace(/[‘’]/g, "'").replace(/```(json)?/g, '').trim();
+    const start = clean.search(/[[{]/);
+    let d;
+    try { d = JSON.parse(clean.slice(start)); } catch { throw new Error('That setup code could not be read. Copy all of it, including the first { and the last }.'); }
+    const list = Array.isArray(d) ? d : d?.players;
+    if (!Array.isArray(list) || !list.length) throw new Error('No players found in that setup code.');
+    const added = [], updated = [];
+    for (const raw of list.slice(0, 12)) {
+      const name = String(raw?.name || '').trim().slice(0, 20);
+      const grade = Math.round(Number(raw?.grade));
+      if (!name || !Number.isFinite(grade)) continue;
+      const fields = { name, grade: Math.max(-1, Math.min(5, grade)), school: cleanSchool(raw.school) };
+      const existing = this.data.players.find((p) => p.name.toLowerCase() === name.toLowerCase());
+      if (existing) { Object.assign(existing, fields); updated.push(existing); }
+      else added.push(this.addPlayer({ ...fields, avatar: String(raw.avatar || '🙂').slice(0, 8), color: /^#[0-9a-f]{6}$/i.test(raw.color) ? raw.color : '#4dabf7' }));
+    }
+    this.save();
+    return { added, updated };
+  },
 };
+
+const IXL_KEYS = ['overall', 'nbt', 'nf', 'oa', 'md', 'geo'];
+const DIBELS_KEYS = ['lnf', 'psf', 'nwf', 'wrf', 'orf', 'maze', 'vocab', 'spell'];
+const STATUSES = ['wellbelow', 'below', 'at', 'above'];
+const isDate = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
+function cleanSchool(s) {
+  const out = {};
+  if (s?.ixl) {
+    const ixl = { date: isDate(s.ixl.date) ? s.ixl.date : '' };
+    let any = false;
+    for (const k of IXL_KEYS) if (Number.isFinite(+s.ixl[k]) && s.ixl[k] !== '' && s.ixl[k] != null) { ixl[k] = +s.ixl[k]; any = true; }
+    if (any) out.ixl = ixl;
+  }
+  if (s?.dibels) {
+    const dib = { date: isDate(s.dibels.date) ? s.dibels.date : '', grade: Number.isFinite(+s.dibels.grade) ? +s.dibels.grade : undefined };
+    let any = false;
+    for (const k of DIBELS_KEYS) if (STATUSES.includes(s.dibels[k])) { dib[k] = s.dibels[k]; any = true; }
+    if (any) out.dibels = dib;
+  }
+  return out;
+}

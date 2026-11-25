@@ -1,6 +1,6 @@
 // Offline support: serve from the cache, refresh the cache in the background.
 // Bump VERSION on each release so phones drop the old cache.
-const VERSION = 'brain-arcade-v1';
+const VERSION = 'brain-arcade-v2';
 self.addEventListener('install', (e) => {
   self.skipWaiting();
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(['./', 'index.html', 'css/app.css', 'js/app.js'])).catch(() => {}));

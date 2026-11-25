@@ -46,7 +46,8 @@ input, select, textarea { font-family: inherit; font-size: 16px; -webkit-user-se
 .who-btn .av { font-size: 76px; line-height: 1.1; }
 .who-btn b { font-size: 26px; }
 .who.small .who-btn { width: 130px; } .who.small .av { font-size: 54px; } .who.small b { font-size: 20px; }
-.welcome { text-align: center; max-width: 460px; font-size: 20px; margin-top: 40px; }
+.welcome { text-align: center; max-width: 460px; font-size: 20px; margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.setup-text { width: 100%; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 14px; padding: 10px; border-radius: 12px; border: 1.5px solid #ced4da; -webkit-user-select: text; user-select: text; }
 
 .home { display: flex; flex-direction: column; gap: 16px; background: linear-gradient(180deg, color-mix(in srgb, var(--c) 18%, #fff) 0%, var(--bg) 55%); }
 .home-top { display: flex; align-items: center; gap: 12px; }

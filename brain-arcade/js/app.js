@@ -51,11 +51,12 @@ export function showPicker() {
     <h1 class="logo">Brain <span>Arcade</span></h1>
     ${players.length ? `<p class="sub">Who's playing?</p>
     <div class="who">${players.map((p) => `<button class="who-btn" data-id="${p.id}" style="--c:${p.color}"><span class="av">${p.avatar}</span><b>${esc(p.name)}</b></button>`).join('')}</div>`
-    : `<div class="welcome"><p>Welcome! A grown-up sets up a player for each child.</p><button class="btn primary big setup">Set up players</button></div>`}
+    : `<div class="welcome"><p>Welcome! A grown-up sets up a player for each child.</p><button class="btn primary big setup">Set up players</button><button class="link setupcode">or paste a setup code</button></div>`}
     ${players.length ? '<p class="hint">Grown-ups: hold ⚙️ for 2 seconds</p>' : ''}
   </div>`;
   holdToOpen($('.gear', root), 1800, () => openParent(root, { onClose: showPicker }));
   $('.setup', root)?.addEventListener('click', () => openParent(root, { onClose: showPicker, startWith: 'add' }));
+  $('.setupcode', root)?.addEventListener('click', () => openParent(root, { onClose: showPicker, startWith: 'setup' }));
   $$('.who-btn', root).forEach((b) => b.addEventListener('click', () => { sfx.tap(); showHome(store.player(b.dataset.id)); }));
 }
 

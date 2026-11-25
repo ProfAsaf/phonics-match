@@ -19,6 +19,7 @@ export function openParent(r, opts = {}) {
   onClose = opts.onClose;
   stopSpeech();
   if (opts.startWith === 'add') return editPlayer(null);
+  if (opts.startWith === 'setup') return setupCodeScreen(() => { store.save(); onClose?.(); });
   parentHome();
 }
 
@@ -45,6 +46,7 @@ function parentHome() {
     }).join('')}</div>
     <div class="p-actions">
       <button class="btn primary add">+ Add a player</button>
+      <button class="btn setupcode">📋 Paste a setup code</button>
       <button class="btn fluency">📖 Read-aloud check</button>
       <button class="btn settings">⚙️ Settings</button>
       <button class="btn backup">💾 Backup</button>
@@ -52,6 +54,7 @@ function parentHome() {
     <p class="fine">Levels use a grade scale like IXL's diagnostic: 270 means "ready for late-2nd-grade skills". They are estimates from the questions answered here, not a standardized test; the band on each bar shows how sure the estimate is.</p>`, { back: () => { store.save(); onClose?.(); } });
   $$('.p-kid', body).forEach((b) => b.addEventListener('click', () => report(store.player(b.dataset.id))));
   $('.add', body).addEventListener('click', () => editPlayer(null));
+  $('.setupcode', body).addEventListener('click', () => setupCodeScreen(parentHome));
   $('.fluency', body).addEventListener('click', () => fluencyStart());
   $('.settings', body).addEventListener('click', settingsScreen);
   $('.backup', body).addEventListener('click', backupScreen);
@@ -214,12 +217,22 @@ function editPlayer(player) {
         <div class="dib">${DIBELS_MEASURES.map((m) => `<div class="dib-row"><span>${m.name}</span><div class="chips">${chip(m.id)}</div></div>`).join('')}</div>
       </details>
       ${isNew ? '' : `<details><summary>Focus areas (asked more often)</summary><div class="focus">${Object.entries(STRANDS).map(([id, st]) => `<label class="chk"><input type="checkbox" name="focus_${id}" ${p.settings.focus?.[id] ? 'checked' : ''}> ${st.name} <small>(${SUBJECTS[st.subject].name})</small></label>`).join('')}</div></details>`}
-      <div class="p-actions"><button class="btn primary save" type="submit">${isNew ? 'Add player' : 'Save'}</button>${isNew ? '' : '<button type="button" class="btn danger del">Delete player</button>'}</div>
+      <div class="p-actions"><button class="btn primary save" type="submit">${isNew ? 'Add player' : 'Save'}</button>${isNew ? '' : '<button type="button" class="btn restart">↺ Start over</button><button type="button" class="btn danger del">Delete player</button>'}</div>
     </form>`, { back: () => (player ? report(player) : parentHome()) });
   const f = $('form', body);
   $$('.av-pick', f).forEach((b) => b.addEventListener('click', () => { $$('.av-pick', f).forEach((x) => x.classList.remove('on')); b.classList.add('on'); }));
   $$('.col-pick', f).forEach((b) => b.addEventListener('click', () => { $$('.col-pick', f).forEach((x) => x.classList.remove('on')); b.classList.add('on'); }));
   $$('.st-chip', f).forEach((b) => b.addEventListener('click', () => { const on = b.classList.contains('on'); $$(`.st-chip[data-m="${b.dataset.m}"]`, f).forEach((x) => x.classList.remove('on')); if (!on) b.classList.add('on'); }));
+  $('.restart', f)?.addEventListener('click', async () => {
+    if (!(await confirmBox(`Start ${p.name} over? This erases their answers, levels, history, stars and stickers. School scores and settings stay.`, { ok: 'Start over', danger: true }))) return;
+    for (const k of ['subjects', 'skills', 'history', 'log', 'days', 'seen', 'fluency', 'lastSubject', 'greeted']) delete player[k];
+    player.stars = 0;
+    player.stickers = [];
+    E.reseed(player);
+    store.save();
+    toast(`${p.name} starts fresh`);
+    report(player);
+  });
   $('.del', f)?.addEventListener('click', async () => {
     if (await confirmBox(`Delete ${p.name} and all of their progress? This cannot be undone.`, { ok: 'Delete', danger: true })) { store.removePlayer(p.id); parentHome(); }
   });
@@ -247,6 +260,24 @@ function editPlayer(player) {
     store.save();
     toast(isNew ? `${name} added` : 'Saved');
     isNew ? parentHome() : report(target);
+  });
+}
+
+// ---------------------------------------------------------------- setup code
+function setupCodeScreen(back = parentHome) {
+  const body = frame('Paste a setup code', `
+    <p>A setup code adds players with their grade and school scores already filled in. Paste the whole code (it starts with { and ends with }). Players already here with the same name get their scores updated and keep their progress.</p>
+    <textarea class="setup-text" rows="9" placeholder='{"players": [ ... ]}' autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
+    <div class="p-actions"><button class="btn primary go">Add players</button></div>`, { back });
+  $('.go', body).addEventListener('click', () => {
+    try {
+      const { added, updated } = store.mergeSetup($('.setup-text', body).value);
+      for (const p of [...added, ...updated]) E.reseed(p);
+      store.save();
+      const names = (list) => list.map((p) => p.name).join(', ');
+      toast([added.length ? `Added ${names(added)}` : '', updated.length ? `Updated ${names(updated)}` : ''].filter(Boolean).join(' · ') || 'Nothing to add', 3200);
+      parentHome();
+    } catch (err) { toast(err.message, 4200); }
   });
 }
 
