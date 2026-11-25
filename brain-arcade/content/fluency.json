@@ -1,0 +1,215 @@
+{
+ "about": "One-minute oral reading fluency passages. A parent counts words read correctly in 60 seconds, then asks the retell and questions. g is grade-level difficulty.",
+ "passages": [
+  {
+   "id": "f1",
+   "g": 1,
+   "title": "Nan and the Big Seed",
+   "text": "Nan the hen lived on a farm. She had a nest in the barn. One day, Nan found a big seed. \"I will plant it,\" she said. She dug a hole in the mud. She put the seed in the hole. Then she gave it a drink of water. Day by day, a green sprout came up. It grew and grew. Soon it was taller than Nan!\n\nA big yellow flower opened on the top. Nan's friends came to see it. The pig said, \"What a big flower!\" The duck said, \"It looks like the sun!\" A bee came to visit, too. It sat on the flower and had a sip. Nan was so proud. \"I did this,\" she said with a smile.\n\nAt night, the flower shut up tight. Nan sat next to it and felt glad. She hoped it would get bigger. Next week, it did! Now the flower was as tall as the barn. Nan had the best flower on the farm. She gave a seed to each of her friends, and they planted them too.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What did Nan find?",
+     "answer": "A big seed."
+    },
+    {
+     "q": "What came up after Nan gave the seed water?",
+     "answer": "A green sprout."
+    },
+    {
+     "q": "Who sat on the flower and had a sip?",
+     "answer": "A bee."
+    }
+   ]
+  },
+  {
+   "id": "f2",
+   "g": 1.5,
+   "title": "Max and the Missing Mitten",
+   "text": "Max loved the first snow of winter. He pulled on his boots, his hat, and his warm red mittens. Then he ran outside to play with his sister, Rosa.\n\nThey rolled a big snowball across the yard. It got bigger and bigger until it was as tall as Rosa. \"Now we need a smaller one for the head,\" said Max. He pulled off his mittens and set them on a fence to make the snowball faster. When the snowman was done, they gave him a carrot nose and two black buttons for eyes.\n\nThen Max looked at the fence. One mitten was gone! He looked under the fence. He looked in the snow. He looked behind the tree. \"Where could it be?\" he asked.\n\nRosa began to giggle. She pointed at the snowman. There, on the end of one stick arm, was a red mitten. A gust of wind must have blown it there. \"He is cold too,\" said Rosa. Max laughed. \"Well, he can keep it for tonight,\" he said. \"But I want it back in the morning!\"",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What did Max put on the fence?",
+     "answer": "His mittens."
+    },
+    {
+     "q": "Where did Max find the missing mitten?",
+     "answer": "On the snowman's stick arm."
+    },
+    {
+     "q": "Why did Max say the snowman could keep the mitten for tonight?",
+     "answer": "The snowman looked cold / Max was being kind and funny."
+    }
+   ]
+  },
+  {
+   "id": "f3",
+   "g": 2,
+   "title": "Honey Bees at Work",
+   "text": "A honey bee colony is like a busy little town. Thousands of bees live together in one hive, and each bee has a job to do.\n\nThe queen bee is the mother of the hive. She lays up to a thousand eggs every day. Worker bees take care of the eggs and feed the baby bees. When they get older, some workers clean the hive. Others stand guard at the door to keep out any visitors that do not belong there.\n\nThe oldest workers are the ones who leave the hive to find food. They fly from flower to flower, drinking sweet nectar. They also gather a yellow dust called pollen. A bee carries the pollen on its back legs, which have tiny pockets for it. As a bee moves between flowers, some pollen rubs off. This helps the flowers make seeds and fruit.\n\nBack at the hive, the bees turn nectar into honey. They fan their wings to dry it out until it is thick and sticky. Then they store it in small wax rooms called cells. The honey is food for the bees when winter comes and flowers are gone. A bee works so hard that one bee makes only a tiny spoonful of honey in its whole life.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What is the job of the queen bee?",
+     "answer": "To lay eggs."
+    },
+    {
+     "q": "What do bees carry on their back legs?",
+     "answer": "Pollen."
+    },
+    {
+     "q": "Why do bees store honey?",
+     "answer": "For food in winter when flowers are gone."
+    }
+   ]
+  },
+  {
+   "id": "f4",
+   "g": 2,
+   "title": "The Pumpkin Patch",
+   "text": "On Saturday, Ava and her grandpa drove to the pumpkin patch. Orange pumpkins of every size sat in the field. Ava wanted to find the biggest one in the whole patch.\n\nShe walked up and down the rows. She found one that was as round as a beach ball. \"This is the one!\" she shouted. She bent down and tried to pick it up, but it was too heavy. She pushed and pulled. The pumpkin did not move. Grandpa laughed and said, \"We need a wagon, my dear.\"\n\nThey got a wagon from the barn. Together, they rolled the giant pumpkin onto it. But now the wagon was heavy, and it would not go up the muddy hill. Ava huffed and puffed. Grandpa pushed from behind. At last, a farmer on a tractor came by and gave them a ride to the gate.\n\nAt home, Ava drew a funny face on the pumpkin with a marker. Grandpa cut it out with a knife while Ava scooped out the seeds. That night, they put a candle inside. The pumpkin glowed in the window. Ava smiled. The hard work was worth it. It was the best pumpkin she had ever seen.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "Why could Ava not pick up the pumpkin?",
+     "answer": "It was too heavy."
+    },
+    {
+     "q": "Who helped them get the wagon up the hill and to the gate?",
+     "answer": "A farmer on a tractor."
+    },
+    {
+     "q": "How did Ava feel at the end?",
+     "answer": "Happy / proud that the hard work was worth it."
+    }
+   ]
+  },
+  {
+   "id": "f5",
+   "g": 2.5,
+   "title": "Fireflies",
+   "text": "On warm summer nights, tiny lights blink over lawns and fields. These lights come from fireflies. Even though they are called flies, fireflies are really beetles. They make their own light inside their bodies, using a special chemical. Unlike a lightbulb, the glow gives off almost no heat, so it is called \"cold light.\"\n\nFireflies do not blink just for fun. They flash to talk to each other. Each kind of firefly has its own pattern. One kind may give a quick flash every five seconds. Another may make a long, steady glow. A male firefly flies around flashing his pattern. If a female of the same kind sees it, she answers with a flash of her own. This lets them find each other in the dark.\n\nSome fireflies have a sneaky trick. A female of one kind sometimes copies the flashes of another kind. When a male flies down to meet her, she catches him for dinner! Scientists find this behavior fascinating.\n\nFirefly babies, called larvae, live in the soil and also glow. People sometimes call them glowworms. They eat snails and worms. Today there are fewer fireflies than there used to be. Bright lights at night confuse them, and fields where they live are being built over. You can help by turning off outdoor lights at night and leaving a patch of tall grass in your yard.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What is a firefly really?",
+     "answer": "A beetle."
+    },
+    {
+     "q": "Why do fireflies flash their lights?",
+     "answer": "To talk to each other / find each other."
+    },
+    {
+     "q": "What can you do to help fireflies?",
+     "answer": "Turn off outdoor lights at night / leave tall grass in the yard."
+    }
+   ]
+  },
+  {
+   "id": "f6",
+   "g": 3,
+   "title": "The Science Fair Volcano",
+   "text": "Mia had been working on her science fair project for two weeks. She had built a volcano from clay and painted it brown and gray. Inside the top, she had hidden a small cup. Her plan was to pour in baking soda, then add vinegar and a few drops of red food coloring. The mixture would bubble up and spill down the sides like real lava.\n\nOn the morning of the fair, Mia carried her volcano carefully into the gym. Rows of tables stood in the room, covered with posters, plants, and models. A judge in a green sweater walked from table to table, writing on a clipboard.\n\nWhen the judge reached Mia's table, Mia felt her stomach flip. She explained how the volcano worked. Then she poured the baking soda into the cup. She added the vinegar. Nothing happened. She shook the bottle. Still nothing. Her cheeks turned warm and pink.\n\nThen Mia noticed the problem. In her rush, she had grabbed the wrong bottle from the kitchen. It was water, not vinegar! She took a breath and smiled. \"Here is a lesson about science,\" she told the judge. \"Sometimes an experiment fails. You have to find out why.\"\n\nShe ran to the cafeteria and found a bottle of vinegar. When she poured it in, red foam rushed out of the top and down the sides. The crowd cheered. The judge wrote something down and gave Mia a thumbs up. Afterward, Mia wrote in her notebook what had gone wrong, so she would remember to check every bottle next time.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What did Mia build her volcano from?",
+     "answer": "Clay."
+    },
+    {
+     "q": "Why did the volcano not erupt the first time?",
+     "answer": "She used water instead of vinegar."
+    },
+    {
+     "q": "What lesson did Mia share with the judge?",
+     "answer": "Sometimes experiments fail, and you have to find out why."
+    }
+   ]
+  },
+  {
+   "id": "f7",
+   "g": 3,
+   "title": "How Spiders Spin Webs",
+   "text": "A spider's web looks delicate, but it is one of the strongest things in nature. Pound for pound, spider silk is stronger than steel. The silk is also stretchy, which helps a web catch a flying insect without tearing.\n\nSpiders make silk inside their bodies. It starts as a liquid in small glands. When the spider pulls it out through tiny spigots called spinnerets, the liquid hardens into a thin thread. A spider can make several kinds of silk. One kind is dry and strong, used for the frame. Another is sticky, used to trap insects.\n\nTo build a round web, a spider begins by letting a thread drift in the wind until it sticks to a faraway branch. This becomes the bridge line. Then the spider drops down on a second thread, making a Y shape. The center of the Y becomes the hub of the web. Next, the spider adds spokes that reach out from the hub like the spokes of a bicycle wheel. Finally, it walks in a big spiral from the outside in, laying sticky thread across the spokes.\n\nA spider does not get stuck in its own web. It walks only on the dry threads, and its feet have a thin oily coating. When a bug lands on the web, the threads shake. The spider feels the vibration and hurries over to wrap its meal in silk. Most spiders rebuild their webs every day or two, since a torn web catches less food. Some spiders even eat their old webs and reuse the silk, so nothing goes to waste.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What are the two kinds of silk a spider uses for a round web?",
+     "answer": "Dry strong silk for the frame and sticky silk to trap insects."
+    },
+    {
+     "q": "How does the spider know when a bug has landed in the web?",
+     "answer": "It feels the threads shake / vibrate."
+    },
+    {
+     "q": "Why does a spider not get stuck in its own web?",
+     "answer": "It walks on the dry threads and has oily feet."
+    }
+   ]
+  },
+  {
+   "id": "f8",
+   "g": 3.5,
+   "title": "The Treehouse Rules",
+   "text": "When Kai and his cousin Nora finished building their treehouse, they were so proud. They had spent the whole summer measuring boards, hammering nails, and painting the walls bright blue. Every board squeaked a little when you stepped on it, which they decided was part of the charm. On windy days, the whole treehouse swayed gently like a boat on a calm lake. A rope ladder dangled from the door, and a bucket on a pulley carried snacks up from the ground.\n\nThey decided to make a list of rules and nail it to the wall. Nora wrote the first one in thick black marker: \"No grown-ups allowed without a password.\" Kai thought that was funny. He added: \"Everyone must bring one good joke.\" They kept adding rules until the list stretched down the whole wall.\n\nThe next week, their friend Theo asked if he could visit. Kai and Nora said yes, but Theo forgot the password. Standing at the bottom of the ladder, he guessed over and over. \"Banana? Rocket? Pickles?\" Nora shook her head each time. Finally, Theo sighed. \"Can I just tell you a joke instead?\" he asked. \"What do you call a sleeping dinosaur? A dino-snore!\"\n\nKai and Nora burst out laughing so hard that the whole treehouse shook. Nora climbed down to open the door. \"That counts as a joke,\" she said, \"and that counts as a password.\" Theo grinned and scrambled up the ladder. That afternoon, the three friends sat in the blue treehouse, sharing crackers and swapping jokes. Kai looked at the list on the wall. Maybe, he thought, the most important rule was the one they had made without noticing: friends are always welcome.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What was the password rule that Nora wrote?",
+     "answer": "No grown-ups allowed without a password."
+    },
+    {
+     "q": "Why did Nora let Theo in?",
+     "answer": "His joke made them laugh, so it counted as a password."
+    },
+    {
+     "q": "What do you think Kai meant by the last rule he thought about?",
+     "answer": "Friends are always welcome; kindness matters more than the rules."
+    }
+   ]
+  },
+  {
+   "id": "f9",
+   "g": 4,
+   "title": "Life in the Deep Sea",
+   "text": "Far below the surface of the ocean, the water is cold, dark, and crushing. Below about three thousand feet, no sunlight reaches. Scientists call this zone the deep sea. For a long time, people thought nothing could live in such a place. We now know that it is full of strange and wonderful creatures.\n\nBecause the deep sea is pitch black, many animals make their own light. This is called bioluminescence. The anglerfish dangles a glowing lure in front of its mouth. Small fish swim toward the light, thinking it is food, and the anglerfish snaps them up. Other animals use light for different purposes. Some squid squirt glowing clouds to confuse predators, much like a squid near the surface would squirt ink. Certain jellyfish flash bright blue rings of light to scare away attackers.\n\nThe pressure in the deep sea is enormous. At the deepest points, it is more than a thousand times the pressure at the surface. Deep-sea fish have soft, flexible bodies with few hard bones, which keeps them from being crushed. Their mouths are often huge, and their stomachs can stretch, because meals are rare. When food does arrive, a fish may need to eat as much as it can.\n\nFood is scarce because plants cannot grow without sunlight. Instead, animals depend on bits of dead plants and animals that drift down from above, which scientists call marine snow. Near cracks in the sea floor called hydrothermal vents, hot water rich in minerals bubbles out. Bacteria there make food from chemicals, and a whole community of tube worms, crabs, and shrimp gathers around them. The giant squid, which can grow as long as a school bus, lives in these waters too, and its eyes are as big as dinner plates. Exploring the deep sea takes special submarines, and scientists believe thousands of species there remain undiscovered.",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "What does the word bioluminescence describe in this passage?",
+     "answer": "Animals making their own light."
+    },
+    {
+     "q": "Why do deep-sea fish have soft, flexible bodies?",
+     "answer": "To keep from being crushed by the pressure."
+    },
+    {
+     "q": "Why is food hard to find in the deep sea?",
+     "answer": "Plants cannot grow without sunlight, so food drifts down from above."
+    }
+   ]
+  },
+  {
+   "id": "f10",
+   "g": 4.5,
+   "title": "The Weather Station",
+   "text": "On the top of a tall mountain, a small gray building clings to the rock. Inside, a pair of scientists named Dr. Ortiz and Dr. Kim spend each winter measuring the weather. Their station is so remote that supplies come only by helicopter, and snow sometimes buries the doors up to the windows.\n\nEvery morning, the scientists take careful readings. A tall metal mast outside carries a spinning cup device to measure wind speed and a thin vane that points into the wind. A tube on the roof collects falling snow, which they melt to learn how much water it holds. Dr. Kim climbs a ladder to check that ice has not frozen the instruments. Dr. Ortiz types the numbers into a computer that sends them to forecasters in the valley below. Between readings, the two scientists brew coffee on a tiny stove and trade stories about the strangest storms they have ever seen.\n\nThe work is important. Farmers, pilots, and families all rely on weather forecasts, and a forecast is only as good as the data behind it. A change in air pressure on the mountain, for example, may signal a storm hours before it reaches the town. One winter, the scientists noticed the pressure dropping unusually fast. They radioed a warning. By the time the blizzard arrived, the town's snowplows were ready and schools had closed early.\n\nLife at the station is not always easy. The wind can howl so loudly that the scientists must shout to hear each other. The days are short and the cold is fierce. Yet Dr. Ortiz says she would not trade the job. \"When the sky clears after a storm, the whole mountain glows pink,\" she explains. \"It reminds me why I do this work: to understand the sky well enough to help people prepare for it.\"",
+   "retell": "Tell me about what you read.",
+   "questions": [
+    {
+     "q": "Why is the weather station only reached by helicopter?",
+     "answer": "It is very remote."
+    },
+    {
+     "q": "How did the scientists help the town before the blizzard?",
+     "answer": "They noticed the pressure dropping fast and radioed a warning, so snowplows were ready and schools closed early."
+    },
+    {
+     "q": "Why does Dr. Ortiz love her job despite the hardships?",
+     "answer": "She enjoys the beauty after storms and wants to help people prepare for the weather."
+    }
+   ]
+  }
+ ]
+}

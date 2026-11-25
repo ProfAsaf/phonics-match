@@ -1,0 +1,1349 @@
+{
+ "about": "Brain Arcade sentence-to-picture items. The text is NOT read aloud (it tests reading). 3 options; answer is an index into options.",
+ "items": [
+  {
+   "id": "s001",
+   "g": 0.3,
+   "text": "It can hop. It is not big.",
+   "options": [
+    {
+     "label": "elephant",
+     "emoji": "🐘"
+    },
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the frog fits all the clues in the sentence."
+  },
+  {
+   "id": "s002",
+   "g": 0.4,
+   "text": "It is hot. Look up at it.",
+   "options": [
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    },
+    {
+     "label": "moon",
+     "emoji": "🌙"
+    },
+    {
+     "label": "star",
+     "emoji": "⭐"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the sun fits all the clues in the sentence."
+  },
+  {
+   "id": "s003",
+   "g": 0.5,
+   "text": "It has a web. It can run on it.",
+   "options": [
+    {
+     "label": "bee",
+     "emoji": "🐝"
+    },
+    {
+     "label": "ant",
+     "emoji": "🐜"
+    },
+    {
+     "label": "spider",
+     "emoji": "🕷️"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the spider fits all the clues in the sentence."
+  },
+  {
+   "id": "s004",
+   "g": 0.6,
+   "text": "It is a pet. It can yap.",
+   "options": [
+    {
+     "label": "cat",
+     "emoji": "🐱"
+    },
+    {
+     "label": "dog",
+     "emoji": "🐶"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the dog fits all the clues in the sentence."
+  },
+  {
+   "id": "s005",
+   "g": 0.6,
+   "text": "It has a hump. It is big.",
+   "options": [
+    {
+     "label": "elephant",
+     "emoji": "🐘"
+    },
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    },
+    {
+     "label": "camel",
+     "emoji": "🐪"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the camel fits all the clues in the sentence."
+  },
+  {
+   "id": "s006",
+   "g": 0.7,
+   "text": "It is a bug. It has six legs. It is red.",
+   "options": [
+    {
+     "label": "ladybug",
+     "emoji": "🐞"
+    },
+    {
+     "label": "bee",
+     "emoji": "🐝"
+    },
+    {
+     "label": "spider",
+     "emoji": "🕷️"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the ladybug fits all the clues in the sentence."
+  },
+  {
+   "id": "s007",
+   "g": 0.8,
+   "text": "It has a bill. It can quack.",
+   "options": [
+    {
+     "label": "duck",
+     "emoji": "🦆"
+    },
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the duck fits all the clues in the sentence."
+  },
+  {
+   "id": "s008",
+   "g": 0.8,
+   "text": "It can hop. It has long ears.",
+   "options": [
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    },
+    {
+     "label": "rabbit",
+     "emoji": "🐇"
+    },
+    {
+     "label": "cat",
+     "emoji": "🐱"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the rabbit fits all the clues in the sentence."
+  },
+  {
+   "id": "s009",
+   "g": 0.8,
+   "text": "It is long. It has no legs. It can hiss.",
+   "options": [
+    {
+     "label": "cat",
+     "emoji": "🐱"
+    },
+    {
+     "label": "snake",
+     "emoji": "🐍"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the snake fits all the clues in the sentence."
+  },
+  {
+   "id": "s010",
+   "g": 0.9,
+   "text": "It says oink. It likes mud.",
+   "options": [
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    },
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "sheep",
+     "emoji": "🐑"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the pig fits all the clues in the sentence."
+  },
+  {
+   "id": "s011",
+   "g": 1,
+   "text": "It can quack. It swims in a pond.",
+   "options": [
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "duck",
+     "emoji": "🦆"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the duck fits all the clues in the sentence."
+  },
+  {
+   "id": "s012",
+   "g": 1,
+   "text": "It says moo. It gives us milk.",
+   "options": [
+    {
+     "label": "sheep",
+     "emoji": "🐑"
+    },
+    {
+     "label": "horse",
+     "emoji": "🐴"
+    },
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the cow fits all the clues in the sentence."
+  },
+  {
+   "id": "s013",
+   "g": 1,
+   "text": "It has fur. It can purr and meow.",
+   "options": [
+    {
+     "label": "dog",
+     "emoji": "🐶"
+    },
+    {
+     "label": "cat",
+     "emoji": "🐱"
+    },
+    {
+     "label": "rabbit",
+     "emoji": "🐇"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the cat fits all the clues in the sentence."
+  },
+  {
+   "id": "s014",
+   "g": 1.1,
+   "text": "It says baa. It has soft wool.",
+   "options": [
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    },
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "sheep",
+     "emoji": "🐑"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the sheep fits all the clues in the sentence."
+  },
+  {
+   "id": "s015",
+   "g": 1.1,
+   "text": "It has two wheels. You ride it.",
+   "options": [
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "bicycle",
+     "emoji": "🚲"
+    },
+    {
+     "label": "bus",
+     "emoji": "🚌"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the bicycle fits all the clues in the sentence."
+  },
+  {
+   "id": "s016",
+   "g": 1.1,
+   "text": "It is gray. It has a long nose.",
+   "options": [
+    {
+     "label": "mouse",
+     "emoji": "🐭"
+    },
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "elephant",
+     "emoji": "🐘"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the elephant fits all the clues in the sentence."
+  },
+  {
+   "id": "s017",
+   "g": 1.1,
+   "text": "It is long and yellow. Monkeys like it.",
+   "options": [
+    {
+     "label": "lemon",
+     "emoji": "🍋"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the banana fits all the clues in the sentence."
+  },
+  {
+   "id": "s018",
+   "g": 1.2,
+   "text": "It is cold. You eat it. It can melt.",
+   "options": [
+    {
+     "label": "ice cream",
+     "emoji": "🍦"
+    },
+    {
+     "label": "pizza",
+     "emoji": "🍕"
+    },
+    {
+     "label": "bread",
+     "emoji": "🍞"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the ice cream fits all the clues in the sentence."
+  },
+  {
+   "id": "s019",
+   "g": 1.2,
+   "text": "Rain falls from it. It is gray.",
+   "options": [
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    },
+    {
+     "label": "cloud",
+     "emoji": "☁️"
+    },
+    {
+     "label": "rainbow",
+     "emoji": "🌈"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the cloud fits all the clues in the sentence."
+  },
+  {
+   "id": "s020",
+   "g": 1.2,
+   "text": "It is round and red. It grows on a tree.",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "strawberry",
+     "emoji": "🍓"
+    },
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the apple fits all the clues in the sentence."
+  },
+  {
+   "id": "s021",
+   "g": 1.2,
+   "text": "You use it to brush your teeth.",
+   "options": [
+    {
+     "label": "toothbrush",
+     "emoji": "🪥"
+    },
+    {
+     "label": "broom",
+     "emoji": "🧹"
+    },
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the toothbrush fits all the clues in the sentence."
+  },
+  {
+   "id": "s022",
+   "g": 1.3,
+   "text": "It is white and cold. It falls in winter.",
+   "options": [
+    {
+     "label": "snowflake",
+     "emoji": "❄️"
+    },
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    },
+    {
+     "label": "rainbow",
+     "emoji": "🌈"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the snowflake fits all the clues in the sentence."
+  },
+  {
+   "id": "s023",
+   "g": 1.3,
+   "text": "It has a long neck and spots. It is tall.",
+   "options": [
+    {
+     "label": "giraffe",
+     "emoji": "🦒"
+    },
+    {
+     "label": "leopard",
+     "emoji": "🐆"
+    },
+    {
+     "label": "horse",
+     "emoji": "🐴"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the giraffe fits all the clues in the sentence."
+  },
+  {
+   "id": "s024",
+   "g": 1.3,
+   "text": "It is yellow. It buzzes and makes honey.",
+   "options": [
+    {
+     "label": "bee",
+     "emoji": "🐝"
+    },
+    {
+     "label": "butterfly",
+     "emoji": "🦋"
+    },
+    {
+     "label": "ladybug",
+     "emoji": "🐞"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the bee fits all the clues in the sentence."
+  },
+  {
+   "id": "s025",
+   "g": 1.3,
+   "text": "You wear them on your hands. They keep you warm.",
+   "options": [
+    {
+     "label": "gloves",
+     "emoji": "🧤"
+    },
+    {
+     "label": "socks",
+     "emoji": "🧦"
+    },
+    {
+     "label": "cap",
+     "emoji": "🧢"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the gloves fits all the clues in the sentence."
+  },
+  {
+   "id": "s026",
+   "g": 1.3,
+   "text": "It is big and yellow. Kids ride it to school.",
+   "options": [
+    {
+     "label": "bus",
+     "emoji": "🚌"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "helicopter",
+     "emoji": "🚁"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the bus fits all the clues in the sentence."
+  },
+  {
+   "id": "s027",
+   "g": 1.3,
+   "text": "It has a hard shell on its back. It is slow.",
+   "options": [
+    {
+     "label": "rabbit",
+     "emoji": "🐇"
+    },
+    {
+     "label": "turtle",
+     "emoji": "🐢"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the turtle fits all the clues in the sentence."
+  },
+  {
+   "id": "s028",
+   "g": 1.3,
+   "text": "It is round and orange. You can peel it.",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "orange",
+     "emoji": "🍊"
+    },
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the orange fits all the clues in the sentence."
+  },
+  {
+   "id": "s029",
+   "g": 1.4,
+   "text": "It has a pouch. It can hop.",
+   "options": [
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    },
+    {
+     "label": "kangaroo",
+     "emoji": "🦘"
+    },
+    {
+     "label": "rabbit",
+     "emoji": "🐇"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the kangaroo fits all the clues in the sentence."
+  },
+  {
+   "id": "s030",
+   "g": 1.4,
+   "text": "It has a long tail and a mane. You can ride it.",
+   "options": [
+    {
+     "label": "lion",
+     "emoji": "🦁"
+    },
+    {
+     "label": "horse",
+     "emoji": "🐴"
+    },
+    {
+     "label": "dog",
+     "emoji": "🐶"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the horse fits all the clues in the sentence."
+  },
+  {
+   "id": "s031",
+   "g": 1.4,
+   "text": "It floats on the sea. It has a sail.",
+   "options": [
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "train",
+     "emoji": "🚂"
+    },
+    {
+     "label": "sailboat",
+     "emoji": "⛵"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the sailboat fits all the clues in the sentence."
+  },
+  {
+   "id": "s032",
+   "g": 1.4,
+   "text": "It is round. You kick it into a net.",
+   "options": [
+    {
+     "label": "basketball",
+     "emoji": "🏀"
+    },
+    {
+     "label": "soccer ball",
+     "emoji": "⚽"
+    },
+    {
+     "label": "tennis ball",
+     "emoji": "🎾"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the soccer ball fits all the clues in the sentence."
+  },
+  {
+   "id": "s033",
+   "g": 1.4,
+   "text": "You put it in a lock to open a door.",
+   "options": [
+    {
+     "label": "key",
+     "emoji": "🔑"
+    },
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    },
+    {
+     "label": "scissors",
+     "emoji": "✂️"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the key fits all the clues in the sentence."
+  },
+  {
+   "id": "s034",
+   "g": 1.4,
+   "text": "It has eight legs. It spins a web.",
+   "options": [
+    {
+     "label": "ant",
+     "emoji": "🐜"
+    },
+    {
+     "label": "bee",
+     "emoji": "🐝"
+    },
+    {
+     "label": "spider",
+     "emoji": "🕷️"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the spider fits all the clues in the sentence."
+  },
+  {
+   "id": "s035",
+   "g": 1.5,
+   "text": "It is black and white. It is a bird that can not fly.",
+   "options": [
+    {
+     "label": "penguin",
+     "emoji": "🐧"
+    },
+    {
+     "label": "parrot",
+     "emoji": "🦜"
+    },
+    {
+     "label": "panda",
+     "emoji": "🐼"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the penguin fits all the clues in the sentence."
+  },
+  {
+   "id": "s036",
+   "g": 1.5,
+   "text": "You blow into it and it gets bigger. It can float away.",
+   "options": [
+    {
+     "label": "ball",
+     "emoji": "⚽"
+    },
+    {
+     "label": "balloon",
+     "emoji": "🎈"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the balloon fits all the clues in the sentence."
+  },
+  {
+   "id": "s037",
+   "g": 1.5,
+   "text": "You wear it on your ears to hear music.",
+   "options": [
+    {
+     "label": "glasses",
+     "emoji": "👓"
+    },
+    {
+     "label": "cap",
+     "emoji": "🧢"
+    },
+    {
+     "label": "headphones",
+     "emoji": "🎧"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the headphones fits all the clues in the sentence."
+  },
+  {
+   "id": "s038",
+   "g": 1.5,
+   "text": "It has a handle and a bowl. You eat soup with it.",
+   "options": [
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "fork",
+     "emoji": "🍴"
+    },
+    {
+     "label": "broom",
+     "emoji": "🧹"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the spoon fits all the clues in the sentence."
+  },
+  {
+   "id": "s039",
+   "g": 1.5,
+   "text": "You hit it with sticks to make a beat.",
+   "options": [
+    {
+     "label": "guitar",
+     "emoji": "🎸"
+    },
+    {
+     "label": "piano",
+     "emoji": "🎹"
+    },
+    {
+     "label": "drum",
+     "emoji": "🥁"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the drum fits all the clues in the sentence."
+  },
+  {
+   "id": "s040",
+   "g": 1.5,
+   "text": "It lives in the sea. It has eight arms.",
+   "options": [
+    {
+     "label": "octopus",
+     "emoji": "🐙"
+    },
+    {
+     "label": "crab",
+     "emoji": "🦀"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the octopus fits all the clues in the sentence."
+  },
+  {
+   "id": "s041",
+   "g": 1.5,
+   "text": "It is a vegetable. It is orange and grows under the ground.",
+   "options": [
+    {
+     "label": "orange",
+     "emoji": "🍊"
+    },
+    {
+     "label": "corn",
+     "emoji": "🌽"
+    },
+    {
+     "label": "carrot",
+     "emoji": "🥕"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the carrot fits all the clues in the sentence."
+  },
+  {
+   "id": "s042",
+   "g": 1.6,
+   "text": "You see it at night. It is round and bright.",
+   "options": [
+    {
+     "label": "moon",
+     "emoji": "🌕"
+    },
+    {
+     "label": "star",
+     "emoji": "⭐"
+    },
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the moon fits all the clues in the sentence."
+  },
+  {
+   "id": "s043",
+   "g": 1.6,
+   "text": "It has black and white keys.",
+   "options": [
+    {
+     "label": "guitar",
+     "emoji": "🎸"
+    },
+    {
+     "label": "piano",
+     "emoji": "🎹"
+    },
+    {
+     "label": "drum",
+     "emoji": "🥁"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the piano fits all the clues in the sentence."
+  },
+  {
+   "id": "s044",
+   "g": 1.6,
+   "text": "It is red and has a ladder. It helps put out fires.",
+   "options": [
+    {
+     "label": "ambulance",
+     "emoji": "🚑"
+    },
+    {
+     "label": "fire truck",
+     "emoji": "🚒"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the fire truck fits all the clues in the sentence."
+  },
+  {
+   "id": "s045",
+   "g": 1.6,
+   "text": "It is a tool with two sharp blades. You use it to cut paper.",
+   "options": [
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    },
+    {
+     "label": "pencil",
+     "emoji": "✏️"
+    },
+    {
+     "label": "scissors",
+     "emoji": "✂️"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the scissors fits all the clues in the sentence."
+  },
+  {
+   "id": "s046",
+   "g": 1.6,
+   "text": "It is made of ice and snow. It has a carrot nose.",
+   "options": [
+    {
+     "label": "ice cube",
+     "emoji": "🧊"
+    },
+    {
+     "label": "snowman",
+     "emoji": "⛄"
+    },
+    {
+     "label": "snowflake",
+     "emoji": "❄️"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the snowman fits all the clues in the sentence."
+  },
+  {
+   "id": "s047",
+   "g": 1.7,
+   "text": "It has black and white stripes. It looks like a horse.",
+   "options": [
+    {
+     "label": "tiger",
+     "emoji": "🐅"
+    },
+    {
+     "label": "horse",
+     "emoji": "🐴"
+    },
+    {
+     "label": "zebra",
+     "emoji": "🦓"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the zebra fits all the clues in the sentence."
+  },
+  {
+   "id": "s048",
+   "g": 1.7,
+   "text": "It has a long, curved tail and loves to climb trees. It eats bananas.",
+   "options": [
+    {
+     "label": "bear",
+     "emoji": "🐻"
+    },
+    {
+     "label": "monkey",
+     "emoji": "🐒"
+    },
+    {
+     "label": "elephant",
+     "emoji": "🐘"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the monkey fits all the clues in the sentence."
+  },
+  {
+   "id": "s049",
+   "g": 1.7,
+   "text": "It has two big ears and a tiny pink nose. It hops and eats carrots.",
+   "options": [
+    {
+     "label": "mouse",
+     "emoji": "🐭"
+    },
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "rabbit",
+     "emoji": "🐇"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the rabbit fits all the clues in the sentence."
+  },
+  {
+   "id": "s050",
+   "g": 1.7,
+   "text": "You wear them on your face to help you see.",
+   "options": [
+    {
+     "label": "glasses",
+     "emoji": "👓"
+    },
+    {
+     "label": "gloves",
+     "emoji": "🧤"
+    },
+    {
+     "label": "cap",
+     "emoji": "🧢"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the glasses fits all the clues in the sentence."
+  },
+  {
+   "id": "s051",
+   "g": 1.8,
+   "text": "This bird has bright feathers and can talk.",
+   "options": [
+    {
+     "label": "duck",
+     "emoji": "🦆"
+    },
+    {
+     "label": "owl",
+     "emoji": "🦉"
+    },
+    {
+     "label": "parrot",
+     "emoji": "🦜"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the parrot fits all the clues in the sentence."
+  },
+  {
+   "id": "s052",
+   "g": 1.8,
+   "text": "It is purple and sweet. It grows in bunches on a vine.",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    },
+    {
+     "label": "grapes",
+     "emoji": "🍇"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the grapes fits all the clues in the sentence."
+  },
+  {
+   "id": "s053",
+   "g": 1.8,
+   "text": "It is sweet and sticky. Bees make it.",
+   "options": [
+    {
+     "label": "honey",
+     "emoji": "🍯"
+    },
+    {
+     "label": "milk",
+     "emoji": "🥛"
+    },
+    {
+     "label": "bread",
+     "emoji": "🍞"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the honey fits all the clues in the sentence."
+  },
+  {
+   "id": "s054",
+   "g": 1.9,
+   "text": "It has two wings and carries many people through the sky.",
+   "options": [
+    {
+     "label": "helicopter",
+     "emoji": "🚁"
+    },
+    {
+     "label": "airplane",
+     "emoji": "✈️"
+    },
+    {
+     "label": "train",
+     "emoji": "🚂"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the airplane fits all the clues in the sentence."
+  },
+  {
+   "id": "s055",
+   "g": 1.9,
+   "text": "It has a hard shell and big claws. It walks sideways on the sand.",
+   "options": [
+    {
+     "label": "octopus",
+     "emoji": "🐙"
+    },
+    {
+     "label": "turtle",
+     "emoji": "🐢"
+    },
+    {
+     "label": "crab",
+     "emoji": "🦀"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the crab fits all the clues in the sentence."
+  },
+  {
+   "id": "s056",
+   "g": 1.9,
+   "text": "It is big and green on the outside and red inside. It has black seeds.",
+   "options": [
+    {
+     "label": "watermelon",
+     "emoji": "🍉"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the watermelon fits all the clues in the sentence."
+  },
+  {
+   "id": "s057",
+   "g": 1.9,
+   "text": "It starts out as a caterpillar. It has colorful wings.",
+   "options": [
+    {
+     "label": "bee",
+     "emoji": "🐝"
+    },
+    {
+     "label": "bird",
+     "emoji": "🐦"
+    },
+    {
+     "label": "butterfly",
+     "emoji": "🦋"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the butterfly fits all the clues in the sentence."
+  },
+  {
+   "id": "s058",
+   "g": 1.9,
+   "text": "It has strings. You strum it to make music.",
+   "options": [
+    {
+     "label": "drum",
+     "emoji": "🥁"
+    },
+    {
+     "label": "trumpet",
+     "emoji": "🎺"
+    },
+    {
+     "label": "guitar",
+     "emoji": "🎸"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the guitar fits all the clues in the sentence."
+  },
+  {
+   "id": "s059",
+   "g": 2,
+   "text": "It is gray and heavy. It has a horn on its nose.",
+   "options": [
+    {
+     "label": "elephant",
+     "emoji": "🐘"
+    },
+    {
+     "label": "rhino",
+     "emoji": "🦏"
+    },
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    }
+   ],
+   "answer": 1,
+   "why": "Only the rhino fits all the clues in the sentence."
+  },
+  {
+   "id": "s060",
+   "g": 2,
+   "text": "It is the biggest animal in the sea. It breathes air through a hole on its back.",
+   "options": [
+    {
+     "label": "whale",
+     "emoji": "🐋"
+    },
+    {
+     "label": "shark",
+     "emoji": "🦈"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 0,
+   "why": "Only the whale fits all the clues in the sentence."
+  },
+  {
+   "id": "s061",
+   "g": 2,
+   "text": "It has a long stem and a bright yellow top that follows the sun.",
+   "options": [
+    {
+     "label": "rose",
+     "emoji": "🌹"
+    },
+    {
+     "label": "cactus",
+     "emoji": "🌵"
+    },
+    {
+     "label": "sunflower",
+     "emoji": "🌻"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the sunflower fits all the clues in the sentence."
+  },
+  {
+   "id": "s062",
+   "g": 2,
+   "text": "It hangs upside down in a cave. It comes out at night.",
+   "options": [
+    {
+     "label": "bird",
+     "emoji": "🐦"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "bat",
+     "emoji": "🦇"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the bat fits all the clues in the sentence."
+  },
+  {
+   "id": "s063",
+   "g": 2,
+   "text": "It has big blades that spin on top. It can land on a roof.",
+   "options": [
+    {
+     "label": "airplane",
+     "emoji": "✈️"
+    },
+    {
+     "label": "rocket",
+     "emoji": "🚀"
+    },
+    {
+     "label": "helicopter",
+     "emoji": "🚁"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the helicopter fits all the clues in the sentence."
+  },
+  {
+   "id": "s064",
+   "g": 2,
+   "text": "It is green and long. It grows in a garden and is crunchy.",
+   "options": [
+    {
+     "label": "carrot",
+     "emoji": "🥕"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "cucumber",
+     "emoji": "🥒"
+    }
+   ],
+   "answer": 2,
+   "why": "Only the cucumber fits all the clues in the sentence."
+  }
+ ]
+}

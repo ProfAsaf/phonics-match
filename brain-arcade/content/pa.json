@@ -1,0 +1,2214 @@
+{
+ "about": "Brain Arcade phonemic-awareness picture words. Every sounds[] element is exactly one General American phoneme (ids: consonants b d f g h j k l m n p r s t v w y z sh ch th dh ng zh; short vowels a e i o u; long vowels ay ee ie oa; others oo uu ow oy aw ar or er). Letters like x, qu, nk are split (fox = f o k s). words are one-syllable with unique emoji; rhymeSets share final vowel+coda; syllableWords carry dictionary syllable counts and may reuse emoji from words.",
+ "words": [
+  {
+   "word": "cat",
+   "emoji": "🐱",
+   "sounds": [
+    "k",
+    "a",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "hat",
+   "emoji": "🎩",
+   "sounds": [
+    "h",
+    "a",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bat",
+   "emoji": "🦇",
+   "sounds": [
+    "b",
+    "a",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "rat",
+   "emoji": "🐀",
+   "sounds": [
+    "r",
+    "a",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "map",
+   "emoji": "🗺️",
+   "sounds": [
+    "m",
+    "a",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "cap",
+   "emoji": "🧢",
+   "sounds": [
+    "k",
+    "a",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "clap",
+   "emoji": "👏",
+   "sounds": [
+    "k",
+    "l",
+    "a",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "trap",
+   "emoji": "🪤",
+   "sounds": [
+    "t",
+    "r",
+    "a",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "can",
+   "emoji": "🥫",
+   "sounds": [
+    "k",
+    "a",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "man",
+   "emoji": "👨",
+   "sounds": [
+    "m",
+    "a",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bag",
+   "emoji": "🛍️",
+   "sounds": [
+    "b",
+    "a",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "flag",
+   "emoji": "🚩",
+   "sounds": [
+    "f",
+    "l",
+    "a",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "tag",
+   "emoji": "🏷️",
+   "sounds": [
+    "t",
+    "a",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "crab",
+   "emoji": "🦀",
+   "sounds": [
+    "k",
+    "r",
+    "a",
+    "b"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "hand",
+   "emoji": "✋",
+   "sounds": [
+    "h",
+    "a",
+    "n",
+    "d"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ant",
+   "emoji": "🐜",
+   "sounds": [
+    "a",
+    "n",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bank",
+   "emoji": "🏦",
+   "sounds": [
+    "b",
+    "a",
+    "ng",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bed",
+   "emoji": "🛏️",
+   "sounds": [
+    "b",
+    "e",
+    "d"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "leg",
+   "emoji": "🦵",
+   "sounds": [
+    "l",
+    "e",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "pen",
+   "emoji": "🖊️",
+   "sounds": [
+    "p",
+    "e",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ten",
+   "emoji": "🔟",
+   "sounds": [
+    "t",
+    "e",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "web",
+   "emoji": "🕸️",
+   "sounds": [
+    "w",
+    "e",
+    "b"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "nest",
+   "emoji": "🪺",
+   "sounds": [
+    "n",
+    "e",
+    "s",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "tent",
+   "emoji": "⛺",
+   "sounds": [
+    "t",
+    "e",
+    "n",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "vest",
+   "emoji": "🦺",
+   "sounds": [
+    "v",
+    "e",
+    "s",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bell",
+   "emoji": "🔔",
+   "sounds": [
+    "b",
+    "e",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "shell",
+   "emoji": "🐚",
+   "sounds": [
+    "sh",
+    "e",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "sled",
+   "emoji": "🛷",
+   "sounds": [
+    "s",
+    "l",
+    "e",
+    "d"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "dress",
+   "emoji": "👗",
+   "sounds": [
+    "d",
+    "r",
+    "e",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "egg",
+   "emoji": "🥚",
+   "sounds": [
+    "e",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bread",
+   "emoji": "🍞",
+   "sounds": [
+    "b",
+    "r",
+    "e",
+    "d"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "thread",
+   "emoji": "🧵",
+   "sounds": [
+    "th",
+    "r",
+    "e",
+    "d"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "pig",
+   "emoji": "🐷",
+   "sounds": [
+    "p",
+    "i",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "pin",
+   "emoji": "📌",
+   "sounds": [
+    "p",
+    "i",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "six",
+   "emoji": "6️⃣",
+   "sounds": [
+    "s",
+    "i",
+    "k",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ship",
+   "emoji": "🚢",
+   "sounds": [
+    "sh",
+    "i",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "fish",
+   "emoji": "🐟",
+   "sounds": [
+    "f",
+    "i",
+    "sh"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ring",
+   "emoji": "💍",
+   "sounds": [
+    "r",
+    "i",
+    "ng"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "swim",
+   "emoji": "🏊",
+   "sounds": [
+    "s",
+    "w",
+    "i",
+    "m"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "brick",
+   "emoji": "🧱",
+   "sounds": [
+    "b",
+    "r",
+    "i",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "chick",
+   "emoji": "🐤",
+   "sounds": [
+    "ch",
+    "i",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "pill",
+   "emoji": "💊",
+   "sounds": [
+    "p",
+    "i",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "milk",
+   "emoji": "🥛",
+   "sounds": [
+    "m",
+    "i",
+    "l",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "gift",
+   "emoji": "🎁",
+   "sounds": [
+    "g",
+    "i",
+    "f",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "dog",
+   "emoji": "🐶",
+   "sounds": [
+    "d",
+    "o",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "fox",
+   "emoji": "🦊",
+   "sounds": [
+    "f",
+    "o",
+    "k",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ox",
+   "emoji": "🐂",
+   "sounds": [
+    "o",
+    "k",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "box",
+   "emoji": "📦",
+   "sounds": [
+    "b",
+    "o",
+    "k",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "sock",
+   "emoji": "🧦",
+   "sounds": [
+    "s",
+    "o",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "rock",
+   "emoji": "🪨",
+   "sounds": [
+    "r",
+    "o",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "lock",
+   "emoji": "🔒",
+   "sounds": [
+    "l",
+    "o",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "clock",
+   "emoji": "🕐",
+   "sounds": [
+    "k",
+    "l",
+    "o",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "frog",
+   "emoji": "🐸",
+   "sounds": [
+    "f",
+    "r",
+    "o",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "log",
+   "emoji": "🪵",
+   "sounds": [
+    "l",
+    "o",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "fog",
+   "emoji": "🌫️",
+   "sounds": [
+    "f",
+    "o",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "swan",
+   "emoji": "🦢",
+   "sounds": [
+    "s",
+    "w",
+    "o",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "stop",
+   "emoji": "🛑",
+   "sounds": [
+    "s",
+    "t",
+    "o",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "knot",
+   "emoji": "🪢",
+   "sounds": [
+    "n",
+    "o",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bug",
+   "emoji": "🐛",
+   "sounds": [
+    "b",
+    "u",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bus",
+   "emoji": "🚌",
+   "sounds": [
+    "b",
+    "u",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "sun",
+   "emoji": "☀️",
+   "sounds": [
+    "s",
+    "u",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "duck",
+   "emoji": "🦆",
+   "sounds": [
+    "d",
+    "u",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "drum",
+   "emoji": "🥁",
+   "sounds": [
+    "d",
+    "r",
+    "u",
+    "m"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "truck",
+   "emoji": "🚚",
+   "sounds": [
+    "t",
+    "r",
+    "u",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "plug",
+   "emoji": "🔌",
+   "sounds": [
+    "p",
+    "l",
+    "u",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "skunk",
+   "emoji": "🦨",
+   "sounds": [
+    "s",
+    "k",
+    "u",
+    "ng",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "hut",
+   "emoji": "🛖",
+   "sounds": [
+    "h",
+    "u",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "lung",
+   "emoji": "🫁",
+   "sounds": [
+    "l",
+    "u",
+    "ng"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "hug",
+   "emoji": "🤗",
+   "sounds": [
+    "h",
+    "u",
+    "g"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "run",
+   "emoji": "🏃",
+   "sounds": [
+    "r",
+    "u",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "one",
+   "emoji": "1️⃣",
+   "sounds": [
+    "w",
+    "u",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "glove",
+   "emoji": "🧤",
+   "sounds": [
+    "g",
+    "l",
+    "u",
+    "v"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "dove",
+   "emoji": "🕊️",
+   "sounds": [
+    "d",
+    "u",
+    "v"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "cake",
+   "emoji": "🎂",
+   "sounds": [
+    "k",
+    "ay",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "snake",
+   "emoji": "🐍",
+   "sounds": [
+    "s",
+    "n",
+    "ay",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "steak",
+   "emoji": "🥩",
+   "sounds": [
+    "s",
+    "t",
+    "ay",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "rain",
+   "emoji": "🌧️",
+   "sounds": [
+    "r",
+    "ay",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "train",
+   "emoji": "🚆",
+   "sounds": [
+    "t",
+    "r",
+    "ay",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "brain",
+   "emoji": "🧠",
+   "sounds": [
+    "b",
+    "r",
+    "ay",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "chain",
+   "emoji": "⛓️",
+   "sounds": [
+    "ch",
+    "ay",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "snail",
+   "emoji": "🐌",
+   "sounds": [
+    "s",
+    "n",
+    "ay",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "mail",
+   "emoji": "📬",
+   "sounds": [
+    "m",
+    "ay",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "whale",
+   "emoji": "🐋",
+   "sounds": [
+    "w",
+    "ay",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "wave",
+   "emoji": "🌊",
+   "sounds": [
+    "w",
+    "ay",
+    "v"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "skate",
+   "emoji": "⛸️",
+   "sounds": [
+    "s",
+    "k",
+    "ay",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "eight",
+   "emoji": "8️⃣",
+   "sounds": [
+    "ay",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "game",
+   "emoji": "🎮",
+   "sounds": [
+    "g",
+    "ay",
+    "m"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bee",
+   "emoji": "🐝",
+   "sounds": [
+    "b",
+    "ee"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "tree",
+   "emoji": "🌳",
+   "sounds": [
+    "t",
+    "r",
+    "ee"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "key",
+   "emoji": "🔑",
+   "sounds": [
+    "k",
+    "ee"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "three",
+   "emoji": "3️⃣",
+   "sounds": [
+    "th",
+    "r",
+    "ee"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ski",
+   "emoji": "🎿",
+   "sounds": [
+    "s",
+    "k",
+    "ee"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "sheep",
+   "emoji": "🐑",
+   "sounds": [
+    "sh",
+    "ee",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "sleep",
+   "emoji": "😴",
+   "sounds": [
+    "s",
+    "l",
+    "ee",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "cheese",
+   "emoji": "🧀",
+   "sounds": [
+    "ch",
+    "ee",
+    "z"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "peach",
+   "emoji": "🍑",
+   "sounds": [
+    "p",
+    "ee",
+    "ch"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "beach",
+   "emoji": "🏖️",
+   "sounds": [
+    "b",
+    "ee",
+    "ch"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "wheel",
+   "emoji": "🛞",
+   "sounds": [
+    "w",
+    "ee",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "seat",
+   "emoji": "💺",
+   "sounds": [
+    "s",
+    "ee",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "jeans",
+   "emoji": "👖",
+   "sounds": [
+    "j",
+    "ee",
+    "n",
+    "z"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bike",
+   "emoji": "🚲",
+   "sounds": [
+    "b",
+    "ie",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "kite",
+   "emoji": "🪁",
+   "sounds": [
+    "k",
+    "ie",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "five",
+   "emoji": "5️⃣",
+   "sounds": [
+    "f",
+    "ie",
+    "v"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "nine",
+   "emoji": "9️⃣",
+   "sounds": [
+    "n",
+    "ie",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "pie",
+   "emoji": "🥧",
+   "sounds": [
+    "p",
+    "ie"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "tie",
+   "emoji": "👔",
+   "sounds": [
+    "t",
+    "ie"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "fly",
+   "emoji": "🪰",
+   "sounds": [
+    "f",
+    "l",
+    "ie"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "spy",
+   "emoji": "🕵️",
+   "sounds": [
+    "s",
+    "p",
+    "ie"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ice",
+   "emoji": "🧊",
+   "sounds": [
+    "ie",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "dice",
+   "emoji": "🎲",
+   "sounds": [
+    "d",
+    "ie",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "rice",
+   "emoji": "🍚",
+   "sounds": [
+    "r",
+    "ie",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "coat",
+   "emoji": "🧥",
+   "sounds": [
+    "k",
+    "oa",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "goat",
+   "emoji": "🐐",
+   "sounds": [
+    "g",
+    "oa",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "boat",
+   "emoji": "🚤",
+   "sounds": [
+    "b",
+    "oa",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "soap",
+   "emoji": "🧼",
+   "sounds": [
+    "s",
+    "oa",
+    "p"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bone",
+   "emoji": "🦴",
+   "sounds": [
+    "b",
+    "oa",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "phone",
+   "emoji": "📱",
+   "sounds": [
+    "f",
+    "oa",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "nose",
+   "emoji": "👃",
+   "sounds": [
+    "n",
+    "oa",
+    "z"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "rose",
+   "emoji": "🌹",
+   "sounds": [
+    "r",
+    "oa",
+    "z"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ghost",
+   "emoji": "👻",
+   "sounds": [
+    "g",
+    "oa",
+    "s",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "moon",
+   "emoji": "🌙",
+   "sounds": [
+    "m",
+    "oo",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "spoon",
+   "emoji": "🥄",
+   "sounds": [
+    "s",
+    "p",
+    "oo",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "broom",
+   "emoji": "🧹",
+   "sounds": [
+    "b",
+    "r",
+    "oo",
+    "m"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "boot",
+   "emoji": "🥾",
+   "sounds": [
+    "b",
+    "oo",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "tooth",
+   "emoji": "🦷",
+   "sounds": [
+    "t",
+    "oo",
+    "th"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "school",
+   "emoji": "🏫",
+   "sounds": [
+    "s",
+    "k",
+    "oo",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "two",
+   "emoji": "2️⃣",
+   "sounds": [
+    "t",
+    "oo"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "shoe",
+   "emoji": "👞",
+   "sounds": [
+    "sh",
+    "oo"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "blue",
+   "emoji": "🔵",
+   "sounds": [
+    "b",
+    "l",
+    "oo"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "juice",
+   "emoji": "🧃",
+   "sounds": [
+    "j",
+    "oo",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "book",
+   "emoji": "📕",
+   "sounds": [
+    "b",
+    "uu",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "foot",
+   "emoji": "🦶",
+   "sounds": [
+    "f",
+    "uu",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "wolf",
+   "emoji": "🐺",
+   "sounds": [
+    "w",
+    "uu",
+    "l",
+    "f"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "hook",
+   "emoji": "🪝",
+   "sounds": [
+    "h",
+    "uu",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "cow",
+   "emoji": "🐄",
+   "sounds": [
+    "k",
+    "ow"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "house",
+   "emoji": "🏠",
+   "sounds": [
+    "h",
+    "ow",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "mouse",
+   "emoji": "🐭",
+   "sounds": [
+    "m",
+    "ow",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "owl",
+   "emoji": "🦉",
+   "sounds": [
+    "ow",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "clown",
+   "emoji": "🤡",
+   "sounds": [
+    "k",
+    "l",
+    "ow",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "crown",
+   "emoji": "👑",
+   "sounds": [
+    "k",
+    "r",
+    "ow",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "cloud",
+   "emoji": "☁️",
+   "sounds": [
+    "k",
+    "l",
+    "ow",
+    "d"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "brown",
+   "emoji": "🟤",
+   "sounds": [
+    "b",
+    "r",
+    "ow",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "boy",
+   "emoji": "👦",
+   "sounds": [
+    "b",
+    "oy"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "coin",
+   "emoji": "🪙",
+   "sounds": [
+    "k",
+    "oy",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "saw",
+   "emoji": "🪚",
+   "sounds": [
+    "s",
+    "aw"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "paw",
+   "emoji": "🐾",
+   "sounds": [
+    "p",
+    "aw"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "yawn",
+   "emoji": "🥱",
+   "sounds": [
+    "y",
+    "aw",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "ball",
+   "emoji": "⚽",
+   "sounds": [
+    "b",
+    "aw",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "car",
+   "emoji": "🚗",
+   "sounds": [
+    "k",
+    "ar"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "star",
+   "emoji": "⭐",
+   "sounds": [
+    "s",
+    "t",
+    "ar"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "jar",
+   "emoji": "🫙",
+   "sounds": [
+    "j",
+    "ar"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "shark",
+   "emoji": "🦈",
+   "sounds": [
+    "sh",
+    "ar",
+    "k"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "heart",
+   "emoji": "❤️",
+   "sounds": [
+    "h",
+    "ar",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "cart",
+   "emoji": "🛒",
+   "sounds": [
+    "k",
+    "ar",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "scarf",
+   "emoji": "🧣",
+   "sounds": [
+    "s",
+    "k",
+    "ar",
+    "f"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "yarn",
+   "emoji": "🧶",
+   "sounds": [
+    "y",
+    "ar",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "corn",
+   "emoji": "🌽",
+   "sounds": [
+    "k",
+    "or",
+    "n"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "horse",
+   "emoji": "🐴",
+   "sounds": [
+    "h",
+    "or",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "door",
+   "emoji": "🚪",
+   "sounds": [
+    "d",
+    "or"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "four",
+   "emoji": "4️⃣",
+   "sounds": [
+    "f",
+    "or"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "boar",
+   "emoji": "🐗",
+   "sounds": [
+    "b",
+    "or"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "storm",
+   "emoji": "⛈️",
+   "sounds": [
+    "s",
+    "t",
+    "or",
+    "m"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "shorts",
+   "emoji": "🩳",
+   "sounds": [
+    "sh",
+    "or",
+    "t",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "bird",
+   "emoji": "🐦",
+   "sounds": [
+    "b",
+    "er",
+    "d"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "girl",
+   "emoji": "👧",
+   "sounds": [
+    "g",
+    "er",
+    "l"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "shirt",
+   "emoji": "👕",
+   "sounds": [
+    "sh",
+    "er",
+    "t"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "church",
+   "emoji": "⛪",
+   "sounds": [
+    "ch",
+    "er",
+    "ch"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "purse",
+   "emoji": "👛",
+   "sounds": [
+    "p",
+    "er",
+    "s"
+   ],
+   "syllables": 1
+  },
+  {
+   "word": "worm",
+   "emoji": "🪱",
+   "sounds": [
+    "w",
+    "er",
+    "m"
+   ],
+   "syllables": 1
+  }
+ ],
+ "rhymeSets": [
+  [
+   "cat",
+   "hat",
+   "bat",
+   "rat"
+  ],
+  [
+   "map",
+   "cap",
+   "clap",
+   "trap"
+  ],
+  [
+   "bag",
+   "flag",
+   "tag"
+  ],
+  [
+   "bed",
+   "sled",
+   "bread",
+   "thread"
+  ],
+  [
+   "box",
+   "fox",
+   "ox"
+  ],
+  [
+   "sock",
+   "rock",
+   "lock",
+   "clock"
+  ],
+  [
+   "dog",
+   "log",
+   "frog",
+   "fog"
+  ],
+  [
+   "bug",
+   "plug",
+   "hug"
+  ],
+  [
+   "sun",
+   "run",
+   "one"
+  ],
+  [
+   "cake",
+   "snake",
+   "steak"
+  ],
+  [
+   "rain",
+   "train",
+   "brain",
+   "chain"
+  ],
+  [
+   "snail",
+   "mail",
+   "whale"
+  ],
+  [
+   "bee",
+   "tree",
+   "key",
+   "three",
+   "ski"
+  ],
+  [
+   "pie",
+   "tie",
+   "fly",
+   "spy"
+  ],
+  [
+   "ice",
+   "dice",
+   "rice"
+  ],
+  [
+   "coat",
+   "goat",
+   "boat"
+  ],
+  [
+   "two",
+   "shoe",
+   "blue"
+  ],
+  [
+   "clown",
+   "crown",
+   "brown"
+  ],
+  [
+   "car",
+   "star",
+   "jar"
+  ],
+  [
+   "door",
+   "four",
+   "boar"
+  ]
+ ],
+ "syllableWords": [
+  {
+   "word": "ship",
+   "emoji": "🚢",
+   "syllables": 1
+  },
+  {
+   "word": "frog",
+   "emoji": "🐸",
+   "syllables": 1
+  },
+  {
+   "word": "tree",
+   "emoji": "🌳",
+   "syllables": 1
+  },
+  {
+   "word": "star",
+   "emoji": "⭐",
+   "syllables": 1
+  },
+  {
+   "word": "moon",
+   "emoji": "🌙",
+   "syllables": 1
+  },
+  {
+   "word": "house",
+   "emoji": "🏠",
+   "syllables": 1
+  },
+  {
+   "word": "cake",
+   "emoji": "🎂",
+   "syllables": 1
+  },
+  {
+   "word": "fish",
+   "emoji": "🐟",
+   "syllables": 1
+  },
+  {
+   "word": "bee",
+   "emoji": "🐝",
+   "syllables": 1
+  },
+  {
+   "word": "book",
+   "emoji": "📕",
+   "syllables": 1
+  },
+  {
+   "word": "shoe",
+   "emoji": "👞",
+   "syllables": 1
+  },
+  {
+   "word": "snake",
+   "emoji": "🐍",
+   "syllables": 1
+  },
+  {
+   "word": "apple",
+   "emoji": "🍎",
+   "syllables": 2
+  },
+  {
+   "word": "tiger",
+   "emoji": "🐯",
+   "syllables": 2
+  },
+  {
+   "word": "monkey",
+   "emoji": "🐒",
+   "syllables": 2
+  },
+  {
+   "word": "pizza",
+   "emoji": "🍕",
+   "syllables": 2
+  },
+  {
+   "word": "candy",
+   "emoji": "🍬",
+   "syllables": 2
+  },
+  {
+   "word": "lemon",
+   "emoji": "🍋",
+   "syllables": 2
+  },
+  {
+   "word": "spider",
+   "emoji": "🕷️",
+   "syllables": 2
+  },
+  {
+   "word": "turtle",
+   "emoji": "🐢",
+   "syllables": 2
+  },
+  {
+   "word": "pencil",
+   "emoji": "✏️",
+   "syllables": 2
+  },
+  {
+   "word": "window",
+   "emoji": "🪟",
+   "syllables": 2
+  },
+  {
+   "word": "pumpkin",
+   "emoji": "🎃",
+   "syllables": 2
+  },
+  {
+   "word": "robot",
+   "emoji": "🤖",
+   "syllables": 2
+  },
+  {
+   "word": "rocket",
+   "emoji": "🚀",
+   "syllables": 2
+  },
+  {
+   "word": "penguin",
+   "emoji": "🐧",
+   "syllables": 2
+  },
+  {
+   "word": "zebra",
+   "emoji": "🦓",
+   "syllables": 2
+  },
+  {
+   "word": "dolphin",
+   "emoji": "🐬",
+   "syllables": 2
+  },
+  {
+   "word": "ladder",
+   "emoji": "🪜",
+   "syllables": 2
+  },
+  {
+   "word": "cookie",
+   "emoji": "🍪",
+   "syllables": 2
+  },
+  {
+   "word": "hammer",
+   "emoji": "🔨",
+   "syllables": 2
+  },
+  {
+   "word": "candle",
+   "emoji": "🕯️",
+   "syllables": 2
+  },
+  {
+   "word": "carrot",
+   "emoji": "🥕",
+   "syllables": 2
+  },
+  {
+   "word": "tractor",
+   "emoji": "🚜",
+   "syllables": 2
+  },
+  {
+   "word": "popcorn",
+   "emoji": "🍿",
+   "syllables": 2
+  },
+  {
+   "word": "cupcake",
+   "emoji": "🧁",
+   "syllables": 2
+  },
+  {
+   "word": "rainbow",
+   "emoji": "🌈",
+   "syllables": 2
+  },
+  {
+   "word": "giraffe",
+   "emoji": "🦒",
+   "syllables": 2
+  },
+  {
+   "word": "banana",
+   "emoji": "🍌",
+   "syllables": 3
+  },
+  {
+   "word": "butterfly",
+   "emoji": "🦋",
+   "syllables": 3
+  },
+  {
+   "word": "elephant",
+   "emoji": "🐘",
+   "syllables": 3
+  },
+  {
+   "word": "octopus",
+   "emoji": "🐙",
+   "syllables": 3
+  },
+  {
+   "word": "dinosaur",
+   "emoji": "🦖",
+   "syllables": 3
+  },
+  {
+   "word": "kangaroo",
+   "emoji": "🦘",
+   "syllables": 3
+  },
+  {
+   "word": "gorilla",
+   "emoji": "🦍",
+   "syllables": 3
+  },
+  {
+   "word": "tomato",
+   "emoji": "🍅",
+   "syllables": 3
+  },
+  {
+   "word": "potato",
+   "emoji": "🥔",
+   "syllables": 3
+  },
+  {
+   "word": "strawberry",
+   "emoji": "🍓",
+   "syllables": 3
+  },
+  {
+   "word": "pineapple",
+   "emoji": "🍍",
+   "syllables": 3
+  },
+  {
+   "word": "spaghetti",
+   "emoji": "🍝",
+   "syllables": 3
+  },
+  {
+   "word": "telephone",
+   "emoji": "☎️",
+   "syllables": 3
+  },
+  {
+   "word": "umbrella",
+   "emoji": "☂️",
+   "syllables": 3
+  },
+  {
+   "word": "volcano",
+   "emoji": "🌋",
+   "syllables": 3
+  },
+  {
+   "word": "ambulance",
+   "emoji": "🚑",
+   "syllables": 3
+  },
+  {
+   "word": "calendar",
+   "emoji": "📅",
+   "syllables": 3
+  },
+  {
+   "word": "piano",
+   "emoji": "🎹",
+   "syllables": 3
+  },
+  {
+   "word": "ladybug",
+   "emoji": "🐞",
+   "syllables": 3
+  },
+  {
+   "word": "coconut",
+   "emoji": "🥥",
+   "syllables": 3
+  },
+  {
+   "word": "hamburger",
+   "emoji": "🍔",
+   "syllables": 3
+  },
+  {
+   "word": "cucumber",
+   "emoji": "🥒",
+   "syllables": 3
+  },
+  {
+   "word": "mosquito",
+   "emoji": "🦟",
+   "syllables": 3
+  },
+  {
+   "word": "unicorn",
+   "emoji": "🦄",
+   "syllables": 3
+  },
+  {
+   "word": "lollipop",
+   "emoji": "🍭",
+   "syllables": 3
+  },
+  {
+   "word": "basketball",
+   "emoji": "🏀",
+   "syllables": 3
+  },
+  {
+   "word": "tornado",
+   "emoji": "🌪️",
+   "syllables": 3
+  },
+  {
+   "word": "watermelon",
+   "emoji": "🍉",
+   "syllables": 4
+  },
+  {
+   "word": "television",
+   "emoji": "📺",
+   "syllables": 4
+  },
+  {
+   "word": "helicopter",
+   "emoji": "🚁",
+   "syllables": 4
+  },
+  {
+   "word": "avocado",
+   "emoji": "🥑",
+   "syllables": 4
+  },
+  {
+   "word": "motorcycle",
+   "emoji": "🏍️",
+   "syllables": 4
+  },
+  {
+   "word": "elevator",
+   "emoji": "🛗",
+   "syllables": 4
+  },
+  {
+   "word": "thermometer",
+   "emoji": "🌡️",
+   "syllables": 4
+  },
+  {
+   "word": "caterpillar",
+   "emoji": "🐛",
+   "syllables": 4
+  },
+  {
+   "word": "accordion",
+   "emoji": "🪗",
+   "syllables": 4
+  },
+  {
+   "word": "orangutan",
+   "emoji": "🦧",
+   "syllables": 4
+  }
+ ]
+}

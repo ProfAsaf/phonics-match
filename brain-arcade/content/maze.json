@@ -1,0 +1,1073 @@
+{
+ "about": "Brain Arcade maze (cloze) items. Exactly one ___ per text; 3 options; answer is an index into options. From g 2.0 many items are short passages with the blank in the last sentence.",
+ "items": [
+  {
+   "id": "m001",
+   "g": 0.8,
+   "text": "The cat will ___ on the bed.",
+   "options": [
+    "red",
+    "pond",
+    "nap"
+   ],
+   "answer": 2,
+   "why": "A cat can nap on a bed."
+  },
+  {
+   "id": "m002",
+   "g": 0.8,
+   "text": "A hen can lay an ___.",
+   "options": [
+    "egg",
+    "hop",
+    "ear"
+   ],
+   "answer": 0,
+   "why": "A hen lays an egg."
+  },
+  {
+   "id": "m003",
+   "g": 0.8,
+   "text": "I can ___ with my eyes.",
+   "options": [
+    "red",
+    "see",
+    "sit"
+   ],
+   "answer": 1,
+   "why": "You see with your eyes."
+  },
+  {
+   "id": "m004",
+   "g": 0.9,
+   "text": "The pig likes to roll in the ___.",
+   "options": [
+    "mud",
+    "sky",
+    "big"
+   ],
+   "answer": 0,
+   "why": "Pigs like to roll in mud."
+  },
+  {
+   "id": "m005",
+   "g": 0.9,
+   "text": "A fish can swim in a ___.",
+   "options": [
+    "hat",
+    "pond",
+    "jump"
+   ],
+   "answer": 1,
+   "why": "A fish swims in a pond."
+  },
+  {
+   "id": "m006",
+   "g": 0.9,
+   "text": "Ice is cold, but fire is ___.",
+   "options": [
+    "wet",
+    "jump",
+    "hot"
+   ],
+   "answer": 2,
+   "why": "Fire is hot."
+  },
+  {
+   "id": "m007",
+   "g": 1,
+   "text": "A cow gives us ___.",
+   "options": [
+    "milk",
+    "eggs",
+    "jump"
+   ],
+   "answer": 0,
+   "why": "A cow gives us milk."
+  },
+  {
+   "id": "m008",
+   "g": 1,
+   "text": "I use a pen to ___.",
+   "options": [
+    "swim",
+    "write",
+    "blue"
+   ],
+   "answer": 1,
+   "why": "You write with a pen."
+  },
+  {
+   "id": "m009",
+   "g": 1,
+   "text": "Fish live in the ___.",
+   "options": [
+    "hop",
+    "water",
+    "tree"
+   ],
+   "answer": 1,
+   "why": "Fish live in water."
+  },
+  {
+   "id": "m010",
+   "g": 1,
+   "text": "My dog likes to chase the ___.",
+   "options": [
+    "soup",
+    "sleep",
+    "ball"
+   ],
+   "answer": 2,
+   "why": "Dogs like to chase a ball."
+  },
+  {
+   "id": "m011",
+   "g": 1.1,
+   "text": "Mom can ___ the car to the shop.",
+   "options": [
+    "soft",
+    "sleep",
+    "drive"
+   ],
+   "answer": 2,
+   "why": "You drive a car."
+  },
+  {
+   "id": "m012",
+   "g": 1.1,
+   "text": "Snow is white and ___.",
+   "options": [
+    "jump",
+    "cold",
+    "loud"
+   ],
+   "answer": 1,
+   "why": "Snow is cold."
+  },
+  {
+   "id": "m013",
+   "g": 1.2,
+   "text": "Before you eat, be sure to ___ your hands.",
+   "options": [
+    "jump",
+    "blue",
+    "wash"
+   ],
+   "answer": 2,
+   "why": "You wash your hands before you eat."
+  },
+  {
+   "id": "m014",
+   "g": 1.2,
+   "text": "We plant seeds in the ___.",
+   "options": [
+    "cloud",
+    "dirt",
+    "quickly"
+   ],
+   "answer": 1,
+   "why": "Seeds go in the dirt."
+  },
+  {
+   "id": "m015",
+   "g": 1.2,
+   "text": "I hang my coat on a ___.",
+   "options": [
+    "hook",
+    "snake",
+    "quickly"
+   ],
+   "answer": 0,
+   "why": "You hang a coat on a hook."
+  },
+  {
+   "id": "m016",
+   "g": 1.3,
+   "text": "At night, the stars shine in the ___.",
+   "options": [
+    "sky",
+    "quick",
+    "bowl"
+   ],
+   "answer": 0,
+   "why": "Stars shine in the sky."
+  },
+  {
+   "id": "m017",
+   "g": 1.3,
+   "text": "A bird has two wings and a ___.",
+   "options": [
+    "flew",
+    "wheel",
+    "beak"
+   ],
+   "answer": 2,
+   "why": "A bird has a beak."
+  },
+  {
+   "id": "m018",
+   "g": 1.3,
+   "text": "The clock tells us the ___.",
+   "options": [
+    "time",
+    "jump",
+    "tree"
+   ],
+   "answer": 0,
+   "why": "A clock tells the time."
+  },
+  {
+   "id": "m019",
+   "g": 1.3,
+   "text": "Tom was very hungry, so he ate a big ___.",
+   "options": [
+    "slowly",
+    "lunch",
+    "cloud"
+   ],
+   "answer": 1,
+   "why": "A hungry boy eats lunch."
+  },
+  {
+   "id": "m020",
+   "g": 1.4,
+   "text": "Mia was so sleepy that she went to ___.",
+   "options": [
+    "quietly",
+    "pencil",
+    "bed"
+   ],
+   "answer": 2,
+   "why": "A sleepy girl goes to bed."
+  },
+  {
+   "id": "m021",
+   "g": 1.4,
+   "text": "The kitten drank a bowl of warm ___.",
+   "options": [
+    "door",
+    "milk",
+    "softly"
+   ],
+   "answer": 1,
+   "why": "Kittens drink milk."
+  },
+  {
+   "id": "m022",
+   "g": 1.4,
+   "text": "Dad cut the paper with ___.",
+   "options": [
+    "slowly",
+    "scissors",
+    "pillows"
+   ],
+   "answer": 1,
+   "why": "Scissors cut paper."
+  },
+  {
+   "id": "m023",
+   "g": 1.5,
+   "text": "When it rains, I use an ___ to stay dry.",
+   "options": [
+    "apple",
+    "quickly",
+    "umbrella"
+   ],
+   "answer": 2,
+   "why": "An umbrella keeps the rain off you."
+  },
+  {
+   "id": "m024",
+   "g": 1.5,
+   "text": "The lion let out a loud ___.",
+   "options": [
+    "hill",
+    "quickly",
+    "roar"
+   ],
+   "answer": 2,
+   "why": "A lion makes a loud roar."
+  },
+  {
+   "id": "m025",
+   "g": 1.5,
+   "text": "After the rain, we saw a pretty ___.",
+   "options": [
+    "rainbow",
+    "hiccup",
+    "quickly"
+   ],
+   "answer": 0,
+   "why": "A rainbow shows up after rain."
+  },
+  {
+   "id": "m026",
+   "g": 1.5,
+   "text": "A turtle moves very ___.",
+   "options": [
+    "shell",
+    "slowly",
+    "tall"
+   ],
+   "answer": 1,
+   "why": "Turtles move slowly."
+  },
+  {
+   "id": "m027",
+   "g": 1.5,
+   "text": "The teacher gave each child a ___ to write with.",
+   "options": [
+    "kindly",
+    "pillow",
+    "pencil"
+   ],
+   "answer": 2,
+   "why": "You write with a pencil."
+  },
+  {
+   "id": "m028",
+   "g": 1.6,
+   "text": "Max put on his boots to walk in the ___.",
+   "options": [
+    "clock",
+    "happily",
+    "mud"
+   ],
+   "answer": 2,
+   "why": "Boots keep your feet dry in mud."
+  },
+  {
+   "id": "m029",
+   "g": 1.6,
+   "text": "The sun was so bright that Kai needed his ___.",
+   "options": [
+    "sunglasses",
+    "brightly",
+    "spoon"
+   ],
+   "answer": 0,
+   "why": "Sunglasses help in bright sun."
+  },
+  {
+   "id": "m030",
+   "g": 1.6,
+   "text": "Sam was sad because his balloon floated up into the ___.",
+   "options": [
+    "sky",
+    "pocket",
+    "softly"
+   ],
+   "answer": 0,
+   "why": "A balloon can float up into the sky."
+  },
+  {
+   "id": "m031",
+   "g": 1.7,
+   "text": "Ava planted a seed, and soon it began to ___.",
+   "options": [
+    "sing",
+    "grow",
+    "garden"
+   ],
+   "answer": 1,
+   "why": "A seed grows into a plant."
+  },
+  {
+   "id": "m032",
+   "g": 1.7,
+   "text": "The class lined up quietly to go to ___.",
+   "options": [
+    "lunch",
+    "purple",
+    "blanket"
+   ],
+   "answer": 0,
+   "why": "The class went to lunch."
+  },
+  {
+   "id": "m033",
+   "g": 1.8,
+   "text": "The ice cream melted because the day was so ___.",
+   "options": [
+    "hot",
+    "melt",
+    "tall"
+   ],
+   "answer": 0,
+   "why": "Ice cream melts on a hot day."
+  },
+  {
+   "id": "m034",
+   "g": 1.9,
+   "text": "Dad's glasses help him ___ the small words in his book.",
+   "options": [
+    "see",
+    "bake",
+    "sunny"
+   ],
+   "answer": 0,
+   "why": "Glasses help you see."
+  },
+  {
+   "id": "m035",
+   "g": 1.9,
+   "text": "Dad turned on the heater because the room was ___.",
+   "options": [
+    "quickly",
+    "round",
+    "chilly"
+   ],
+   "answer": 2,
+   "why": "A heater warms a chilly room."
+  },
+  {
+   "id": "m036",
+   "g": 2,
+   "text": "Mia forgot her umbrella. When the rain started, she got ___.",
+   "options": [
+    "sleepy",
+    "soaked",
+    "quickly"
+   ],
+   "answer": 1,
+   "why": "Without an umbrella, Mia got soaked."
+  },
+  {
+   "id": "m037",
+   "g": 2,
+   "text": "Ana had a loose tooth. It wiggled and wiggled until it finally fell ___.",
+   "options": [
+    "blue",
+    "happy",
+    "out"
+   ],
+   "answer": 2,
+   "why": "A loose tooth falls out."
+  },
+  {
+   "id": "m038",
+   "g": 2.1,
+   "text": "Omar's puppy chewed his shoe. Omar was a little mad, but he still gave the puppy a ___.",
+   "options": [
+    "bridge",
+    "gently",
+    "hug"
+   ],
+   "answer": 2,
+   "why": "Omar gave the puppy a hug."
+  },
+  {
+   "id": "m039",
+   "g": 2.1,
+   "text": "Mia's grandma lives far away. They talk by video so they can ___ each other's faces.",
+   "options": [
+    "bake",
+    "quietly",
+    "see"
+   ],
+   "answer": 2,
+   "why": "Video lets them see each other."
+  },
+  {
+   "id": "m040",
+   "g": 2.2,
+   "text": "The sky grew dark and the wind began to blow. Soon a big ___ rolled in.",
+   "options": [
+    "spoon",
+    "loudly",
+    "storm"
+   ],
+   "answer": 2,
+   "why": "Dark sky and wind mean a storm."
+  },
+  {
+   "id": "m041",
+   "g": 2.2,
+   "text": "The farmer woke up before sunrise to ___ the cows.",
+   "options": [
+    "milk",
+    "farm",
+    "sneeze"
+   ],
+   "answer": 0,
+   "why": "Farmers milk cows."
+  },
+  {
+   "id": "m042",
+   "g": 2.3,
+   "text": "Lily saved her coins in a jar for months. At last she had enough money to buy a ___.",
+   "options": [
+    "mountain",
+    "slowly",
+    "bike"
+   ],
+   "answer": 2,
+   "why": "You can buy a bike with saved money."
+  },
+  {
+   "id": "m043",
+   "g": 2.3,
+   "text": "The puppy was so small that it could fit in Sam's ___.",
+   "options": [
+    "backpack",
+    "softly",
+    "ocean"
+   ],
+   "answer": 0,
+   "why": "A tiny puppy can fit in a backpack."
+  },
+  {
+   "id": "m044",
+   "g": 2.4,
+   "text": "Kai wanted to bake a cake. First, he ___ the eggs and flour.",
+   "options": [
+    "jumped",
+    "sweet",
+    "mixed"
+   ],
+   "answer": 2,
+   "why": "You mix eggs and flour for a cake."
+  },
+  {
+   "id": "m045",
+   "g": 2.4,
+   "text": "Rosa's shoes were covered in mud. Before going inside, she wiped them on the ___.",
+   "options": [
+    "mat",
+    "cloud",
+    "slowly"
+   ],
+   "answer": 0,
+   "why": "You wipe muddy shoes on a mat."
+  },
+  {
+   "id": "m046",
+   "g": 2.5,
+   "text": "The little seed was buried deep in the dirt. With sun and rain, it sprouted into a tall ___.",
+   "options": [
+    "spoon",
+    "plant",
+    "quickly"
+   ],
+   "answer": 1,
+   "why": "A seed sprouts into a plant."
+  },
+  {
+   "id": "m047",
+   "g": 2.5,
+   "text": "The library was very quiet. Everyone ___ when they talked.",
+   "options": [
+    "shouted",
+    "whispered",
+    "silent"
+   ],
+   "answer": 1,
+   "why": "People whisper in a quiet library."
+  },
+  {
+   "id": "m048",
+   "g": 2.6,
+   "text": "Rosa studied hard for her spelling test. When she got her paper back, she was ___.",
+   "options": [
+    "quickly",
+    "proud",
+    "rainy"
+   ],
+   "answer": 1,
+   "why": "Hard work made Rosa proud."
+  },
+  {
+   "id": "m049",
+   "g": 2.6,
+   "text": "The magician pulled a rabbit out of his hat. The children ___ with joy.",
+   "options": [
+    "frowned",
+    "cheered",
+    "cheerful"
+   ],
+   "answer": 1,
+   "why": "Kids cheer at a fun trick."
+  },
+  {
+   "id": "m050",
+   "g": 2.7,
+   "text": "The campers walked for hours. By the time they reached the lake, their legs were ___.",
+   "options": [
+    "slowly",
+    "tired",
+    "square"
+   ],
+   "answer": 1,
+   "why": "Walking for hours makes legs tired."
+  },
+  {
+   "id": "m051",
+   "g": 2.7,
+   "text": "Because it was Mia's birthday, her friends came to her house for a ___.",
+   "options": [
+    "party",
+    "ladder",
+    "happily"
+   ],
+   "answer": 0,
+   "why": "Friends come to a birthday party."
+  },
+  {
+   "id": "m052",
+   "g": 2.8,
+   "text": "Nora's frog escaped from its box. She looked under the bed and behind the couch, but she could not ___ it.",
+   "options": [
+    "quiet",
+    "float",
+    "find"
+   ],
+   "answer": 2,
+   "why": "She looked everywhere but could not find it."
+  },
+  {
+   "id": "m053",
+   "g": 2.8,
+   "text": "Kai was thirsty after the game, so he drank a big glass of ___.",
+   "options": [
+    "thirsty",
+    "water",
+    "thunder"
+   ],
+   "answer": 1,
+   "why": "A thirsty boy drinks water."
+  },
+  {
+   "id": "m054",
+   "g": 2.9,
+   "text": "The baby was crying loudly. Her dad picked her up and sang a soft ___.",
+   "options": [
+    "window",
+    "softly",
+    "song"
+   ],
+   "answer": 2,
+   "why": "Dad sang a soft song."
+  },
+  {
+   "id": "m055",
+   "g": 2.9,
+   "text": "The sandwich fell on the floor, so Ben decided not to eat it. It was no longer ___.",
+   "options": [
+    "cleaning",
+    "square",
+    "clean"
+   ],
+   "answer": 2,
+   "why": "Food on the floor is not clean."
+  },
+  {
+   "id": "m056",
+   "g": 3,
+   "text": "Max ran to catch the bus, but the doors closed before he got there. Now he would be ___ for school.",
+   "options": [
+    "quickly",
+    "late",
+    "purple"
+   ],
+   "answer": 1,
+   "why": "Missing the bus makes him late."
+  },
+  {
+   "id": "m057",
+   "g": 3,
+   "text": "The bakery opened early. By noon, the shelves were ___ because everything had sold.",
+   "options": [
+    "quickly",
+    "sweet",
+    "empty"
+   ],
+   "answer": 2,
+   "why": "When everything is sold, shelves are empty."
+  },
+  {
+   "id": "m058",
+   "g": 3,
+   "text": "The soccer game was close until the last minute, when Kai ___ the winning goal.",
+   "options": [
+    "measured",
+    "scored",
+    "scoring"
+   ],
+   "answer": 1,
+   "why": "Kai scored the winning goal."
+  },
+  {
+   "id": "m059",
+   "g": 3.1,
+   "text": "Ben's team practiced every day. On Saturday, they ___ the championship game.",
+   "options": [
+    "wooden",
+    "won",
+    "wore"
+   ],
+   "answer": 1,
+   "why": "All that practice helped them win."
+  },
+  {
+   "id": "m060",
+   "g": 3.1,
+   "text": "Because the road was icy, drivers moved ___.",
+   "options": [
+    "carefully",
+    "careful",
+    "tall"
+   ],
+   "answer": 0,
+   "why": "Drivers go slowly and carefully on ice."
+  },
+  {
+   "id": "m061",
+   "g": 3.2,
+   "text": "A good friend listens carefully. When Mia was sad, Ava sat beside her and ___ to her story.",
+   "options": [
+    "gently",
+    "listened",
+    "juggled"
+   ],
+   "answer": 1,
+   "why": "A good friend listens."
+  },
+  {
+   "id": "m062",
+   "g": 3.2,
+   "text": "The astronaut floated inside the spaceship because there was no ___ in space.",
+   "options": [
+    "birthday",
+    "floating",
+    "gravity"
+   ],
+   "answer": 2,
+   "why": "Without gravity, things float."
+  },
+  {
+   "id": "m063",
+   "g": 3.2,
+   "text": "The mouse was too small to reach the cheese. It had to ___ on a box to get it.",
+   "options": [
+    "climb",
+    "giggle",
+    "careful"
+   ],
+   "answer": 0,
+   "why": "The mouse climbed up to reach the cheese."
+  },
+  {
+   "id": "m064",
+   "g": 3.3,
+   "text": "The museum was full of ancient pots and tools. Kai felt like he was walking through ___.",
+   "options": [
+    "slowly",
+    "spaghetti",
+    "history"
+   ],
+   "answer": 2,
+   "why": "Ancient things come from history."
+  },
+  {
+   "id": "m065",
+   "g": 3.4,
+   "text": "Dark clouds covered the sky, and thunder shook the windows. The family decided to ___ the picnic.",
+   "options": [
+    "cancel",
+    "stormy",
+    "polish"
+   ],
+   "answer": 0,
+   "why": "A storm is a good reason to cancel a picnic."
+  },
+  {
+   "id": "m066",
+   "g": 3.5,
+   "text": "Nora's garden needed water. She filled the can and ___ the thirsty flowers.",
+   "options": [
+    "watered",
+    "mailed",
+    "thirsty"
+   ],
+   "answer": 0,
+   "why": "She watered the flowers."
+  },
+  {
+   "id": "m067",
+   "g": 3.5,
+   "text": "The wolves howled at night. Their ___ echoed across the valley.",
+   "options": [
+    "howls",
+    "pillows",
+    "howling"
+   ],
+   "answer": 0,
+   "why": "Howls are the sounds wolves make."
+  },
+  {
+   "id": "m068",
+   "g": 3.6,
+   "text": "Although the test was difficult, Omar stayed calm and ___ each question carefully.",
+   "options": [
+    "read",
+    "calmly",
+    "wore"
+   ],
+   "answer": 0,
+   "why": "He read each question carefully."
+  },
+  {
+   "id": "m069",
+   "g": 3.6,
+   "text": "The class hamster escaped, and the whole school helped ___ for it.",
+   "options": [
+    "search",
+    "glue",
+    "quickly"
+   ],
+   "answer": 0,
+   "why": "Everyone helped search for the hamster."
+  },
+  {
+   "id": "m070",
+   "g": 3.7,
+   "text": "The tiny caterpillar ate leaves all summer. Then it spun a cocoon and later became a beautiful ___.",
+   "options": [
+    "butterfly",
+    "quickly",
+    "boulder"
+   ],
+   "answer": 0,
+   "why": "A caterpillar becomes a butterfly."
+  },
+  {
+   "id": "m071",
+   "g": 3.7,
+   "text": "Max wanted to join the chess club, but he did not know how to play. He decided to ___ the rules first.",
+   "options": [
+    "learn",
+    "learning",
+    "polish"
+   ],
+   "answer": 0,
+   "why": "He needed to learn the rules."
+  },
+  {
+   "id": "m072",
+   "g": 3.8,
+   "text": "The hikers ran out of water, so they were desperate to find a ___.",
+   "options": [
+    "stream",
+    "button",
+    "thirsty"
+   ],
+   "answer": 0,
+   "why": "Thirsty hikers look for a stream."
+  },
+  {
+   "id": "m073",
+   "g": 3.8,
+   "text": "After weeks of practice, Rosa's piano playing became smooth and ___.",
+   "options": [
+    "gracefully",
+    "graceful",
+    "frozen"
+   ],
+   "answer": 1,
+   "why": "Practice made her playing graceful."
+  },
+  {
+   "id": "m074",
+   "g": 3.9,
+   "text": "Ava's experiment failed twice. Instead of giving up, she ___ and tried a new method.",
+   "options": [
+    "gracefully",
+    "persisted",
+    "vanished"
+   ],
+   "answer": 1,
+   "why": "She kept trying, which is persisting."
+  },
+  {
+   "id": "m075",
+   "g": 3.9,
+   "text": "The judge listened to both sides before making a fair ___.",
+   "options": [
+    "decide",
+    "blanket",
+    "decision"
+   ],
+   "answer": 2,
+   "why": "A judge makes a decision."
+  },
+  {
+   "id": "m076",
+   "g": 4,
+   "text": "Scientists collected samples from the river to test whether the water was ___.",
+   "options": [
+    "brittle",
+    "pollution",
+    "polluted"
+   ],
+   "answer": 2,
+   "why": "They tested if the water was polluted."
+  },
+  {
+   "id": "m077",
+   "g": 4,
+   "text": "The inventor's first machine was clumsy, but each new version was more ___ than the last.",
+   "options": [
+    "efficiently",
+    "efficient",
+    "edible"
+   ],
+   "answer": 1,
+   "why": "Each version worked better, so it was more efficient."
+  },
+  {
+   "id": "m078",
+   "g": 4,
+   "text": "Because the pond had frozen solid, the children could ___ across it.",
+   "options": [
+    "skate",
+    "slippery",
+    "blossom"
+   ],
+   "answer": 0,
+   "why": "You can skate on frozen ice."
+  },
+  {
+   "id": "m079",
+   "g": 4.1,
+   "text": "The explorers had no map, so they relied on the stars to ___ their way.",
+   "options": [
+    "directly",
+    "navigate",
+    "decorate"
+   ],
+   "answer": 1,
+   "why": "Stars help travelers navigate."
+  },
+  {
+   "id": "m080",
+   "g": 4.1,
+   "text": "The sailors feared the approaching storm, so they ___ the ship into the harbor.",
+   "options": [
+    "steered",
+    "scribbled",
+    "nervous"
+   ],
+   "answer": 0,
+   "why": "They steered the ship to safety."
+  },
+  {
+   "id": "m081",
+   "g": 4.2,
+   "text": "Heavy rain caused the river to overflow. Soon the streets were ___ with water.",
+   "options": [
+    "flooded",
+    "frequently",
+    "folded"
+   ],
+   "answer": 0,
+   "why": "Overflowing rivers flood streets."
+  },
+  {
+   "id": "m082",
+   "g": 4.2,
+   "text": "The recipe was so complicated that Nora needed to follow each step in the proper ___.",
+   "options": [
+    "orderly",
+    "order",
+    "umbrella"
+   ],
+   "answer": 1,
+   "why": "Steps must be done in order."
+  },
+  {
+   "id": "m083",
+   "g": 4.3,
+   "text": "Grandma saved all her old photographs. They were precious ___ of her childhood.",
+   "options": [
+    "precious",
+    "memories",
+    "machines"
+   ],
+   "answer": 1,
+   "why": "Photographs hold memories."
+  },
+  {
+   "id": "m084",
+   "g": 4.3,
+   "text": "The speaker's voice was so faint that people in the back row could barely ___ her.",
+   "options": [
+    "taste",
+    "faintly",
+    "hear"
+   ],
+   "answer": 2,
+   "why": "A faint voice is hard to hear."
+  },
+  {
+   "id": "m085",
+   "g": 4.4,
+   "text": "The scientist's findings contradicted what everyone believed. Many people were ___ at first.",
+   "options": [
+    "skeptically",
+    "skeptical",
+    "delicious"
+   ],
+   "answer": 1,
+   "why": "Skeptical means not sure you believe it."
+  },
+  {
+   "id": "m086",
+   "g": 4.4,
+   "text": "Though the mountain looked easy to climb from far away, the steep, rocky path proved ___ difficult.",
+   "options": [
+    "surprisingly",
+    "surprising",
+    "deliciously"
+   ],
+   "answer": 0,
+   "why": "Surprisingly means in a way you did not expect."
+  },
+  {
+   "id": "m087",
+   "g": 4.4,
+   "text": "The detective carefully examined the evidence, hoping to ___ the mystery.",
+   "options": [
+    "solve",
+    "solved",
+    "pour"
+   ],
+   "answer": 0,
+   "why": "Detectives solve mysteries."
+  },
+  {
+   "id": "m088",
+   "g": 4.5,
+   "text": "The author spent years researching the topic. As a result, her book was remarkably ___.",
+   "options": [
+    "frozen",
+    "thoroughly",
+    "thorough"
+   ],
+   "answer": 2,
+   "why": "Years of research make a book thorough."
+  },
+  {
+   "id": "m089",
+   "g": 4.5,
+   "text": "The mayor's plan was controversial; some residents supported it, while others strongly ___ it.",
+   "options": [
+    "opposite",
+    "opposed",
+    "painted"
+   ],
+   "answer": 1,
+   "why": "Some people supported it and others opposed it."
+  }
+ ]
+}

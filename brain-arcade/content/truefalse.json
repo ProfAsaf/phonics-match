@@ -1,0 +1,1037 @@
+{
+ "about": "Brain Arcade true/false sentence reading items (silent reading efficiency). answer is a boolean (true = the sentence is true).",
+ "items": [
+  {
+   "id": "t001",
+   "g": 0.3,
+   "text": "A dog can run.",
+   "answer": true
+  },
+  {
+   "id": "t002",
+   "g": 0.3,
+   "text": "A bed can run.",
+   "answer": false
+  },
+  {
+   "id": "t003",
+   "g": 0.3,
+   "text": "The sun is hot.",
+   "answer": true
+  },
+  {
+   "id": "t004",
+   "g": 0.3,
+   "text": "A hen can sit in a jet.",
+   "answer": false
+  },
+  {
+   "id": "t005",
+   "g": 0.4,
+   "text": "A pig is in the mud.",
+   "answer": true
+  },
+  {
+   "id": "t006",
+   "g": 0.4,
+   "text": "A bug can sit on a log.",
+   "answer": true
+  },
+  {
+   "id": "t007",
+   "g": 0.4,
+   "text": "The sun is in a cup.",
+   "answer": false
+  },
+  {
+   "id": "t008",
+   "g": 0.4,
+   "text": "A cat can nap on a rug.",
+   "answer": true
+  },
+  {
+   "id": "t009",
+   "g": 0.5,
+   "text": "A fox can run.",
+   "answer": true
+  },
+  {
+   "id": "t010",
+   "g": 0.5,
+   "text": "A bus has ten legs.",
+   "answer": false
+  },
+  {
+   "id": "t011",
+   "g": 0.5,
+   "text": "I can sit on a bed.",
+   "answer": true
+  },
+  {
+   "id": "t012",
+   "g": 0.5,
+   "text": "A rat can nap.",
+   "answer": true
+  },
+  {
+   "id": "t013",
+   "g": 0.5,
+   "text": "A cup can hop on a bus.",
+   "answer": false
+  },
+  {
+   "id": "t014",
+   "g": 0.6,
+   "text": "A cat has six legs.",
+   "answer": false
+  },
+  {
+   "id": "t015",
+   "g": 0.6,
+   "text": "Mud is wet.",
+   "answer": true
+  },
+  {
+   "id": "t016",
+   "g": 0.6,
+   "text": "A dog is a pet.",
+   "answer": true
+  },
+  {
+   "id": "t017",
+   "g": 0.6,
+   "text": "A hat can sit on a bed.",
+   "answer": true
+  },
+  {
+   "id": "t018",
+   "g": 0.7,
+   "text": "A bug can fit in a cup.",
+   "answer": true
+  },
+  {
+   "id": "t019",
+   "g": 0.7,
+   "text": "A big bus fits in a cup.",
+   "answer": false
+  },
+  {
+   "id": "t020",
+   "g": 0.7,
+   "text": "We can sit on a rug.",
+   "answer": true
+  },
+  {
+   "id": "t021",
+   "g": 0.7,
+   "text": "A pot can hop on a bed.",
+   "answer": false
+  },
+  {
+   "id": "t022",
+   "g": 0.8,
+   "text": "Fish live in trees.",
+   "answer": false
+  },
+  {
+   "id": "t023",
+   "g": 0.8,
+   "text": "A bird can fly.",
+   "answer": true
+  },
+  {
+   "id": "t024",
+   "g": 0.9,
+   "text": "Snow is cold.",
+   "answer": true
+  },
+  {
+   "id": "t025",
+   "g": 0.9,
+   "text": "A frog can swim.",
+   "answer": true
+  },
+  {
+   "id": "t026",
+   "g": 0.9,
+   "text": "Cows say quack.",
+   "answer": false
+  },
+  {
+   "id": "t027",
+   "g": 1,
+   "text": "A truck has big wheels.",
+   "answer": true
+  },
+  {
+   "id": "t028",
+   "g": 1,
+   "text": "Milk comes from a tree.",
+   "answer": false
+  },
+  {
+   "id": "t029",
+   "g": 1,
+   "text": "You can ride a bike.",
+   "answer": true
+  },
+  {
+   "id": "t030",
+   "g": 1,
+   "text": "A cat can drive a bus.",
+   "answer": false
+  },
+  {
+   "id": "t031",
+   "g": 1.1,
+   "text": "Fish ride bikes to school.",
+   "answer": false
+  },
+  {
+   "id": "t032",
+   "g": 1.1,
+   "text": "The moon shines at night.",
+   "answer": true
+  },
+  {
+   "id": "t033",
+   "g": 1.1,
+   "text": "Ducks have feathers.",
+   "answer": true
+  },
+  {
+   "id": "t034",
+   "g": 1.1,
+   "text": "Snow is hot like fire.",
+   "answer": false
+  },
+  {
+   "id": "t035",
+   "g": 1.2,
+   "text": "We wear socks on our hands.",
+   "answer": false
+  },
+  {
+   "id": "t036",
+   "g": 1.2,
+   "text": "Bees make honey.",
+   "answer": true
+  },
+  {
+   "id": "t037",
+   "g": 1.2,
+   "text": "A boat can sail on the sea.",
+   "answer": true
+  },
+  {
+   "id": "t038",
+   "g": 1.2,
+   "text": "A house is made of ice cream.",
+   "answer": false
+  },
+  {
+   "id": "t039",
+   "g": 1.2,
+   "text": "Birds can build nests.",
+   "answer": true
+  },
+  {
+   "id": "t040",
+   "g": 1.2,
+   "text": "A tree can walk to school.",
+   "answer": false
+  },
+  {
+   "id": "t041",
+   "g": 1.3,
+   "text": "A rock can sing a song.",
+   "answer": false
+  },
+  {
+   "id": "t042",
+   "g": 1.3,
+   "text": "A cow has four legs.",
+   "answer": true
+  },
+  {
+   "id": "t043",
+   "g": 1.3,
+   "text": "Grass is green.",
+   "answer": true
+  },
+  {
+   "id": "t044",
+   "g": 1.3,
+   "text": "Trees grow under the sea.",
+   "answer": false
+  },
+  {
+   "id": "t045",
+   "g": 1.4,
+   "text": "You brush your teeth with a spoon.",
+   "answer": false
+  },
+  {
+   "id": "t046",
+   "g": 1.4,
+   "text": "A baby cat is called a kitten.",
+   "answer": true
+  },
+  {
+   "id": "t047",
+   "g": 1.4,
+   "text": "Pigs have wings and fly high.",
+   "answer": false
+  },
+  {
+   "id": "t048",
+   "g": 1.4,
+   "text": "A car can drive on the road.",
+   "answer": true
+  },
+  {
+   "id": "t049",
+   "g": 1.4,
+   "text": "A fish can talk on the phone.",
+   "answer": false
+  },
+  {
+   "id": "t050",
+   "g": 1.5,
+   "text": "Dogs wag their tails when they are happy.",
+   "answer": true
+  },
+  {
+   "id": "t051",
+   "g": 1.5,
+   "text": "Winter is cold, and summer is hot.",
+   "answer": true
+  },
+  {
+   "id": "t052",
+   "g": 1.5,
+   "text": "Fish have fins to help them swim.",
+   "answer": true
+  },
+  {
+   "id": "t053",
+   "g": 1.5,
+   "text": "A cat can read a book to you.",
+   "answer": false
+  },
+  {
+   "id": "t054",
+   "g": 1.6,
+   "text": "You can see stars in the sky at night.",
+   "answer": true
+  },
+  {
+   "id": "t055",
+   "g": 1.6,
+   "text": "Rain falls from the ground up to the clouds.",
+   "answer": false
+  },
+  {
+   "id": "t056",
+   "g": 1.6,
+   "text": "A shoe is something you eat for lunch.",
+   "answer": false
+  },
+  {
+   "id": "t057",
+   "g": 1.7,
+   "text": "A square has four sides.",
+   "answer": true
+  },
+  {
+   "id": "t058",
+   "g": 1.7,
+   "text": "A triangle has five sides.",
+   "answer": false
+  },
+  {
+   "id": "t059",
+   "g": 1.7,
+   "text": "Most children sleep at night.",
+   "answer": true
+  },
+  {
+   "id": "t060",
+   "g": 1.7,
+   "text": "A cow gives us milk.",
+   "answer": true
+  },
+  {
+   "id": "t061",
+   "g": 1.7,
+   "text": "A pencil is a kind of animal.",
+   "answer": false
+  },
+  {
+   "id": "t062",
+   "g": 1.8,
+   "text": "Bread grows on trees like apples.",
+   "answer": false
+  },
+  {
+   "id": "t063",
+   "g": 1.8,
+   "text": "An elephant is bigger than a mouse.",
+   "answer": true
+  },
+  {
+   "id": "t064",
+   "g": 1.8,
+   "text": "A school bus floats high up in the sky.",
+   "answer": false
+  },
+  {
+   "id": "t065",
+   "g": 1.8,
+   "text": "Bears sleep a lot in the winter.",
+   "answer": true
+  },
+  {
+   "id": "t066",
+   "g": 1.8,
+   "text": "Cars drink milk to make them go.",
+   "answer": false
+  },
+  {
+   "id": "t067",
+   "g": 1.8,
+   "text": "Most pizza is baked in a hot oven.",
+   "answer": true
+  },
+  {
+   "id": "t068",
+   "g": 1.9,
+   "text": "Ice cream is hot and spicy.",
+   "answer": false
+  },
+  {
+   "id": "t069",
+   "g": 1.9,
+   "text": "A week has seven days.",
+   "answer": true
+  },
+  {
+   "id": "t070",
+   "g": 1.9,
+   "text": "A clock tells us what time it is.",
+   "answer": true
+  },
+  {
+   "id": "t071",
+   "g": 1.9,
+   "text": "Grass grows best in the dark under a rock.",
+   "answer": false
+  },
+  {
+   "id": "t072",
+   "g": 1.9,
+   "text": "The sky is blue on a clear, sunny day.",
+   "answer": true
+  },
+  {
+   "id": "t073",
+   "g": 2,
+   "text": "Butterflies start out as caterpillars.",
+   "answer": true
+  },
+  {
+   "id": "t074",
+   "g": 2,
+   "text": "Penguins live in the hot desert.",
+   "answer": false
+  },
+  {
+   "id": "t075",
+   "g": 2,
+   "text": "Spiders have eight legs.",
+   "answer": true
+  },
+  {
+   "id": "t076",
+   "g": 2,
+   "text": "A dentist helps fix broken cars.",
+   "answer": false
+  },
+  {
+   "id": "t077",
+   "g": 2,
+   "text": "A doctor helps sick people get better.",
+   "answer": true
+  },
+  {
+   "id": "t078",
+   "g": 2,
+   "text": "Penguins can fly high above the clouds.",
+   "answer": false
+  },
+  {
+   "id": "t079",
+   "g": 2.1,
+   "text": "The sun comes up in the morning.",
+   "answer": true
+  },
+  {
+   "id": "t080",
+   "g": 2.1,
+   "text": "We use our eyes to hear music.",
+   "answer": false
+  },
+  {
+   "id": "t081",
+   "g": 2.1,
+   "text": "There are twelve months in a year.",
+   "answer": true
+  },
+  {
+   "id": "t082",
+   "g": 2.2,
+   "text": "A baby kangaroo grows in its mother's pouch.",
+   "answer": true
+  },
+  {
+   "id": "t083",
+   "g": 2.2,
+   "text": "Whales are tiny and live in puddles.",
+   "answer": false
+  },
+  {
+   "id": "t084",
+   "g": 2.2,
+   "text": "A lemon tastes sweet like candy.",
+   "answer": false
+  },
+  {
+   "id": "t085",
+   "g": 2.2,
+   "text": "A bicycle needs a person to push the pedals.",
+   "answer": true
+  },
+  {
+   "id": "t086",
+   "g": 2.3,
+   "text": "Firefighters use hoses to put out fires.",
+   "answer": true
+  },
+  {
+   "id": "t087",
+   "g": 2.3,
+   "text": "A thermometer tells how heavy something is.",
+   "answer": false
+  },
+  {
+   "id": "t088",
+   "g": 2.3,
+   "text": "Birds build nests out of twigs and leaves.",
+   "answer": true
+  },
+  {
+   "id": "t089",
+   "g": 2.3,
+   "text": "The ocean is made of salty water.",
+   "answer": true
+  },
+  {
+   "id": "t090",
+   "g": 2.3,
+   "text": "Frozen water is called steam.",
+   "answer": false
+  },
+  {
+   "id": "t091",
+   "g": 2.3,
+   "text": "A baby chick hatches from a seed.",
+   "answer": false
+  },
+  {
+   "id": "t092",
+   "g": 2.4,
+   "text": "Plants need sunlight and water to grow.",
+   "answer": true
+  },
+  {
+   "id": "t093",
+   "g": 2.4,
+   "text": "Snakes have four legs and soft fur.",
+   "answer": false
+  },
+  {
+   "id": "t094",
+   "g": 2.4,
+   "text": "Dinosaurs lived on Earth long, long ago.",
+   "answer": true
+  },
+  {
+   "id": "t095",
+   "g": 2.4,
+   "text": "Turtles carry their shells on their backs.",
+   "answer": true
+  },
+  {
+   "id": "t096",
+   "g": 2.4,
+   "text": "Every kitten can drive a car.",
+   "answer": false
+  },
+  {
+   "id": "t097",
+   "g": 2.5,
+   "text": "A rectangle has four sides and four corners.",
+   "answer": true
+  },
+  {
+   "id": "t098",
+   "g": 2.5,
+   "text": "People use umbrellas to stay dry when it rains.",
+   "answer": true
+  },
+  {
+   "id": "t099",
+   "g": 2.5,
+   "text": "A hexagon has four sides.",
+   "answer": false
+  },
+  {
+   "id": "t100",
+   "g": 2.6,
+   "text": "Dogs and cats are mammals.",
+   "answer": true
+  },
+  {
+   "id": "t101",
+   "g": 2.6,
+   "text": "A desert gets a lot of rain every day.",
+   "answer": false
+  },
+  {
+   "id": "t102",
+   "g": 2.6,
+   "text": "Ten minutes is longer than one hour.",
+   "answer": false
+  },
+  {
+   "id": "t103",
+   "g": 2.6,
+   "text": "Wool comes from fish.",
+   "answer": false
+  },
+  {
+   "id": "t104",
+   "g": 2.6,
+   "text": "Wool comes from sheep.",
+   "answer": true
+  },
+  {
+   "id": "t105",
+   "g": 2.6,
+   "text": "People can breathe easily under the water without any help.",
+   "answer": false
+  },
+  {
+   "id": "t106",
+   "g": 2.7,
+   "text": "The Earth goes around the sun.",
+   "answer": true
+  },
+  {
+   "id": "t107",
+   "g": 2.7,
+   "text": "A magnet will stick to a wooden spoon.",
+   "answer": false
+  },
+  {
+   "id": "t108",
+   "g": 2.7,
+   "text": "Frogs lay their eggs in the water.",
+   "answer": true
+  },
+  {
+   "id": "t109",
+   "g": 2.8,
+   "text": "Pennies, nickels, and dimes are kinds of coins.",
+   "answer": true
+  },
+  {
+   "id": "t110",
+   "g": 2.8,
+   "text": "You should wear a helmet when you ride a bike.",
+   "answer": true
+  },
+  {
+   "id": "t111",
+   "g": 2.8,
+   "text": "Metal is soft and squishy like a pillow.",
+   "answer": false
+  },
+  {
+   "id": "t112",
+   "g": 2.9,
+   "text": "A triangle has more sides than a square.",
+   "answer": false
+  },
+  {
+   "id": "t113",
+   "g": 2.9,
+   "text": "Lightning is a bright flash that comes with thunder.",
+   "answer": true
+  },
+  {
+   "id": "t114",
+   "g": 2.9,
+   "text": "A calendar tells you how hot it is outside.",
+   "answer": false
+  },
+  {
+   "id": "t115",
+   "g": 3,
+   "text": "Oceans cover most of the surface of our planet.",
+   "answer": true
+  },
+  {
+   "id": "t116",
+   "g": 3,
+   "text": "When ice gets warm, it turns into a rock.",
+   "answer": false
+  },
+  {
+   "id": "t117",
+   "g": 3,
+   "text": "Fish take in oxygen from the water through gills.",
+   "answer": true
+  },
+  {
+   "id": "t118",
+   "g": 3,
+   "text": "A hexagon has six sides.",
+   "answer": true
+  },
+  {
+   "id": "t119",
+   "g": 3,
+   "text": "The sun is a planet that goes around the Earth.",
+   "answer": false
+  },
+  {
+   "id": "t120",
+   "g": 3.1,
+   "text": "A caterpillar makes a cocoon before it becomes a butterfly.",
+   "answer": true
+  },
+  {
+   "id": "t121",
+   "g": 3.1,
+   "text": "Elephants are the smallest animals on Earth.",
+   "answer": false
+  },
+  {
+   "id": "t122",
+   "g": 3.1,
+   "text": "A compass helps you tell which way is north.",
+   "answer": true
+  },
+  {
+   "id": "t123",
+   "g": 3.2,
+   "text": "Insects have six legs and three body parts.",
+   "answer": true
+  },
+  {
+   "id": "t124",
+   "g": 3.2,
+   "text": "A rainbow appears when sunlight shines through raindrops.",
+   "answer": true
+  },
+  {
+   "id": "t125",
+   "g": 3.2,
+   "text": "A quarter is worth more than a dime.",
+   "answer": true
+  },
+  {
+   "id": "t126",
+   "g": 3.2,
+   "text": "The North Pole is a hot, sandy desert.",
+   "answer": false
+  },
+  {
+   "id": "t127",
+   "g": 3.2,
+   "text": "Most plants grow best when they get no light and no water.",
+   "answer": false
+  },
+  {
+   "id": "t128",
+   "g": 3.3,
+   "text": "Plants make their food from moonlight and nothing else.",
+   "answer": false
+  },
+  {
+   "id": "t129",
+   "g": 3.3,
+   "text": "Many birds fly south to find warmer weather in winter.",
+   "answer": true
+  },
+  {
+   "id": "t130",
+   "g": 3.3,
+   "text": "A year is longer than a month.",
+   "answer": true
+  },
+  {
+   "id": "t131",
+   "g": 3.3,
+   "text": "Honey is made by cows.",
+   "answer": false
+  },
+  {
+   "id": "t132",
+   "g": 3.4,
+   "text": "The moon makes its own light, just like the sun.",
+   "answer": false
+  },
+  {
+   "id": "t133",
+   "g": 3.4,
+   "text": "A cube has six flat faces.",
+   "answer": true
+  },
+  {
+   "id": "t134",
+   "g": 3.4,
+   "text": "An island is land with water all around it.",
+   "answer": true
+  },
+  {
+   "id": "t135",
+   "g": 3.4,
+   "text": "Whales live on dry land and eat grass.",
+   "answer": false
+  },
+  {
+   "id": "t136",
+   "g": 3.4,
+   "text": "A desert is usually very wet and rainy.",
+   "answer": false
+  },
+  {
+   "id": "t137",
+   "g": 3.4,
+   "text": "A map shows where places are.",
+   "answer": true
+  },
+  {
+   "id": "t138",
+   "g": 3.5,
+   "text": "Although penguins are birds, they cannot fly through the air.",
+   "answer": true
+  },
+  {
+   "id": "t139",
+   "g": 3.5,
+   "text": "Because the sun sets in the east, we see it rise in the west.",
+   "answer": false
+  },
+  {
+   "id": "t140",
+   "g": 3.5,
+   "text": "A dictionary helps you look up the meaning of a word.",
+   "answer": true
+  },
+  {
+   "id": "t141",
+   "g": 3.5,
+   "text": "The author of a book is the person who writes it.",
+   "answer": true
+  },
+  {
+   "id": "t142",
+   "g": 3.6,
+   "text": "Plants take in carbon dioxide and release the oxygen that people need.",
+   "answer": true
+  },
+  {
+   "id": "t143",
+   "g": 3.6,
+   "text": "Every sentence in a story must be exactly five words long.",
+   "answer": false
+  },
+  {
+   "id": "t144",
+   "g": 3.6,
+   "text": "Mountains are usually flat, and valleys are usually very tall.",
+   "answer": false
+  },
+  {
+   "id": "t145",
+   "g": 3.6,
+   "text": "Foods like bread and rice give our bodies energy.",
+   "answer": true
+  },
+  {
+   "id": "t146",
+   "g": 3.6,
+   "text": "Dinosaurs were alive when people first used phones.",
+   "answer": false
+  },
+  {
+   "id": "t147",
+   "g": 3.7,
+   "text": "When a volcano erupts, melted rock called lava flows out.",
+   "answer": true
+  },
+  {
+   "id": "t148",
+   "g": 3.7,
+   "text": "The desert is known for heavy rainfall and thick forests.",
+   "answer": false
+  },
+  {
+   "id": "t149",
+   "g": 3.7,
+   "text": "In the fall, many trees lose their leaves before winter arrives.",
+   "answer": true
+  },
+  {
+   "id": "t150",
+   "g": 3.7,
+   "text": "A blizzard is a heavy snowstorm with strong winds.",
+   "answer": true
+  },
+  {
+   "id": "t151",
+   "g": 3.7,
+   "text": "A blizzard is a hot, dry wind that blows across a desert.",
+   "answer": false
+  },
+  {
+   "id": "t152",
+   "g": 3.8,
+   "text": "Even though a whale lives in the ocean, it must come up to breathe air.",
+   "answer": true
+  },
+  {
+   "id": "t153",
+   "g": 3.8,
+   "text": "Honeybees always sleep through the entire summer without leaving their hive.",
+   "answer": false
+  },
+  {
+   "id": "t154",
+   "g": 3.8,
+   "text": "Our lungs are the part of the body that helps us breathe air.",
+   "answer": true
+  },
+  {
+   "id": "t155",
+   "g": 3.8,
+   "text": "Our stomach helps us hear sounds from far away.",
+   "answer": false
+  },
+  {
+   "id": "t156",
+   "g": 3.9,
+   "text": "Because the Sahara Desert gets heavy rain every day, thick forests cover it.",
+   "answer": false
+  },
+  {
+   "id": "t157",
+   "g": 3.9,
+   "text": "A map key explains what each symbol on the map means.",
+   "answer": true
+  },
+  {
+   "id": "t158",
+   "g": 3.9,
+   "text": "To measure the length of a table, you would use a thermometer.",
+   "answer": false
+  },
+  {
+   "id": "t159",
+   "g": 3.9,
+   "text": "A century is a period of one thousand years.",
+   "answer": false
+  },
+  {
+   "id": "t160",
+   "g": 3.9,
+   "text": "A flock of geese is a group of birds.",
+   "answer": true
+  },
+  {
+   "id": "t161",
+   "g": 3.9,
+   "text": "A school of fish is a group of kittens.",
+   "answer": false
+  },
+  {
+   "id": "t162",
+   "g": 3.9,
+   "text": "Although the full moon looks bright, it only reflects light from the sun.",
+   "answer": true
+  },
+  {
+   "id": "t163",
+   "g": 4,
+   "text": "A glacier is a river of fast, hot water that flows through a desert.",
+   "answer": false
+  },
+  {
+   "id": "t164",
+   "g": 4,
+   "text": "Glaciers are huge, slow-moving rivers of ice.",
+   "answer": true
+  },
+  {
+   "id": "t165",
+   "g": 4,
+   "text": "Many animals, such as bears, sleep through most of the winter.",
+   "answer": true
+  },
+  {
+   "id": "t166",
+   "g": 4,
+   "text": "An adjective is a word that names an action, like run or jump.",
+   "answer": false
+  },
+  {
+   "id": "t167",
+   "g": 4,
+   "text": "A noun is a word that names a person, place, or thing.",
+   "answer": true
+  },
+  {
+   "id": "t168",
+   "g": 4,
+   "text": "The setting of a story tells where and when it happens.",
+   "answer": true
+  },
+  {
+   "id": "t169",
+   "g": 4,
+   "text": "Because the moon has no air, astronauts need special suits to breathe there.",
+   "answer": true
+  },
+  {
+   "id": "t170",
+   "g": 4,
+   "text": "Water freezes into ice when it is heated to a very high temperature.",
+   "answer": false
+  },
+  {
+   "id": "t171",
+   "g": 4,
+   "text": "After the storm passed, the sky slowly became clear and bright.",
+   "answer": true
+  },
+  {
+   "id": "t172",
+   "g": 4,
+   "text": "Scissors are safe to toss around the classroom, even though they are sharp.",
+   "answer": false
+  }
+ ]
+}

@@ -1,0 +1,4788 @@
+{
+ "about": "Brain Arcade vocabulary items. g = grade-level difficulty (-1.0 start of Pre-K ... 5.0 start of 5th). Types: picture, category, function, opposite, synonym, context, prefix, suffix, multimeaning, homophone, analogy. Options are shuffled by the game; answer is an index into options.",
+ "items": [
+  {
+   "id": "v001",
+   "g": -1,
+   "type": "picture",
+   "prompt": "Tap the dog",
+   "say": "Tap the dog",
+   "options": [
+    {
+     "label": "cat",
+     "emoji": "🐱"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "dog",
+     "emoji": "🐶"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a dog. Look for the dog."
+  },
+  {
+   "id": "v002",
+   "g": -1,
+   "type": "picture",
+   "prompt": "Tap the apple",
+   "say": "Tap the apple",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is an apple. Look for the apple."
+  },
+  {
+   "id": "v003",
+   "g": -0.9,
+   "type": "picture",
+   "prompt": "Tap the car",
+   "say": "Tap the car",
+   "options": [
+    {
+     "label": "bus",
+     "emoji": "🚌"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "ball",
+     "emoji": "⚽"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a car. Look for the car."
+  },
+  {
+   "id": "v004",
+   "g": -0.9,
+   "type": "picture",
+   "prompt": "Tap the sun",
+   "say": "Tap the sun",
+   "options": [
+    {
+     "label": "moon",
+     "emoji": "🌙"
+    },
+    {
+     "label": "star",
+     "emoji": "⭐"
+    },
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a sun. Look for the sun."
+  },
+  {
+   "id": "v005",
+   "g": -0.8,
+   "type": "picture",
+   "prompt": "Tap the cat",
+   "say": "Tap the cat",
+   "options": [
+    {
+     "label": "dog",
+     "emoji": "🐶"
+    },
+    {
+     "label": "cat",
+     "emoji": "🐱"
+    },
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a cat. Look for the cat."
+  },
+  {
+   "id": "v006",
+   "g": -0.8,
+   "type": "picture",
+   "prompt": "Tap the ball",
+   "say": "Tap the ball",
+   "options": [
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    },
+    {
+     "label": "ball",
+     "emoji": "⚽"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a ball. Look for the ball."
+  },
+  {
+   "id": "v007",
+   "g": -0.8,
+   "type": "category",
+   "prompt": "Which one is an animal?",
+   "say": "Which one is an animal?",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "dog",
+     "emoji": "🐶"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A dog is an animal."
+  },
+  {
+   "id": "v008",
+   "g": -0.8,
+   "type": "function",
+   "prompt": "Which one do you wear on your feet?",
+   "say": "Which one do you wear on your feet?",
+   "options": [
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    },
+    {
+     "label": "cap",
+     "emoji": "🧢"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "You wear shoes on your feet."
+  },
+  {
+   "id": "v009",
+   "g": -0.7,
+   "type": "picture",
+   "prompt": "Tap the fish",
+   "say": "Tap the fish",
+   "options": [
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "bird",
+     "emoji": "🐦"
+    },
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is a fish. Look for the fish."
+  },
+  {
+   "id": "v010",
+   "g": -0.7,
+   "type": "picture",
+   "prompt": "Tap the bed",
+   "say": "Tap the bed",
+   "options": [
+    {
+     "label": "chair",
+     "emoji": "🪑"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "bed",
+     "emoji": "🛏️"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a bed. Look for the bed."
+  },
+  {
+   "id": "v011",
+   "g": -0.7,
+   "type": "category",
+   "prompt": "Which one can you eat?",
+   "say": "Which one can you eat?",
+   "options": [
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    },
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "You can eat a banana."
+  },
+  {
+   "id": "v012",
+   "g": -0.7,
+   "type": "function",
+   "prompt": "Which one do you sleep in?",
+   "say": "Which one do you sleep in?",
+   "options": [
+    {
+     "label": "bed",
+     "emoji": "🛏️"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "ball",
+     "emoji": "⚽"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "You sleep in a bed."
+  },
+  {
+   "id": "v013",
+   "g": -0.6,
+   "type": "picture",
+   "prompt": "Tap the cow",
+   "say": "Tap the cow",
+   "options": [
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "horse",
+     "emoji": "🐴"
+    },
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a cow. Look for the cow."
+  },
+  {
+   "id": "v014",
+   "g": -0.6,
+   "type": "picture",
+   "prompt": "Tap the shoe",
+   "say": "Tap the shoe",
+   "options": [
+    {
+     "label": "ball",
+     "emoji": "⚽"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a shoe. Look for the shoe."
+  },
+  {
+   "id": "v015",
+   "g": -0.6,
+   "type": "category",
+   "prompt": "Which one can drive on a road?",
+   "say": "Which one can drive on a road?",
+   "options": [
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A car drives on a road."
+  },
+  {
+   "id": "v016",
+   "g": -0.6,
+   "type": "function",
+   "prompt": "Which one do you use to eat soup?",
+   "say": "Which one do you use to eat soup?",
+   "options": [
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    },
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    },
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "You eat soup with a spoon."
+  },
+  {
+   "id": "v017",
+   "g": -0.5,
+   "type": "picture",
+   "prompt": "Tap the star",
+   "say": "Tap the star",
+   "options": [
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    },
+    {
+     "label": "star",
+     "emoji": "⭐"
+    },
+    {
+     "label": "moon",
+     "emoji": "🌙"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a star. Look for the star."
+  },
+  {
+   "id": "v018",
+   "g": -0.5,
+   "type": "picture",
+   "prompt": "Tap the bird",
+   "say": "Tap the bird",
+   "options": [
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "cat",
+     "emoji": "🐱"
+    },
+    {
+     "label": "bird",
+     "emoji": "🐦"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a bird. Look for the bird."
+  },
+  {
+   "id": "v019",
+   "g": -0.5,
+   "type": "category",
+   "prompt": "Which one can fly?",
+   "say": "Which one can fly?",
+   "options": [
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "turtle",
+     "emoji": "🐢"
+    },
+    {
+     "label": "bird",
+     "emoji": "🐦"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Birds have wings, so they can fly."
+  },
+  {
+   "id": "v020",
+   "g": -0.5,
+   "type": "function",
+   "prompt": "Which one do you use to brush your teeth?",
+   "say": "Which one do you use to brush your teeth?",
+   "options": [
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "toothbrush",
+     "emoji": "🪥"
+    },
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "You brush your teeth with a toothbrush."
+  },
+  {
+   "id": "v021",
+   "g": -0.4,
+   "type": "picture",
+   "prompt": "Tap the duck",
+   "say": "Tap the duck",
+   "options": [
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    },
+    {
+     "label": "duck",
+     "emoji": "🦆"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a duck. Look for the duck."
+  },
+  {
+   "id": "v022",
+   "g": -0.4,
+   "type": "picture",
+   "prompt": "Tap the key",
+   "say": "Tap the key",
+   "options": [
+    {
+     "label": "bell",
+     "emoji": "🔔"
+    },
+    {
+     "label": "cup",
+     "emoji": "🥤"
+    },
+    {
+     "label": "key",
+     "emoji": "🔑"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a key. Look for the key."
+  },
+  {
+   "id": "v023",
+   "g": -0.4,
+   "type": "category",
+   "prompt": "Which one lives in water?",
+   "say": "Which one lives in water?",
+   "options": [
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    },
+    {
+     "label": "dog",
+     "emoji": "🐶"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Fish live in water."
+  },
+  {
+   "id": "v024",
+   "g": -0.4,
+   "type": "function",
+   "prompt": "Which one do you use to write?",
+   "say": "Which one do you use to write?",
+   "options": [
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "sock",
+     "emoji": "🧦"
+    },
+    {
+     "label": "pencil",
+     "emoji": "✏️"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "You write with a pencil."
+  },
+  {
+   "id": "v025",
+   "g": -0.3,
+   "type": "picture",
+   "prompt": "Tap the banana",
+   "say": "Tap the banana",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    },
+    {
+     "label": "carrot",
+     "emoji": "🥕"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a banana. Look for the banana."
+  },
+  {
+   "id": "v026",
+   "g": -0.3,
+   "type": "picture",
+   "prompt": "Tap the moon",
+   "say": "Tap the moon",
+   "options": [
+    {
+     "label": "moon",
+     "emoji": "🌙"
+    },
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    },
+    {
+     "label": "star",
+     "emoji": "⭐"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is a moon. Look for the moon."
+  },
+  {
+   "id": "v027",
+   "g": -0.3,
+   "type": "category",
+   "prompt": "Which one is a fruit?",
+   "say": "Which one is a fruit?",
+   "options": [
+    {
+     "label": "banana",
+     "emoji": "🍌"
+    },
+    {
+     "label": "carrot",
+     "emoji": "🥕"
+    },
+    {
+     "label": "bread",
+     "emoji": "🍞"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A banana is a fruit."
+  },
+  {
+   "id": "v028",
+   "g": -0.3,
+   "type": "function",
+   "prompt": "Which one do you use to cut paper?",
+   "say": "Which one do you use to cut paper?",
+   "options": [
+    {
+     "label": "scissors",
+     "emoji": "✂️"
+    },
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "cap",
+     "emoji": "🧢"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Scissors cut paper."
+  },
+  {
+   "id": "v029",
+   "g": -0.2,
+   "type": "picture",
+   "prompt": "Tap the pig",
+   "say": "Tap the pig",
+   "options": [
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    },
+    {
+     "label": "pig",
+     "emoji": "🐷"
+    },
+    {
+     "label": "duck",
+     "emoji": "🦆"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a pig. Look for the pig."
+  },
+  {
+   "id": "v030",
+   "g": -0.2,
+   "type": "picture",
+   "prompt": "Tap the bus",
+   "say": "Tap the bus",
+   "options": [
+    {
+     "label": "bus",
+     "emoji": "🚌"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    },
+    {
+     "label": "train",
+     "emoji": "🚂"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is a bus. Look for the bus."
+  },
+  {
+   "id": "v031",
+   "g": -0.2,
+   "type": "category",
+   "prompt": "Which one is a vegetable?",
+   "say": "Which one is a vegetable?",
+   "options": [
+    {
+     "label": "strawberry",
+     "emoji": "🍓"
+    },
+    {
+     "label": "carrot",
+     "emoji": "🥕"
+    },
+    {
+     "label": "cookie",
+     "emoji": "🍪"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A carrot is a vegetable."
+  },
+  {
+   "id": "v032",
+   "g": -0.2,
+   "type": "function",
+   "prompt": "Which one keeps you dry in the rain?",
+   "say": "Which one keeps you dry in the rain?",
+   "options": [
+    {
+     "label": "umbrella",
+     "emoji": "☂️"
+    },
+    {
+     "label": "sock",
+     "emoji": "🧦"
+    },
+    {
+     "label": "balloon",
+     "emoji": "🎈"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "An umbrella keeps the rain off you."
+  },
+  {
+   "id": "v033",
+   "g": -0.1,
+   "type": "picture",
+   "prompt": "Tap the elephant",
+   "say": "Tap the elephant",
+   "options": [
+    {
+     "label": "lion",
+     "emoji": "🦁"
+    },
+    {
+     "label": "monkey",
+     "emoji": "🐒"
+    },
+    {
+     "label": "elephant",
+     "emoji": "🐘"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is an elephant. Look for the elephant."
+  },
+  {
+   "id": "v034",
+   "g": -0.1,
+   "type": "category",
+   "prompt": "Which one is a farm animal?",
+   "say": "Which one is a farm animal?",
+   "options": [
+    {
+     "label": "lion",
+     "emoji": "🦁"
+    },
+    {
+     "label": "penguin",
+     "emoji": "🐧"
+    },
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Cows live on farms."
+  },
+  {
+   "id": "v035",
+   "g": -0.1,
+   "type": "function",
+   "prompt": "Which one tells you the time?",
+   "say": "Which one tells you the time?",
+   "options": [
+    {
+     "label": "clock",
+     "emoji": "⏰"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A clock tells you the time."
+  },
+  {
+   "id": "v036",
+   "g": 0,
+   "type": "picture",
+   "prompt": "Tap the turtle",
+   "say": "Tap the turtle",
+   "options": [
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    },
+    {
+     "label": "snake",
+     "emoji": "🐍"
+    },
+    {
+     "label": "turtle",
+     "emoji": "🐢"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a turtle. Look for the turtle."
+  },
+  {
+   "id": "v037",
+   "g": 0,
+   "type": "picture",
+   "prompt": "Tap the umbrella",
+   "say": "Tap the umbrella",
+   "options": [
+    {
+     "label": "cap",
+     "emoji": "🧢"
+    },
+    {
+     "label": "umbrella",
+     "emoji": "☂️"
+    },
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is an umbrella. Look for the umbrella."
+  },
+  {
+   "id": "v038",
+   "g": 0,
+   "type": "function",
+   "prompt": "Which one do you use to sweep the floor?",
+   "say": "Which one do you use to sweep the floor?",
+   "options": [
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "pencil",
+     "emoji": "✏️"
+    },
+    {
+     "label": "broom",
+     "emoji": "🧹"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "You sweep the floor with a broom."
+  },
+  {
+   "id": "v039",
+   "g": 0,
+   "type": "opposite",
+   "prompt": "What is the opposite of up?",
+   "say": "What is the opposite of up?",
+   "options": [
+    {
+     "label": "in"
+    },
+    {
+     "label": "on"
+    },
+    {
+     "label": "down"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": true,
+   "why": "Up and down are opposites."
+  },
+  {
+   "id": "v040",
+   "g": 0.1,
+   "type": "picture",
+   "prompt": "Tap the frog",
+   "say": "Tap the frog",
+   "options": [
+    {
+     "label": "turtle",
+     "emoji": "🐢"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a frog. Look for the frog."
+  },
+  {
+   "id": "v041",
+   "g": 0.1,
+   "type": "category",
+   "prompt": "Which one is a toy?",
+   "say": "Which one is a toy?",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    },
+    {
+     "label": "teddy bear",
+     "emoji": "🧸"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "You play with a teddy bear."
+  },
+  {
+   "id": "v042",
+   "g": 0.1,
+   "type": "category",
+   "prompt": "Which one is an insect?",
+   "say": "Which one is an insect?",
+   "options": [
+    {
+     "label": "bee",
+     "emoji": "🐝"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    },
+    {
+     "label": "frog",
+     "emoji": "🐸"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A bee is an insect."
+  },
+  {
+   "id": "v043",
+   "g": 0.1,
+   "type": "function",
+   "prompt": "Which one do you use to listen to music?",
+   "say": "Which one do you use to listen to music?",
+   "options": [
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "headphones",
+     "emoji": "🎧"
+    },
+    {
+     "label": "umbrella",
+     "emoji": "☂️"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Headphones help you hear music."
+  },
+  {
+   "id": "v044",
+   "g": 0.1,
+   "type": "opposite",
+   "prompt": "What is the opposite of big?",
+   "say": "What is the opposite of big?",
+   "options": [
+    {
+     "label": "small"
+    },
+    {
+     "label": "tall"
+    },
+    {
+     "label": "fast"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": true,
+   "why": "Big and small are opposites."
+  },
+  {
+   "id": "v045",
+   "g": 0.2,
+   "type": "picture",
+   "prompt": "Tap the butterfly",
+   "say": "Tap the butterfly",
+   "options": [
+    {
+     "label": "bee",
+     "emoji": "🐝"
+    },
+    {
+     "label": "bird",
+     "emoji": "🐦"
+    },
+    {
+     "label": "butterfly",
+     "emoji": "🦋"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a butterfly. Look for the butterfly."
+  },
+  {
+   "id": "v046",
+   "g": 0.2,
+   "type": "category",
+   "prompt": "Which one is a musical instrument?",
+   "say": "Which one is a musical instrument?",
+   "options": [
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    },
+    {
+     "label": "guitar",
+     "emoji": "🎸"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "You make music with a guitar."
+  },
+  {
+   "id": "v047",
+   "g": 0.2,
+   "type": "function",
+   "prompt": "Which one do you use to hit a nail?",
+   "say": "Which one do you use to hit a nail?",
+   "options": [
+    {
+     "label": "pencil",
+     "emoji": "✏️"
+    },
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "You hit a nail with a hammer."
+  },
+  {
+   "id": "v048",
+   "g": 0.2,
+   "type": "function",
+   "prompt": "Which one do you use to call a friend?",
+   "say": "Which one do you use to call a friend?",
+   "options": [
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "phone",
+     "emoji": "📱"
+    },
+    {
+     "label": "broom",
+     "emoji": "🧹"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "You call a friend on a phone."
+  },
+  {
+   "id": "v049",
+   "g": 0.2,
+   "type": "opposite",
+   "prompt": "What is the opposite of day?",
+   "say": "What is the opposite of day?",
+   "options": [
+    {
+     "label": "night"
+    },
+    {
+     "label": "sun"
+    },
+    {
+     "label": "play"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": true,
+   "why": "Day and night are opposites."
+  },
+  {
+   "id": "v050",
+   "g": 0.3,
+   "type": "picture",
+   "prompt": "Tap the giraffe",
+   "say": "Tap the giraffe",
+   "options": [
+    {
+     "label": "zebra",
+     "emoji": "🦓"
+    },
+    {
+     "label": "giraffe",
+     "emoji": "🦒"
+    },
+    {
+     "label": "horse",
+     "emoji": "🐴"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a giraffe. Look for the giraffe."
+  },
+  {
+   "id": "v051",
+   "g": 0.3,
+   "type": "category",
+   "prompt": "Which one is clothing?",
+   "say": "Which one is clothing?",
+   "options": [
+    {
+     "label": "pizza",
+     "emoji": "🍕"
+    },
+    {
+     "label": "bicycle",
+     "emoji": "🚲"
+    },
+    {
+     "label": "shirt",
+     "emoji": "👕"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "You wear a shirt."
+  },
+  {
+   "id": "v052",
+   "g": 0.3,
+   "type": "function",
+   "prompt": "Which one do you use to open a lock?",
+   "say": "Which one do you use to open a lock?",
+   "options": [
+    {
+     "label": "key",
+     "emoji": "🔑"
+    },
+    {
+     "label": "spoon",
+     "emoji": "🥄"
+    },
+    {
+     "label": "balloon",
+     "emoji": "🎈"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A key opens a lock."
+  },
+  {
+   "id": "v053",
+   "g": 0.3,
+   "type": "opposite",
+   "prompt": "What is the opposite of hot?",
+   "say": "What is the opposite of hot?",
+   "options": [
+    {
+     "label": "warm"
+    },
+    {
+     "label": "cold"
+    },
+    {
+     "label": "wet"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": true,
+   "why": "Hot and cold are opposites."
+  },
+  {
+   "id": "v054",
+   "g": 0.4,
+   "type": "picture",
+   "prompt": "Tap the rocket",
+   "say": "Tap the rocket",
+   "options": [
+    {
+     "label": "airplane",
+     "emoji": "✈️"
+    },
+    {
+     "label": "rocket",
+     "emoji": "🚀"
+    },
+    {
+     "label": "helicopter",
+     "emoji": "🚁"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a rocket. Look for the rocket."
+  },
+  {
+   "id": "v055",
+   "g": 0.4,
+   "type": "picture",
+   "prompt": "Tap the octopus",
+   "say": "Tap the octopus",
+   "options": [
+    {
+     "label": "octopus",
+     "emoji": "🐙"
+    },
+    {
+     "label": "crab",
+     "emoji": "🦀"
+    },
+    {
+     "label": "fish",
+     "emoji": "🐟"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is an octopus. Look for the octopus."
+  },
+  {
+   "id": "v056",
+   "g": 0.4,
+   "type": "category",
+   "prompt": "Which one is a tool?",
+   "say": "Which one is a tool?",
+   "options": [
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    },
+    {
+     "label": "balloon",
+     "emoji": "🎈"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A hammer is a tool for fixing things."
+  },
+  {
+   "id": "v057",
+   "g": 0.4,
+   "type": "function",
+   "prompt": "Which one do you use to take a photo?",
+   "say": "Which one do you use to take a photo?",
+   "options": [
+    {
+     "label": "broom",
+     "emoji": "🧹"
+    },
+    {
+     "label": "camera",
+     "emoji": "📷"
+    },
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A camera takes photos."
+  },
+  {
+   "id": "v058",
+   "g": 0.4,
+   "type": "opposite",
+   "prompt": "What is the opposite of happy?",
+   "say": "What is the opposite of happy?",
+   "options": [
+    {
+     "label": "sad"
+    },
+    {
+     "label": "glad"
+    },
+    {
+     "label": "silly"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": true,
+   "why": "Happy and sad are opposites."
+  },
+  {
+   "id": "v059",
+   "g": 0.5,
+   "type": "picture",
+   "prompt": "Tap the kangaroo",
+   "say": "Tap the kangaroo",
+   "options": [
+    {
+     "label": "kangaroo",
+     "emoji": "🦘"
+    },
+    {
+     "label": "rabbit",
+     "emoji": "🐇"
+    },
+    {
+     "label": "deer",
+     "emoji": "🦌"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is a kangaroo. Look for the kangaroo."
+  },
+  {
+   "id": "v060",
+   "g": 0.5,
+   "type": "picture",
+   "prompt": "Tap the cactus",
+   "say": "Tap the cactus",
+   "options": [
+    {
+     "label": "cactus",
+     "emoji": "🌵"
+    },
+    {
+     "label": "tree",
+     "emoji": "🌳"
+    },
+    {
+     "label": "flower",
+     "emoji": "🌻"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is a cactus. Look for the cactus."
+  },
+  {
+   "id": "v061",
+   "g": 0.5,
+   "type": "category",
+   "prompt": "Which one is a bird?",
+   "say": "Which one is a bird?",
+   "options": [
+    {
+     "label": "snake",
+     "emoji": "🐍"
+    },
+    {
+     "label": "shark",
+     "emoji": "🦈"
+    },
+    {
+     "label": "owl",
+     "emoji": "🦉"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "An owl is a bird."
+  },
+  {
+   "id": "v062",
+   "g": 0.5,
+   "type": "function",
+   "prompt": "Which one do you use to see tiny things up close?",
+   "say": "Which one do you use to see tiny things up close?",
+   "options": [
+    {
+     "label": "telescope",
+     "emoji": "🔭"
+    },
+    {
+     "label": "broom",
+     "emoji": "🧹"
+    },
+    {
+     "label": "microscope",
+     "emoji": "🔬"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "A microscope makes tiny things look big."
+  },
+  {
+   "id": "v063",
+   "g": 0.5,
+   "type": "function",
+   "prompt": "Which one shows you which way is north?",
+   "say": "Which one shows you which way is north?",
+   "options": [
+    {
+     "label": "clock",
+     "emoji": "⏰"
+    },
+    {
+     "label": "camera",
+     "emoji": "📷"
+    },
+    {
+     "label": "compass",
+     "emoji": "🧭"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "A compass points north."
+  },
+  {
+   "id": "v064",
+   "g": 0.5,
+   "type": "opposite",
+   "prompt": "What is the opposite of open?",
+   "say": "What is the opposite of open?",
+   "options": [
+    {
+     "label": "jump"
+    },
+    {
+     "label": "close"
+    },
+    {
+     "label": "look"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": true,
+   "why": "Open and close are opposites."
+  },
+  {
+   "id": "v065",
+   "g": 0.6,
+   "type": "picture",
+   "prompt": "Tap the telescope",
+   "say": "Tap the telescope",
+   "options": [
+    {
+     "label": "microscope",
+     "emoji": "🔬"
+    },
+    {
+     "label": "camera",
+     "emoji": "📷"
+    },
+    {
+     "label": "telescope",
+     "emoji": "🔭"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a telescope. Look for the telescope."
+  },
+  {
+   "id": "v066",
+   "g": 0.6,
+   "type": "picture",
+   "prompt": "Tap the anchor",
+   "say": "Tap the anchor",
+   "options": [
+    {
+     "label": "anchor",
+     "emoji": "⚓"
+    },
+    {
+     "label": "bell",
+     "emoji": "🔔"
+    },
+    {
+     "label": "key",
+     "emoji": "🔑"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is an anchor. Look for the anchor."
+  },
+  {
+   "id": "v067",
+   "g": 0.6,
+   "type": "category",
+   "prompt": "Which one is a plant?",
+   "say": "Which one is a plant?",
+   "options": [
+    {
+     "label": "snail",
+     "emoji": "🐌"
+    },
+    {
+     "label": "cactus",
+     "emoji": "🌵"
+    },
+    {
+     "label": "car",
+     "emoji": "🚗"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A cactus is a plant."
+  },
+  {
+   "id": "v068",
+   "g": 0.6,
+   "type": "opposite",
+   "prompt": "What is the opposite of fast?",
+   "say": "What is the opposite of fast?",
+   "options": [
+    {
+     "label": "slow"
+    },
+    {
+     "label": "quick"
+    },
+    {
+     "label": "loud"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": true,
+   "why": "Fast and slow are opposites."
+  },
+  {
+   "id": "v069",
+   "g": 0.7,
+   "type": "picture",
+   "prompt": "Tap the volcano",
+   "say": "Tap the volcano",
+   "options": [
+    {
+     "label": "volcano",
+     "emoji": "🌋"
+    },
+    {
+     "label": "mountain",
+     "emoji": "⛰️"
+    },
+    {
+     "label": "tornado",
+     "emoji": "🌪️"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is a volcano. Look for the volcano."
+  },
+  {
+   "id": "v070",
+   "g": 0.7,
+   "type": "picture",
+   "prompt": "Tap the hammer",
+   "say": "Tap the hammer",
+   "options": [
+    {
+     "label": "hammer",
+     "emoji": "🔨"
+    },
+    {
+     "label": "scissors",
+     "emoji": "✂️"
+    },
+    {
+     "label": "wrench",
+     "emoji": "🔧"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "That is a hammer. Look for the hammer."
+  },
+  {
+   "id": "v071",
+   "g": 0.7,
+   "type": "category",
+   "prompt": "Which one is a reptile?",
+   "say": "Which one is a reptile?",
+   "options": [
+    {
+     "label": "snake",
+     "emoji": "🐍"
+    },
+    {
+     "label": "dolphin",
+     "emoji": "🐬"
+    },
+    {
+     "label": "eagle",
+     "emoji": "🦅"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A snake is a reptile. Reptiles have scales."
+  },
+  {
+   "id": "v072",
+   "g": 0.7,
+   "type": "opposite",
+   "prompt": "What is the opposite of wet?",
+   "say": "What is the opposite of wet?",
+   "options": [
+    {
+     "label": "cold"
+    },
+    {
+     "label": "soft"
+    },
+    {
+     "label": "dry"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": true,
+   "why": "Wet and dry are opposites."
+  },
+  {
+   "id": "v073",
+   "g": 0.8,
+   "type": "picture",
+   "prompt": "Tap the flamingo",
+   "say": "Tap the flamingo",
+   "options": [
+    {
+     "label": "parrot",
+     "emoji": "🦜"
+    },
+    {
+     "label": "flamingo",
+     "emoji": "🦩"
+    },
+    {
+     "label": "swan",
+     "emoji": "🦢"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "That is a flamingo. Look for the flamingo."
+  },
+  {
+   "id": "v074",
+   "g": 0.8,
+   "type": "picture",
+   "prompt": "Tap the lobster",
+   "say": "Tap the lobster",
+   "options": [
+    {
+     "label": "crab",
+     "emoji": "🦀"
+    },
+    {
+     "label": "octopus",
+     "emoji": "🐙"
+    },
+    {
+     "label": "lobster",
+     "emoji": "🦞"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "That is a lobster. Look for the lobster."
+  },
+  {
+   "id": "v075",
+   "g": 0.8,
+   "type": "category",
+   "prompt": "Which one lives in the ocean?",
+   "say": "Which one lives in the ocean?",
+   "options": [
+    {
+     "label": "whale",
+     "emoji": "🐋"
+    },
+    {
+     "label": "cow",
+     "emoji": "🐄"
+    },
+    {
+     "label": "lion",
+     "emoji": "🦁"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Whales live in the ocean."
+  },
+  {
+   "id": "v076",
+   "g": 0.8,
+   "type": "opposite",
+   "prompt": "What is the opposite of full?",
+   "say": "What is the opposite of full?",
+   "options": [
+    {
+     "label": "heavy"
+    },
+    {
+     "label": "round"
+    },
+    {
+     "label": "empty"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": true,
+   "why": "Full and empty are opposites."
+  },
+  {
+   "id": "v077",
+   "g": 0.9,
+   "type": "category",
+   "prompt": "Which one is a planet?",
+   "say": "Which one is a planet?",
+   "options": [
+    {
+     "label": "sun",
+     "emoji": "☀️"
+    },
+    {
+     "label": "planet",
+     "emoji": "🪐"
+    },
+    {
+     "label": "moon",
+     "emoji": "🌙"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A planet goes around the sun."
+  },
+  {
+   "id": "v078",
+   "g": 0.9,
+   "type": "opposite",
+   "prompt": "What is the opposite of old?",
+   "say": "What is the opposite of old?",
+   "options": [
+    {
+     "label": "new"
+    },
+    {
+     "label": "big"
+    },
+    {
+     "label": "loud"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": true,
+   "why": "Old and new are opposites."
+  },
+  {
+   "id": "v079",
+   "g": 1,
+   "type": "category",
+   "prompt": "Which one is a kind of weather?",
+   "say": "Which one is a kind of weather?",
+   "options": [
+    {
+     "label": "shoe",
+     "emoji": "👟"
+    },
+    {
+     "label": "apple",
+     "emoji": "🍎"
+    },
+    {
+     "label": "rain",
+     "emoji": "🌧️"
+    },
+    {
+     "label": "bus",
+     "emoji": "🚌"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Rain is a kind of weather."
+  },
+  {
+   "id": "v080",
+   "g": 1,
+   "type": "opposite",
+   "prompt": "What is the opposite of loud?",
+   "say": "What is the opposite of loud?",
+   "options": [
+    {
+     "label": "noisy"
+    },
+    {
+     "label": "tiny"
+    },
+    {
+     "label": "fast"
+    },
+    {
+     "label": "quiet"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": true,
+   "why": "Loud and quiet are opposites."
+  },
+  {
+   "id": "v081",
+   "g": 1,
+   "type": "opposite",
+   "prompt": "What is the opposite of top?",
+   "say": "What is the opposite of top?",
+   "options": [
+    {
+     "label": "side"
+    },
+    {
+     "label": "bottom"
+    },
+    {
+     "label": "edge"
+    },
+    {
+     "label": "corner"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": true,
+   "why": "Top and bottom are opposites."
+  },
+  {
+   "id": "v082",
+   "g": 1.1,
+   "type": "opposite",
+   "prompt": "What is the opposite of dark?",
+   "say": "What is the opposite of dark?",
+   "options": [
+    {
+     "label": "night"
+    },
+    {
+     "label": "black"
+    },
+    {
+     "label": "shadow"
+    },
+    {
+     "label": "light"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": true,
+   "why": "Dark and light are opposites."
+  },
+  {
+   "id": "v083",
+   "g": 1.2,
+   "type": "opposite",
+   "prompt": "What is the opposite of early?",
+   "say": "What is the opposite of early?",
+   "options": [
+    {
+     "label": "soon"
+    },
+    {
+     "label": "bright"
+    },
+    {
+     "label": "empty"
+    },
+    {
+     "label": "late"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": true,
+   "why": "Early and late are opposites."
+  },
+  {
+   "id": "v084",
+   "g": 1.2,
+   "type": "opposite",
+   "prompt": "What is the opposite of hard?",
+   "say": "What is the opposite of hard?",
+   "options": [
+    {
+     "label": "rough"
+    },
+    {
+     "label": "heavy"
+    },
+    {
+     "label": "loud"
+    },
+    {
+     "label": "soft"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": true,
+   "why": "Hard and soft are opposites."
+  },
+  {
+   "id": "v085",
+   "g": 1.3,
+   "type": "opposite",
+   "prompt": "What is the opposite of start?",
+   "say": "What is the opposite of start?",
+   "options": [
+    {
+     "label": "finish"
+    },
+    {
+     "label": "begin"
+    },
+    {
+     "label": "jump"
+    },
+    {
+     "label": "move"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": true,
+   "why": "Start and finish are opposites."
+  },
+  {
+   "id": "v086",
+   "g": 1.3,
+   "type": "opposite",
+   "prompt": "What is the opposite of inside?",
+   "say": "What is the opposite of inside?",
+   "options": [
+    {
+     "label": "under"
+    },
+    {
+     "label": "around"
+    },
+    {
+     "label": "above"
+    },
+    {
+     "label": "outside"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": true,
+   "why": "Inside and outside are opposites."
+  },
+  {
+   "id": "v087",
+   "g": 1.3,
+   "type": "opposite",
+   "prompt": "What is the opposite of heavy?",
+   "say": "What is the opposite of heavy?",
+   "options": [
+    {
+     "label": "large"
+    },
+    {
+     "label": "strong"
+    },
+    {
+     "label": "light"
+    },
+    {
+     "label": "thick"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": true,
+   "why": "Heavy and light are opposites."
+  },
+  {
+   "id": "v088",
+   "g": 1.4,
+   "type": "opposite",
+   "prompt": "What is the opposite of near?",
+   "say": "What is the opposite of near?",
+   "options": [
+    {
+     "label": "far"
+    },
+    {
+     "label": "close"
+    },
+    {
+     "label": "next"
+    },
+    {
+     "label": "high"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": true,
+   "why": "Near and far are opposites."
+  },
+  {
+   "id": "v089",
+   "g": 1.4,
+   "type": "opposite",
+   "prompt": "What is the opposite of push?",
+   "say": "What is the opposite of push?",
+   "options": [
+    {
+     "label": "shove"
+    },
+    {
+     "label": "throw"
+    },
+    {
+     "label": "pull"
+    },
+    {
+     "label": "lift"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": true,
+   "why": "Push and pull are opposites."
+  },
+  {
+   "id": "v090",
+   "g": 1.5,
+   "type": "opposite",
+   "prompt": "What is the opposite of strong?",
+   "say": "What is the opposite of strong?",
+   "options": [
+    {
+     "label": "tough"
+    },
+    {
+     "label": "heavy"
+    },
+    {
+     "label": "weak"
+    },
+    {
+     "label": "brave"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Strong and weak are opposites."
+  },
+  {
+   "id": "v091",
+   "g": 1.5,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as big?",
+   "say": "Which word means almost the same as big?",
+   "options": [
+    {
+     "label": "tiny"
+    },
+    {
+     "label": "large"
+    },
+    {
+     "label": "quiet"
+    },
+    {
+     "label": "wet"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Big and large mean almost the same thing."
+  },
+  {
+   "id": "v092",
+   "g": 1.6,
+   "type": "opposite",
+   "prompt": "What is the opposite of smooth?",
+   "say": "What is the opposite of smooth?",
+   "options": [
+    {
+     "label": "shiny"
+    },
+    {
+     "label": "slippery"
+    },
+    {
+     "label": "rough"
+    },
+    {
+     "label": "flat"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Smooth and rough are opposites."
+  },
+  {
+   "id": "v093",
+   "g": 1.7,
+   "type": "opposite",
+   "prompt": "What is the opposite of brave?",
+   "say": "What is the opposite of brave?",
+   "options": [
+    {
+     "label": "strong"
+    },
+    {
+     "label": "kind"
+    },
+    {
+     "label": "scared"
+    },
+    {
+     "label": "smart"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Brave and scared are opposites."
+  },
+  {
+   "id": "v094",
+   "g": 1.7,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as quick?",
+   "say": "Which word means almost the same as quick?",
+   "options": [
+    {
+     "label": "fast"
+    },
+    {
+     "label": "slow"
+    },
+    {
+     "label": "sleepy"
+    },
+    {
+     "label": "tall"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Quick and fast mean almost the same thing."
+  },
+  {
+   "id": "v095",
+   "g": 1.8,
+   "type": "opposite",
+   "prompt": "What is the opposite of always?",
+   "say": "What is the opposite of always?",
+   "options": [
+    {
+     "label": "often"
+    },
+    {
+     "label": "sometimes"
+    },
+    {
+     "label": "soon"
+    },
+    {
+     "label": "never"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Always and never are opposites."
+  },
+  {
+   "id": "v096",
+   "g": 1.8,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as begin?",
+   "say": "Which word means almost the same as begin?",
+   "options": [
+    {
+     "label": "stop"
+    },
+    {
+     "label": "start"
+    },
+    {
+     "label": "ask"
+    },
+    {
+     "label": "end"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Begin and start mean almost the same thing."
+  },
+  {
+   "id": "v097",
+   "g": 1.9,
+   "type": "opposite",
+   "prompt": "What is the opposite of expensive?",
+   "say": "What is the opposite of expensive?",
+   "options": [
+    {
+     "label": "costly"
+    },
+    {
+     "label": "heavy"
+    },
+    {
+     "label": "tiny"
+    },
+    {
+     "label": "cheap"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Expensive and cheap are opposites."
+  },
+  {
+   "id": "v098",
+   "g": 1.9,
+   "type": "opposite",
+   "prompt": "What is the opposite of arrive?",
+   "say": "What is the opposite of arrive?",
+   "options": [
+    {
+     "label": "reach"
+    },
+    {
+     "label": "enter"
+    },
+    {
+     "label": "stay"
+    },
+    {
+     "label": "leave"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Arrive and leave are opposites."
+  },
+  {
+   "id": "v099",
+   "g": 1.9,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as glad?",
+   "say": "Which word means almost the same as glad?",
+   "options": [
+    {
+     "label": "sad"
+    },
+    {
+     "label": "angry"
+    },
+    {
+     "label": "tired"
+    },
+    {
+     "label": "happy"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Glad and happy mean almost the same thing."
+  },
+  {
+   "id": "v100",
+   "g": 2,
+   "type": "opposite",
+   "prompt": "What is the opposite of ancient?",
+   "say": "What is the opposite of ancient?",
+   "options": [
+    {
+     "label": "old"
+    },
+    {
+     "label": "fancy"
+    },
+    {
+     "label": "rare"
+    },
+    {
+     "label": "modern"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Ancient and modern are opposites."
+  },
+  {
+   "id": "v101",
+   "g": 2,
+   "type": "opposite",
+   "prompt": "What is the opposite of increase?",
+   "say": "What is the opposite of increase?",
+   "options": [
+    {
+     "label": "expand"
+    },
+    {
+     "label": "decrease"
+    },
+    {
+     "label": "collect"
+    },
+    {
+     "label": "climb"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Increase and decrease are opposites."
+  },
+  {
+   "id": "v102",
+   "g": 2,
+   "type": "context",
+   "context": "Ben was thrilled when he saw the puppy.",
+   "prompt": "What does thrilled mean?",
+   "say": "Ben was thrilled when he saw the puppy. What does thrilled mean?",
+   "options": [
+    {
+     "label": "very sleepy"
+    },
+    {
+     "label": "very excited"
+    },
+    {
+     "label": "very sad"
+    },
+    {
+     "label": "very small"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "In this sentence, thrilled means \"very excited\"."
+  },
+  {
+   "id": "v103",
+   "g": 2,
+   "type": "prefix",
+   "prompt": "What does unhappy mean?",
+   "say": "What does unhappy mean?",
+   "options": [
+    {
+     "label": "very happy"
+    },
+    {
+     "label": "happy again"
+    },
+    {
+     "label": "a bit happy"
+    },
+    {
+     "label": "not happy"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "The prefix un- means not."
+  },
+  {
+   "id": "v104",
+   "g": 2,
+   "type": "homophone",
+   "context": "I will ___ a letter to Grandma.",
+   "prompt": "Which word fits the blank?",
+   "say": "I will blank a letter to Grandma. Which word fits the blank?",
+   "options": [
+    {
+     "label": "right"
+    },
+    {
+     "label": "white"
+    },
+    {
+     "label": "wait"
+    },
+    {
+     "label": "write"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Write means to put words on paper."
+  },
+  {
+   "id": "v105",
+   "g": 2.1,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as shut?",
+   "say": "Which word means almost the same as shut?",
+   "options": [
+    {
+     "label": "open"
+    },
+    {
+     "label": "close"
+    },
+    {
+     "label": "lock"
+    },
+    {
+     "label": "stay"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Shut and close mean almost the same thing."
+  },
+  {
+   "id": "v106",
+   "g": 2.2,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as tiny?",
+   "say": "Which word means almost the same as tiny?",
+   "options": [
+    {
+     "label": "small"
+    },
+    {
+     "label": "huge"
+    },
+    {
+     "label": "bright"
+    },
+    {
+     "label": "empty"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Tiny and small mean almost the same thing."
+  },
+  {
+   "id": "v107",
+   "g": 2.2,
+   "type": "context",
+   "context": "The soup was too scorching to eat.",
+   "prompt": "What does scorching mean?",
+   "say": "The soup was too scorching to eat. What does scorching mean?",
+   "options": [
+    {
+     "label": "very hot"
+    },
+    {
+     "label": "very salty"
+    },
+    {
+     "label": "very old"
+    },
+    {
+     "label": "very thin"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "In this sentence, scorching means \"very hot\"."
+  },
+  {
+   "id": "v108",
+   "g": 2.2,
+   "type": "prefix",
+   "prompt": "What does replay mean?",
+   "say": "What does replay mean?",
+   "options": [
+    {
+     "label": "not play"
+    },
+    {
+     "label": "play first"
+    },
+    {
+     "label": "play badly"
+    },
+    {
+     "label": "play again"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "The prefix re- means again."
+  },
+  {
+   "id": "v109",
+   "g": 2.2,
+   "type": "homophone",
+   "context": "I can ___ a bird singing.",
+   "prompt": "Which word fits the blank?",
+   "say": "I can blank a bird singing. Which word fits the blank?",
+   "options": [
+    {
+     "label": "here"
+    },
+    {
+     "label": "hair"
+    },
+    {
+     "label": "her"
+    },
+    {
+     "label": "hear"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "You hear with your ears."
+  },
+  {
+   "id": "v110",
+   "g": 2.3,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as simple?",
+   "say": "Which word means almost the same as simple?",
+   "options": [
+    {
+     "label": "easy"
+    },
+    {
+     "label": "hard"
+    },
+    {
+     "label": "loud"
+    },
+    {
+     "label": "heavy"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Simple and easy mean almost the same thing."
+  },
+  {
+   "id": "v111",
+   "g": 2.3,
+   "type": "suffix",
+   "prompt": "What does helpful mean?",
+   "say": "What does helpful mean?",
+   "options": [
+    {
+     "label": "full of help"
+    },
+    {
+     "label": "without help"
+    },
+    {
+     "label": "help again"
+    },
+    {
+     "label": "not help"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "The suffix -ful means full of."
+  },
+  {
+   "id": "v112",
+   "g": 2.4,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as chilly?",
+   "say": "Which word means almost the same as chilly?",
+   "options": [
+    {
+     "label": "hot"
+    },
+    {
+     "label": "cold"
+    },
+    {
+     "label": "wet"
+    },
+    {
+     "label": "windy"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Chilly and cold mean almost the same thing."
+  },
+  {
+   "id": "v113",
+   "g": 2.4,
+   "type": "context",
+   "context": "Mia was starving after the long hike.",
+   "prompt": "What does starving mean?",
+   "say": "Mia was starving after the long hike. What does starving mean?",
+   "options": [
+    {
+     "label": "very happy"
+    },
+    {
+     "label": "very dirty"
+    },
+    {
+     "label": "very hungry"
+    },
+    {
+     "label": "very cold"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "In this sentence, starving means \"very hungry\"."
+  },
+  {
+   "id": "v114",
+   "g": 2.4,
+   "type": "prefix",
+   "prompt": "What does unlock mean?",
+   "say": "What does unlock mean?",
+   "options": [
+    {
+     "label": "to lock again"
+    },
+    {
+     "label": "to lock tightly"
+    },
+    {
+     "label": "not a lock"
+    },
+    {
+     "label": "to undo a lock"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "The prefix un- means to undo or not."
+  },
+  {
+   "id": "v115",
+   "g": 2.4,
+   "type": "homophone",
+   "context": "Please put the book over ___.",
+   "prompt": "Which word fits the blank?",
+   "say": "Please put the book over blank. Which word fits the blank?",
+   "options": [
+    {
+     "label": "their"
+    },
+    {
+     "label": "three"
+    },
+    {
+     "label": "there"
+    },
+    {
+     "label": "these"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "There tells where something is."
+  },
+  {
+   "id": "v116",
+   "g": 2.5,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as shout?",
+   "say": "Which word means almost the same as shout?",
+   "options": [
+    {
+     "label": "whisper"
+    },
+    {
+     "label": "yell"
+    },
+    {
+     "label": "sing"
+    },
+    {
+     "label": "laugh"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Shout and yell mean almost the same thing."
+  },
+  {
+   "id": "v117",
+   "g": 2.5,
+   "type": "prefix",
+   "prompt": "What does unsafe mean?",
+   "say": "What does unsafe mean?",
+   "options": [
+    {
+     "label": "very safe"
+    },
+    {
+     "label": "not safe"
+    },
+    {
+     "label": "safe again"
+    },
+    {
+     "label": "safe before"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "The prefix un- means not."
+  },
+  {
+   "id": "v118",
+   "g": 2.5,
+   "type": "multimeaning",
+   "prompt": "In \"The bat flew out of the cave,\" what is a bat?",
+   "say": "In \"The bat flew out of the cave,\" what is a bat?",
+   "options": [
+    {
+     "label": "a stick to hit balls"
+    },
+    {
+     "label": "a kind of cave"
+    },
+    {
+     "label": "an animal that flies"
+    },
+    {
+     "label": "a baseball glove"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "A bat that flies out of a cave is an animal."
+  },
+  {
+   "id": "v119",
+   "g": 2.5,
+   "type": "homophone",
+   "context": "Our team ___ the game!",
+   "prompt": "Which word fits the blank?",
+   "say": "Our team blank the game! Which word fits the blank?",
+   "options": [
+    {
+     "label": "won"
+    },
+    {
+     "label": "one"
+    },
+    {
+     "label": "win"
+    },
+    {
+     "label": "want"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Won means you came in first."
+  },
+  {
+   "id": "v120",
+   "g": 2.6,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as gift?",
+   "say": "Which word means almost the same as gift?",
+   "options": [
+    {
+     "label": "party"
+    },
+    {
+     "label": "present"
+    },
+    {
+     "label": "card"
+    },
+    {
+     "label": "box"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Gift and present mean almost the same thing."
+  },
+  {
+   "id": "v121",
+   "g": 2.6,
+   "type": "context",
+   "context": "The kitten was timid around strangers.",
+   "prompt": "What does timid mean?",
+   "say": "The kitten was timid around strangers. What does timid mean?",
+   "options": [
+    {
+     "label": "loud and silly"
+    },
+    {
+     "label": "shy and nervous"
+    },
+    {
+     "label": "big and strong"
+    },
+    {
+     "label": "fast and sneaky"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "In this sentence, timid means \"shy and nervous\"."
+  },
+  {
+   "id": "v122",
+   "g": 2.6,
+   "type": "suffix",
+   "prompt": "What does careless mean?",
+   "say": "What does careless mean?",
+   "options": [
+    {
+     "label": "full of care"
+    },
+    {
+     "label": "care again"
+    },
+    {
+     "label": "very careful"
+    },
+    {
+     "label": "without care"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "The suffix -less means without."
+  },
+  {
+   "id": "v123",
+   "g": 2.6,
+   "type": "homophone",
+   "context": "Ben has ___ cats and a dog.",
+   "prompt": "Which word fits the blank?",
+   "say": "Ben has blank cats and a dog. Which word fits the blank?",
+   "options": [
+    {
+     "label": "to"
+    },
+    {
+     "label": "too"
+    },
+    {
+     "label": "tow"
+    },
+    {
+     "label": "two"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Two is the number 2."
+  },
+  {
+   "id": "v124",
+   "g": 2.7,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as enormous?",
+   "say": "Which word means almost the same as enormous?",
+   "options": [
+    {
+     "label": "narrow"
+    },
+    {
+     "label": "huge"
+    },
+    {
+     "label": "ancient"
+    },
+    {
+     "label": "quiet"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Enormous and huge mean almost the same thing."
+  },
+  {
+   "id": "v125",
+   "g": 2.7,
+   "type": "multimeaning",
+   "prompt": "In \"Mia sat on the bank of the river,\" what is a bank?",
+   "say": "In \"Mia sat on the bank of the river,\" what is a bank?",
+   "options": [
+    {
+     "label": "land beside a river"
+    },
+    {
+     "label": "a place that keeps money"
+    },
+    {
+     "label": "a kind of boat"
+    },
+    {
+     "label": "a bridge"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Here bank means the land beside the water."
+  },
+  {
+   "id": "v126",
+   "g": 2.8,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as correct?",
+   "say": "Which word means almost the same as correct?",
+   "options": [
+    {
+     "label": "wrong"
+    },
+    {
+     "label": "fast"
+    },
+    {
+     "label": "near"
+    },
+    {
+     "label": "right"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Correct and right mean almost the same thing."
+  },
+  {
+   "id": "v127",
+   "g": 2.8,
+   "type": "context",
+   "context": "Max's room was cluttered with toys.",
+   "prompt": "What does cluttered mean?",
+   "say": "Max's room was cluttered with toys. What does cluttered mean?",
+   "options": [
+    {
+     "label": "messy and full"
+    },
+    {
+     "label": "clean and bright"
+    },
+    {
+     "label": "empty and quiet"
+    },
+    {
+     "label": "small and warm"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "In this sentence, cluttered means \"messy and full\"."
+  },
+  {
+   "id": "v128",
+   "g": 2.8,
+   "type": "prefix",
+   "prompt": "What does reread mean?",
+   "say": "What does reread mean?",
+   "options": [
+    {
+     "label": "not read"
+    },
+    {
+     "label": "read again"
+    },
+    {
+     "label": "read before"
+    },
+    {
+     "label": "read badly"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "The prefix re- means again."
+  },
+  {
+   "id": "v129",
+   "g": 2.8,
+   "type": "homophone",
+   "context": "The wind ___ my hat off.",
+   "prompt": "Which word fits the blank?",
+   "say": "The wind blank my hat off. Which word fits the blank?",
+   "options": [
+    {
+     "label": "blew"
+    },
+    {
+     "label": "blue"
+    },
+    {
+     "label": "blow"
+    },
+    {
+     "label": "flew"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Blew is the past of blow. Blue is a color."
+  },
+  {
+   "id": "v130",
+   "g": 2.9,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as stroll?",
+   "say": "Which word means almost the same as stroll?",
+   "options": [
+    {
+     "label": "run"
+    },
+    {
+     "label": "walk"
+    },
+    {
+     "label": "hop"
+    },
+    {
+     "label": "crawl"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Stroll and walk mean almost the same thing."
+  },
+  {
+   "id": "v131",
+   "g": 2.9,
+   "type": "suffix",
+   "prompt": "What does slowly mean?",
+   "say": "What does slowly mean?",
+   "options": [
+    {
+     "label": "not slow"
+    },
+    {
+     "label": "in a slow way"
+    },
+    {
+     "label": "very fast"
+    },
+    {
+     "label": "slow again"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "The suffix -ly can mean in a way."
+  },
+  {
+   "id": "v132",
+   "g": 2.9,
+   "type": "multimeaning",
+   "prompt": "In \"The box was light, so Ben carried it easily,\" what does light mean?",
+   "say": "In \"The box was light, so Ben carried it easily,\" what does light mean?",
+   "options": [
+    {
+     "label": "bright"
+    },
+    {
+     "label": "a lamp"
+    },
+    {
+     "label": "not heavy"
+    },
+    {
+     "label": "a color"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "A box that is easy to carry is not heavy."
+  },
+  {
+   "id": "v133",
+   "g": 3,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as ill?",
+   "say": "Which word means almost the same as ill?",
+   "options": [
+    {
+     "label": "weak"
+    },
+    {
+     "label": "tired"
+    },
+    {
+     "label": "hungry"
+    },
+    {
+     "label": "sick"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Ill and sick mean almost the same thing."
+  },
+  {
+   "id": "v134",
+   "g": 3,
+   "type": "context",
+   "context": "Mia was exhausted after the race.",
+   "prompt": "What does exhausted mean?",
+   "say": "Mia was exhausted after the race. What does exhausted mean?",
+   "options": [
+    {
+     "label": "very proud"
+    },
+    {
+     "label": "very late"
+    },
+    {
+     "label": "very tired"
+    },
+    {
+     "label": "very loud"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "In this sentence, exhausted means \"very tired\"."
+  },
+  {
+   "id": "v135",
+   "g": 3,
+   "type": "prefix",
+   "prompt": "What does disagree mean?",
+   "say": "What does disagree mean?",
+   "options": [
+    {
+     "label": "not agree"
+    },
+    {
+     "label": "agree again"
+    },
+    {
+     "label": "agree early"
+    },
+    {
+     "label": "agree a lot"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "The prefix dis- means not."
+  },
+  {
+   "id": "v136",
+   "g": 3,
+   "type": "multimeaning",
+   "prompt": "In \"The bark of the old tree was rough,\" what is bark?",
+   "say": "In \"The bark of the old tree was rough,\" what is bark?",
+   "options": [
+    {
+     "label": "the sound a dog makes"
+    },
+    {
+     "label": "a kind of leaf"
+    },
+    {
+     "label": "a tree branch"
+    },
+    {
+     "label": "the outside of a tree"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Here bark is the rough outside of a tree."
+  },
+  {
+   "id": "v137",
+   "g": 3,
+   "type": "homophone",
+   "context": "The ___ rose over the hills.",
+   "prompt": "Which word fits the blank?",
+   "say": "The blank rose over the hills. Which word fits the blank?",
+   "options": [
+    {
+     "label": "sun"
+    },
+    {
+     "label": "son"
+    },
+    {
+     "label": "sum"
+    },
+    {
+     "label": "sung"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "The sun is the star in our sky."
+  },
+  {
+   "id": "v138",
+   "g": 3,
+   "type": "analogy",
+   "prompt": "Duck is to quack as cow is to ___.",
+   "say": "Duck is to quack as cow is to blank.",
+   "options": [
+    {
+     "label": "oink"
+    },
+    {
+     "label": "neigh"
+    },
+    {
+     "label": "baa"
+    },
+    {
+     "label": "moo"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "A duck quacks and a cow moos."
+  },
+  {
+   "id": "v139",
+   "g": 3.1,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as courageous?",
+   "say": "Which word means almost the same as courageous?",
+   "options": [
+    {
+     "label": "loud"
+    },
+    {
+     "label": "clever"
+    },
+    {
+     "label": "careful"
+    },
+    {
+     "label": "brave"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Courageous and brave mean almost the same thing."
+  },
+  {
+   "id": "v140",
+   "g": 3.1,
+   "type": "prefix",
+   "prompt": "What does preheat mean?",
+   "say": "What does preheat mean?",
+   "options": [
+    {
+     "label": "heat before"
+    },
+    {
+     "label": "heat again"
+    },
+    {
+     "label": "not heat"
+    },
+    {
+     "label": "heat too much"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "The prefix pre- means before."
+  },
+  {
+   "id": "v141",
+   "g": 3.1,
+   "type": "homophone",
+   "context": "Rosa will ___ the ball to Max.",
+   "prompt": "Which word fits the blank?",
+   "say": "Rosa will blank the ball to Max. Which word fits the blank?",
+   "options": [
+    {
+     "label": "through"
+    },
+    {
+     "label": "threw"
+    },
+    {
+     "label": "throw"
+    },
+    {
+     "label": "though"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Will throw is about the future. Threw is the past."
+  },
+  {
+   "id": "v142",
+   "g": 3.1,
+   "type": "analogy",
+   "prompt": "Puppy is to dog as kitten is to ___.",
+   "say": "Puppy is to dog as kitten is to blank.",
+   "options": [
+    {
+     "label": "mouse"
+    },
+    {
+     "label": "bird"
+    },
+    {
+     "label": "fish"
+    },
+    {
+     "label": "cat"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "A puppy is a young dog. A kitten is a young cat."
+  },
+  {
+   "id": "v143",
+   "g": 3.2,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as eager?",
+   "say": "Which word means almost the same as eager?",
+   "options": [
+    {
+     "label": "sleepy"
+    },
+    {
+     "label": "careful"
+    },
+    {
+     "label": "excited"
+    },
+    {
+     "label": "angry"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Eager and excited mean almost the same thing."
+  },
+  {
+   "id": "v144",
+   "g": 3.2,
+   "type": "context",
+   "context": "The explorers crossed a vast desert.",
+   "prompt": "What does vast mean?",
+   "say": "The explorers crossed a vast desert. What does vast mean?",
+   "options": [
+    {
+     "label": "very hot"
+    },
+    {
+     "label": "very quiet"
+    },
+    {
+     "label": "very large"
+    },
+    {
+     "label": "very new"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "In this sentence, vast means \"very large\"."
+  },
+  {
+   "id": "v145",
+   "g": 3.2,
+   "type": "suffix",
+   "prompt": "What does painless mean?",
+   "say": "What does painless mean?",
+   "options": [
+    {
+     "label": "without pain"
+    },
+    {
+     "label": "full of pain"
+    },
+    {
+     "label": "pain again"
+    },
+    {
+     "label": "a little pain"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "The suffix -less means without."
+  },
+  {
+   "id": "v146",
+   "g": 3.2,
+   "type": "multimeaning",
+   "prompt": "In \"Nora used a ruler to draw a line,\" what is a ruler?",
+   "say": "In \"Nora used a ruler to draw a line,\" what is a ruler?",
+   "options": [
+    {
+     "label": "a tool for measuring"
+    },
+    {
+     "label": "a king or queen"
+    },
+    {
+     "label": "a kind of pencil"
+    },
+    {
+     "label": "a piece of paper"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "You can draw a line with a ruler."
+  },
+  {
+   "id": "v147",
+   "g": 3.2,
+   "type": "homophone",
+   "context": "We walked ___ the woods.",
+   "prompt": "Which word fits the blank?",
+   "say": "We walked blank the woods. Which word fits the blank?",
+   "options": [
+    {
+     "label": "through"
+    },
+    {
+     "label": "threw"
+    },
+    {
+     "label": "throw"
+    },
+    {
+     "label": "though"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Through means in one side and out the other."
+  },
+  {
+   "id": "v148",
+   "g": 3.2,
+   "type": "analogy",
+   "prompt": "Hot is to cold as up is to ___.",
+   "say": "Hot is to cold as up is to blank.",
+   "options": [
+    {
+     "label": "high"
+    },
+    {
+     "label": "down"
+    },
+    {
+     "label": "over"
+    },
+    {
+     "label": "out"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "Hot and cold are opposites, and so are up and down."
+  },
+  {
+   "id": "v149",
+   "g": 3.3,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as hurry?",
+   "say": "Which word means almost the same as hurry?",
+   "options": [
+    {
+     "label": "relax"
+    },
+    {
+     "label": "wander"
+    },
+    {
+     "label": "rush"
+    },
+    {
+     "label": "delay"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Hurry and rush mean almost the same thing."
+  },
+  {
+   "id": "v150",
+   "g": 3.3,
+   "type": "context",
+   "context": "The scientist observed the ants for an hour.",
+   "prompt": "What does observed mean?",
+   "say": "The scientist observed the ants for an hour. What does observed mean?",
+   "options": [
+    {
+     "label": "watched carefully"
+    },
+    {
+     "label": "chased away"
+    },
+    {
+     "label": "fed with crumbs"
+    },
+    {
+     "label": "tried to catch"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "In this sentence, observed means \"watched carefully\"."
+  },
+  {
+   "id": "v151",
+   "g": 3.3,
+   "type": "prefix",
+   "prompt": "What does misspell mean?",
+   "say": "What does misspell mean?",
+   "options": [
+    {
+     "label": "spell again"
+    },
+    {
+     "label": "not spell"
+    },
+    {
+     "label": "spell wrongly"
+    },
+    {
+     "label": "spell first"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "The prefix mis- means wrongly."
+  },
+  {
+   "id": "v152",
+   "g": 3.3,
+   "type": "multimeaning",
+   "prompt": "In \"The pitcher on the table was full of juice,\" what is a pitcher?",
+   "say": "In \"The pitcher on the table was full of juice,\" what is a pitcher?",
+   "options": [
+    {
+     "label": "a ball thrower"
+    },
+    {
+     "label": "a container for pouring"
+    },
+    {
+     "label": "a picture on a wall"
+    },
+    {
+     "label": "a kind of window"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A pitcher full of juice is a container."
+  },
+  {
+   "id": "v153",
+   "g": 3.3,
+   "type": "homophone",
+   "context": "The family wanted some ___ and quiet.",
+   "prompt": "Which word fits the blank?",
+   "say": "The family wanted some blank and quiet. Which word fits the blank?",
+   "options": [
+    {
+     "label": "piece"
+    },
+    {
+     "label": "pace"
+    },
+    {
+     "label": "peace"
+    },
+    {
+     "label": "price"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Peace means calm and quiet."
+  },
+  {
+   "id": "v154",
+   "g": 3.3,
+   "type": "analogy",
+   "prompt": "Bird is to nest as bee is to ___.",
+   "say": "Bird is to nest as bee is to blank.",
+   "options": [
+    {
+     "label": "hole"
+    },
+    {
+     "label": "flower"
+    },
+    {
+     "label": "wing"
+    },
+    {
+     "label": "hive"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "A bird lives in a nest. A bee lives in a hive."
+  },
+  {
+   "id": "v155",
+   "g": 3.4,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as vanish?",
+   "say": "Which word means almost the same as vanish?",
+   "options": [
+    {
+     "label": "disappear"
+    },
+    {
+     "label": "flicker"
+    },
+    {
+     "label": "return"
+    },
+    {
+     "label": "arrive"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Vanish and disappear mean almost the same thing."
+  },
+  {
+   "id": "v156",
+   "g": 3.4,
+   "type": "context",
+   "context": "Omar was determined to finish the puzzle.",
+   "prompt": "What does determined mean?",
+   "say": "Omar was determined to finish the puzzle. What does determined mean?",
+   "options": [
+    {
+     "label": "afraid to try"
+    },
+    {
+     "label": "set on doing it"
+    },
+    {
+     "label": "bored with it"
+    },
+    {
+     "label": "too sleepy"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "In this sentence, determined means \"set on doing it\"."
+  },
+  {
+   "id": "v157",
+   "g": 3.4,
+   "type": "suffix",
+   "prompt": "What does kindness mean?",
+   "say": "What does kindness mean?",
+   "options": [
+    {
+     "label": "not kind"
+    },
+    {
+     "label": "kind again"
+    },
+    {
+     "label": "the state of being kind"
+    },
+    {
+     "label": "able to be kind"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "The suffix -ness means the state of being."
+  },
+  {
+   "id": "v158",
+   "g": 3.4,
+   "type": "multimeaning",
+   "prompt": "In \"Dad will park the car,\" what does park mean?",
+   "say": "In \"Dad will park the car,\" what does park mean?",
+   "options": [
+    {
+     "label": "a place with swings"
+    },
+    {
+     "label": "to drive very fast"
+    },
+    {
+     "label": "to leave a car in a spot"
+    },
+    {
+     "label": "to wash a car"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Here park is something you do with a car."
+  },
+  {
+   "id": "v159",
+   "g": 3.4,
+   "type": "homophone",
+   "context": "A ___ ran across the road.",
+   "prompt": "Which word fits the blank?",
+   "say": "A blank ran across the road. Which word fits the blank?",
+   "options": [
+    {
+     "label": "dear"
+    },
+    {
+     "label": "deer"
+    },
+    {
+     "label": "dare"
+    },
+    {
+     "label": "door"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A deer is an animal."
+  },
+  {
+   "id": "v160",
+   "g": 3.4,
+   "type": "analogy",
+   "prompt": "Finger is to hand as toe is to ___.",
+   "say": "Finger is to hand as toe is to blank.",
+   "options": [
+    {
+     "label": "shoe"
+    },
+    {
+     "label": "hair"
+    },
+    {
+     "label": "foot"
+    },
+    {
+     "label": "ear"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "A finger is part of a hand. A toe is part of a foot."
+  },
+  {
+   "id": "v161",
+   "g": 3.5,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as fragile?",
+   "say": "Which word means almost the same as fragile?",
+   "options": [
+    {
+     "label": "delicate"
+    },
+    {
+     "label": "heavy"
+    },
+    {
+     "label": "valuable"
+    },
+    {
+     "label": "ordinary"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Fragile and delicate mean almost the same thing."
+  },
+  {
+   "id": "v162",
+   "g": 3.5,
+   "type": "context",
+   "context": "The ice made the road hazardous.",
+   "prompt": "What does hazardous mean?",
+   "say": "The ice made the road hazardous. What does hazardous mean?",
+   "options": [
+    {
+     "label": "quiet"
+    },
+    {
+     "label": "crowded"
+    },
+    {
+     "label": "dangerous"
+    },
+    {
+     "label": "pretty"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "In this sentence, hazardous means \"dangerous\"."
+  },
+  {
+   "id": "v163",
+   "g": 3.5,
+   "type": "prefix",
+   "prompt": "What does nonstop mean?",
+   "say": "What does nonstop mean?",
+   "options": [
+    {
+     "label": "without stopping"
+    },
+    {
+     "label": "stopping again"
+    },
+    {
+     "label": "stopping before"
+    },
+    {
+     "label": "stopping slowly"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "The prefix non- means not or without."
+  },
+  {
+   "id": "v164",
+   "g": 3.5,
+   "type": "multimeaning",
+   "prompt": "In \"The fan above Omar's bed spun fast,\" what is a fan?",
+   "say": "In \"The fan above Omar's bed spun fast,\" what is a fan?",
+   "options": [
+    {
+     "label": "a person who cheers"
+    },
+    {
+     "label": "a machine that moves air"
+    },
+    {
+     "label": "a kind of light"
+    },
+    {
+     "label": "a type of bed"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A fan that spins is a machine that moves air."
+  },
+  {
+   "id": "v165",
+   "g": 3.5,
+   "type": "homophone",
+   "context": "The ___ of the backpack made it hard to carry.",
+   "prompt": "Which word fits the blank?",
+   "say": "The blank of the backpack made it hard to carry. Which word fits the blank?",
+   "options": [
+    {
+     "label": "wait"
+    },
+    {
+     "label": "wheat"
+    },
+    {
+     "label": "way"
+    },
+    {
+     "label": "weight"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Weight tells how heavy something is."
+  },
+  {
+   "id": "v166",
+   "g": 3.5,
+   "type": "analogy",
+   "prompt": "Teacher is to school as doctor is to ___.",
+   "say": "Teacher is to school as doctor is to blank.",
+   "options": [
+    {
+     "label": "library"
+    },
+    {
+     "label": "hospital"
+    },
+    {
+     "label": "store"
+    },
+    {
+     "label": "farm"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A teacher works at a school. A doctor works at a hospital."
+  },
+  {
+   "id": "v167",
+   "g": 3.6,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as reluctant?",
+   "say": "Which word means almost the same as reluctant?",
+   "options": [
+    {
+     "label": "eager"
+    },
+    {
+     "label": "curious"
+    },
+    {
+     "label": "nervous"
+    },
+    {
+     "label": "unwilling"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Reluctant and unwilling mean almost the same thing."
+  },
+  {
+   "id": "v168",
+   "g": 3.6,
+   "type": "context",
+   "context": "Rosa gave a generous gift to the school.",
+   "prompt": "What does generous mean?",
+   "say": "Rosa gave a generous gift to the school. What does generous mean?",
+   "options": [
+    {
+     "label": "very small"
+    },
+    {
+     "label": "willing to give a lot"
+    },
+    {
+     "label": "hard to find"
+    },
+    {
+     "label": "not on time"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "In this sentence, generous means \"willing to give a lot\"."
+  },
+  {
+   "id": "v169",
+   "g": 3.6,
+   "type": "suffix",
+   "prompt": "What does washable mean?",
+   "say": "What does washable mean?",
+   "options": [
+    {
+     "label": "not washed"
+    },
+    {
+     "label": "washed again"
+    },
+    {
+     "label": "able to be washed"
+    },
+    {
+     "label": "full of wash"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "The suffix -able means able to be."
+  },
+  {
+   "id": "v170",
+   "g": 3.6,
+   "type": "multimeaning",
+   "prompt": "In \"We saw a seal at the zoo,\" what is a seal?",
+   "say": "In \"We saw a seal at the zoo,\" what is a seal?",
+   "options": [
+    {
+     "label": "a sea animal"
+    },
+    {
+     "label": "a stamp for paper"
+    },
+    {
+     "label": "a lid on a jar"
+    },
+    {
+     "label": "a kind of fish tank"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A seal at the zoo is an animal."
+  },
+  {
+   "id": "v171",
+   "g": 3.6,
+   "type": "analogy",
+   "prompt": "Pen is to write as knife is to ___.",
+   "say": "Pen is to write as knife is to blank.",
+   "options": [
+    {
+     "label": "cut"
+    },
+    {
+     "label": "eat"
+    },
+    {
+     "label": "draw"
+    },
+    {
+     "label": "read"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A pen is for writing. A knife is for cutting."
+  },
+  {
+   "id": "v172",
+   "g": 3.7,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as abundant?",
+   "say": "Which word means almost the same as abundant?",
+   "options": [
+    {
+     "label": "plentiful"
+    },
+    {
+     "label": "rare"
+    },
+    {
+     "label": "valuable"
+    },
+    {
+     "label": "ordinary"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Abundant and plentiful mean almost the same thing."
+  },
+  {
+   "id": "v173",
+   "g": 3.7,
+   "type": "context",
+   "context": "The ants worked diligently all day.",
+   "prompt": "What does diligently mean?",
+   "say": "The ants worked diligently all day. What does diligently mean?",
+   "options": [
+    {
+     "label": "very slowly"
+    },
+    {
+     "label": "very noisily"
+    },
+    {
+     "label": "with careful, hard work"
+    },
+    {
+     "label": "without any plan"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "In this sentence, diligently means \"with careful, hard work\"."
+  },
+  {
+   "id": "v174",
+   "g": 3.7,
+   "type": "suffix",
+   "prompt": "What does hopeless mean?",
+   "say": "What does hopeless mean?",
+   "options": [
+    {
+     "label": "full of hope"
+    },
+    {
+     "label": "hope again"
+    },
+    {
+     "label": "a little hope"
+    },
+    {
+     "label": "without hope"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "The suffix -less means without."
+  },
+  {
+   "id": "v175",
+   "g": 3.7,
+   "type": "multimeaning",
+   "prompt": "In \"The plant near our town makes bicycles,\" what is a plant?",
+   "say": "In \"The plant near our town makes bicycles,\" what is a plant?",
+   "options": [
+    {
+     "label": "a flower in a pot"
+    },
+    {
+     "label": "a kind of tree"
+    },
+    {
+     "label": "a factory"
+    },
+    {
+     "label": "a farm"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "A plant that makes bicycles is a factory."
+  },
+  {
+   "id": "v176",
+   "g": 3.8,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as weary?",
+   "say": "Which word means almost the same as weary?",
+   "options": [
+    {
+     "label": "nervous"
+    },
+    {
+     "label": "wise"
+    },
+    {
+     "label": "tired"
+    },
+    {
+     "label": "lonely"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Weary and tired mean almost the same thing."
+  },
+  {
+   "id": "v177",
+   "g": 3.8,
+   "type": "context",
+   "context": "The old bridge was sturdy enough to hold a truck.",
+   "prompt": "What does sturdy mean?",
+   "say": "The old bridge was sturdy enough to hold a truck. What does sturdy mean?",
+   "options": [
+    {
+     "label": "thin and bendy"
+    },
+    {
+     "label": "loud and shaky"
+    },
+    {
+     "label": "new and shiny"
+    },
+    {
+     "label": "strong and solid"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "In this sentence, sturdy means \"strong and solid\"."
+  },
+  {
+   "id": "v178",
+   "g": 3.8,
+   "type": "prefix",
+   "prompt": "What does overcooked mean?",
+   "say": "What does overcooked mean?",
+   "options": [
+    {
+     "label": "cooked again"
+    },
+    {
+     "label": "not cooked"
+    },
+    {
+     "label": "cooked too much"
+    },
+    {
+     "label": "cooked before"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "The prefix over- means too much."
+  },
+  {
+   "id": "v179",
+   "g": 3.8,
+   "type": "multimeaning",
+   "prompt": "In \"The match lit the candle,\" what is a match?",
+   "say": "In \"The match lit the candle,\" what is a match?",
+   "options": [
+    {
+     "label": "a game between teams"
+    },
+    {
+     "label": "a matching pair"
+    },
+    {
+     "label": "a kind of candle"
+    },
+    {
+     "label": "a fire-lighting stick"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "A match that lights a candle makes fire."
+  },
+  {
+   "id": "v180",
+   "g": 3.8,
+   "type": "analogy",
+   "prompt": "Large is to huge as small is to ___.",
+   "say": "Large is to huge as small is to blank.",
+   "options": [
+    {
+     "label": "tiny"
+    },
+    {
+     "label": "big"
+    },
+    {
+     "label": "loud"
+    },
+    {
+     "label": "fast"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "Huge is a very large size. Tiny is a very small size."
+  },
+  {
+   "id": "v181",
+   "g": 3.9,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as tranquil?",
+   "say": "Which word means almost the same as tranquil?",
+   "options": [
+    {
+     "label": "noisy"
+    },
+    {
+     "label": "gloomy"
+    },
+    {
+     "label": "lively"
+    },
+    {
+     "label": "calm"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "Tranquil and calm mean almost the same thing."
+  },
+  {
+   "id": "v182",
+   "g": 3.9,
+   "type": "context",
+   "context": "The team was jubilant after winning.",
+   "prompt": "What does jubilant mean?",
+   "say": "The team was jubilant after winning. What does jubilant mean?",
+   "options": [
+    {
+     "label": "rather nervous"
+    },
+    {
+     "label": "quite quiet"
+    },
+    {
+     "label": "a bit confused"
+    },
+    {
+     "label": "extremely joyful"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "In this sentence, jubilant means \"extremely joyful\"."
+  },
+  {
+   "id": "v183",
+   "g": 3.9,
+   "type": "prefix",
+   "prompt": "What does unbelievable mean?",
+   "say": "What does unbelievable mean?",
+   "options": [
+    {
+     "label": "easy to believe"
+    },
+    {
+     "label": "believed again"
+    },
+    {
+     "label": "not able to be believed"
+    },
+    {
+     "label": "believed before"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Un- means not, and -able means able to be."
+  },
+  {
+   "id": "v184",
+   "g": 3.9,
+   "type": "analogy",
+   "prompt": "Day is to night as summer is to ___.",
+   "say": "Day is to night as summer is to blank.",
+   "options": [
+    {
+     "label": "spring"
+    },
+    {
+     "label": "sunshine"
+    },
+    {
+     "label": "winter"
+    },
+    {
+     "label": "warm"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Day and night are opposites, and so are summer and winter."
+  },
+  {
+   "id": "v185",
+   "g": 4,
+   "type": "synonym",
+   "prompt": "Which word means almost the same as frigid?",
+   "say": "Which word means almost the same as frigid?",
+   "options": [
+    {
+     "label": "scorching"
+    },
+    {
+     "label": "damp"
+    },
+    {
+     "label": "freezing"
+    },
+    {
+     "label": "gentle"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Frigid and freezing mean almost the same thing."
+  },
+  {
+   "id": "v186",
+   "g": 4,
+   "type": "context",
+   "context": "Kai was astonished by the magic trick.",
+   "prompt": "What does astonished mean?",
+   "say": "Kai was astonished by the magic trick. What does astonished mean?",
+   "options": [
+    {
+     "label": "a little bored"
+    },
+    {
+     "label": "quite angry"
+    },
+    {
+     "label": "very hungry"
+    },
+    {
+     "label": "greatly surprised"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "In this sentence, astonished means \"greatly surprised\"."
+  },
+  {
+   "id": "v187",
+   "g": 4,
+   "type": "suffix",
+   "prompt": "What does enjoyable mean?",
+   "say": "What does enjoyable mean?",
+   "options": [
+    {
+     "label": "not enjoyed"
+    },
+    {
+     "label": "enjoyed again"
+    },
+    {
+     "label": "able to be enjoyed"
+    },
+    {
+     "label": "full of joy"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "The suffix -able means able to be."
+  },
+  {
+   "id": "v188",
+   "g": 4,
+   "type": "multimeaning",
+   "prompt": "In \"The river's current was strong,\" what is a current?",
+   "say": "In \"The river's current was strong,\" what is a current?",
+   "options": [
+    {
+     "label": "the present time"
+    },
+    {
+     "label": "a kind of fruit"
+    },
+    {
+     "label": "a type of boat"
+    },
+    {
+     "label": "moving water"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "A strong river current is water that moves."
+  },
+  {
+   "id": "v189",
+   "g": 4,
+   "type": "analogy",
+   "prompt": "Author is to book as painter is to ___.",
+   "say": "Author is to book as painter is to blank.",
+   "options": [
+    {
+     "label": "painting"
+    },
+    {
+     "label": "paint"
+    },
+    {
+     "label": "museum"
+    },
+    {
+     "label": "color"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "An author makes a book. A painter makes a painting."
+  },
+  {
+   "id": "v190",
+   "g": 4.1,
+   "type": "context",
+   "context": "The frail bird could not fly far.",
+   "prompt": "What does frail mean?",
+   "say": "The frail bird could not fly far. What does frail mean?",
+   "options": [
+    {
+     "label": "fast and loud"
+    },
+    {
+     "label": "big and heavy"
+    },
+    {
+     "label": "bright and colorful"
+    },
+    {
+     "label": "weak and delicate"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "In this sentence, frail means \"weak and delicate\"."
+  },
+  {
+   "id": "v191",
+   "g": 4.2,
+   "type": "context",
+   "context": "The villagers were hospitable to the travelers.",
+   "prompt": "What does hospitable mean?",
+   "say": "The villagers were hospitable to the travelers. What does hospitable mean?",
+   "options": [
+    {
+     "label": "rude to visitors"
+    },
+    {
+     "label": "friendly to guests"
+    },
+    {
+     "label": "afraid of strangers"
+    },
+    {
+     "label": "busy with work"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "In this sentence, hospitable means \"friendly to guests\"."
+  },
+  {
+   "id": "v192",
+   "g": 4.2,
+   "type": "analogy",
+   "prompt": "Sapling is to tree as tadpole is to ___.",
+   "say": "Sapling is to tree as tadpole is to blank.",
+   "options": [
+    {
+     "label": "frog"
+    },
+    {
+     "label": "pond"
+    },
+    {
+     "label": "fish"
+    },
+    {
+     "label": "snake"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A sapling grows into a tree. A tadpole grows into a frog."
+  },
+  {
+   "id": "v193",
+   "g": 4.3,
+   "type": "context",
+   "context": "The ship's voyage lasted three long weeks.",
+   "prompt": "What does voyage mean?",
+   "say": "The ship's voyage lasted three long weeks. What does voyage mean?",
+   "options": [
+    {
+     "label": "a storm at sea"
+    },
+    {
+     "label": "a kind of ship"
+    },
+    {
+     "label": "a place to dock"
+    },
+    {
+     "label": "a long trip by sea"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "In this sentence, voyage means \"a long trip by sea\"."
+  },
+  {
+   "id": "v194",
+   "g": 4.3,
+   "type": "analogy",
+   "prompt": "Thermometer is to temperature as ruler is to ___.",
+   "say": "Thermometer is to temperature as ruler is to blank.",
+   "options": [
+    {
+     "label": "weight"
+    },
+    {
+     "label": "length"
+    },
+    {
+     "label": "color"
+    },
+    {
+     "label": "time"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "A thermometer measures temperature. A ruler measures length."
+  },
+  {
+   "id": "v195",
+   "g": 4.4,
+   "type": "context",
+   "context": "Water is scarce in the desert.",
+   "prompt": "What does scarce mean?",
+   "say": "Water is scarce in the desert. What does scarce mean?",
+   "options": [
+    {
+     "label": "easy to spill"
+    },
+    {
+     "label": "too hot"
+    },
+    {
+     "label": "very clean"
+    },
+    {
+     "label": "hard to find"
+    }
+   ],
+   "answer": 3,
+   "sayOptions": false,
+   "why": "In this sentence, scarce means \"hard to find\"."
+  },
+  {
+   "id": "v196",
+   "g": 4.4,
+   "type": "analogy",
+   "prompt": "Brave is to cowardly as generous is to ___.",
+   "say": "Brave is to cowardly as generous is to blank.",
+   "options": [
+    {
+     "label": "wealthy"
+    },
+    {
+     "label": "polite"
+    },
+    {
+     "label": "selfish"
+    },
+    {
+     "label": "careless"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "Brave is the opposite of cowardly. Generous is the opposite of selfish."
+  },
+  {
+   "id": "v197",
+   "g": 4.5,
+   "type": "context",
+   "context": "The scientist made a meticulous record of every test.",
+   "prompt": "What does meticulous mean?",
+   "say": "The scientist made a meticulous record of every test. What does meticulous mean?",
+   "options": [
+    {
+     "label": "quick and messy"
+    },
+    {
+     "label": "careful with details"
+    },
+    {
+     "label": "hard to read"
+    },
+    {
+     "label": "very short"
+    }
+   ],
+   "answer": 1,
+   "sayOptions": false,
+   "why": "In this sentence, meticulous means \"careful with details\"."
+  },
+  {
+   "id": "v198",
+   "g": 4.5,
+   "type": "context",
+   "context": "Lily's explanation was concise, so everyone understood quickly.",
+   "prompt": "What does concise mean?",
+   "say": "Lily's explanation was concise, so everyone understood quickly. What does concise mean?",
+   "options": [
+    {
+     "label": "long and confusing"
+    },
+    {
+     "label": "loud and angry"
+    },
+    {
+     "label": "short and clear"
+    },
+    {
+     "label": "hard to hear"
+    }
+   ],
+   "answer": 2,
+   "sayOptions": false,
+   "why": "In this sentence, concise means \"short and clear\"."
+  },
+  {
+   "id": "v199",
+   "g": 4.5,
+   "type": "analogy",
+   "prompt": "Verse is to poem as chapter is to ___.",
+   "say": "Verse is to poem as chapter is to blank.",
+   "options": [
+    {
+     "label": "book"
+    },
+    {
+     "label": "word"
+    },
+    {
+     "label": "letter"
+    },
+    {
+     "label": "library"
+    }
+   ],
+   "answer": 0,
+   "sayOptions": false,
+   "why": "A poem is made of verses. A book is made of chapters."
+  }
+ ]
+}

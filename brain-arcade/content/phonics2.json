@@ -1,0 +1,3705 @@
+{
+ "about": "Decoding patterns from late 1st grade through 4th grade (vowel teams and diphthongs, silent letters, soft c and g, -le, prefixes and suffixes, spelling changes, longer words, Greek and Latin parts). Each pattern has a g and 12-15 words. picture is an emoji where one shows the word clearly. distractors are 3 real or made-up words that differ in the pattern and are never homophones of the target. The game shuffles the options.",
+ "patterns": [
+  {
+   "id": "oo-moon",
+   "name": "oo as in moon",
+   "g": 1.8,
+   "words": [
+    {
+     "word": "moon",
+     "picture": "🌙",
+     "distractors": [
+      "moan",
+      "man",
+      "mean"
+     ]
+    },
+    {
+     "word": "spoon",
+     "picture": "🥄",
+     "distractors": [
+      "spin",
+      "span",
+      "spoke"
+     ]
+    },
+    {
+     "word": "broom",
+     "picture": "🧹",
+     "distractors": [
+      "brim",
+      "roam",
+      "brown"
+     ]
+    },
+    {
+     "word": "zoo",
+     "distractors": [
+      "zap",
+      "zip",
+      "zone"
+     ]
+    },
+    {
+     "word": "food",
+     "distractors": [
+      "fond",
+      "feed",
+      "fold"
+     ]
+    },
+    {
+     "word": "cool",
+     "distractors": [
+      "coal",
+      "call",
+      "cell"
+     ]
+    },
+    {
+     "word": "pool",
+     "distractors": [
+      "pail",
+      "pole",
+      "pull"
+     ]
+    },
+    {
+     "word": "roof",
+     "distractors": [
+      "reef",
+      "roar",
+      "rope"
+     ]
+    },
+    {
+     "word": "tooth",
+     "picture": "🦷",
+     "distractors": [
+      "tenth",
+      "teeth",
+      "toast"
+     ]
+    },
+    {
+     "word": "boot",
+     "picture": "🥾",
+     "distractors": [
+      "boat",
+      "bolt",
+      "bat"
+     ]
+    },
+    {
+     "word": "room",
+     "distractors": [
+      "roam",
+      "rim",
+      "ram"
+     ]
+    },
+    {
+     "word": "school",
+     "picture": "🏫",
+     "distractors": [
+      "scowl",
+      "scold",
+      "shoal"
+     ]
+    },
+    {
+     "word": "balloon",
+     "picture": "🎈",
+     "distractors": [
+      "ballot",
+      "bellows",
+      "bullet"
+     ]
+    },
+    {
+     "word": "tool",
+     "distractors": [
+      "toil",
+      "tall",
+      "tell"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "oo-book",
+   "name": "oo as in book",
+   "g": 2,
+   "words": [
+    {
+     "word": "book",
+     "picture": "📖",
+     "distractors": [
+      "boot",
+      "back",
+      "bake"
+     ]
+    },
+    {
+     "word": "look",
+     "distractors": [
+      "lock",
+      "like",
+      "loop"
+     ]
+    },
+    {
+     "word": "took",
+     "distractors": [
+      "tuck",
+      "take",
+      "tool"
+     ]
+    },
+    {
+     "word": "cook",
+     "picture": "🍳",
+     "distractors": [
+      "cake",
+      "cork",
+      "coke"
+     ]
+    },
+    {
+     "word": "foot",
+     "picture": "🦶",
+     "distractors": [
+      "food",
+      "fort",
+      "fit"
+     ]
+    },
+    {
+     "word": "good",
+     "distractors": [
+      "food",
+      "gold",
+      "gown"
+     ]
+    },
+    {
+     "word": "wood",
+     "picture": "🪵",
+     "distractors": [
+      "wand",
+      "wild",
+      "word"
+     ]
+    },
+    {
+     "word": "hook",
+     "distractors": [
+      "hoop",
+      "hack",
+      "hike"
+     ]
+    },
+    {
+     "word": "stood",
+     "distractors": [
+      "stool",
+      "stud",
+      "stone"
+     ]
+    },
+    {
+     "word": "wool",
+     "distractors": [
+      "wail",
+      "wall",
+      "well"
+     ]
+    },
+    {
+     "word": "brook",
+     "distractors": [
+      "broke",
+      "brick",
+      "break"
+     ]
+    },
+    {
+     "word": "shook",
+     "distractors": [
+      "shock",
+      "shake",
+      "shout"
+     ]
+    },
+    {
+     "word": "hood",
+     "distractors": [
+      "hold",
+      "hid",
+      "herd"
+     ]
+    },
+    {
+     "word": "crook",
+     "distractors": [
+      "crack",
+      "creak",
+      "croak"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ou-ow",
+   "name": "ou / ow as in cloud and cow",
+   "g": 2.1,
+   "words": [
+    {
+     "word": "cloud",
+     "picture": "☁️",
+     "distractors": [
+      "could",
+      "cold",
+      "clad"
+     ]
+    },
+    {
+     "word": "cow",
+     "picture": "🐄",
+     "distractors": [
+      "cob",
+      "cot",
+      "caw"
+     ]
+    },
+    {
+     "word": "house",
+     "picture": "🏠",
+     "distractors": [
+      "horse",
+      "hose",
+      "hoax"
+     ]
+    },
+    {
+     "word": "mouse",
+     "picture": "🐭",
+     "distractors": [
+      "moose",
+      "moss",
+      "mule"
+     ]
+    },
+    {
+     "word": "down",
+     "distractors": [
+      "done",
+      "dawn",
+      "dine"
+     ]
+    },
+    {
+     "word": "town",
+     "distractors": [
+      "torn",
+      "tan",
+      "ton"
+     ]
+    },
+    {
+     "word": "owl",
+     "picture": "🦉",
+     "distractors": [
+      "oil",
+      "owe",
+      "own"
+     ]
+    },
+    {
+     "word": "out",
+     "distractors": [
+      "oat",
+      "art",
+      "but"
+     ]
+    },
+    {
+     "word": "mouth",
+     "distractors": [
+      "moth",
+      "month",
+      "math"
+     ]
+    },
+    {
+     "word": "round",
+     "distractors": [
+      "road",
+      "rind",
+      "rend"
+     ]
+    },
+    {
+     "word": "sound",
+     "distractors": [
+      "sand",
+      "send",
+      "sold"
+     ]
+    },
+    {
+     "word": "brown",
+     "distractors": [
+      "born",
+      "brawn",
+      "burn"
+     ]
+    },
+    {
+     "word": "crown",
+     "picture": "👑",
+     "distractors": [
+      "crow",
+      "crawl",
+      "grown"
+     ]
+    },
+    {
+     "word": "clown",
+     "picture": "🤡",
+     "distractors": [
+      "clone",
+      "clan",
+      "cling"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "oi-oy",
+   "name": "oi / oy as in coin and toy",
+   "g": 2.2,
+   "words": [
+    {
+     "word": "coin",
+     "picture": "🪙",
+     "distractors": [
+      "corn",
+      "cone",
+      "cain"
+     ]
+    },
+    {
+     "word": "toy",
+     "picture": "🧸",
+     "distractors": [
+      "tie",
+      "toe",
+      "tow"
+     ]
+    },
+    {
+     "word": "oil",
+     "picture": "🛢️",
+     "distractors": [
+      "owl",
+      "ill",
+      "old"
+     ]
+    },
+    {
+     "word": "soil",
+     "distractors": [
+      "soul",
+      "sail",
+      "soap"
+     ]
+    },
+    {
+     "word": "join",
+     "distractors": [
+      "jog",
+      "jean",
+      "grin"
+     ]
+    },
+    {
+     "word": "enjoy",
+     "distractors": [
+      "enemy",
+      "entry",
+      "energy"
+     ]
+    },
+    {
+     "word": "noise",
+     "distractors": [
+      "nose",
+      "nice",
+      "raise"
+     ]
+    },
+    {
+     "word": "boil",
+     "distractors": [
+      "bowl",
+      "bail",
+      "bell"
+     ]
+    },
+    {
+     "word": "point",
+     "distractors": [
+      "paint",
+      "print",
+      "pint"
+     ]
+    },
+    {
+     "word": "voice",
+     "distractors": [
+      "vice",
+      "vote",
+      "value"
+     ]
+    },
+    {
+     "word": "joy",
+     "distractors": [
+      "jay",
+      "jog",
+      "jaw"
+     ]
+    },
+    {
+     "word": "spoil",
+     "distractors": [
+      "spool",
+      "spill",
+      "spell"
+     ]
+    },
+    {
+     "word": "royal",
+     "distractors": [
+      "rival",
+      "regal",
+      "rural"
+     ]
+    },
+    {
+     "word": "boy",
+     "distractors": [
+      "bay",
+      "bog",
+      "bow"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "aw-au",
+   "name": "aw / au as in paw and cause",
+   "g": 2.3,
+   "words": [
+    {
+     "word": "paw",
+     "picture": "🐾",
+     "distractors": [
+      "pay",
+      "pan",
+      "pat"
+     ]
+    },
+    {
+     "word": "saw",
+     "picture": "🪚",
+     "distractors": [
+      "say",
+      "sad",
+      "sea"
+     ]
+    },
+    {
+     "word": "jaw",
+     "distractors": [
+      "jar",
+      "joy",
+      "jab"
+     ]
+    },
+    {
+     "word": "claw",
+     "distractors": [
+      "clay",
+      "clap",
+      "clam"
+     ]
+    },
+    {
+     "word": "straw",
+     "distractors": [
+      "stray",
+      "strap",
+      "strew"
+     ]
+    },
+    {
+     "word": "lawn",
+     "distractors": [
+      "lane",
+      "loan",
+      "line"
+     ]
+    },
+    {
+     "word": "yawn",
+     "distractors": [
+      "yarn",
+      "yank",
+      "yard"
+     ]
+    },
+    {
+     "word": "dawn",
+     "distractors": [
+      "down",
+      "darn",
+      "dune"
+     ]
+    },
+    {
+     "word": "crawl",
+     "distractors": [
+      "crowd",
+      "curl",
+      "call"
+     ]
+    },
+    {
+     "word": "hawk",
+     "distractors": [
+      "hack",
+      "hook",
+      "hulk"
+     ]
+    },
+    {
+     "word": "cause",
+     "distractors": [
+      "case",
+      "cuss",
+      "curse"
+     ]
+    },
+    {
+     "word": "pause",
+     "distractors": [
+      "pose",
+      "pass",
+      "pulse"
+     ]
+    },
+    {
+     "word": "sauce",
+     "distractors": [
+      "source",
+      "space",
+      "sage"
+     ]
+    },
+    {
+     "word": "author",
+     "distractors": [
+      "other",
+      "outer",
+      "actor"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ew-ue",
+   "name": "ew / ue as in new and blue",
+   "g": 2.4,
+   "words": [
+    {
+     "word": "new",
+     "distractors": [
+      "now",
+      "net",
+      "nest"
+     ]
+    },
+    {
+     "word": "few",
+     "distractors": [
+      "fee",
+      "fed",
+      "fox"
+     ]
+    },
+    {
+     "word": "grew",
+     "distractors": [
+      "grow",
+      "green",
+      "grub"
+     ]
+    },
+    {
+     "word": "flew",
+     "distractors": [
+      "flaw",
+      "flow",
+      "flea"
+     ]
+    },
+    {
+     "word": "drew",
+     "distractors": [
+      "draw",
+      "drove",
+      "dry"
+     ]
+    },
+    {
+     "word": "chew",
+     "distractors": [
+      "chow",
+      "chop",
+      "chin"
+     ]
+    },
+    {
+     "word": "blue",
+     "distractors": [
+      "blur",
+      "bluff",
+      "blow"
+     ]
+    },
+    {
+     "word": "glue",
+     "distractors": [
+      "glum",
+      "globe",
+      "gloat"
+     ]
+    },
+    {
+     "word": "clue",
+     "distractors": [
+      "club",
+      "clunk",
+      "clone"
+     ]
+    },
+    {
+     "word": "true",
+     "distractors": [
+      "tree",
+      "tray",
+      "trip"
+     ]
+    },
+    {
+     "word": "due",
+     "distractors": [
+      "dye",
+      "dud",
+      "den"
+     ]
+    },
+    {
+     "word": "screw",
+     "distractors": [
+      "scrub",
+      "scrawl",
+      "screen"
+     ]
+    },
+    {
+     "word": "statue",
+     "distractors": [
+      "status",
+      "stature",
+      "stand"
+     ]
+    },
+    {
+     "word": "value",
+     "distractors": [
+      "valve",
+      "valley",
+      "valid"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "igh",
+   "name": "igh as in light",
+   "g": 2.4,
+   "words": [
+    {
+     "word": "light",
+     "picture": "💡",
+     "distractors": [
+      "lift",
+      "lint",
+      "lilt"
+     ]
+    },
+    {
+     "word": "right",
+     "distractors": [
+      "rift",
+      "rich",
+      "rind"
+     ]
+    },
+    {
+     "word": "night",
+     "distractors": [
+      "nine",
+      "nest",
+      "nice"
+     ]
+    },
+    {
+     "word": "fight",
+     "distractors": [
+      "fist",
+      "fish",
+      "fifty"
+     ]
+    },
+    {
+     "word": "might",
+     "distractors": [
+      "mist",
+      "mint",
+      "mile"
+     ]
+    },
+    {
+     "word": "sight",
+     "distractors": [
+      "silt",
+      "sift",
+      "sixty"
+     ]
+    },
+    {
+     "word": "tight",
+     "distractors": [
+      "tilt",
+      "tint",
+      "tiny"
+     ]
+    },
+    {
+     "word": "high",
+     "distractors": [
+      "hill",
+      "hide",
+      "hip"
+     ]
+    },
+    {
+     "word": "flight",
+     "distractors": [
+      "flint",
+      "fling",
+      "flirt"
+     ]
+    },
+    {
+     "word": "bright",
+     "distractors": [
+      "brisk",
+      "brick",
+      "bring"
+     ]
+    },
+    {
+     "word": "slight",
+     "distractors": [
+      "slick",
+      "sling",
+      "slice"
+     ]
+    },
+    {
+     "word": "sigh",
+     "distractors": [
+      "sign",
+      "sip",
+      "sag"
+     ]
+    },
+    {
+     "word": "fright",
+     "distractors": [
+      "fresh",
+      "front",
+      "fruit"
+     ]
+    },
+    {
+     "word": "thigh",
+     "distractors": [
+      "thing",
+      "thick",
+      "thin"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ie-pie",
+   "name": "ie as in pie and tied",
+   "g": 2.5,
+   "words": [
+    {
+     "word": "pie",
+     "picture": "🥧",
+     "distractors": [
+      "pin",
+      "pea",
+      "pit"
+     ]
+    },
+    {
+     "word": "tie",
+     "distractors": [
+      "tin",
+      "tip",
+      "toe"
+     ]
+    },
+    {
+     "word": "lie",
+     "distractors": [
+      "lit",
+      "lid",
+      "lip"
+     ]
+    },
+    {
+     "word": "cried",
+     "distractors": [
+      "creed",
+      "crib",
+      "crowd"
+     ]
+    },
+    {
+     "word": "pies",
+     "distractors": [
+      "pins",
+      "pits",
+      "pipes"
+     ]
+    },
+    {
+     "word": "ties",
+     "distractors": [
+      "tins",
+      "tips",
+      "toes"
+     ]
+    },
+    {
+     "word": "lies",
+     "distractors": [
+      "lids",
+      "lips",
+      "lines"
+     ]
+    },
+    {
+     "word": "tied",
+     "distractors": [
+      "tire",
+      "toed",
+      "tidy"
+     ]
+    },
+    {
+     "word": "lied",
+     "distractors": [
+      "lid",
+      "lice",
+      "lined"
+     ]
+    },
+    {
+     "word": "tried",
+     "distractors": [
+      "tired",
+      "trade",
+      "tread"
+     ]
+    },
+    {
+     "word": "fried",
+     "distractors": [
+      "fired",
+      "freed",
+      "friend"
+     ]
+    },
+    {
+     "word": "cries",
+     "distractors": [
+      "crime",
+      "cress",
+      "crows"
+     ]
+    },
+    {
+     "word": "flies",
+     "distractors": [
+      "files",
+      "flees",
+      "flips"
+     ]
+    },
+    {
+     "word": "dries",
+     "distractors": [
+      "drips",
+      "dress",
+      "drive"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "y-fly",
+   "name": "y as a long i (fly)",
+   "g": 2.5,
+   "words": [
+    {
+     "word": "fly",
+     "picture": "🪰",
+     "distractors": [
+      "flu",
+      "flew",
+      "flat"
+     ]
+    },
+    {
+     "word": "cry",
+     "distractors": [
+      "crow",
+      "crib",
+      "cure"
+     ]
+    },
+    {
+     "word": "try",
+     "distractors": [
+      "tray",
+      "trip",
+      "tree"
+     ]
+    },
+    {
+     "word": "dry",
+     "distractors": [
+      "drag",
+      "drip",
+      "drum"
+     ]
+    },
+    {
+     "word": "sky",
+     "distractors": [
+      "ski",
+      "skin",
+      "skip"
+     ]
+    },
+    {
+     "word": "my",
+     "distractors": [
+      "me",
+      "may",
+      "mud"
+     ]
+    },
+    {
+     "word": "by",
+     "distractors": [
+      "be",
+      "bay",
+      "boy"
+     ]
+    },
+    {
+     "word": "why",
+     "distractors": [
+      "who",
+      "when",
+      "wow"
+     ]
+    },
+    {
+     "word": "shy",
+     "distractors": [
+      "she",
+      "ship",
+      "shoe"
+     ]
+    },
+    {
+     "word": "spy",
+     "distractors": [
+      "spa",
+      "spit",
+      "spin"
+     ]
+    },
+    {
+     "word": "fry",
+     "distractors": [
+      "free",
+      "fray",
+      "frog"
+     ]
+    },
+    {
+     "word": "sly",
+     "distractors": [
+      "slip",
+      "slay",
+      "slow"
+     ]
+    },
+    {
+     "word": "reply",
+     "distractors": [
+      "replay",
+      "repay",
+      "repel"
+     ]
+    },
+    {
+     "word": "July",
+     "distractors": [
+      "jelly",
+      "jolly",
+      "jury"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "y-happy",
+   "name": "y as a long e (happy)",
+   "g": 2.6,
+   "words": [
+    {
+     "word": "happy",
+     "distractors": [
+      "happen",
+      "hobby",
+      "handy"
+     ]
+    },
+    {
+     "word": "funny",
+     "distractors": [
+      "fuzzy",
+      "runny",
+      "bunny"
+     ]
+    },
+    {
+     "word": "baby",
+     "distractors": [
+      "maybe",
+      "bunny",
+      "busy"
+     ]
+    },
+    {
+     "word": "bunny",
+     "picture": "🐰",
+     "distractors": [
+      "bunch",
+      "bunk",
+      "bump"
+     ]
+    },
+    {
+     "word": "puppy",
+     "picture": "🐶",
+     "distractors": [
+      "pupil",
+      "poppy",
+      "puffy"
+     ]
+    },
+    {
+     "word": "family",
+     "distractors": [
+      "famine",
+      "fairly",
+      "firmly"
+     ]
+    },
+    {
+     "word": "windy",
+     "distractors": [
+      "wind",
+      "wordy",
+      "wiry"
+     ]
+    },
+    {
+     "word": "sunny",
+     "picture": "☀️",
+     "distractors": [
+      "sandy",
+      "sunk",
+      "runny"
+     ]
+    },
+    {
+     "word": "candy",
+     "picture": "🍬",
+     "distractors": [
+      "handy",
+      "candle",
+      "canny"
+     ]
+    },
+    {
+     "word": "lucky",
+     "distractors": [
+      "lacy",
+      "lucid",
+      "mucky"
+     ]
+    },
+    {
+     "word": "muddy",
+     "distractors": [
+      "madly",
+      "mushy",
+      "moody"
+     ]
+    },
+    {
+     "word": "jelly",
+     "distractors": [
+      "jolly",
+      "belly",
+      "jetty"
+     ]
+    },
+    {
+     "word": "story",
+     "distractors": [
+      "stony",
+      "store",
+      "stormy"
+     ]
+    },
+    {
+     "word": "silly",
+     "distractors": [
+      "sill",
+      "sulky",
+      "silky"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "compound",
+   "name": "compound words",
+   "g": 2.7,
+   "words": [
+    {
+     "word": "cupcake",
+     "picture": "🧁",
+     "distractors": [
+      "cupcape",
+      "cupcase",
+      "cupboard"
+     ]
+    },
+    {
+     "word": "sunshine",
+     "distractors": [
+      "sunshade",
+      "sunshone",
+      "sunshiny"
+     ]
+    },
+    {
+     "word": "rainbow",
+     "picture": "🌈",
+     "distractors": [
+      "raincoat",
+      "rainbox",
+      "rainbowl"
+     ]
+    },
+    {
+     "word": "sandbox",
+     "distractors": [
+      "sandbag",
+      "sandbar",
+      "sandbux"
+     ]
+    },
+    {
+     "word": "popcorn",
+     "picture": "🍿",
+     "distractors": [
+      "popcarn",
+      "popcord",
+      "popcorm"
+     ]
+    },
+    {
+     "word": "airplane",
+     "picture": "✈️",
+     "distractors": [
+      "airplace",
+      "airplant",
+      "airpane"
+     ]
+    },
+    {
+     "word": "butterfly",
+     "picture": "🦋",
+     "distractors": [
+      "butterfty",
+      "butterfry",
+      "buttercup"
+     ]
+    },
+    {
+     "word": "snowman",
+     "picture": "⛄",
+     "distractors": [
+      "snowmen",
+      "snowmad",
+      "snowban"
+     ]
+    },
+    {
+     "word": "toothbrush",
+     "picture": "🪥",
+     "distractors": [
+      "toothbrash",
+      "toothbrust",
+      "toothpush"
+     ]
+    },
+    {
+     "word": "backpack",
+     "picture": "🎒",
+     "distractors": [
+      "backpick",
+      "backpuck",
+      "backpace"
+     ]
+    },
+    {
+     "word": "bedroom",
+     "picture": "🛏️",
+     "distractors": [
+      "bedroam",
+      "bedrome",
+      "bedboom"
+     ]
+    },
+    {
+     "word": "notebook",
+     "picture": "📓",
+     "distractors": [
+      "notebool",
+      "notebolt",
+      "nodebook"
+     ]
+    },
+    {
+     "word": "sailboat",
+     "picture": "⛵",
+     "distractors": [
+      "sailbolt",
+      "sailboot",
+      "sailcoat"
+     ]
+    },
+    {
+     "word": "baseball",
+     "picture": "⚾",
+     "distractors": [
+      "basebell",
+      "baseboll",
+      "basebowl"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "soft-c",
+   "name": "soft c as in city and ice",
+   "g": 2.8,
+   "words": [
+    {
+     "word": "city",
+     "distractors": [
+      "kitty",
+      "caty",
+      "cite"
+     ]
+    },
+    {
+     "word": "cent",
+     "distractors": [
+      "cant",
+      "cost",
+      "cart"
+     ]
+    },
+    {
+     "word": "face",
+     "distractors": [
+      "fact",
+      "fake",
+      "fade"
+     ]
+    },
+    {
+     "word": "race",
+     "distractors": [
+      "rake",
+      "rate",
+      "rack"
+     ]
+    },
+    {
+     "word": "ice",
+     "picture": "🧊",
+     "distractors": [
+      "ire",
+      "ink",
+      "ill"
+     ]
+    },
+    {
+     "word": "rice",
+     "picture": "🍚",
+     "distractors": [
+      "rich",
+      "rise",
+      "rink"
+     ]
+    },
+    {
+     "word": "mice",
+     "picture": "🐭",
+     "distractors": [
+      "mine",
+      "mile",
+      "mike"
+     ]
+    },
+    {
+     "word": "fence",
+     "distractors": [
+      "fend",
+      "fern",
+      "fetch"
+     ]
+    },
+    {
+     "word": "dance",
+     "distractors": [
+      "dank",
+      "dane",
+      "dare"
+     ]
+    },
+    {
+     "word": "pencil",
+     "picture": "✏️",
+     "distractors": [
+      "pedal",
+      "pebble",
+      "pencal"
+     ]
+    },
+    {
+     "word": "juice",
+     "picture": "🧃",
+     "distractors": [
+      "just",
+      "judge",
+      "juke"
+     ]
+    },
+    {
+     "word": "circle",
+     "picture": "⭕",
+     "distractors": [
+      "cradle",
+      "cuddle",
+      "curtle"
+     ]
+    },
+    {
+     "word": "price",
+     "distractors": [
+      "pride",
+      "prick",
+      "prize"
+     ]
+    },
+    {
+     "word": "dice",
+     "picture": "🎲",
+     "distractors": [
+      "dine",
+      "dime",
+      "dike"
+     ]
+    },
+    {
+     "word": "space",
+     "distractors": [
+      "spade",
+      "spare",
+      "spine"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "soft-g",
+   "name": "soft g as in giant and cage",
+   "g": 2.9,
+   "words": [
+    {
+     "word": "giant",
+     "distractors": [
+      "grant",
+      "glint",
+      "gaunt"
+     ]
+    },
+    {
+     "word": "gem",
+     "picture": "💎",
+     "distractors": [
+      "gum",
+      "get",
+      "gap"
+     ]
+    },
+    {
+     "word": "gentle",
+     "distractors": [
+      "gettle",
+      "gantle",
+      "kettle"
+     ]
+    },
+    {
+     "word": "magic",
+     "distractors": [
+      "music",
+      "magma",
+      "mogic"
+     ]
+    },
+    {
+     "word": "cage",
+     "distractors": [
+      "cake",
+      "cave",
+      "came"
+     ]
+    },
+    {
+     "word": "page",
+     "distractors": [
+      "pale",
+      "pave",
+      "pane"
+     ]
+    },
+    {
+     "word": "stage",
+     "distractors": [
+      "state",
+      "stake",
+      "stale"
+     ]
+    },
+    {
+     "word": "giraffe",
+     "picture": "🦒",
+     "distractors": [
+      "griffin",
+      "gazelle",
+      "graffiti"
+     ]
+    },
+    {
+     "word": "orange",
+     "picture": "🍊",
+     "distractors": [
+      "arrange",
+      "ornate",
+      "orchid"
+     ]
+    },
+    {
+     "word": "age",
+     "distractors": [
+      "ago",
+      "ace",
+      "ape"
+     ]
+    },
+    {
+     "word": "huge",
+     "distractors": [
+      "hug",
+      "hunk",
+      "hose"
+     ]
+    },
+    {
+     "word": "change",
+     "distractors": [
+      "chance",
+      "chang",
+      "channel"
+     ]
+    },
+    {
+     "word": "ginger",
+     "distractors": [
+      "finger",
+      "singer",
+      "linger"
+     ]
+    },
+    {
+     "word": "germ",
+     "distractors": [
+      "term",
+      "perm",
+      "worm"
+     ]
+    },
+    {
+     "word": "energy",
+     "distractors": [
+      "enemy",
+      "entry",
+      "enjoy"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "silent-letters",
+   "name": "Silent letters: kn, wr, gn, mb",
+   "g": 2.9,
+   "words": [
+    {
+     "word": "knee",
+     "distractors": [
+      "knew",
+      "kneel",
+      "keen"
+     ]
+    },
+    {
+     "word": "knife",
+     "distractors": [
+      "knit",
+      "kite",
+      "wife"
+     ]
+    },
+    {
+     "word": "knock",
+     "distractors": [
+      "knack",
+      "flock",
+      "lock"
+     ]
+    },
+    {
+     "word": "knot",
+     "distractors": [
+      "nut",
+      "knit",
+      "note"
+     ]
+    },
+    {
+     "word": "know",
+     "distractors": [
+      "known",
+      "snow",
+      "knob"
+     ]
+    },
+    {
+     "word": "wrap",
+     "picture": "🎁",
+     "distractors": [
+      "warp",
+      "wasp",
+      "trap"
+     ]
+    },
+    {
+     "word": "write",
+     "distractors": [
+      "white",
+      "wrote",
+      "wrist"
+     ]
+    },
+    {
+     "word": "wrist",
+     "distractors": [
+      "twist",
+      "wrote",
+      "wrists"
+     ]
+    },
+    {
+     "word": "wrong",
+     "distractors": [
+      "strong",
+      "wrung",
+      "long"
+     ]
+    },
+    {
+     "word": "gnat",
+     "distractors": [
+      "goat",
+      "that",
+      "gnaw"
+     ]
+    },
+    {
+     "word": "sign",
+     "distractors": [
+      "sing",
+      "sigh",
+      "silk"
+     ]
+    },
+    {
+     "word": "lamb",
+     "picture": "🐑",
+     "distractors": [
+      "lamp",
+      "lame",
+      "land"
+     ]
+    },
+    {
+     "word": "thumb",
+     "distractors": [
+      "thump",
+      "thrum",
+      "thud"
+     ]
+    },
+    {
+     "word": "climb",
+     "distractors": [
+      "clamp",
+      "clip",
+      "crime"
+     ]
+    },
+    {
+     "word": "comb",
+     "distractors": [
+      "come",
+      "cone",
+      "cob"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "prefix-un-re",
+   "name": "Prefixes un- and re-",
+   "g": 3,
+   "words": [
+    {
+     "word": "unlock",
+     "picture": "🔓",
+     "distractors": [
+      "unlike",
+      "unluck",
+      "unlace"
+     ]
+    },
+    {
+     "word": "undo",
+     "distractors": [
+      "under",
+      "undid",
+      "unto"
+     ]
+    },
+    {
+     "word": "unfair",
+     "distractors": [
+      "unfold",
+      "unfit",
+      "unfurl"
+     ]
+    },
+    {
+     "word": "unhappy",
+     "distractors": [
+      "unhandy",
+      "unharpy",
+      "unheard"
+     ]
+    },
+    {
+     "word": "untie",
+     "distractors": [
+      "until",
+      "unite",
+      "unlit"
+     ]
+    },
+    {
+     "word": "unpack",
+     "distractors": [
+      "unpick",
+      "unlock",
+      "unpark"
+     ]
+    },
+    {
+     "word": "unsafe",
+     "distractors": [
+      "unsure",
+      "unsaid",
+      "unseen"
+     ]
+    },
+    {
+     "word": "replay",
+     "distractors": [
+      "repay",
+      "reply",
+      "relay"
+     ]
+    },
+    {
+     "word": "reread",
+     "distractors": [
+      "retread",
+      "reheat",
+      "reseed"
+     ]
+    },
+    {
+     "word": "rewrite",
+     "distractors": [
+      "rewrote",
+      "rewire",
+      "rewrap"
+     ]
+    },
+    {
+     "word": "rebuild",
+     "distractors": [
+      "rebuilt",
+      "rebuke",
+      "rebuilds"
+     ]
+    },
+    {
+     "word": "reopen",
+     "distractors": [
+      "repent",
+      "rewind",
+      "reopens"
+     ]
+    },
+    {
+     "word": "recycle",
+     "picture": "♻️",
+     "distractors": [
+      "bicycle",
+      "recline",
+      "rescue"
+     ]
+    },
+    {
+     "word": "refill",
+     "distractors": [
+      "refile",
+      "refit",
+      "rebill"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "er-est",
+   "name": "Endings -er and -est",
+   "g": 3,
+   "words": [
+    {
+     "word": "faster",
+     "distractors": [
+      "master",
+      "falter",
+      "fasten"
+     ]
+    },
+    {
+     "word": "taller",
+     "distractors": [
+      "teller",
+      "tailor",
+      "talker"
+     ]
+    },
+    {
+     "word": "smaller",
+     "distractors": [
+      "smiler",
+      "spiller",
+      "stalled"
+     ]
+    },
+    {
+     "word": "bigger",
+     "distractors": [
+      "digger",
+      "bagger",
+      "bitter"
+     ]
+    },
+    {
+     "word": "older",
+     "distractors": [
+      "elder",
+      "odder",
+      "colder"
+     ]
+    },
+    {
+     "word": "colder",
+     "distractors": [
+      "cooler",
+      "folder",
+      "holder"
+     ]
+    },
+    {
+     "word": "slower",
+     "distractors": [
+      "flower",
+      "slowly",
+      "slaver"
+     ]
+    },
+    {
+     "word": "louder",
+     "distractors": [
+      "leader",
+      "powder",
+      "loader"
+     ]
+    },
+    {
+     "word": "fastest",
+     "distractors": [
+      "fattest",
+      "fastens",
+      "faintest"
+     ]
+    },
+    {
+     "word": "tallest",
+     "distractors": [
+      "smallest",
+      "tallies",
+      "tallness"
+     ]
+    },
+    {
+     "word": "smallest",
+     "distractors": [
+      "smallish",
+      "tallest",
+      "smelliest"
+     ]
+    },
+    {
+     "word": "biggest",
+     "distractors": [
+      "bigness",
+      "biggish",
+      "bagging"
+     ]
+    },
+    {
+     "word": "oldest",
+     "distractors": [
+      "coldest",
+      "oldies",
+      "oldish"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dge-tch",
+   "name": "-dge and -tch",
+   "g": 3,
+   "words": [
+    {
+     "word": "badge",
+     "distractors": [
+      "batch",
+      "bash",
+      "base"
+     ]
+    },
+    {
+     "word": "bridge",
+     "distractors": [
+      "bride",
+      "brick",
+      "bridal"
+     ]
+    },
+    {
+     "word": "fudge",
+     "distractors": [
+      "fuss",
+      "fund",
+      "fuse"
+     ]
+    },
+    {
+     "word": "edge",
+     "distractors": [
+      "egg",
+      "edit",
+      "elf"
+     ]
+    },
+    {
+     "word": "judge",
+     "distractors": [
+      "judo",
+      "junk",
+      "jumps"
+     ]
+    },
+    {
+     "word": "ridge",
+     "distractors": [
+      "rigid",
+      "rinse",
+      "rides"
+     ]
+    },
+    {
+     "word": "hedge",
+     "distractors": [
+      "helps",
+      "helm",
+      "hence"
+     ]
+    },
+    {
+     "word": "dodge",
+     "distractors": [
+      "dock",
+      "dole",
+      "docks"
+     ]
+    },
+    {
+     "word": "catch",
+     "distractors": [
+      "cash",
+      "cats",
+      "couch"
+     ]
+    },
+    {
+     "word": "match",
+     "distractors": [
+      "math",
+      "mash",
+      "mast"
+     ]
+    },
+    {
+     "word": "patch",
+     "distractors": [
+      "path",
+      "pash",
+      "past"
+     ]
+    },
+    {
+     "word": "ditch",
+     "distractors": [
+      "dish",
+      "dig",
+      "dinch"
+     ]
+    },
+    {
+     "word": "kitchen",
+     "distractors": [
+      "kitten",
+      "chicken",
+      "kitches"
+     ]
+    },
+    {
+     "word": "watch",
+     "picture": "⌚",
+     "distractors": [
+      "wash",
+      "wasp",
+      "wage"
+     ]
+    },
+    {
+     "word": "itch",
+     "distractors": [
+      "inch",
+      "ouch",
+      "ink"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "le",
+   "name": "-le endings (table)",
+   "g": 3.1,
+   "words": [
+    {
+     "word": "table",
+     "distractors": [
+      "tale",
+      "tablet",
+      "tabby"
+     ]
+    },
+    {
+     "word": "apple",
+     "picture": "🍎",
+     "distractors": [
+      "ample",
+      "apply",
+      "angle"
+     ]
+    },
+    {
+     "word": "little",
+     "distractors": [
+      "litter",
+      "letter",
+      "lattice"
+     ]
+    },
+    {
+     "word": "puzzle",
+     "picture": "🧩",
+     "distractors": [
+      "puddle",
+      "muzzle",
+      "nozzle"
+     ]
+    },
+    {
+     "word": "candle",
+     "picture": "🕯️",
+     "distractors": [
+      "candy",
+      "canal",
+      "castle"
+     ]
+    },
+    {
+     "word": "turtle",
+     "picture": "🐢",
+     "distractors": [
+      "title",
+      "turkey",
+      "turret"
+     ]
+    },
+    {
+     "word": "bottle",
+     "picture": "🍼",
+     "distractors": [
+      "battle",
+      "bottom",
+      "bolted"
+     ]
+    },
+    {
+     "word": "middle",
+     "distractors": [
+      "muddle",
+      "meddle",
+      "mittle"
+     ]
+    },
+    {
+     "word": "bubble",
+     "distractors": [
+      "babble",
+      "bobble",
+      "bumble"
+     ]
+    },
+    {
+     "word": "handle",
+     "distractors": [
+      "handy",
+      "hurdle",
+      "hassle"
+     ]
+    },
+    {
+     "word": "giggle",
+     "distractors": [
+      "wiggle",
+      "jiggle",
+      "giggly"
+     ]
+    },
+    {
+     "word": "eagle",
+     "picture": "🦅",
+     "distractors": [
+      "eager",
+      "easel",
+      "legal"
+     ]
+    },
+    {
+     "word": "purple",
+     "picture": "🟣",
+     "distractors": [
+      "purse",
+      "pupil",
+      "people"
+     ]
+    },
+    {
+     "word": "tickle",
+     "distractors": [
+      "tackle",
+      "tinkle",
+      "pickle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ful-less",
+   "name": "Endings -ful and -less",
+   "g": 3.1,
+   "words": [
+    {
+     "word": "careful",
+     "distractors": [
+      "careless",
+      "carefree",
+      "cheerful"
+     ]
+    },
+    {
+     "word": "helpful",
+     "distractors": [
+      "helpless",
+      "hopeful",
+      "handful"
+     ]
+    },
+    {
+     "word": "joyful",
+     "distractors": [
+      "joyless",
+      "joyous",
+      "jovial"
+     ]
+    },
+    {
+     "word": "painful",
+     "distractors": [
+      "painless",
+      "pitiful",
+      "painter"
+     ]
+    },
+    {
+     "word": "thankful",
+     "distractors": [
+      "thankless",
+      "tankful",
+      "thanking"
+     ]
+    },
+    {
+     "word": "hopeful",
+     "distractors": [
+      "hopeless",
+      "hopped",
+      "helpful"
+     ]
+    },
+    {
+     "word": "wonderful",
+     "distractors": [
+      "wondered",
+      "wonderland",
+      "wondering"
+     ]
+    },
+    {
+     "word": "colorful",
+     "distractors": [
+      "colorless",
+      "coloring",
+      "colored"
+     ]
+    },
+    {
+     "word": "useful",
+     "distractors": [
+      "useless",
+      "usual",
+      "using"
+     ]
+    },
+    {
+     "word": "endless",
+     "distractors": [
+      "ending",
+      "needless",
+      "endlong"
+     ]
+    },
+    {
+     "word": "fearless",
+     "distractors": [
+      "fearful",
+      "careless",
+      "hairless"
+     ]
+    },
+    {
+     "word": "harmless",
+     "distractors": [
+      "harmful",
+      "harness",
+      "hairless"
+     ]
+    },
+    {
+     "word": "restless",
+     "distractors": [
+      "restful",
+      "rustless",
+      "resting"
+     ]
+    },
+    {
+     "word": "sleepless",
+     "distractors": [
+      "sleeping",
+      "sleepily",
+      "sleepier"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "air-are-ear",
+   "name": "air / are / ear as in chair, care, bear",
+   "g": 3.2,
+   "words": [
+    {
+     "word": "air",
+     "distractors": [
+      "aim",
+      "all",
+      "art"
+     ]
+    },
+    {
+     "word": "hair",
+     "distractors": [
+      "hail",
+      "harm",
+      "hairs"
+     ]
+    },
+    {
+     "word": "chair",
+     "picture": "🪑",
+     "distractors": [
+      "chain",
+      "charm",
+      "chart"
+     ]
+    },
+    {
+     "word": "pair",
+     "distractors": [
+      "pail",
+      "paid",
+      "pain"
+     ]
+    },
+    {
+     "word": "care",
+     "distractors": [
+      "core",
+      "cure",
+      "cave"
+     ]
+    },
+    {
+     "word": "share",
+     "distractors": [
+      "shore",
+      "shale",
+      "shape"
+     ]
+    },
+    {
+     "word": "bear",
+     "picture": "🐻",
+     "distractors": [
+      "bead",
+      "beam",
+      "bean"
+     ]
+    },
+    {
+     "word": "pear",
+     "picture": "🍐",
+     "distractors": [
+      "peer",
+      "pearl",
+      "peak"
+     ]
+    },
+    {
+     "word": "wear",
+     "distractors": [
+      "were",
+      "wire",
+      "wean"
+     ]
+    },
+    {
+     "word": "square",
+     "distractors": [
+      "squire",
+      "squared",
+      "squirm"
+     ]
+    },
+    {
+     "word": "scare",
+     "distractors": [
+      "scar",
+      "score",
+      "scarf"
+     ]
+    },
+    {
+     "word": "rare",
+     "distractors": [
+      "roar",
+      "rate",
+      "rave"
+     ]
+    },
+    {
+     "word": "stare",
+     "distractors": [
+      "start",
+      "store",
+      "stale"
+     ]
+    },
+    {
+     "word": "stairs",
+     "distractors": [
+      "stars",
+      "starts",
+      "stirs"
+     ]
+    },
+    {
+     "word": "fairy",
+     "distractors": [
+      "ferry",
+      "fairly",
+      "furry"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "spell-double-drop",
+   "name": "Doubling or dropping the e before -ing",
+   "g": 3.2,
+   "words": [
+    {
+     "word": "hopping",
+     "distractors": [
+      "hoping",
+      "happing",
+      "hipping"
+     ]
+    },
+    {
+     "word": "running",
+     "distractors": [
+      "runing",
+      "ruining",
+      "rusting"
+     ]
+    },
+    {
+     "word": "sitting",
+     "distractors": [
+      "siting",
+      "setting",
+      "sifting"
+     ]
+    },
+    {
+     "word": "swimming",
+     "distractors": [
+      "swiming",
+      "swinging",
+      "skimming"
+     ]
+    },
+    {
+     "word": "getting",
+     "distractors": [
+      "geting",
+      "jetting",
+      "betting"
+     ]
+    },
+    {
+     "word": "stopping",
+     "distractors": [
+      "stoping",
+      "shopping",
+      "stepping"
+     ]
+    },
+    {
+     "word": "shopping",
+     "distractors": [
+      "shoping",
+      "shipping",
+      "chopping"
+     ]
+    },
+    {
+     "word": "hoping",
+     "distractors": [
+      "hopping",
+      "hopes",
+      "hiding"
+     ]
+    },
+    {
+     "word": "riding",
+     "distractors": [
+      "ridding",
+      "rinding",
+      "rising"
+     ]
+    },
+    {
+     "word": "making",
+     "distractors": [
+      "matting",
+      "mailing",
+      "masking"
+     ]
+    },
+    {
+     "word": "baking",
+     "distractors": [
+      "backing",
+      "barking",
+      "banking"
+     ]
+    },
+    {
+     "word": "taking",
+     "distractors": [
+      "tacking",
+      "talking",
+      "tasking"
+     ]
+    },
+    {
+     "word": "smiling",
+     "distractors": [
+      "smelling",
+      "spilling",
+      "smirking"
+     ]
+    },
+    {
+     "word": "biting",
+     "distractors": [
+      "bitting",
+      "baiting",
+      "bidding"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ness-ly",
+   "name": "Endings -ness and -ly",
+   "g": 3.2,
+   "words": [
+    {
+     "word": "kindness",
+     "distractors": [
+      "kindred",
+      "kindles",
+      "kindest"
+     ]
+    },
+    {
+     "word": "sadness",
+     "distractors": [
+      "saddest",
+      "saddens",
+      "madness"
+     ]
+    },
+    {
+     "word": "darkness",
+     "distractors": [
+      "darkest",
+      "darkens",
+      "hardness"
+     ]
+    },
+    {
+     "word": "softness",
+     "distractors": [
+      "softest",
+      "softens",
+      "swiftness"
+     ]
+    },
+    {
+     "word": "sickness",
+     "distractors": [
+      "sickest",
+      "sickens",
+      "thickness"
+     ]
+    },
+    {
+     "word": "weakness",
+     "distractors": [
+      "weakest",
+      "weakens",
+      "weekends"
+     ]
+    },
+    {
+     "word": "quickly",
+     "distractors": [
+      "quicker",
+      "quickens",
+      "quickest"
+     ]
+    },
+    {
+     "word": "slowly",
+     "distractors": [
+      "slowest",
+      "slowing",
+      "slowed"
+     ]
+    },
+    {
+     "word": "loudly",
+     "distractors": [
+      "louder",
+      "lowly",
+      "lovely"
+     ]
+    },
+    {
+     "word": "softly",
+     "distractors": [
+      "softer",
+      "soften",
+      "safely"
+     ]
+    },
+    {
+     "word": "gently",
+     "distractors": [
+      "gentle",
+      "gentry",
+      "gentler"
+     ]
+    },
+    {
+     "word": "carefully",
+     "distractors": [
+      "carelessly",
+      "cheerfully",
+      "powerfully"
+     ]
+    },
+    {
+     "word": "nicely",
+     "distractors": [
+      "nicer",
+      "nicest",
+      "nicety"
+     ]
+    },
+    {
+     "word": "badly",
+     "distractors": [
+      "baldly",
+      "barely",
+      "sadly"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "r-controlled-2syl",
+   "name": "ar / or / er / ir / ur in longer words",
+   "g": 3.3,
+   "words": [
+    {
+     "word": "garden",
+     "distractors": [
+      "warden",
+      "harden",
+      "golden"
+     ]
+    },
+    {
+     "word": "market",
+     "distractors": [
+      "marker",
+      "magnet",
+      "marvel"
+     ]
+    },
+    {
+     "word": "farmer",
+     "distractors": [
+      "farmed",
+      "former",
+      "firmer"
+     ]
+    },
+    {
+     "word": "corner",
+     "distractors": [
+      "cover",
+      "cornet",
+      "coaster"
+     ]
+    },
+    {
+     "word": "morning",
+     "distractors": [
+      "warning",
+      "moaning",
+      "mooring"
+     ]
+    },
+    {
+     "word": "winter",
+     "distractors": [
+      "winner",
+      "window",
+      "wintry"
+     ]
+    },
+    {
+     "word": "dinner",
+     "distractors": [
+      "diner",
+      "thinner",
+      "dimmer"
+     ]
+    },
+    {
+     "word": "sister",
+     "distractors": [
+      "sitter",
+      "sifter",
+      "mister"
+     ]
+    },
+    {
+     "word": "summer",
+     "distractors": [
+      "simmer",
+      "summit",
+      "hammer"
+     ]
+    },
+    {
+     "word": "thirsty",
+     "distractors": [
+      "thirty",
+      "thirsts",
+      "thirdly"
+     ]
+    },
+    {
+     "word": "turkey",
+     "picture": "🦃",
+     "distractors": [
+      "turnip",
+      "tunnel",
+      "tucker"
+     ]
+    },
+    {
+     "word": "thunder",
+     "picture": "⛈️",
+     "distractors": [
+      "blunder",
+      "wonder",
+      "tender"
+     ]
+    },
+    {
+     "word": "lantern",
+     "picture": "🏮",
+     "distractors": [
+      "pattern",
+      "lectern",
+      "western"
+     ]
+    },
+    {
+     "word": "carpet",
+     "distractors": [
+      "carrot",
+      "carton",
+      "carpel"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "spell-y-i",
+   "name": "Changing y to i before -ed and -es",
+   "g": 3.3,
+   "words": [
+    {
+     "word": "cried",
+     "distractors": [
+      "creed",
+      "crier",
+      "cries"
+     ]
+    },
+    {
+     "word": "babies",
+     "distractors": [
+      "babes",
+      "basics",
+      "babysit"
+     ]
+    },
+    {
+     "word": "puppies",
+     "picture": "🐶",
+     "distractors": [
+      "puppets",
+      "pupils",
+      "poppies"
+     ]
+    },
+    {
+     "word": "bunnies",
+     "picture": "🐰",
+     "distractors": [
+      "funnies",
+      "tunnels",
+      "bunches"
+     ]
+    },
+    {
+     "word": "ladies",
+     "distractors": [
+      "ladles",
+      "ladders",
+      "ladybug"
+     ]
+    },
+    {
+     "word": "carried",
+     "distractors": [
+      "carrier",
+      "curried",
+      "carted"
+     ]
+    },
+    {
+     "word": "hurried",
+     "distractors": [
+      "hurled",
+      "hurtled",
+      "hunted"
+     ]
+    },
+    {
+     "word": "worried",
+     "distractors": [
+      "worrier",
+      "worked",
+      "warned"
+     ]
+    },
+    {
+     "word": "copied",
+     "distractors": [
+      "coped",
+      "copier",
+      "cooped"
+     ]
+    },
+    {
+     "word": "studied",
+     "distractors": [
+      "studies",
+      "studio",
+      "studded"
+     ]
+    },
+    {
+     "word": "stories",
+     "distractors": [
+      "stores",
+      "storms",
+      "stolen"
+     ]
+    },
+    {
+     "word": "cities",
+     "distractors": [
+      "cites",
+      "kitties",
+      "citrus"
+     ]
+    },
+    {
+     "word": "parties",
+     "distractors": [
+      "partied",
+      "patties",
+      "pastries"
+     ]
+    },
+    {
+     "word": "families",
+     "distractors": [
+      "famines",
+      "familiar",
+      "females"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ie-field",
+   "name": "ie as in field and movie",
+   "g": 3.4,
+   "words": [
+    {
+     "word": "field",
+     "distractors": [
+      "fled",
+      "filed",
+      "fuel"
+     ]
+    },
+    {
+     "word": "chief",
+     "distractors": [
+      "chef",
+      "chip",
+      "chime"
+     ]
+    },
+    {
+     "word": "thief",
+     "distractors": [
+      "theft",
+      "thick",
+      "think"
+     ]
+    },
+    {
+     "word": "piece",
+     "distractors": [
+      "pierce",
+      "price",
+      "pieced"
+     ]
+    },
+    {
+     "word": "shield",
+     "distractors": [
+      "shelled",
+      "should",
+      "shilled"
+     ]
+    },
+    {
+     "word": "brief",
+     "distractors": [
+      "bride",
+      "brisk",
+      "brim"
+     ]
+    },
+    {
+     "word": "niece",
+     "distractors": [
+      "nice",
+      "niche",
+      "mince"
+     ]
+    },
+    {
+     "word": "yield",
+     "distractors": [
+      "yelled",
+      "yeast",
+      "yields"
+     ]
+    },
+    {
+     "word": "relief",
+     "distractors": [
+      "relied",
+      "relive",
+      "relish"
+     ]
+    },
+    {
+     "word": "shriek",
+     "distractors": [
+      "shrink",
+      "shrimp",
+      "shirk"
+     ]
+    },
+    {
+     "word": "fierce",
+     "distractors": [
+      "fence",
+      "force",
+      "fires"
+     ]
+    },
+    {
+     "word": "movie",
+     "distractors": [
+      "moved",
+      "moves",
+      "mopes"
+     ]
+    },
+    {
+     "word": "cookie",
+     "picture": "🍪",
+     "distractors": [
+      "cooked",
+      "cooker",
+      "cooler"
+     ]
+    },
+    {
+     "word": "believe",
+     "distractors": [
+      "beloved",
+      "behave",
+      "beehive"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "prefix-dis-pre-mis",
+   "name": "Prefixes dis-, pre-, and mis-",
+   "g": 3.5,
+   "words": [
+    {
+     "word": "dislike",
+     "distractors": [
+      "display",
+      "disable",
+      "distant"
+     ]
+    },
+    {
+     "word": "disagree",
+     "distractors": [
+      "disgrace",
+      "displace",
+      "disarray"
+     ]
+    },
+    {
+     "word": "discover",
+     "distractors": [
+      "discount",
+      "disclose",
+      "recover"
+     ]
+    },
+    {
+     "word": "dishonest",
+     "distractors": [
+      "dishonor",
+      "disorder",
+      "dishonesty"
+     ]
+    },
+    {
+     "word": "disobey",
+     "distractors": [
+      "dismay",
+      "discard",
+      "disobeys"
+     ]
+    },
+    {
+     "word": "discount",
+     "distractors": [
+      "discover",
+      "disclose",
+      "dismount"
+     ]
+    },
+    {
+     "word": "preview",
+     "distractors": [
+      "prevent",
+      "previous",
+      "review"
+     ]
+    },
+    {
+     "word": "preheat",
+     "distractors": [
+      "prepare",
+      "prefect",
+      "prepaid"
+     ]
+    },
+    {
+     "word": "prepay",
+     "distractors": [
+      "prepaid",
+      "repay",
+      "preach"
+     ]
+    },
+    {
+     "word": "pretest",
+     "distractors": [
+      "pretext",
+      "protest",
+      "pretend"
+     ]
+    },
+    {
+     "word": "mistake",
+     "distractors": [
+      "mistook",
+      "mistime",
+      "mistaken"
+     ]
+    },
+    {
+     "word": "misplace",
+     "distractors": [
+      "displace",
+      "misplay",
+      "misspace"
+     ]
+    },
+    {
+     "word": "misread",
+     "distractors": [
+      "mislead",
+      "misdeed",
+      "mistreat"
+     ]
+    },
+    {
+     "word": "misspend",
+     "distractors": [
+      "misspent",
+      "mistrust",
+      "missend"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tion-sion",
+   "name": "-tion and -sion",
+   "g": 3.7,
+   "words": [
+    {
+     "word": "action",
+     "distractors": [
+      "acting",
+      "active",
+      "auction"
+     ]
+    },
+    {
+     "word": "nation",
+     "distractors": [
+      "nature",
+      "native",
+      "natal"
+     ]
+    },
+    {
+     "word": "vacation",
+     "picture": "🏖️",
+     "distractors": [
+      "vocation",
+      "vacating",
+      "location"
+     ]
+    },
+    {
+     "word": "station",
+     "picture": "🚉",
+     "distractors": [
+      "statue",
+      "status",
+      "static"
+     ]
+    },
+    {
+     "word": "mention",
+     "distractors": [
+      "mentor",
+      "motion",
+      "mansion"
+     ]
+    },
+    {
+     "word": "section",
+     "distractors": [
+      "sector",
+      "secret",
+      "session"
+     ]
+    },
+    {
+     "word": "lotion",
+     "distractors": [
+      "motion",
+      "potion",
+      "lesson"
+     ]
+    },
+    {
+     "word": "fraction",
+     "distractors": [
+      "friction",
+      "traction",
+      "faction"
+     ]
+    },
+    {
+     "word": "direction",
+     "distractors": [
+      "correction",
+      "dictation",
+      "detection"
+     ]
+    },
+    {
+     "word": "vision",
+     "distractors": [
+      "version",
+      "visor",
+      "visit"
+     ]
+    },
+    {
+     "word": "television",
+     "picture": "📺",
+     "distractors": [
+      "telephone",
+      "televised",
+      "telescope"
+     ]
+    },
+    {
+     "word": "decision",
+     "distractors": [
+      "division",
+      "derision",
+      "decimal"
+     ]
+    },
+    {
+     "word": "division",
+     "distractors": [
+      "decision",
+      "revision",
+      "diversion"
+     ]
+    },
+    {
+     "word": "confusion",
+     "distractors": [
+      "conclusion",
+      "confession",
+      "confusing"
+     ]
+    },
+    {
+     "word": "permission",
+     "distractors": [
+      "commission",
+      "percussion",
+      "permitted"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "three-syllable",
+   "name": "Three-syllable words",
+   "g": 3.8,
+   "words": [
+    {
+     "word": "elephant",
+     "picture": "🐘",
+     "distractors": [
+      "elegant",
+      "element",
+      "relevant"
+     ]
+    },
+    {
+     "word": "banana",
+     "picture": "🍌",
+     "distractors": [
+      "bandana",
+      "cabana",
+      "bananas"
+     ]
+    },
+    {
+     "word": "potato",
+     "picture": "🥔",
+     "distractors": [
+      "tomato",
+      "patio",
+      "pistol"
+     ]
+    },
+    {
+     "word": "tomato",
+     "picture": "🍅",
+     "distractors": [
+      "potato",
+      "tornado",
+      "torpedo"
+     ]
+    },
+    {
+     "word": "animal",
+     "distractors": [
+      "animate",
+      "minimal",
+      "anima"
+     ]
+    },
+    {
+     "word": "different",
+     "distractors": [
+      "difference",
+      "diffident",
+      "differing"
+     ]
+    },
+    {
+     "word": "important",
+     "distractors": [
+      "impatient",
+      "imported",
+      "impostor"
+     ]
+    },
+    {
+     "word": "beautiful",
+     "distractors": [
+      "bountiful",
+      "beautify",
+      "beautician"
+     ]
+    },
+    {
+     "word": "adventure",
+     "distractors": [
+      "advertise",
+      "adventurer",
+      "advantage"
+     ]
+    },
+    {
+     "word": "delicious",
+     "distractors": [
+      "delirious",
+      "delicate",
+      "deliberate"
+     ]
+    },
+    {
+     "word": "calendar",
+     "picture": "📅",
+     "distractors": [
+      "colander",
+      "cylinder",
+      "calamity"
+     ]
+    },
+    {
+     "word": "remember",
+     "distractors": [
+      "reminder",
+      "remainder",
+      "resemble"
+     ]
+    },
+    {
+     "word": "triangle",
+     "picture": "🔺",
+     "distractors": [
+      "tricycle",
+      "rectangle",
+      "triangles"
+     ]
+    },
+    {
+     "word": "computer",
+     "picture": "💻",
+     "distractors": [
+      "commuter",
+      "computes",
+      "compiler"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "greek",
+   "name": "Greek parts: tele-, -graph, micro-",
+   "g": 4,
+   "words": [
+    {
+     "word": "telephone",
+     "picture": "☎️",
+     "distractors": [
+      "telegram",
+      "telescope",
+      "telecast"
+     ]
+    },
+    {
+     "word": "telescope",
+     "picture": "🔭",
+     "distractors": [
+      "telephone",
+      "telecast",
+      "periscope"
+     ]
+    },
+    {
+     "word": "telegram",
+     "distractors": [
+      "telegraph",
+      "telephone",
+      "telecast"
+     ]
+    },
+    {
+     "word": "telegraph",
+     "distractors": [
+      "telegram",
+      "paragraph",
+      "telephone"
+     ]
+    },
+    {
+     "word": "photograph",
+     "picture": "📷",
+     "distractors": [
+      "phonograph",
+      "photography",
+      "photographs"
+     ]
+    },
+    {
+     "word": "paragraph",
+     "distractors": [
+      "paragraphs",
+      "parachute",
+      "paramount"
+     ]
+    },
+    {
+     "word": "autograph",
+     "distractors": [
+      "autographs",
+      "automatic",
+      "autograss"
+     ]
+    },
+    {
+     "word": "graph",
+     "distractors": [
+      "grape",
+      "graft",
+      "grasp"
+     ]
+    },
+    {
+     "word": "biography",
+     "distractors": [
+      "geography",
+      "biographer",
+      "biographic"
+     ]
+    },
+    {
+     "word": "geography",
+     "picture": "🌍",
+     "distractors": [
+      "biography",
+      "geographer",
+      "geometry"
+     ]
+    },
+    {
+     "word": "microscope",
+     "picture": "🔬",
+     "distractors": [
+      "microphone",
+      "microwave",
+      "microscopic"
+     ]
+    },
+    {
+     "word": "microphone",
+     "picture": "🎤",
+     "distractors": [
+      "microscope",
+      "microwave",
+      "micrograph"
+     ]
+    },
+    {
+     "word": "megaphone",
+     "picture": "📣",
+     "distractors": [
+      "microphone",
+      "megabyte",
+      "megawatt"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "latin",
+   "name": "Latin parts: port and -able",
+   "g": 4.3,
+   "words": [
+    {
+     "word": "port",
+     "distractors": [
+      "part",
+      "pork",
+      "post"
+     ]
+    },
+    {
+     "word": "airport",
+     "distractors": [
+      "airpost",
+      "airpart",
+      "airfort"
+     ]
+    },
+    {
+     "word": "passport",
+     "distractors": [
+      "passage",
+      "passion",
+      "passports"
+     ]
+    },
+    {
+     "word": "import",
+     "distractors": [
+      "impart",
+      "impact",
+      "impure"
+     ]
+    },
+    {
+     "word": "export",
+     "distractors": [
+      "expert",
+      "expose",
+      "exports"
+     ]
+    },
+    {
+     "word": "transport",
+     "distractors": [
+      "transform",
+      "transpose",
+      "transmit"
+     ]
+    },
+    {
+     "word": "support",
+     "distractors": [
+      "suppose",
+      "supper",
+      "suppress"
+     ]
+    },
+    {
+     "word": "report",
+     "distractors": [
+      "repair",
+      "repeat",
+      "resort"
+     ]
+    },
+    {
+     "word": "portable",
+     "distractors": [
+      "potable",
+      "portage",
+      "portrait"
+     ]
+    },
+    {
+     "word": "comfortable",
+     "distractors": [
+      "comfortably",
+      "comfortless",
+      "comforters"
+     ]
+    },
+    {
+     "word": "enjoyable",
+     "distractors": [
+      "employable",
+      "enjoyment",
+      "enjoyably"
+     ]
+    },
+    {
+     "word": "readable",
+     "distractors": [
+      "reliable",
+      "reachable",
+      "readably"
+     ]
+    },
+    {
+     "word": "breakable",
+     "distractors": [
+      "bearable",
+      "breathable",
+      "bendable"
+     ]
+    },
+    {
+     "word": "valuable",
+     "distractors": [
+      "variable",
+      "valuables",
+      "valuably"
+     ]
+    },
+    {
+     "word": "reasonable",
+     "distractors": [
+      "seasonable",
+      "reasonably",
+      "reasoning"
+     ]
+    }
+   ]
+  }
+ ]
+}

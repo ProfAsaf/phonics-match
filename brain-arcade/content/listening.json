@@ -1,0 +1,741 @@
+{
+ "about": "Short stories read aloud to pre-readers, with picture-answer questions. g is grade-level difficulty (-1.0 = start of Pre-K).",
+ "stories": [
+  {
+   "id": "l01",
+   "g": -1,
+   "title": "Sam's Red Ball",
+   "text": "Sam has a red ball. Sam likes his ball.",
+   "questions": [
+    {
+     "q": "What does Sam have?",
+     "options": [
+      {
+       "label": "ball",
+       "emoji": "⚽"
+      },
+      {
+       "label": "hat",
+       "emoji": "🧢"
+      },
+      {
+       "label": "cup",
+       "emoji": "🥤"
+      }
+     ],
+     "answer": 0,
+     "why": "Sam has a red ball."
+    },
+    {
+     "q": "What color is the ball?",
+     "options": [
+      {
+       "label": "blue",
+       "emoji": "🔵"
+      },
+      {
+       "label": "red",
+       "emoji": "🔴"
+      },
+      {
+       "label": "green",
+       "emoji": "🟢"
+      }
+     ],
+     "answer": 1,
+     "why": "The story says Sam has a red ball."
+    }
+   ]
+  },
+  {
+   "id": "l02",
+   "g": -0.9,
+   "title": "Mia's Cat",
+   "text": "Mia has a cat. The cat likes milk.",
+   "questions": [
+    {
+     "q": "What does Mia have?",
+     "options": [
+      {
+       "label": "dog",
+       "emoji": "🐶"
+      },
+      {
+       "label": "fish",
+       "emoji": "🐟"
+      },
+      {
+       "label": "cat",
+       "emoji": "🐱"
+      }
+     ],
+     "answer": 2,
+     "why": "Mia has a cat."
+    },
+    {
+     "q": "What does the cat like?",
+     "options": [
+      {
+       "label": "milk",
+       "emoji": "🥛"
+      },
+      {
+       "label": "cake",
+       "emoji": "🍰"
+      },
+      {
+       "label": "juice",
+       "emoji": "🧃"
+      }
+     ],
+     "answer": 0,
+     "why": "The cat likes milk."
+    }
+   ]
+  },
+  {
+   "id": "l03",
+   "g": -0.7,
+   "title": "Ben and the Duck",
+   "text": "Ben sees a duck. The duck is in the water. Quack, quack!",
+   "questions": [
+    {
+     "q": "What did Ben see?",
+     "options": [
+      {
+       "label": "frog",
+       "emoji": "🐸"
+      },
+      {
+       "label": "duck",
+       "emoji": "🦆"
+      },
+      {
+       "label": "fish",
+       "emoji": "🐟"
+      }
+     ],
+     "answer": 1,
+     "why": "Ben sees a duck."
+    },
+    {
+     "q": "Where is the duck?",
+     "options": [
+      {
+       "label": "in the water",
+       "emoji": "💧"
+      },
+      {
+       "label": "in a tree",
+       "emoji": "🌳"
+      },
+      {
+       "label": "in a house",
+       "emoji": "🏠"
+      }
+     ],
+     "answer": 0,
+     "why": "The duck is in the water."
+    }
+   ]
+  },
+  {
+   "id": "l04",
+   "g": -0.6,
+   "title": "Rosa's Snack",
+   "text": "Rosa is hungry. She eats an apple. Then she drinks some milk.",
+   "questions": [
+    {
+     "q": "What did Rosa eat?",
+     "options": [
+      {
+       "label": "pizza",
+       "emoji": "🍕"
+      },
+      {
+       "label": "cookie",
+       "emoji": "🍪"
+      },
+      {
+       "label": "apple",
+       "emoji": "🍎"
+      }
+     ],
+     "answer": 2,
+     "why": "Rosa eats an apple."
+    },
+    {
+     "q": "What did Rosa drink?",
+     "options": [
+      {
+       "label": "juice",
+       "emoji": "🧃"
+      },
+      {
+       "label": "milk",
+       "emoji": "🥛"
+      },
+      {
+       "label": "water",
+       "emoji": "💧"
+      }
+     ],
+     "answer": 1,
+     "why": "Rosa drinks some milk."
+    }
+   ]
+  },
+  {
+   "id": "l05",
+   "g": -0.4,
+   "title": "The Rain",
+   "text": "Dark clouds came. Rain fell down. Kai got his umbrella.",
+   "questions": [
+    {
+     "q": "What fell down?",
+     "options": [
+      {
+       "label": "rain",
+       "emoji": "🌧️"
+      },
+      {
+       "label": "snow",
+       "emoji": "❄️"
+      },
+      {
+       "label": "leaves",
+       "emoji": "🍂"
+      }
+     ],
+     "answer": 0,
+     "why": "The story says rain fell down."
+    },
+    {
+     "q": "What did Kai get?",
+     "options": [
+      {
+       "label": "hat",
+       "emoji": "🧢"
+      },
+      {
+       "label": "boots",
+       "emoji": "🥾"
+      },
+      {
+       "label": "umbrella",
+       "emoji": "☂️"
+      }
+     ],
+     "answer": 2,
+     "why": "Kai got his umbrella."
+    }
+   ]
+  },
+  {
+   "id": "l06",
+   "g": -0.3,
+   "title": "Max at the Park",
+   "text": "Max went to the park. He saw a dog. Max gave the dog a pat.",
+   "questions": [
+    {
+     "q": "Where did Max go?",
+     "options": [
+      {
+       "label": "school",
+       "emoji": "🏫"
+      },
+      {
+       "label": "park",
+       "emoji": "🏞️"
+      },
+      {
+       "label": "store",
+       "emoji": "🏪"
+      }
+     ],
+     "answer": 1,
+     "why": "Max went to the park."
+    },
+    {
+     "q": "What did Max see?",
+     "options": [
+      {
+       "label": "dog",
+       "emoji": "🐕"
+      },
+      {
+       "label": "bird",
+       "emoji": "🐦"
+      },
+      {
+       "label": "bug",
+       "emoji": "🐛"
+      }
+     ],
+     "answer": 0,
+     "why": "Max saw a dog."
+    }
+   ]
+  },
+  {
+   "id": "l07",
+   "g": -0.1,
+   "title": "The Bird's Nest",
+   "text": "A bird made a nest in a tree. She put three eggs in the nest. The eggs were small and blue.",
+   "questions": [
+    {
+     "q": "Where did the bird make her nest?",
+     "options": [
+      {
+       "label": "in a house",
+       "emoji": "🏠"
+      },
+      {
+       "label": "in a boat",
+       "emoji": "⛵"
+      },
+      {
+       "label": "in a tree",
+       "emoji": "🌳"
+      }
+     ],
+     "answer": 2,
+     "why": "The bird made her nest in a tree."
+    },
+    {
+     "q": "How many eggs were in the nest?",
+     "options": [
+      {
+       "label": "one",
+       "emoji": "1️⃣"
+      },
+      {
+       "label": "two",
+       "emoji": "2️⃣"
+      },
+      {
+       "label": "three",
+       "emoji": "3️⃣"
+      }
+     ],
+     "answer": 2,
+     "why": "She put three eggs in the nest."
+    }
+   ]
+  },
+  {
+   "id": "l08",
+   "g": 0,
+   "title": "Lily's Birthday",
+   "text": "Today is Lily's birthday. Her mom made a cake. Lily blew out the candles and made a wish.",
+   "questions": [
+    {
+     "q": "What did Mom make?",
+     "options": [
+      {
+       "label": "soup",
+       "emoji": "🍲"
+      },
+      {
+       "label": "cake",
+       "emoji": "🎂"
+      },
+      {
+       "label": "pie",
+       "emoji": "🥧"
+      }
+     ],
+     "answer": 1,
+     "why": "Lily's mom made a cake."
+    },
+    {
+     "q": "What did Lily blow out?",
+     "options": [
+      {
+       "label": "candles",
+       "emoji": "🕯️"
+      },
+      {
+       "label": "balloon",
+       "emoji": "🎈"
+      },
+      {
+       "label": "flashlight",
+       "emoji": "🔦"
+      }
+     ],
+     "answer": 0,
+     "why": "Lily blew out the candles."
+    }
+   ]
+  },
+  {
+   "id": "l09",
+   "g": 0.1,
+   "title": "The Snowman",
+   "text": "Omar made a snowman. He gave it a carrot nose. He put a scarf on its neck. Then the sun came out.",
+   "questions": [
+    {
+     "q": "What did Omar use for the nose?",
+     "options": [
+      {
+       "label": "banana",
+       "emoji": "🍌"
+      },
+      {
+       "label": "apple",
+       "emoji": "🍎"
+      },
+      {
+       "label": "carrot",
+       "emoji": "🥕"
+      }
+     ],
+     "answer": 2,
+     "why": "Omar gave the snowman a carrot nose."
+    },
+    {
+     "q": "What came out at the end?",
+     "options": [
+      {
+       "label": "sun",
+       "emoji": "☀️"
+      },
+      {
+       "label": "moon",
+       "emoji": "🌙"
+      },
+      {
+       "label": "rain",
+       "emoji": "🌧️"
+      }
+     ],
+     "answer": 0,
+     "why": "Then the sun came out."
+    }
+   ]
+  },
+  {
+   "id": "l10",
+   "g": 0.2,
+   "title": "Nora's Lost Shoe",
+   "text": "Nora could not find her shoe. She looked under the bed. It was not there. Then she saw her puppy chewing something. It was her shoe!",
+   "questions": [
+    {
+     "q": "Where did Nora look first?",
+     "options": [
+      {
+       "label": "bag",
+       "emoji": "🎒"
+      },
+      {
+       "label": "box",
+       "emoji": "📦"
+      },
+      {
+       "label": "bed",
+       "emoji": "🛏️"
+      }
+     ],
+     "answer": 2,
+     "why": "Nora looked under the bed first."
+    },
+    {
+     "q": "Who had the shoe?",
+     "options": [
+      {
+       "label": "puppy",
+       "emoji": "🐶"
+      },
+      {
+       "label": "cat",
+       "emoji": "🐱"
+      },
+      {
+       "label": "mouse",
+       "emoji": "🐭"
+      }
+     ],
+     "answer": 0,
+     "why": "Her puppy was chewing her shoe."
+    }
+   ]
+  },
+  {
+   "id": "l11",
+   "g": 0.3,
+   "title": "Ava's Seed",
+   "text": "Ava planted a seed in a pot. She gave it water every day. Soon a tiny green sprout came up.",
+   "questions": [
+    {
+     "q": "What did Ava give the seed every day?",
+     "options": [
+      {
+       "label": "candy",
+       "emoji": "🍬"
+      },
+      {
+       "label": "water",
+       "emoji": "💧"
+      },
+      {
+       "label": "milk",
+       "emoji": "🥛"
+      }
+     ],
+     "answer": 1,
+     "why": "She gave it water every day."
+    },
+    {
+     "q": "What came up from the seed?",
+     "options": [
+      {
+       "label": "sprout",
+       "emoji": "🌱"
+      },
+      {
+       "label": "fish",
+       "emoji": "🐟"
+      },
+      {
+       "label": "shoe",
+       "emoji": "👟"
+      }
+     ],
+     "answer": 0,
+     "why": "A tiny green sprout came up."
+    }
+   ]
+  },
+  {
+   "id": "l12",
+   "g": 0.4,
+   "title": "Why Theo Wore a Coat",
+   "text": "It was a cold, snowy day. Theo put on his coat, a hat, and big mittens. He went outside to play. His nose got red, but he stayed warm.",
+   "questions": [
+    {
+     "q": "Why did Theo wear a coat?",
+     "options": [
+      {
+       "label": "It was hot.",
+       "emoji": "🥵"
+      },
+      {
+       "label": "It was sunny.",
+       "emoji": "☀️"
+      },
+      {
+       "label": "It was cold.",
+       "emoji": "🥶"
+      }
+     ],
+     "answer": 2,
+     "why": "Theo wore a coat because it was a cold day."
+    },
+    {
+     "q": "What did Theo wear on his hands?",
+     "options": [
+      {
+       "label": "mittens",
+       "emoji": "🧤"
+      },
+      {
+       "label": "socks",
+       "emoji": "🧦"
+      },
+      {
+       "label": "shoes",
+       "emoji": "👟"
+      }
+     ],
+     "answer": 0,
+     "why": "He put on big mittens."
+    }
+   ]
+  },
+  {
+   "id": "l13",
+   "g": 0.5,
+   "title": "Bear's Long Nap",
+   "text": "Bear ate honey all fall. When it got cold, Bear went to sleep. He slept all winter. In spring, Bear woke up and was very hungry.",
+   "questions": [
+    {
+     "q": "What did Bear eat in the fall?",
+     "options": [
+      {
+       "label": "fish",
+       "emoji": "🐟"
+      },
+      {
+       "label": "honey",
+       "emoji": "🍯"
+      },
+      {
+       "label": "apples",
+       "emoji": "🍎"
+      }
+     ],
+     "answer": 1,
+     "why": "Bear ate honey all fall."
+    },
+    {
+     "q": "When did Bear wake up?",
+     "options": [
+      {
+       "label": "winter",
+       "emoji": "❄️"
+      },
+      {
+       "label": "summer",
+       "emoji": "☀️"
+      },
+      {
+       "label": "spring",
+       "emoji": "🌸"
+      }
+     ],
+     "answer": 2,
+     "why": "In spring, Bear woke up."
+    }
+   ]
+  },
+  {
+   "id": "l14",
+   "g": 0.6,
+   "title": "The Lost Puppy",
+   "text": "Ben found a little puppy in the rain. It had no collar. Ben took the puppy home and dried it with a towel. Then Ben drew a picture of the puppy for Mom to hang up.",
+   "questions": [
+    {
+     "q": "Where did Ben find the puppy?",
+     "options": [
+      {
+       "label": "in the rain",
+       "emoji": "🌧️"
+      },
+      {
+       "label": "at the beach",
+       "emoji": "🏖️"
+      },
+      {
+       "label": "in a car",
+       "emoji": "🚗"
+      }
+     ],
+     "answer": 0,
+     "why": "Ben found the puppy in the rain."
+    },
+    {
+     "q": "What did Ben draw a picture of?",
+     "options": [
+      {
+       "label": "kitten",
+       "emoji": "🐱"
+      },
+      {
+       "label": "bunny",
+       "emoji": "🐰"
+      },
+      {
+       "label": "puppy",
+       "emoji": "🐶"
+      }
+     ],
+     "answer": 2,
+     "why": "Ben drew a picture of the puppy."
+    }
+   ]
+  },
+  {
+   "id": "l15",
+   "g": 0.7,
+   "title": "Kai's Sandcastle",
+   "text": "Kai built a sandcastle at the beach. He packed wet sand into a bucket and flipped it over. Then a big wave came and washed it away. Kai laughed and began again.",
+   "questions": [
+    {
+     "q": "What did Kai build?",
+     "options": [
+      {
+       "label": "snowman",
+       "emoji": "⛄"
+      },
+      {
+       "label": "sandcastle",
+       "emoji": "🏰"
+      },
+      {
+       "label": "tent",
+       "emoji": "⛺"
+      }
+     ],
+     "answer": 1,
+     "why": "Kai built a sandcastle at the beach."
+    },
+    {
+     "q": "What washed the sandcastle away?",
+     "options": [
+      {
+       "label": "wave",
+       "emoji": "🌊"
+      },
+      {
+       "label": "wind",
+       "emoji": "💨"
+      },
+      {
+       "label": "rain",
+       "emoji": "🌧️"
+      }
+     ],
+     "answer": 0,
+     "why": "A big wave washed it away."
+    }
+   ]
+  },
+  {
+   "id": "l16",
+   "g": 0.8,
+   "title": "The Runaway Balloon",
+   "text": "Rosa held a big red balloon at the party. On the way home, a gust of wind pulled the string from her hand. The balloon floated up, up, up. Rosa watched it go into the sky.",
+   "questions": [
+    {
+     "q": "Why did the balloon float away?",
+     "options": [
+      {
+       "label": "The wind pulled it.",
+       "emoji": "💨"
+      },
+      {
+       "label": "A bee poked it.",
+       "emoji": "🐝"
+      },
+      {
+       "label": "The rain hit it.",
+       "emoji": "🌧️"
+      }
+     ],
+     "answer": 0,
+     "why": "A gust of wind pulled the string from her hand."
+    },
+    {
+     "q": "Where did the balloon go?",
+     "options": [
+      {
+       "label": "in the water",
+       "emoji": "🌊"
+      },
+      {
+       "label": "in a tree",
+       "emoji": "🌳"
+      },
+      {
+       "label": "up in the sky",
+       "emoji": "☁️"
+      }
+     ],
+     "answer": 2,
+     "why": "The balloon floated up into the sky."
+    }
+   ]
+  }
+ ]
+}

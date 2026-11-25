@@ -1,0 +1,2605 @@
+{
+ "about": "High-frequency sight words: the public-domain Dolch lists (pre-primer, primer, first, second, third grade) plus about 40 common upper-grade words with irregular spellings. g rises within each list as words get less regular or easier to confuse. Each word has 3 real-word distractors that look close but are not homophones; the game shuffles the options.",
+ "words": [
+  {
+   "word": "a",
+   "list": "pre-primer",
+   "g": 0,
+   "distractors": [
+    "an",
+    "as",
+    "at"
+   ]
+  },
+  {
+   "word": "I",
+   "list": "pre-primer",
+   "g": 0,
+   "distractors": [
+    "if",
+    "it",
+    "in"
+   ]
+  },
+  {
+   "word": "go",
+   "list": "pre-primer",
+   "g": 0,
+   "distractors": [
+    "so",
+    "no",
+    "do"
+   ]
+  },
+  {
+   "word": "me",
+   "list": "pre-primer",
+   "g": 0,
+   "distractors": [
+    "we",
+    "be",
+    "my"
+   ]
+  },
+  {
+   "word": "my",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "me",
+    "by",
+    "may"
+   ]
+  },
+  {
+   "word": "we",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "me",
+    "he",
+    "be"
+   ]
+  },
+  {
+   "word": "in",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "is",
+    "it",
+    "if"
+   ]
+  },
+  {
+   "word": "is",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "in",
+    "it",
+    "as"
+   ]
+  },
+  {
+   "word": "it",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "in",
+    "is",
+    "if"
+   ]
+  },
+  {
+   "word": "up",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "us",
+    "on",
+    "if"
+   ]
+  },
+  {
+   "word": "and",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "any",
+    "end",
+    "add"
+   ]
+  },
+  {
+   "word": "big",
+   "list": "pre-primer",
+   "g": 0.1,
+   "distractors": [
+    "bag",
+    "bug",
+    "bit"
+   ]
+  },
+  {
+   "word": "can",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "cap",
+    "car",
+    "cat"
+   ]
+  },
+  {
+   "word": "not",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "now",
+    "nut",
+    "net"
+   ]
+  },
+  {
+   "word": "run",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "ran",
+    "rug",
+    "sun"
+   ]
+  },
+  {
+   "word": "see",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "seed",
+    "seen",
+    "set"
+   ]
+  },
+  {
+   "word": "red",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "rod",
+    "bed",
+    "rid"
+   ]
+  },
+  {
+   "word": "look",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "book",
+    "took",
+    "lock"
+   ]
+  },
+  {
+   "word": "down",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "dawn",
+    "town",
+    "done"
+   ]
+  },
+  {
+   "word": "find",
+   "list": "pre-primer",
+   "g": 0.2,
+   "distractors": [
+    "fine",
+    "kind",
+    "fund"
+   ]
+  },
+  {
+   "word": "help",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "held",
+    "hemp",
+    "hole"
+   ]
+  },
+  {
+   "word": "jump",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "bump",
+    "lump",
+    "junk"
+   ]
+  },
+  {
+   "word": "make",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "take",
+    "made",
+    "cake"
+   ]
+  },
+  {
+   "word": "play",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "plan",
+    "clay",
+    "plus"
+   ]
+  },
+  {
+   "word": "yellow",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "fellow",
+    "mellow",
+    "yelled"
+   ]
+  },
+  {
+   "word": "to",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "do",
+    "go",
+    "so"
+   ]
+  },
+  {
+   "word": "the",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "she",
+    "then",
+    "them"
+   ]
+  },
+  {
+   "word": "you",
+   "list": "pre-primer",
+   "g": 0.3,
+   "distractors": [
+    "your",
+    "yes",
+    "yet"
+   ]
+  },
+  {
+   "word": "for",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "far",
+    "fur",
+    "fox"
+   ]
+  },
+  {
+   "word": "one",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "on",
+    "once",
+    "only"
+   ]
+  },
+  {
+   "word": "two",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "tow",
+    "twin",
+    "twig"
+   ]
+  },
+  {
+   "word": "come",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "came",
+    "home",
+    "cone"
+   ]
+  },
+  {
+   "word": "said",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "sad",
+    "sand",
+    "sail"
+   ]
+  },
+  {
+   "word": "away",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "awake",
+    "aware",
+    "avoid"
+   ]
+  },
+  {
+   "word": "blue",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "blur",
+    "glue",
+    "bluff"
+   ]
+  },
+  {
+   "word": "here",
+   "list": "pre-primer",
+   "g": 0.4,
+   "distractors": [
+    "hers",
+    "hero",
+    "hire"
+   ]
+  },
+  {
+   "word": "where",
+   "list": "pre-primer",
+   "g": 0.5,
+   "distractors": [
+    "there",
+    "were",
+    "whale"
+   ]
+  },
+  {
+   "word": "three",
+   "list": "pre-primer",
+   "g": 0.5,
+   "distractors": [
+    "there",
+    "these",
+    "tree"
+   ]
+  },
+  {
+   "word": "funny",
+   "list": "pre-primer",
+   "g": 0.5,
+   "distractors": [
+    "sunny",
+    "bunny",
+    "fussy"
+   ]
+  },
+  {
+   "word": "little",
+   "list": "pre-primer",
+   "g": 0.5,
+   "distractors": [
+    "litter",
+    "letter",
+    "middle"
+   ]
+  },
+  {
+   "word": "am",
+   "list": "primer",
+   "g": 0.4,
+   "distractors": [
+    "an",
+    "as",
+    "ham"
+   ]
+  },
+  {
+   "word": "at",
+   "list": "primer",
+   "g": 0.4,
+   "distractors": [
+    "it",
+    "as",
+    "an"
+   ]
+  },
+  {
+   "word": "be",
+   "list": "primer",
+   "g": 0.4,
+   "distractors": [
+    "he",
+    "me",
+    "bed"
+   ]
+  },
+  {
+   "word": "he",
+   "list": "primer",
+   "g": 0.4,
+   "distractors": [
+    "be",
+    "me",
+    "her"
+   ]
+  },
+  {
+   "word": "so",
+   "list": "primer",
+   "g": 0.4,
+   "distractors": [
+    "go",
+    "no",
+    "do"
+   ]
+  },
+  {
+   "word": "no",
+   "list": "primer",
+   "g": 0.4,
+   "distractors": [
+    "so",
+    "on",
+    "now"
+   ]
+  },
+  {
+   "word": "on",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "no",
+    "in",
+    "of"
+   ]
+  },
+  {
+   "word": "all",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "ill",
+    "ally",
+    "call"
+   ]
+  },
+  {
+   "word": "did",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "dig",
+    "dad",
+    "dim"
+   ]
+  },
+  {
+   "word": "but",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "bus",
+    "bat",
+    "bud"
+   ]
+  },
+  {
+   "word": "get",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "let",
+    "got",
+    "net"
+   ]
+  },
+  {
+   "word": "ran",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "run",
+    "rat",
+    "can"
+   ]
+  },
+  {
+   "word": "out",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "our",
+    "oat",
+    "cut"
+   ]
+  },
+  {
+   "word": "now",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "new",
+    "how",
+    "not"
+   ]
+  },
+  {
+   "word": "new",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "now",
+    "net",
+    "few"
+   ]
+  },
+  {
+   "word": "eat",
+   "list": "primer",
+   "g": 0.5,
+   "distractors": [
+    "ate",
+    "east",
+    "meat"
+   ]
+  },
+  {
+   "word": "saw",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "was",
+    "say",
+    "raw"
+   ]
+  },
+  {
+   "word": "say",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "saw",
+    "may",
+    "sad"
+   ]
+  },
+  {
+   "word": "she",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "he",
+    "the",
+    "shed"
+   ]
+  },
+  {
+   "word": "yes",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "yet",
+    "yen",
+    "yelp"
+   ]
+  },
+  {
+   "word": "like",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "lake",
+    "line",
+    "bike"
+   ]
+  },
+  {
+   "word": "ride",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "rode",
+    "rice",
+    "hide"
+   ]
+  },
+  {
+   "word": "that",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "than",
+    "this",
+    "what"
+   ]
+  },
+  {
+   "word": "this",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "that",
+    "thin",
+    "thus"
+   ]
+  },
+  {
+   "word": "must",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "mist",
+    "most",
+    "mast"
+   ]
+  },
+  {
+   "word": "well",
+   "list": "primer",
+   "g": 0.6,
+   "distractors": [
+    "will",
+    "wall",
+    "bell"
+   ]
+  },
+  {
+   "word": "went",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "want",
+    "west",
+    "when"
+   ]
+  },
+  {
+   "word": "with",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "wish",
+    "wit",
+    "width"
+   ]
+  },
+  {
+   "word": "will",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "well",
+    "wall",
+    "fill"
+   ]
+  },
+  {
+   "word": "came",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "come",
+    "cane",
+    "game"
+   ]
+  },
+  {
+   "word": "good",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "food",
+    "gold",
+    "hood"
+   ]
+  },
+  {
+   "word": "soon",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "moon",
+    "soot",
+    "noon"
+   ]
+  },
+  {
+   "word": "under",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "until",
+    "wonder",
+    "udder"
+   ]
+  },
+  {
+   "word": "black",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "block",
+    "blank",
+    "slack"
+   ]
+  },
+  {
+   "word": "brown",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "crown",
+    "blown",
+    "drown"
+   ]
+  },
+  {
+   "word": "white",
+   "list": "primer",
+   "g": 0.7,
+   "distractors": [
+    "while",
+    "whale",
+    "whine"
+   ]
+  },
+  {
+   "word": "do",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "go",
+    "dog",
+    "did"
+   ]
+  },
+  {
+   "word": "ate",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "eat",
+    "late",
+    "gate"
+   ]
+  },
+  {
+   "word": "are",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "art",
+    "ark",
+    "area"
+   ]
+  },
+  {
+   "word": "too",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "took",
+    "tool",
+    "toy"
+   ]
+  },
+  {
+   "word": "who",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "how",
+    "whom",
+    "why"
+   ]
+  },
+  {
+   "word": "our",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "out",
+    "your",
+    "ours"
+   ]
+  },
+  {
+   "word": "was",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "saw",
+    "has",
+    "way"
+   ]
+  },
+  {
+   "word": "they",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "them",
+    "then",
+    "the"
+   ]
+  },
+  {
+   "word": "want",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "went",
+    "wand",
+    "what"
+   ]
+  },
+  {
+   "word": "what",
+   "list": "primer",
+   "g": 0.8,
+   "distractors": [
+    "that",
+    "when",
+    "want"
+   ]
+  },
+  {
+   "word": "have",
+   "list": "primer",
+   "g": 0.9,
+   "distractors": [
+    "gave",
+    "hive",
+    "halve"
+   ]
+  },
+  {
+   "word": "into",
+   "list": "primer",
+   "g": 0.9,
+   "distractors": [
+    "onto",
+    "unto",
+    "intro"
+   ]
+  },
+  {
+   "word": "four",
+   "list": "primer",
+   "g": 0.9,
+   "distractors": [
+    "foul",
+    "fur",
+    "fort"
+   ]
+  },
+  {
+   "word": "there",
+   "list": "primer",
+   "g": 0.9,
+   "distractors": [
+    "where",
+    "these",
+    "three"
+   ]
+  },
+  {
+   "word": "please",
+   "list": "primer",
+   "g": 0.9,
+   "distractors": [
+    "plead",
+    "pleat",
+    "place"
+   ]
+  },
+  {
+   "word": "pretty",
+   "list": "primer",
+   "g": 0.9,
+   "distractors": [
+    "petty",
+    "pretend",
+    "pretzel"
+   ]
+  },
+  {
+   "word": "an",
+   "list": "first",
+   "g": 0.9,
+   "distractors": [
+    "on",
+    "as",
+    "and"
+   ]
+  },
+  {
+   "word": "as",
+   "list": "first",
+   "g": 0.9,
+   "distractors": [
+    "is",
+    "at",
+    "ask"
+   ]
+  },
+  {
+   "word": "by",
+   "list": "first",
+   "g": 0.9,
+   "distractors": [
+    "my",
+    "be",
+    "boy"
+   ]
+  },
+  {
+   "word": "ask",
+   "list": "first",
+   "g": 0.9,
+   "distractors": [
+    "as",
+    "task",
+    "mask"
+   ]
+  },
+  {
+   "word": "had",
+   "list": "first",
+   "g": 1,
+   "distractors": [
+    "has",
+    "hat",
+    "bad"
+   ]
+  },
+  {
+   "word": "has",
+   "list": "first",
+   "g": 1,
+   "distractors": [
+    "had",
+    "his",
+    "was"
+   ]
+  },
+  {
+   "word": "her",
+   "list": "first",
+   "g": 1,
+   "distractors": [
+    "he",
+    "here",
+    "hen"
+   ]
+  },
+  {
+   "word": "him",
+   "list": "first",
+   "g": 1,
+   "distractors": [
+    "his",
+    "hit",
+    "hid"
+   ]
+  },
+  {
+   "word": "his",
+   "list": "first",
+   "g": 1,
+   "distractors": [
+    "him",
+    "has",
+    "hip"
+   ]
+  },
+  {
+   "word": "how",
+   "list": "first",
+   "g": 1,
+   "distractors": [
+    "now",
+    "who",
+    "hot"
+   ]
+  },
+  {
+   "word": "let",
+   "list": "first",
+   "g": 1.1,
+   "distractors": [
+    "get",
+    "led",
+    "set"
+   ]
+  },
+  {
+   "word": "may",
+   "list": "first",
+   "g": 1.1,
+   "distractors": [
+    "say",
+    "man",
+    "map"
+   ]
+  },
+  {
+   "word": "old",
+   "list": "first",
+   "g": 1.1,
+   "distractors": [
+    "odd",
+    "hold",
+    "cold"
+   ]
+  },
+  {
+   "word": "fly",
+   "list": "first",
+   "g": 1.1,
+   "distractors": [
+    "fry",
+    "flu",
+    "flap"
+   ]
+  },
+  {
+   "word": "just",
+   "list": "first",
+   "g": 1.1,
+   "distractors": [
+    "must",
+    "gust",
+    "jump"
+   ]
+  },
+  {
+   "word": "over",
+   "list": "first",
+   "g": 1.1,
+   "distractors": [
+    "ever",
+    "oven",
+    "other"
+   ]
+  },
+  {
+   "word": "stop",
+   "list": "first",
+   "g": 1.1,
+   "distractors": [
+    "step",
+    "shop",
+    "slop"
+   ]
+  },
+  {
+   "word": "take",
+   "list": "first",
+   "g": 1.2,
+   "distractors": [
+    "make",
+    "tale",
+    "tape"
+   ]
+  },
+  {
+   "word": "them",
+   "list": "first",
+   "g": 1.2,
+   "distractors": [
+    "then",
+    "they",
+    "than"
+   ]
+  },
+  {
+   "word": "then",
+   "list": "first",
+   "g": 1.2,
+   "distractors": [
+    "than",
+    "them",
+    "thin"
+   ]
+  },
+  {
+   "word": "when",
+   "list": "first",
+   "g": 1.2,
+   "distractors": [
+    "then",
+    "went",
+    "what"
+   ]
+  },
+  {
+   "word": "after",
+   "list": "first",
+   "g": 1.2,
+   "distractors": [
+    "alter",
+    "otter",
+    "offer"
+   ]
+  },
+  {
+   "word": "going",
+   "list": "first",
+   "g": 1.2,
+   "distractors": [
+    "doing",
+    "coming",
+    "gaping"
+   ]
+  },
+  {
+   "word": "round",
+   "list": "first",
+   "g": 1.2,
+   "distractors": [
+    "sound",
+    "ground",
+    "around"
+   ]
+  },
+  {
+   "word": "thank",
+   "list": "first",
+   "g": 1.3,
+   "distractors": [
+    "think",
+    "thick",
+    "thanks"
+   ]
+  },
+  {
+   "word": "think",
+   "list": "first",
+   "g": 1.3,
+   "distractors": [
+    "thank",
+    "thing",
+    "thick"
+   ]
+  },
+  {
+   "word": "of",
+   "list": "first",
+   "g": 1.3,
+   "distractors": [
+    "if",
+    "off",
+    "or"
+   ]
+  },
+  {
+   "word": "any",
+   "list": "first",
+   "g": 1.3,
+   "distractors": [
+    "and",
+    "many",
+    "ant"
+   ]
+  },
+  {
+   "word": "put",
+   "list": "first",
+   "g": 1.3,
+   "distractors": [
+    "pit",
+    "pot",
+    "pun"
+   ]
+  },
+  {
+   "word": "from",
+   "list": "first",
+   "g": 1.3,
+   "distractors": [
+    "form",
+    "farm",
+    "frog"
+   ]
+  },
+  {
+   "word": "give",
+   "list": "first",
+   "g": 1.4,
+   "distractors": [
+    "live",
+    "gave",
+    "dive"
+   ]
+  },
+  {
+   "word": "know",
+   "list": "first",
+   "g": 1.4,
+   "distractors": [
+    "knew",
+    "known",
+    "snow"
+   ]
+  },
+  {
+   "word": "live",
+   "list": "first",
+   "g": 1.4,
+   "distractors": [
+    "love",
+    "give",
+    "line"
+   ]
+  },
+  {
+   "word": "once",
+   "list": "first",
+   "g": 1.4,
+   "distractors": [
+    "one",
+    "ones",
+    "ounce"
+   ]
+  },
+  {
+   "word": "open",
+   "list": "first",
+   "g": 1.4,
+   "distractors": [
+    "oven",
+    "even",
+    "upon"
+   ]
+  },
+  {
+   "word": "some",
+   "list": "first",
+   "g": 1.4,
+   "distractors": [
+    "come",
+    "same",
+    "home"
+   ]
+  },
+  {
+   "word": "walk",
+   "list": "first",
+   "g": 1.4,
+   "distractors": [
+    "talk",
+    "wall",
+    "work"
+   ]
+  },
+  {
+   "word": "were",
+   "list": "first",
+   "g": 1.5,
+   "distractors": [
+    "where",
+    "wore",
+    "here"
+   ]
+  },
+  {
+   "word": "again",
+   "list": "first",
+   "g": 1.5,
+   "distractors": [
+    "agent",
+    "aging",
+    "agony"
+   ]
+  },
+  {
+   "word": "could",
+   "list": "first",
+   "g": 1.5,
+   "distractors": [
+    "would",
+    "cold",
+    "cloud"
+   ]
+  },
+  {
+   "word": "every",
+   "list": "first",
+   "g": 1.5,
+   "distractors": [
+    "ever",
+    "very",
+    "even"
+   ]
+  },
+  {
+   "word": "or",
+   "list": "second",
+   "g": 1.8,
+   "distractors": [
+    "of",
+    "on",
+    "for"
+   ]
+  },
+  {
+   "word": "us",
+   "list": "second",
+   "g": 1.8,
+   "distractors": [
+    "is",
+    "up",
+    "as"
+   ]
+  },
+  {
+   "word": "its",
+   "list": "second",
+   "g": 1.8,
+   "distractors": [
+    "is",
+    "it",
+    "hits"
+   ]
+  },
+  {
+   "word": "off",
+   "list": "second",
+   "g": 1.8,
+   "distractors": [
+    "of",
+    "if",
+    "oft"
+   ]
+  },
+  {
+   "word": "sit",
+   "list": "second",
+   "g": 1.9,
+   "distractors": [
+    "sat",
+    "six",
+    "sip"
+   ]
+  },
+  {
+   "word": "use",
+   "list": "second",
+   "g": 1.9,
+   "distractors": [
+    "used",
+    "user",
+    "fuse"
+   ]
+  },
+  {
+   "word": "why",
+   "list": "second",
+   "g": 1.9,
+   "distractors": [
+    "who",
+    "shy",
+    "way"
+   ]
+  },
+  {
+   "word": "best",
+   "list": "second",
+   "g": 1.9,
+   "distractors": [
+    "test",
+    "vest",
+    "bent"
+   ]
+  },
+  {
+   "word": "both",
+   "list": "second",
+   "g": 1.9,
+   "distractors": [
+    "moth",
+    "bath",
+    "boat"
+   ]
+  },
+  {
+   "word": "call",
+   "list": "second",
+   "g": 1.9,
+   "distractors": [
+    "calm",
+    "tall",
+    "cell"
+   ]
+  },
+  {
+   "word": "cold",
+   "list": "second",
+   "g": 2,
+   "distractors": [
+    "gold",
+    "cord",
+    "could"
+   ]
+  },
+  {
+   "word": "fast",
+   "list": "second",
+   "g": 2,
+   "distractors": [
+    "last",
+    "past",
+    "fist"
+   ]
+  },
+  {
+   "word": "five",
+   "list": "second",
+   "g": 2,
+   "distractors": [
+    "fine",
+    "fire",
+    "dive"
+   ]
+  },
+  {
+   "word": "gave",
+   "list": "second",
+   "g": 2,
+   "distractors": [
+    "have",
+    "gate",
+    "cave"
+   ]
+  },
+  {
+   "word": "made",
+   "list": "second",
+   "g": 2,
+   "distractors": [
+    "make",
+    "mad",
+    "mode"
+   ]
+  },
+  {
+   "word": "pull",
+   "list": "second",
+   "g": 2,
+   "distractors": [
+    "bull",
+    "pill",
+    "pool"
+   ]
+  },
+  {
+   "word": "read",
+   "list": "second",
+   "g": 2,
+   "distractors": [
+    "road",
+    "real",
+    "bead"
+   ]
+  },
+  {
+   "word": "sing",
+   "list": "second",
+   "g": 2.1,
+   "distractors": [
+    "sink",
+    "song",
+    "sign"
+   ]
+  },
+  {
+   "word": "tell",
+   "list": "second",
+   "g": 2.1,
+   "distractors": [
+    "tall",
+    "till",
+    "bell"
+   ]
+  },
+  {
+   "word": "wish",
+   "list": "second",
+   "g": 2.1,
+   "distractors": [
+    "wash",
+    "fish",
+    "with"
+   ]
+  },
+  {
+   "word": "found",
+   "list": "second",
+   "g": 2.1,
+   "distractors": [
+    "round",
+    "fond",
+    "fund"
+   ]
+  },
+  {
+   "word": "green",
+   "list": "second",
+   "g": 2.1,
+   "distractors": [
+    "greet",
+    "grown",
+    "grain"
+   ]
+  },
+  {
+   "word": "these",
+   "list": "second",
+   "g": 2.1,
+   "distractors": [
+    "those",
+    "theme",
+    "there"
+   ]
+  },
+  {
+   "word": "those",
+   "list": "second",
+   "g": 2.2,
+   "distractors": [
+    "these",
+    "chose",
+    "whose"
+   ]
+  },
+  {
+   "word": "first",
+   "list": "second",
+   "g": 2.2,
+   "distractors": [
+    "fist",
+    "thirst",
+    "firm"
+   ]
+  },
+  {
+   "word": "around",
+   "list": "second",
+   "g": 2.2,
+   "distractors": [
+    "ground",
+    "round",
+    "abound"
+   ]
+  },
+  {
+   "word": "buy",
+   "list": "second",
+   "g": 2.2,
+   "distractors": [
+    "bus",
+    "bug",
+    "guy"
+   ]
+  },
+  {
+   "word": "been",
+   "list": "second",
+   "g": 2.2,
+   "distractors": [
+    "bean",
+    "seen",
+    "beet"
+   ]
+  },
+  {
+   "word": "does",
+   "list": "second",
+   "g": 2.2,
+   "distractors": [
+    "dose",
+    "goes",
+    "dogs"
+   ]
+  },
+  {
+   "word": "goes",
+   "list": "second",
+   "g": 2.3,
+   "distractors": [
+    "does",
+    "goats",
+    "toes"
+   ]
+  },
+  {
+   "word": "many",
+   "list": "second",
+   "g": 2.3,
+   "distractors": [
+    "man",
+    "money",
+    "mane"
+   ]
+  },
+  {
+   "word": "upon",
+   "list": "second",
+   "g": 2.3,
+   "distractors": [
+    "open",
+    "upper",
+    "apron"
+   ]
+  },
+  {
+   "word": "very",
+   "list": "second",
+   "g": 2.3,
+   "distractors": [
+    "every",
+    "ever",
+    "vent"
+   ]
+  },
+  {
+   "word": "wash",
+   "list": "second",
+   "g": 2.3,
+   "distractors": [
+    "wish",
+    "wasp",
+    "watch"
+   ]
+  },
+  {
+   "word": "work",
+   "list": "second",
+   "g": 2.3,
+   "distractors": [
+    "word",
+    "worm",
+    "fork"
+   ]
+  },
+  {
+   "word": "your",
+   "list": "second",
+   "g": 2.3,
+   "distractors": [
+    "you",
+    "yours",
+    "youth"
+   ]
+  },
+  {
+   "word": "sleep",
+   "list": "second",
+   "g": 2.4,
+   "distractors": [
+    "sheep",
+    "sweep",
+    "steep"
+   ]
+  },
+  {
+   "word": "their",
+   "list": "second",
+   "g": 2.4,
+   "distractors": [
+    "these",
+    "thief",
+    "them"
+   ]
+  },
+  {
+   "word": "which",
+   "list": "second",
+   "g": 2.4,
+   "distractors": [
+    "while",
+    "whisk",
+    "whiff"
+   ]
+  },
+  {
+   "word": "would",
+   "list": "second",
+   "g": 2.4,
+   "distractors": [
+    "could",
+    "should",
+    "wound"
+   ]
+  },
+  {
+   "word": "write",
+   "list": "second",
+   "g": 2.4,
+   "distractors": [
+    "wrote",
+    "white",
+    "wrist"
+   ]
+  },
+  {
+   "word": "don't",
+   "list": "second",
+   "g": 2.4,
+   "distractors": [
+    "won't",
+    "done",
+    "dent"
+   ]
+  },
+  {
+   "word": "right",
+   "list": "second",
+   "g": 2.5,
+   "distractors": [
+    "might",
+    "eight",
+    "rich"
+   ]
+  },
+  {
+   "word": "always",
+   "list": "second",
+   "g": 2.5,
+   "distractors": [
+    "almost",
+    "already",
+    "alleys"
+   ]
+  },
+  {
+   "word": "before",
+   "list": "second",
+   "g": 2.5,
+   "distractors": [
+    "beware",
+    "beyond",
+    "befall"
+   ]
+  },
+  {
+   "word": "because",
+   "list": "second",
+   "g": 2.5,
+   "distractors": [
+    "became",
+    "beside",
+    "besides"
+   ]
+  },
+  {
+   "word": "if",
+   "list": "third",
+   "g": 2.6,
+   "distractors": [
+    "of",
+    "is",
+    "it"
+   ]
+  },
+  {
+   "word": "cut",
+   "list": "third",
+   "g": 2.6,
+   "distractors": [
+    "cat",
+    "cup",
+    "cot"
+   ]
+  },
+  {
+   "word": "far",
+   "list": "third",
+   "g": 2.6,
+   "distractors": [
+    "fur",
+    "fan",
+    "for"
+   ]
+  },
+  {
+   "word": "got",
+   "list": "third",
+   "g": 2.7,
+   "distractors": [
+    "get",
+    "goat",
+    "hot"
+   ]
+  },
+  {
+   "word": "hot",
+   "list": "third",
+   "g": 2.7,
+   "distractors": [
+    "hat",
+    "hit",
+    "hop"
+   ]
+  },
+  {
+   "word": "six",
+   "list": "third",
+   "g": 2.7,
+   "distractors": [
+    "sit",
+    "sick",
+    "fix"
+   ]
+  },
+  {
+   "word": "ten",
+   "list": "third",
+   "g": 2.7,
+   "distractors": [
+    "tan",
+    "tin",
+    "tent"
+   ]
+  },
+  {
+   "word": "try",
+   "list": "third",
+   "g": 2.7,
+   "distractors": [
+    "cry",
+    "tray",
+    "tiny"
+   ]
+  },
+  {
+   "word": "fall",
+   "list": "third",
+   "g": 2.7,
+   "distractors": [
+    "fell",
+    "fill",
+    "tall"
+   ]
+  },
+  {
+   "word": "full",
+   "list": "third",
+   "g": 2.8,
+   "distractors": [
+    "fill",
+    "fall",
+    "pull"
+   ]
+  },
+  {
+   "word": "grow",
+   "list": "third",
+   "g": 2.8,
+   "distractors": [
+    "grew",
+    "glow",
+    "crow"
+   ]
+  },
+  {
+   "word": "hold",
+   "list": "third",
+   "g": 2.8,
+   "distractors": [
+    "bold",
+    "held",
+    "hood"
+   ]
+  },
+  {
+   "word": "keep",
+   "list": "third",
+   "g": 2.8,
+   "distractors": [
+    "deep",
+    "kept",
+    "keen"
+   ]
+  },
+  {
+   "word": "kind",
+   "list": "third",
+   "g": 2.8,
+   "distractors": [
+    "find",
+    "mind",
+    "king"
+   ]
+  },
+  {
+   "word": "long",
+   "list": "third",
+   "g": 2.8,
+   "distractors": [
+    "lung",
+    "song",
+    "lone"
+   ]
+  },
+  {
+   "word": "much",
+   "list": "third",
+   "g": 2.9,
+   "distractors": [
+    "such",
+    "mush",
+    "muck"
+   ]
+  },
+  {
+   "word": "pick",
+   "list": "third",
+   "g": 2.9,
+   "distractors": [
+    "pack",
+    "pink",
+    "kick"
+   ]
+  },
+  {
+   "word": "show",
+   "list": "third",
+   "g": 2.9,
+   "distractors": [
+    "snow",
+    "shot",
+    "shoe"
+   ]
+  },
+  {
+   "word": "about",
+   "list": "third",
+   "g": 2.9,
+   "distractors": [
+    "above",
+    "abort",
+    "adopt"
+   ]
+  },
+  {
+   "word": "clean",
+   "list": "third",
+   "g": 2.9,
+   "distractors": [
+    "clear",
+    "cleat",
+    "clan"
+   ]
+  },
+  {
+   "word": "drink",
+   "list": "third",
+   "g": 3,
+   "distractors": [
+    "drank",
+    "drain",
+    "brink"
+   ]
+  },
+  {
+   "word": "never",
+   "list": "third",
+   "g": 3,
+   "distractors": [
+    "ever",
+    "newer",
+    "nerve"
+   ]
+  },
+  {
+   "word": "seven",
+   "list": "third",
+   "g": 3,
+   "distractors": [
+    "even",
+    "seen",
+    "sever"
+   ]
+  },
+  {
+   "word": "small",
+   "list": "third",
+   "g": 3,
+   "distractors": [
+    "stall",
+    "smell",
+    "shall"
+   ]
+  },
+  {
+   "word": "start",
+   "list": "third",
+   "g": 3,
+   "distractors": [
+    "smart",
+    "stars",
+    "stare"
+   ]
+  },
+  {
+   "word": "better",
+   "list": "third",
+   "g": 3,
+   "distractors": [
+    "butter",
+    "batter",
+    "bitter"
+   ]
+  },
+  {
+   "word": "own",
+   "list": "third",
+   "g": 3.1,
+   "distractors": [
+    "owl",
+    "won",
+    "now"
+   ]
+  },
+  {
+   "word": "done",
+   "list": "third",
+   "g": 3.1,
+   "distractors": [
+    "dome",
+    "gone",
+    "none"
+   ]
+  },
+  {
+   "word": "draw",
+   "list": "third",
+   "g": 3.1,
+   "distractors": [
+    "drew",
+    "drag",
+    "drab"
+   ]
+  },
+  {
+   "word": "hurt",
+   "list": "third",
+   "g": 3.1,
+   "distractors": [
+    "hunt",
+    "hurl",
+    "curt"
+   ]
+  },
+  {
+   "word": "warm",
+   "list": "third",
+   "g": 3.1,
+   "distractors": [
+    "farm",
+    "worm",
+    "warn"
+   ]
+  },
+  {
+   "word": "only",
+   "list": "third",
+   "g": 3.1,
+   "distractors": [
+    "oily",
+    "once",
+    "onto"
+   ]
+  },
+  {
+   "word": "bring",
+   "list": "third",
+   "g": 3.2,
+   "distractors": [
+    "brink",
+    "brisk",
+    "string"
+   ]
+  },
+  {
+   "word": "laugh",
+   "list": "third",
+   "g": 3.2,
+   "distractors": [
+    "lunch",
+    "latch",
+    "launch"
+   ]
+  },
+  {
+   "word": "shall",
+   "list": "third",
+   "g": 3.2,
+   "distractors": [
+    "shell",
+    "small",
+    "shale"
+   ]
+  },
+  {
+   "word": "today",
+   "list": "third",
+   "g": 3.2,
+   "distractors": [
+    "tidy",
+    "toad",
+    "toady"
+   ]
+  },
+  {
+   "word": "carry",
+   "list": "third",
+   "g": 3.2,
+   "distractors": [
+    "marry",
+    "curry",
+    "carve"
+   ]
+  },
+  {
+   "word": "eight",
+   "list": "third",
+   "g": 3.2,
+   "distractors": [
+    "eighty",
+    "height",
+    "eager"
+   ]
+  },
+  {
+   "word": "light",
+   "list": "third",
+   "g": 3.3,
+   "distractors": [
+    "night",
+    "sight",
+    "fight"
+   ]
+  },
+  {
+   "word": "myself",
+   "list": "third",
+   "g": 3.3,
+   "distractors": [
+    "herself",
+    "himself",
+    "itself"
+   ]
+  },
+  {
+   "word": "together",
+   "list": "third",
+   "g": 3.3,
+   "distractors": [
+    "tougher",
+    "toasters",
+    "tonight"
+   ]
+  },
+  {
+   "word": "idea",
+   "list": "upper",
+   "g": 3,
+   "distractors": [
+    "ideal",
+    "ideas",
+    "idle"
+   ]
+  },
+  {
+   "word": "group",
+   "list": "upper",
+   "g": 3,
+   "distractors": [
+    "troop",
+    "grope",
+    "grouse"
+   ]
+  },
+  {
+   "word": "early",
+   "list": "upper",
+   "g": 3.1,
+   "distractors": [
+    "nearly",
+    "yearly",
+    "pearly"
+   ]
+  },
+  {
+   "word": "busy",
+   "list": "upper",
+   "g": 3.1,
+   "distractors": [
+    "bush",
+    "bury",
+    "bust"
+   ]
+  },
+  {
+   "word": "earth",
+   "list": "upper",
+   "g": 3.1,
+   "distractors": [
+    "heart",
+    "hearth",
+    "earns"
+   ]
+  },
+  {
+   "word": "learn",
+   "list": "upper",
+   "g": 3.2,
+   "distractors": [
+    "lean",
+    "earn",
+    "yearn"
+   ]
+  },
+  {
+   "word": "heard",
+   "list": "upper",
+   "g": 3.2,
+   "distractors": [
+    "beard",
+    "heart",
+    "hears"
+   ]
+  },
+  {
+   "word": "heart",
+   "list": "upper",
+   "g": 3.2,
+   "distractors": [
+    "heard",
+    "hearth",
+    "hurt"
+   ]
+  },
+  {
+   "word": "minute",
+   "list": "upper",
+   "g": 3.2,
+   "distractors": [
+    "minuet",
+    "minutes",
+    "minnow"
+   ]
+  },
+  {
+   "word": "whole",
+   "list": "upper",
+   "g": 3.3,
+   "distractors": [
+    "whale",
+    "while",
+    "whom"
+   ]
+  },
+  {
+   "word": "young",
+   "list": "upper",
+   "g": 3.3,
+   "distractors": [
+    "youth",
+    "yonder",
+    "yours"
+   ]
+  },
+  {
+   "word": "double",
+   "list": "upper",
+   "g": 3.3,
+   "distractors": [
+    "bubble",
+    "trouble",
+    "doubt"
+   ]
+  },
+  {
+   "word": "trouble",
+   "list": "upper",
+   "g": 3.4,
+   "distractors": [
+    "double",
+    "tremble",
+    "troubles"
+   ]
+  },
+  {
+   "word": "country",
+   "list": "upper",
+   "g": 3.4,
+   "distractors": [
+    "county",
+    "counter",
+    "courtly"
+   ]
+  },
+  {
+   "word": "friend",
+   "list": "upper",
+   "g": 3.4,
+   "distractors": [
+    "fried",
+    "friends",
+    "trend"
+   ]
+  },
+  {
+   "word": "build",
+   "list": "upper",
+   "g": 3.5,
+   "distractors": [
+    "built",
+    "guilt",
+    "bulb"
+   ]
+  },
+  {
+   "word": "language",
+   "list": "upper",
+   "g": 3.5,
+   "distractors": [
+    "luggage",
+    "languages",
+    "languish"
+   ]
+  },
+  {
+   "word": "library",
+   "list": "upper",
+   "g": 3.5,
+   "distractors": [
+    "liberty",
+    "liberal",
+    "literary"
+   ]
+  },
+  {
+   "word": "mountain",
+   "list": "upper",
+   "g": 3.6,
+   "distractors": [
+    "maintain",
+    "fountain",
+    "mountains"
+   ]
+  },
+  {
+   "word": "measure",
+   "list": "upper",
+   "g": 3.6,
+   "distractors": [
+    "treasure",
+    "pleasure",
+    "measured"
+   ]
+  },
+  {
+   "word": "example",
+   "list": "upper",
+   "g": 3.6,
+   "distractors": [
+    "sample",
+    "examine",
+    "exempt"
+   ]
+  },
+  {
+   "word": "different",
+   "list": "upper",
+   "g": 3.6,
+   "distractors": [
+    "difference",
+    "diffident",
+    "differing"
+   ]
+  },
+  {
+   "word": "against",
+   "list": "upper",
+   "g": 3.7,
+   "distractors": [
+    "agents",
+    "aghast",
+    "adjust"
+   ]
+  },
+  {
+   "word": "between",
+   "list": "upper",
+   "g": 3.7,
+   "distractors": [
+    "better",
+    "beaten",
+    "belong"
+   ]
+  },
+  {
+   "word": "brought",
+   "list": "upper",
+   "g": 3.7,
+   "distractors": [
+    "bought",
+    "drought",
+    "thought"
+   ]
+  },
+  {
+   "word": "caught",
+   "list": "upper",
+   "g": 3.8,
+   "distractors": [
+    "taught",
+    "cough",
+    "caused"
+   ]
+  },
+  {
+   "word": "thought",
+   "list": "upper",
+   "g": 3.8,
+   "distractors": [
+    "though",
+    "through",
+    "taught"
+   ]
+  },
+  {
+   "word": "through",
+   "list": "upper",
+   "g": 3.8,
+   "distractors": [
+    "though",
+    "thorough",
+    "thought"
+   ]
+  },
+  {
+   "word": "though",
+   "list": "upper",
+   "g": 3.9,
+   "distractors": [
+    "thought",
+    "tough",
+    "through"
+   ]
+  },
+  {
+   "word": "enough",
+   "list": "upper",
+   "g": 3.9,
+   "distractors": [
+    "tough",
+    "ensure",
+    "plenty"
+   ]
+  },
+  {
+   "word": "special",
+   "list": "upper",
+   "g": 3.9,
+   "distractors": [
+    "spatial",
+    "species",
+    "spacious"
+   ]
+  },
+  {
+   "word": "answer",
+   "list": "upper",
+   "g": 4,
+   "distractors": [
+    "anchor",
+    "answers",
+    "angers"
+   ]
+  },
+  {
+   "word": "island",
+   "list": "upper",
+   "g": 4,
+   "distractors": [
+    "inland",
+    "islands",
+    "isn't"
+   ]
+  },
+  {
+   "word": "quiet",
+   "list": "upper",
+   "g": 4,
+   "distractors": [
+    "quite",
+    "quit",
+    "quilt"
+   ]
+  },
+  {
+   "word": "weight",
+   "list": "upper",
+   "g": 4,
+   "distractors": [
+    "height",
+    "eight",
+    "weigh"
+   ]
+  },
+  {
+   "word": "machine",
+   "list": "upper",
+   "g": 4.1,
+   "distractors": [
+    "marine",
+    "machete",
+    "machined"
+   ]
+  },
+  {
+   "word": "certain",
+   "list": "upper",
+   "g": 4.1,
+   "distractors": [
+    "curtain",
+    "captain",
+    "cartoon"
+   ]
+  },
+  {
+   "word": "surprise",
+   "list": "upper",
+   "g": 4.1,
+   "distractors": [
+    "sunrise",
+    "surmise",
+    "comprise"
+   ]
+  },
+  {
+   "word": "beautiful",
+   "list": "upper",
+   "g": 4.2,
+   "distractors": [
+    "bountiful",
+    "beautify",
+    "beautician"
+   ]
+  },
+  {
+   "word": "believe",
+   "list": "upper",
+   "g": 4.2,
+   "distractors": [
+    "relieve",
+    "behave",
+    "beehive"
+   ]
+  }
+ ]
+}

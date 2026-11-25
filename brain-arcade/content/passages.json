@@ -1,0 +1,1885 @@
+{
+ "about": "Brain Arcade reading passages with comprehension questions. g is the grade-level difficulty (1.0 = start of 1st grade).",
+ "passages": [
+  {
+   "id": "p01",
+   "g": 0.8,
+   "title": "The Lost Hat",
+   "emoji": "🎩",
+   "genre": "story",
+   "text": "Tom has a red hat. He can not see it. He looks in the tub. He looks on the bed. The hat is on the dog! Tom said, \"Ha! You have my hat.\"",
+   "questions": [
+    {
+     "q": "Where was the hat?",
+     "options": [
+      "on the bed",
+      "in the tub",
+      "on the dog"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The story says the hat is on the dog."
+    },
+    {
+     "q": "What color is the hat?",
+     "options": [
+      "red",
+      "pink",
+      "tan"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "The story says Tom has a red hat."
+    },
+    {
+     "q": "Where did Tom look first?",
+     "options": [
+      "on the dog",
+      "on the bed",
+      "in the tub"
+     ],
+     "answer": 2,
+     "type": "sequence",
+     "why": "Tom looks in the tub first, then on the bed."
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "g": 0.9,
+   "title": "Ants",
+   "emoji": "🐜",
+   "genre": "info",
+   "text": "Ants are tiny. Ants live in a hill. Ants work as a team. They get crumbs and take them to the hill. Ants like to eat sweet things, like jam.",
+   "questions": [
+    {
+     "q": "Where do ants live?",
+     "options": [
+      "in a cup",
+      "in a hill",
+      "in a hat"
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "The passage says ants live in a hill."
+    },
+    {
+     "q": "What do ants like to eat?",
+     "options": [
+      "sweet things",
+      "rocks",
+      "sand"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "The passage says ants like sweet things, like jam."
+    },
+    {
+     "q": "How do ants work?",
+     "options": [
+      "on a bed",
+      "as a team",
+      "all alone"
+     ],
+     "answer": 1,
+     "type": "main-idea",
+     "why": "The passage says ants work as a team."
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "g": 1,
+   "title": "Mia and the Kite",
+   "emoji": "🪁",
+   "genre": "story",
+   "text": "Mia has a kite. It is red and big. The wind is strong. The kite goes up, up, up! It gets stuck in a tree. Dad gets it down. Mia says, \"Thank you, Dad!\"",
+   "questions": [
+    {
+     "q": "What did Mia have?",
+     "options": [
+      "a kite",
+      "a cat",
+      "a drum"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "The story says Mia has a kite."
+    },
+    {
+     "q": "What went wrong?",
+     "options": [
+      "The kite got lost.",
+      "The kite got wet.",
+      "The kite got stuck in a tree."
+     ],
+     "answer": 2,
+     "type": "cause",
+     "why": "The story says the kite gets stuck in a tree."
+    },
+    {
+     "q": "Who got the kite down?",
+     "options": [
+      "Dad",
+      "Mia",
+      "Mom"
+     ],
+     "answer": 0,
+     "type": "character",
+     "why": "The story says Dad gets it down."
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "g": 1.1,
+   "title": "The Sun",
+   "emoji": "☀️",
+   "genre": "info",
+   "text": "The sun is a star. It is very big and very hot. The sun gives us light. It also gives us heat. Plants need the sun to grow. We must not look at the sun.",
+   "questions": [
+    {
+     "q": "What is the sun?",
+     "options": [
+      "a star",
+      "a plane",
+      "a moon"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "The first sentence says the sun is a star."
+    },
+    {
+     "q": "What does the sun give us?",
+     "options": [
+      "rain and snow",
+      "milk and food",
+      "light and heat"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The passage says the sun gives us light and heat."
+    },
+    {
+     "q": "What needs the sun to grow?",
+     "options": [
+      "rocks",
+      "dogs",
+      "plants"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The passage says plants need the sun to grow."
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "g": 1.2,
+   "title": "Ben's Big Fish",
+   "emoji": "🐟",
+   "genre": "story",
+   "text": "Ben went fishing with Gran. He felt a tug. It was a big fish! Ben pulled and pulled. Then the fish got away. Ben was not sad. \"I will try next time,\" he said.",
+   "questions": [
+    {
+     "q": "Who went fishing with Ben?",
+     "options": [
+      "Mom",
+      "Dad",
+      "Gran"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The story says Ben went fishing with Gran."
+    },
+    {
+     "q": "What happened last?",
+     "options": [
+      "Ben pulled and pulled.",
+      "The fish got away.",
+      "Ben felt a tug."
+     ],
+     "answer": 1,
+     "type": "sequence",
+     "why": "The fish got away after Ben pulled and pulled."
+    },
+    {
+     "q": "What did Ben want to do?",
+     "options": [
+      "try again",
+      "go home",
+      "stop fishing"
+     ],
+     "answer": 0,
+     "type": "character",
+     "why": "Ben said, \"I will try next time.\""
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "g": 1.3,
+   "title": "Bees",
+   "emoji": "🐝",
+   "genre": "info",
+   "text": "Bees make honey. They get nectar from flowers. A bee has six legs and two pairs of wings. Bees live in a hive. A hive can have lots of bees. The bees work hard all day.",
+   "questions": [
+    {
+     "q": "What do bees make?",
+     "options": [
+      "honey",
+      "bread",
+      "milk"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "The passage says bees make honey."
+    },
+    {
+     "q": "Where do bees live?",
+     "options": [
+      "in a hive",
+      "in a pond",
+      "in a nest"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "The passage says bees live in a hive."
+    },
+    {
+     "q": "How many legs does a bee have?",
+     "options": [
+      "six",
+      "four",
+      "eight"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "The passage says a bee has six legs."
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "g": 1.4,
+   "title": "The Rainy Day",
+   "emoji": "☔",
+   "genre": "story",
+   "text": "It rained all day. Max and Rosa could not go out. \"Let us build a fort,\" said Rosa. They got a blanket and chairs. Then they hid inside with a snack. It was the best rainy day!",
+   "questions": [
+    {
+     "q": "Why could they not go out?",
+     "options": [
+      "It rained all day.",
+      "It was too hot.",
+      "It was dark."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "The story says it rained all day."
+    },
+    {
+     "q": "What did they build?",
+     "options": [
+      "a boat",
+      "a fort",
+      "a cake"
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "Rosa said, \"Let us build a fort.\""
+    },
+    {
+     "q": "What did they do after they built the fort?",
+     "options": [
+      "went to the park",
+      "went to bed",
+      "hid inside with a snack"
+     ],
+     "answer": 2,
+     "type": "sequence",
+     "why": "The story says they hid inside with a snack."
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "g": 1.4,
+   "title": "Frogs",
+   "emoji": "🐸",
+   "genre": "info",
+   "text": "A frog starts as an egg. The egg turns into a tadpole. A tadpole has a tail and lives in the pond. Then it grows legs. At last, it is a frog that can jump.",
+   "questions": [
+    {
+     "q": "What comes right after the egg?",
+     "options": [
+      "a frog",
+      "a tadpole",
+      "a fish"
+     ],
+     "answer": 1,
+     "type": "sequence",
+     "why": "The egg turns into a tadpole."
+    },
+    {
+     "q": "What does a tadpole have?",
+     "options": [
+      "wings",
+      "a shell",
+      "a tail"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The passage says a tadpole has a tail."
+    },
+    {
+     "q": "What happens after the tadpole grows legs?",
+     "options": [
+      "It lays an egg.",
+      "It is a frog.",
+      "It flies away."
+     ],
+     "answer": 1,
+     "type": "sequence",
+     "why": "After it grows legs, it is a frog that can jump."
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "g": 1.5,
+   "title": "Sam's New Shoes",
+   "emoji": "👟",
+   "genre": "story",
+   "text": "Sam got new shoes. They were bright green. At school, Sam ran fast at recess. His friend Omar said, \"Your shoes are so cool!\" Sam smiled. But on the way home, he stepped in a big puddle. Splash! His new shoes were wet and muddy. Sam grinned anyway. He knew mud would wash off.",
+   "questions": [
+    {
+     "q": "What color were Sam's new shoes?",
+     "options": [
+      "black",
+      "yellow",
+      "blue",
+      "green"
+     ],
+     "answer": 3,
+     "type": "detail",
+     "why": "The story says the shoes were bright green."
+    },
+    {
+     "q": "How did Sam's shoes get muddy?",
+     "options": [
+      "He fell at recess.",
+      "He stepped in a puddle.",
+      "A dog jumped on them.",
+      "He played in the garden."
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "On the way home, Sam stepped in a big puddle."
+    },
+    {
+     "q": "What did Omar think of the shoes?",
+     "options": [
+      "They were cool.",
+      "They were just like his.",
+      "They were too big.",
+      "They were too bright."
+     ],
+     "answer": 0,
+     "type": "character",
+     "why": "Omar said, \"Your shoes are so cool!\""
+    }
+   ]
+  },
+  {
+   "id": "p10",
+   "g": 1.7,
+   "title": "Why Leaves Change Color",
+   "emoji": "🍂",
+   "genre": "info",
+   "text": "In summer, leaves are green because they hold a green stuff. It helps the tree make food from sunlight. In fall, the days get short and cool. The tree stops making food. The green fades away. Then we can see red, orange, and yellow colors that were hiding underneath. These colors were there all summer.",
+   "questions": [
+    {
+     "q": "Why are leaves green in summer?",
+     "options": [
+      "They get a lot of rain.",
+      "They are very young.",
+      "They hold a green stuff.",
+      "They are hiding colors."
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The passage says leaves hold a green stuff."
+    },
+    {
+     "q": "What happens when the days get short and cool?",
+     "options": [
+      "The leaves turn green.",
+      "The sun goes away.",
+      "The tree stops making food.",
+      "The tree grows faster."
+     ],
+     "answer": 2,
+     "type": "sequence",
+     "why": "The tree stops making food, and the green fades."
+    },
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "what trees eat in winter",
+      "how trees make seeds",
+      "why leaves change color in fall",
+      "which trees are the tallest"
+     ],
+     "answer": 2,
+     "type": "main-idea",
+     "why": "The passage explains why leaves change color in fall."
+    }
+   ]
+  },
+  {
+   "id": "p11",
+   "g": 1.8,
+   "title": "The Lemonade Stand",
+   "emoji": "🍋",
+   "genre": "story",
+   "text": "Ava and Kai set up a lemonade stand. It was a sunny day, but no one stopped. Ava felt worried. Then Kai had an idea. He drew a big yellow lemon on a sign. Soon, a car slowed down. Then another one did. By lunch, they had sold every cup.",
+   "questions": [
+    {
+     "q": "What did Kai draw on the sign?",
+     "options": [
+      "a big yellow lemon",
+      "a smiling face",
+      "a bright sun",
+      "a glass of milk"
+     ],
+     "answer": 0,
+     "type": "detail",
+     "why": "Kai drew a big yellow lemon on a sign."
+    },
+    {
+     "q": "What happened right after Kai made the sign?",
+     "options": [
+      "They sold every cup.",
+      "A car slowed down.",
+      "Ava went home.",
+      "It started to rain."
+     ],
+     "answer": 1,
+     "type": "sequence",
+     "why": "Soon after the sign, a car slowed down."
+    },
+    {
+     "q": "How did Ava feel at the start?",
+     "options": [
+      "proud",
+      "sleepy",
+      "worried",
+      "angry"
+     ],
+     "answer": 2,
+     "type": "character",
+     "why": "The story says Ava felt worried when no one stopped."
+    }
+   ]
+  },
+  {
+   "id": "p12",
+   "g": 2,
+   "title": "Sea Otters",
+   "emoji": "🦦",
+   "genre": "info",
+   "text": "Sea otters spend most of their lives in the water. When they sleep, they float on their backs. Otters hold hands while they rest. This keeps them from drifting apart. Otters also use tools. An otter floats with a rock on its belly. It bangs a clam on the rock until the shell cracks open. Then it eats the soft food inside.",
+   "questions": [
+    {
+     "q": "Why do sea otters hold hands when they rest?",
+     "options": [
+      "to find food",
+      "so they do not drift apart",
+      "to play a game",
+      "to keep warm"
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "The passage says holding hands keeps them from drifting apart."
+    },
+    {
+     "q": "What do otters use a rock for?",
+     "options": [
+      "to hide under",
+      "to dig a home",
+      "to crack open a clam",
+      "to sleep on"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "An otter bangs a clam on a rock until the shell cracks."
+    },
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "how sea otters live and rest",
+      "how clams live",
+      "why oceans are cold",
+      "how to build a raft"
+     ],
+     "answer": 0,
+     "type": "main-idea",
+     "why": "It tells how sea otters sleep, rest, and use tools."
+    }
+   ]
+  },
+  {
+   "id": "p13",
+   "g": 2.1,
+   "title": "June and the Spelling Test",
+   "emoji": "📝",
+   "genre": "story",
+   "text": "June had a big spelling test on Friday. She felt nervous. Her brother Theo helped her practice every night. He read each word out loud, and June spelled it. On Friday, she got nine words right. The only one she missed was \"friend.\" June did not mind. \"I practiced so hard,\" she said. \"Next time I will get them all.\"",
+   "questions": [
+    {
+     "q": "Why did June do well on the test?",
+     "options": [
+      "The test was easy.",
+      "She practiced every night.",
+      "She copied a friend.",
+      "Her brother took the test."
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "Theo helped June practice every night."
+    },
+    {
+     "q": "Which word did June miss?",
+     "options": [
+      "nervous",
+      "friend",
+      "Friday",
+      "brother"
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "The only word she missed was \"friend.\""
+    },
+    {
+     "q": "How did June feel after the test?",
+     "options": [
+      "sad and upset",
+      "afraid of Theo",
+      "proud and hopeful",
+      "bored"
+     ],
+     "answer": 2,
+     "type": "inference",
+     "why": "She did not mind one miss and planned to get them all next time."
+    }
+   ]
+  },
+  {
+   "id": "p14",
+   "g": 2.2,
+   "title": "Theo's Robot",
+   "emoji": "🤖",
+   "genre": "story",
+   "text": "Theo built a robot for the school science fair. It had only one trick. It could roll forward in a straight line. At the fair, Theo pressed the button. The robot zoomed down the hallway, past all the tables, and out the gym door! Theo ran after it. The judge laughed so hard that she gave Theo a special ribbon. It said \"Longest Roll.\"",
+   "questions": [
+    {
+     "q": "What could Theo's robot do?",
+     "options": [
+      "talk to people",
+      "roll forward in a straight line",
+      "carry cups",
+      "dance"
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "The story says it could roll forward in a straight line."
+    },
+    {
+     "q": "What happened right after Theo pressed the button?",
+     "options": [
+      "The robot zoomed down the hallway.",
+      "The judge gave him a ribbon.",
+      "Theo went home.",
+      "The robot broke apart."
+     ],
+     "answer": 0,
+     "type": "sequence",
+     "why": "After the button, the robot zoomed down the hallway."
+    },
+    {
+     "q": "Why did the judge give Theo a ribbon?",
+     "options": [
+      "Theo won a race.",
+      "The robot rolled the farthest.",
+      "Theo fixed a table.",
+      "The robot could dance."
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "The ribbon said \"Longest Roll\" after the robot rolled so far."
+    }
+   ]
+  },
+  {
+   "id": "p15",
+   "g": 2.3,
+   "title": "Why We Yawn",
+   "emoji": "🥱",
+   "genre": "info",
+   "text": "Everyone yawns. Dogs, cats, and even fish yawn too. But scientists are not sure why. One idea is that a big yawn pulls in extra air. Another idea is that a yawn cools down the brain. Yawns also spread! If you see someone yawn, you may feel a yawn coming. Some scientists think this helps a group of animals stay alert together.",
+   "questions": [
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "why fish are sleepy",
+      "ideas about why we yawn",
+      "how air works",
+      "how to stop yawning"
+     ],
+     "answer": 1,
+     "type": "main-idea",
+     "why": "It shares what we know and ideas about why we yawn."
+    },
+    {
+     "q": "Which idea says a yawn cools something down?",
+     "options": [
+      "It cools the stomach.",
+      "It cools the brain.",
+      "It cools the face.",
+      "It cools the air."
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "One idea is that a yawn cools down the brain."
+    },
+    {
+     "q": "Why does the passage say \"scientists are not sure\"?",
+     "options": [
+      "They have not seen anyone yawn.",
+      "They think yawns are not real.",
+      "They do not yet know the real reason.",
+      "They only study fish."
+     ],
+     "answer": 2,
+     "type": "inference",
+     "why": "The passage gives ideas, not one proven answer."
+    }
+   ]
+  },
+  {
+   "id": "p16",
+   "g": 2.4,
+   "title": "The Snow Fort",
+   "emoji": "⛄",
+   "genre": "story",
+   "text": "Lily and Omar spent the whole morning building a snow fort. They packed the walls tall and made a little door. Nora, a girl from next door, watched from her porch. She looked lonely. Lily whispered, \"Maybe we can ask her to help.\" Omar nodded. Nora ran over with a bucket. She used it to make bricks of snow, and the fort was finished before lunch.",
+   "questions": [
+    {
+     "q": "What did Nora use to help?",
+     "options": [
+      "a shovel",
+      "a sled",
+      "a bucket",
+      "a wagon"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "Nora ran over with a bucket to make snow bricks."
+    },
+    {
+     "q": "Why did Lily want to ask Nora to help?",
+     "options": [
+      "The fort was too small.",
+      "She thought Nora looked lonely.",
+      "Omar was tired.",
+      "She wanted to be bossy."
+     ],
+     "answer": 1,
+     "type": "inference",
+     "why": "The story says Nora looked lonely, so Lily asked her."
+    },
+    {
+     "q": "Why was the fort finished before lunch?",
+     "options": [
+      "Lily skipped the door.",
+      "Omar built it alone.",
+      "The snow melted.",
+      "Nora helped build it."
+     ],
+     "answer": 3,
+     "type": "cause",
+     "why": "With Nora's snow bricks, the fort was done before lunch."
+    }
+   ]
+  },
+  {
+   "id": "p17",
+   "g": 2.4,
+   "title": "How a Seed Grows",
+   "emoji": "🌱",
+   "genre": "info",
+   "text": "A seed holds a tiny plant inside. When the seed gets water and warmth, it wakes up. First, a root grows down into the soil. The root drinks water and holds the plant in place. Next, a little stem pushes up toward the light. Then the first leaves open. The leaves use sunlight to make food, and the plant keeps growing.",
+   "questions": [
+    {
+     "q": "What grows first from a seed?",
+     "options": [
+      "a stem",
+      "a leaf",
+      "a flower",
+      "a root"
+     ],
+     "answer": 3,
+     "type": "sequence",
+     "why": "First, a root grows down into the soil."
+    },
+    {
+     "q": "What does the root do?",
+     "options": [
+      "It colors the leaves.",
+      "It makes food from sunlight.",
+      "It drinks water and holds the plant in place.",
+      "It makes seeds."
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The root drinks water and holds the plant in place."
+    },
+    {
+     "q": "What wakes up a seed?",
+     "options": [
+      "birds",
+      "wind and cold",
+      "water and warmth",
+      "dark and dry soil"
+     ],
+     "answer": 2,
+     "type": "cause",
+     "why": "The seed wakes up when it gets water and warmth."
+    }
+   ]
+  },
+  {
+   "id": "p18",
+   "g": 2.5,
+   "title": "The Lighthouse Cat",
+   "emoji": "🐱",
+   "genre": "story",
+   "text": "Pearl was a gray cat who lived in a lighthouse by the sea. Every night, the keeper, Mr. Ortiz, climbed the stairs to turn on the big light. Pearl always followed him, even though the stairs were steep and she was very small. One foggy night, the light stopped working. Mr. Ortiz could not fix it in the dark. Pearl hopped onto the lamp and bumped a loose cord with her paw. The light flickered and then glowed bright again. Ships sailed safely past the rocks. The next morning, Mr. Ortiz gave Pearl an extra helping of fish.",
+   "questions": [
+    {
+     "q": "What did Pearl do that helped the light?",
+     "options": [
+      "She turned a key.",
+      "She bumped a loose cord.",
+      "She knocked over the lamp.",
+      "She pulled a handle."
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "Pearl bumped a loose cord with her paw."
+    },
+    {
+     "q": "In the story, what does \"steep\" mean?",
+     "options": [
+      "wet and slippery",
+      "going up at a sharp slant",
+      "covered in dust",
+      "very wide"
+     ],
+     "answer": 1,
+     "type": "vocab",
+     "why": "Steep stairs were hard for a small cat, so they slant sharply."
+    },
+    {
+     "q": "Why did Mr. Ortiz give Pearl extra fish?",
+     "options": [
+      "She was hungry.",
+      "Her bump got the light working again.",
+      "She stayed in bed.",
+      "She caught a mouse."
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "After Pearl bumped the cord, the light glowed again and ships were safe."
+    }
+   ]
+  },
+  {
+   "id": "p19",
+   "g": 2.6,
+   "title": "Why the Moon Changes Shape",
+   "emoji": "🌙",
+   "genre": "info",
+   "text": "The moon looks different from night to night. One night it is a thin curve. A week later it looks like half a circle. Then it becomes a full, round circle. But the moon does not really change shape. It is always a ball. The moon does not make its own light. It shines because sunlight bounces off it. As the moon circles Earth, we see more or less of its sunny side. It takes about a month to go through all of its shapes. People once used the moon's shapes to count the days.",
+   "questions": [
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "why the moon seems to change shape",
+      "how the sun makes light",
+      "how far away the moon is",
+      "why Earth spins"
+     ],
+     "answer": 0,
+     "type": "main-idea",
+     "why": "The passage explains why the moon looks different but is always a ball."
+    },
+    {
+     "q": "Why does the moon seem to shine?",
+     "options": [
+      "It makes its own light.",
+      "Sunlight bounces off it.",
+      "Earth lights it up.",
+      "Stars shine on it."
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "The passage says it shines because sunlight bounces off it."
+    },
+    {
+     "q": "How long does it take for the moon to go through all its shapes?",
+     "options": [
+      "one week",
+      "one year",
+      "about a month",
+      "one night"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The passage says it takes about a month."
+    }
+   ]
+  },
+  {
+   "id": "p20",
+   "g": 2.7,
+   "title": "Kai's Soccer Surprise",
+   "emoji": "⚽",
+   "genre": "story",
+   "text": "Kai wanted to score a goal more than anything. But his coach always put him on defense. Kai thought that was boring. At Saturday's game, the other team's best player raced toward the net. Kai ran after her as fast as his legs would go and stole the ball just in time. He passed it to Mia, who kicked it into the goal. Everyone cheered. After the game, Coach said, \"A goal needs a good pass, and a pass needs a good steal.\" Kai grinned. Maybe defense was not so boring after all.",
+   "questions": [
+    {
+     "q": "How did Kai feel about playing defense at first?",
+     "options": [
+      "He thought it was scary.",
+      "He liked it best.",
+      "He thought it was boring.",
+      "He wanted to quit soccer."
+     ],
+     "answer": 2,
+     "type": "character",
+     "why": "The story says Kai thought defense was boring."
+    },
+    {
+     "q": "Who scored the goal?",
+     "options": [
+      "Coach",
+      "Mia",
+      "the other team's best player",
+      "Kai"
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "Kai passed to Mia, who kicked it into the goal."
+    },
+    {
+     "q": "What did Kai learn?",
+     "options": [
+      "Defense helps the team win.",
+      "Only goals matter.",
+      "He should play alone.",
+      "Coaches are always right."
+     ],
+     "answer": 0,
+     "type": "inference",
+     "why": "Coach explained that a goal starts with a good steal, so defense matters."
+    }
+   ]
+  },
+  {
+   "id": "p21",
+   "g": 2.9,
+   "title": "Octopus Escape Artists",
+   "emoji": "🐙",
+   "genre": "info",
+   "text": "An octopus has no bones. Its soft body can squeeze through any hole bigger than its beak, which is the only hard part. This helps the octopus hide from hungry sharks. It also helps it escape. At an aquarium, workers once found an octopus missing from its tank. They finally found it in the next tank, eating a crab! An octopus is also very smart. It can open jars, solve puzzles, and remember faces. Because octopuses are so clever, aquarium workers must always check that tank lids are shut tight.",
+   "questions": [
+    {
+     "q": "Why can an octopus squeeze through small holes?",
+     "options": [
+      "It has no bones.",
+      "It has a hard shell.",
+      "It has long legs.",
+      "It is very small."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "The passage says an octopus has no bones, so its body is soft."
+    },
+    {
+     "q": "Where did workers find the missing octopus?",
+     "options": [
+      "in the ocean",
+      "under a rock",
+      "in the next tank",
+      "in a jar"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "They found it in the next tank, eating a crab."
+    },
+    {
+     "q": "Why must workers check the tank lids?",
+     "options": [
+      "Crabs sneak in.",
+      "Sharks jump out.",
+      "Octopuses are clever and can escape.",
+      "Lids break easily."
+     ],
+     "answer": 2,
+     "type": "inference",
+     "why": "Octopuses are so clever that they can escape if lids are loose."
+    }
+   ]
+  },
+  {
+   "id": "p22",
+   "g": 3,
+   "title": "The Great Pancake Flip",
+   "emoji": "🥞",
+   "genre": "story",
+   "text": "Nora wanted to surprise her family with breakfast. She got out the big pan, the flour, and three eggs. Her first pancake stuck to the pan. The second one burned black. The third landed on the floor when she tried to flip it high. Nora sighed. Just then, her little brother Ben wandered in, sniffing the smoky air. \"I will help,\" he said. Together they stirred more batter and cooked it over lower heat. This time the pancakes came out golden and fluffy. Everyone agreed they were the best ever, even the ones that were a little lopsided.",
+   "questions": [
+    {
+     "q": "What happened to the third pancake?",
+     "options": [
+      "It was eaten by Ben.",
+      "It landed on the floor.",
+      "It burned black.",
+      "It stuck to the pan."
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "The third pancake landed on the floor when Nora tried to flip it high."
+    },
+    {
+     "q": "What helped the pancakes turn out better?",
+     "options": [
+      "a hotter stove",
+      "lower heat and teamwork",
+      "a bigger pan",
+      "more eggs"
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "Nora and Ben cooked over lower heat, together."
+    },
+    {
+     "q": "In the story, what does \"lopsided\" mean?",
+     "options": [
+      "very tasty",
+      "not even in shape",
+      "burned",
+      "extra fluffy"
+     ],
+     "answer": 1,
+     "type": "vocab",
+     "why": "Lopsided pancakes were uneven, but still tasted great."
+    }
+   ]
+  },
+  {
+   "id": "p23",
+   "g": 3.1,
+   "title": "How Bridges Stay Up",
+   "emoji": "🌉",
+   "genre": "info",
+   "text": "A bridge has to hold up its own weight, plus every car, truck, and person that crosses it. Engineers use shapes to make bridges strong. A beam bridge is just a flat piece laid across a gap. It works well for short distances. An arch bridge is curved, so the weight pushes outward and down into the ground at each end. A suspension bridge hangs from huge cables strung between tall towers. The cables carry the weight, so this kind can stretch across a wide river or bay. Engineers choose a type of bridge by looking at how far it must reach.",
+   "questions": [
+    {
+     "q": "Which bridge can stretch across a wide river or bay?",
+     "options": [
+      "suspension bridge",
+      "beam bridge",
+      "arch bridge",
+      "all three equally"
+     ],
+     "answer": 0,
+     "type": "compare",
+     "why": "Suspension bridges hang from cables, so they can cross wide spaces."
+    },
+    {
+     "q": "In the passage, what does \"strung\" mean?",
+     "options": [
+      "hung in a long line",
+      "broken",
+      "painted",
+      "buried"
+     ],
+     "answer": 0,
+     "type": "vocab",
+     "why": "Cables strung between towers means they are stretched and hung between them."
+    },
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "how towers are built",
+      "how different bridge shapes hold weight",
+      "why bridges are expensive",
+      "who drives on bridges"
+     ],
+     "answer": 1,
+     "type": "main-idea",
+     "why": "It explains how beam, arch, and suspension bridges stay up."
+    }
+   ]
+  },
+  {
+   "id": "p24",
+   "g": 3.2,
+   "title": "The Library Mystery",
+   "emoji": "📚",
+   "genre": "story",
+   "text": "Each morning, Lily noticed a new book on the library steps. There was never a note. Ms. Park, the librarian, was puzzled, so Lily decided to investigate. She woke up before sunrise and hid behind a bush. At six o'clock, an old man in a gray coat shuffled up the path. He placed a book on the step and glanced around. It was Mr. Ames, her neighbor! He had a stack of old books he wanted to give away. \"I was too shy to hand them over,\" he admitted. Lily laughed and helped him carry the rest inside. Ms. Park thanked them both, and the mystery was solved.",
+   "questions": [
+    {
+     "q": "In the story, what does \"puzzled\" mean?",
+     "options": [
+      "angry",
+      "proud",
+      "sleepy",
+      "confused"
+     ],
+     "answer": 3,
+     "type": "vocab",
+     "why": "Ms. Park did not know where the books came from, so she was confused."
+    },
+    {
+     "q": "Why did Mr. Ames leave the books on the steps?",
+     "options": [
+      "He wanted to play a trick.",
+      "He was too shy to hand them over.",
+      "He forgot his library card.",
+      "The library was closed."
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "He said, \"I was too shy to hand them over.\""
+    },
+    {
+     "q": "Where did the mystery books come from?",
+     "options": [
+      "a bookstore sale",
+      "Mr. Ames's own old books",
+      "the library's basement",
+      "Lily's school"
+     ],
+     "answer": 1,
+     "type": "inference",
+     "why": "Mr. Ames had a stack of old books he wanted to give away."
+    }
+   ]
+  },
+  {
+   "id": "p25",
+   "g": 3.3,
+   "title": "Hummingbirds",
+   "emoji": "🌺",
+   "genre": "info",
+   "text": "A hummingbird is smaller than your fist, but it is full of energy. Its wings beat about fifty times each second, which lets it hover in the air like a tiny helicopter. This takes a lot of fuel, so hummingbirds sip sweet nectar from flowers all day long. A hummingbird may need to eat every ten or fifteen minutes. At night, it cannot feed. To save energy, it enters a sleepy state called torpor. Its heart slows down and its body cools. In the morning, it warms up and goes looking for breakfast.",
+   "questions": [
+    {
+     "q": "In the passage, what does \"hover\" mean?",
+     "options": [
+      "to stay in one spot in the air",
+      "to fall asleep",
+      "to fly very far",
+      "to swim underwater"
+     ],
+     "answer": 0,
+     "type": "vocab",
+     "why": "Wings beating fast let it stay in the air like a helicopter."
+    },
+    {
+     "q": "Why must hummingbirds eat so often?",
+     "options": [
+      "They share food with chicks.",
+      "They are afraid of the night.",
+      "Nectar has no sugar.",
+      "Flying and hovering use lots of energy."
+     ],
+     "answer": 3,
+     "type": "cause",
+     "why": "Hovering takes a lot of fuel, so they eat all day."
+    },
+    {
+     "q": "Why does torpor help a hummingbird at night?",
+     "options": [
+      "It warms the bird up.",
+      "It makes the nectar sweeter.",
+      "It saves energy when the bird cannot feed.",
+      "It lets the bird fly in the dark."
+     ],
+     "answer": 2,
+     "type": "inference",
+     "why": "At night it cannot feed, so a slow heart saves energy."
+    }
+   ]
+  },
+  {
+   "id": "p26",
+   "g": 3.4,
+   "title": "A Night at Camp",
+   "emoji": "⛺",
+   "genre": "story",
+   "text": "It was Max's first night at summer camp, and he felt homesick. The cabin was dark, and the other boys were asleep. Then Max heard a strange rustling outside. Scratch, scratch, thump! His heart pounded. He nudged his counselor, who yawned and took out a flashlight. They tiptoed to the window. A raccoon was sitting on the porch, holding a granola bar wrapper in its tiny hands. It looked right at them as if to say, \"Who, me?\" Max burst out laughing. The noise did not seem scary anymore. He crawled back into his sleeping bag and fell asleep smiling.",
+   "questions": [
+    {
+     "q": "What does \"homesick\" mean in the story?",
+     "options": [
+      "feeling ill",
+      "missing home",
+      "being lost",
+      "feeling hungry"
+     ],
+     "answer": 1,
+     "type": "vocab",
+     "why": "Max felt unhappy in a new place and missed his home."
+    },
+    {
+     "q": "What made the strange noise?",
+     "options": [
+      "a bear",
+      "another camper",
+      "a raccoon",
+      "the wind"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "A raccoon was on the porch holding a granola bar wrapper."
+    },
+    {
+     "q": "Why did Max stop feeling scared?",
+     "options": [
+      "He saw the funny raccoon.",
+      "The sun came up.",
+      "He went home.",
+      "His counselor sang to him."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "Max laughed when he saw the raccoon, and the noise was not scary."
+    },
+    {
+     "q": "What did Max do right after he heard the noise?",
+     "options": [
+      "He ran outside.",
+      "He fell asleep.",
+      "He woke his counselor.",
+      "He looked out the window alone."
+     ],
+     "answer": 2,
+     "type": "sequence",
+     "why": "He nudged his counselor, who took out a flashlight."
+    }
+   ]
+  },
+  {
+   "id": "p27",
+   "g": 3.5,
+   "title": "Life in a Tide Pool",
+   "emoji": "🦀",
+   "genre": "info",
+   "text": "Along rocky shores, the ocean rises and falls twice a day. When the tide goes out, it leaves behind small pools of seawater among the rocks. These tide pools are tough places to live. At high tide, waves crash down on the animals. At low tide, the sun beats down, and the water can get hot and extra salty. Still, many creatures thrive there. Sea stars grip the rocks with hundreds of tiny tube feet so waves cannot wash them away. Mussels and barnacles shut their shells tightly to keep moisture inside until the water returns. Crabs scurry under rocks to hide from hot sun and hungry gulls. Each animal has a way of surviving both the pounding waves and the baking sun. A tide pool is like a tiny world that changes with every wave. Visitors who explore tide pools should walk slowly, look closely, and put every creature back exactly where it was found.",
+   "questions": [
+    {
+     "q": "Why do mussels and barnacles shut their shells at low tide?",
+     "options": [
+      "to catch food",
+      "to keep moisture inside",
+      "to hide from waves",
+      "to look for crabs"
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "The passage says they shut tight to keep moisture inside until water returns."
+    },
+    {
+     "q": "In the passage, what does \"thrive\" mean?",
+     "options": [
+      "to grow and do well",
+      "to feel afraid",
+      "to be washed away",
+      "to move quickly"
+     ],
+     "answer": 0,
+     "type": "vocab",
+     "why": "Many creatures live well there, even though it is a tough place."
+    },
+    {
+     "q": "What is the main idea of the passage?",
+     "options": [
+      "Sea stars are the strongest animals.",
+      "The ocean rises and falls once a day.",
+      "Tide pool animals have ways to survive harsh conditions.",
+      "Tide pools are dangerous for visitors."
+     ],
+     "answer": 2,
+     "type": "main-idea",
+     "why": "Each animal has a way to survive waves and sun."
+    },
+    {
+     "q": "How do sea stars stay on the rocks?",
+     "options": [
+      "They shut their shells.",
+      "They hide under crabs.",
+      "They dig holes.",
+      "They grip with tiny tube feet."
+     ],
+     "answer": 3,
+     "type": "detail",
+     "why": "Sea stars grip with hundreds of tiny tube feet."
+    }
+   ]
+  },
+  {
+   "id": "p28",
+   "g": 3.6,
+   "title": "The Night the Lights Went Out",
+   "emoji": "🔦",
+   "genre": "story",
+   "text": "A loud clap of thunder shook the house, and every light went dark. Ava's little brother, Sam, began to whimper. \"It is only the power,\" said Dad. He found a flashlight in the kitchen drawer. Mom set a few candles in jars on the table. Ava looked around. Rain drummed on the roof, and Ava's heart was beating fast, too. Sam clutched his stuffed bear tightly, and even Mom's smile looked a little shaky. The room seemed strange, with shadows stretching up the walls. She had an idea. She held the flashlight under the wall clock and wiggled her fingers in front of it. A huge shadow rabbit hopped across the wall. Sam stopped whimpering and giggled. Soon everyone was making shadow animals. Dad made a goose with a long neck. Mom made a barking dog. They played until the rain softened and the lights flickered back on. Ava almost wished the power would go out again.",
+   "questions": [
+    {
+     "q": "Why did Sam begin to whimper?",
+     "options": [
+      "The thunder was loud and the lights went out.",
+      "The candles burned out.",
+      "Dad was angry.",
+      "He lost his flashlight."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "A loud thunderclap shook the house and the lights went dark."
+    },
+    {
+     "q": "What was Ava trying to do with her shadow rabbit?",
+     "options": [
+      "find the flashlight",
+      "show off to Dad",
+      "help Sam feel less afraid",
+      "scare Sam"
+     ],
+     "answer": 2,
+     "type": "inference",
+     "why": "After her rabbit, Sam stopped whimpering and giggled."
+    },
+    {
+     "q": "What happened right before the lights came back on?",
+     "options": [
+      "Ava made a rabbit.",
+      "Dad found the flashlight.",
+      "The rain softened.",
+      "Mom lit the candles."
+     ],
+     "answer": 2,
+     "type": "sequence",
+     "why": "They played until the rain softened and the lights flickered on."
+    },
+    {
+     "q": "How did Ava feel at the end?",
+     "options": [
+      "She was bored.",
+      "She was afraid of shadows.",
+      "She wished it would happen again.",
+      "She was upset about the storm."
+     ],
+     "answer": 2,
+     "type": "character",
+     "why": "She almost wished the power would go out again."
+    }
+   ]
+  },
+  {
+   "id": "p29",
+   "g": 3.8,
+   "title": "The Monarch Migration",
+   "emoji": "🦋",
+   "genre": "info",
+   "text": "Monarchs are orange with black stripes and white dots, and their bright colors warn birds that they taste bad. Every fall, millions of monarch butterflies travel up to three thousand miles to the mountains of Mexico. This journey is one of the most amazing in the insect world. Monarchs live only a few weeks in summer. But the generation born in late summer is different. These butterflies can live for eight months, long enough to make the whole trip. They fly south by day and rest in trees at night, using the sun to find their way. In Mexico, they cluster by the thousands on fir trees, where the cool, damp air helps them stay calm through winter. In spring, they fly north and lay eggs on milkweed plants. Those butterflies will not live to see Mexico, but their great-grandchildren will. Somehow, each new generation finds the same forests, though none has ever been there before. Scientists are still studying how they do it.",
+   "questions": [
+    {
+     "q": "How long can the late-summer monarchs live?",
+     "options": [
+      "one day",
+      "about eight months",
+      "a few weeks",
+      "three years"
+     ],
+     "answer": 1,
+     "type": "detail",
+     "why": "These butterflies can live for eight months."
+    },
+    {
+     "q": "In the passage, what does \"cluster\" mean?",
+     "options": [
+      "to gather closely together",
+      "to sleep alone",
+      "to eat quickly",
+      "to fly away"
+     ],
+     "answer": 0,
+     "type": "vocab",
+     "why": "They sit by the thousands on trees, grouped together."
+    },
+    {
+     "q": "What is surprising about how monarchs find Mexico?",
+     "options": [
+      "They have never been there before.",
+      "They need a map.",
+      "They fly at night.",
+      "They travel alone."
+     ],
+     "answer": 0,
+     "type": "inference",
+     "why": "Each new generation finds the forests though none has been there."
+    },
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "how milkweed grows",
+      "why Mexico is cool",
+      "the long yearly journey of monarchs",
+      "how butterflies eat"
+     ],
+     "answer": 2,
+     "type": "main-idea",
+     "why": "The passage describes the monarchs' yearly migration."
+    }
+   ]
+  },
+  {
+   "id": "p30",
+   "g": 3.9,
+   "title": "Theo's Invention",
+   "emoji": "💡",
+   "genre": "story",
+   "text": "Theo was tired of his dog, Biscuit, dragging muddy paws across the kitchen floor. He decided to invent a paw cleaner. His first try was a bucket of water. Biscuit knocked it over and splashed everywhere. His second try was a doormat made of sponges, but Biscuit refused to step on it. Biscuit wagged his tail the whole time, as if it were all a game. Theo wrote down every try in a notebook. Then he sat on the porch, feeling discouraged. Then he noticed Biscuit eagerly chasing a squeaky ball across a rough, bristly rug. That gave him an idea. Theo glued a squeaky toy to the end of a scrubbing mat. When Biscuit pounced on the toy, his paws rubbed against the bristles and came out clean. Theo's mother clapped. \"That is brilliant,\" she said. Theo smiled. His invention had taken three tries, but now he knew that failures could lead to good ideas.",
+   "questions": [
+    {
+     "q": "What was Theo's second try at an invention?",
+     "options": [
+      "a squeaky ball",
+      "a scrubbing mat with a toy",
+      "a bucket of water",
+      "a sponge doormat"
+     ],
+     "answer": 3,
+     "type": "sequence",
+     "why": "His second try was a doormat made of sponges."
+    },
+    {
+     "q": "What gave Theo the idea that worked?",
+     "options": [
+      "Biscuit chasing a squeaky ball",
+      "Biscuit knocked over the bucket.",
+      "His mother told him how.",
+      "He read a book."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "He noticed Biscuit eagerly chasing a squeaky ball across a rough rug."
+    },
+    {
+     "q": "In the story, what does \"discouraged\" mean?",
+     "options": [
+      "filled with hope",
+      "ready to give up",
+      "very hungry",
+      "extra proud"
+     ],
+     "answer": 1,
+     "type": "vocab",
+     "why": "Theo sat on the porch after two tries failed, feeling like quitting."
+    },
+    {
+     "q": "What lesson did Theo learn?",
+     "options": [
+      "Failures can lead to good ideas.",
+      "Mud is helpful.",
+      "Dogs cannot be trained.",
+      "Inventions are easy."
+     ],
+     "answer": 0,
+     "type": "inference",
+     "why": "The story ends with Theo knowing failures could lead to good ideas."
+    }
+   ]
+  },
+  {
+   "id": "p31",
+   "g": 4,
+   "title": "How a Volcano Forms",
+   "emoji": "🌋",
+   "genre": "info",
+   "text": "Deep under the ground, the rock is so hot that some of it melts into a thick, glowing liquid called magma. Because magma is lighter than the solid rock around it, it slowly rises toward the surface. It collects in a huge chamber beneath a mountain. Over time, pressure builds up in the chamber, much like pressure builds in a shaken soda bottle. Eventually, the magma finds a crack and bursts out. When magma reaches the surface, it is called lava. Each eruption adds layers of lava and ash. After thousands of years, these layers can pile up into a tall, cone-shaped mountain, which is a volcano. Volcanoes can also form on the ocean floor, and some islands are really the tops of old volcanoes. Not every volcano erupts violently. Some, like those in Hawaii, release slow rivers of lava that give people time to move away. Scientists study the ground and the gases around volcanoes to warn communities when an eruption might be coming.",
+   "questions": [
+    {
+     "q": "Why does magma rise toward the surface?",
+     "options": [
+      "It is lighter than solid rock.",
+      "It is cooler than the rock.",
+      "It is pushed by the ocean.",
+      "It is attracted to mountains."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "The passage says magma is lighter than the solid rock around it."
+    },
+    {
+     "q": "How is magma different from lava?",
+     "options": [
+      "They are the same thing.",
+      "Lava is solid.",
+      "Magma is underground and lava is on the surface.",
+      "Magma is cooler."
+     ],
+     "answer": 2,
+     "type": "compare",
+     "why": "When magma reaches the surface, it is called lava."
+    },
+    {
+     "q": "In the passage, what does \"pressure\" mean?",
+     "options": [
+      "a type of rock",
+      "a loud sound",
+      "a pushing force",
+      "a kind of heat"
+     ],
+     "answer": 2,
+     "type": "vocab",
+     "why": "Pressure building like in a shaken soda bottle means a strong push."
+    },
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "how volcanoes form and erupt",
+      "how scientists predict storms",
+      "why Hawaii is warm",
+      "how soda is made"
+     ],
+     "answer": 0,
+     "type": "main-idea",
+     "why": "The passage explains how magma builds into a volcano and erupts."
+    }
+   ]
+  },
+  {
+   "id": "p32",
+   "g": 4.1,
+   "title": "Nora and the Mountain",
+   "emoji": "⛰️",
+   "genre": "story",
+   "text": "Nora had waited all summer to climb Pine Peak with her dad. They left at dawn and followed a trail that wound through tall pines beside a cold, rushing stream. Her legs ached, but she did not care. By noon they were nearly at the top. The summit was just a short scramble away. But Dad stopped and looked at the sky. Dark clouds were stacking up in the west, and the wind had turned cold. \"We should head back,\" he said quietly. Nora's heart sank. They were so close! \"Mountains will be here tomorrow,\" Dad told her. \"We need to be safe first.\" Reluctantly, Nora turned around. Halfway down, the sky split with lightning, and rain poured over the ridge. Nora and Dad were already below the tree line, tucked under a rocky overhang, dry and safe. Nora took a deep breath. She realized that choosing to turn back had taken more courage than reaching the top.",
+   "questions": [
+    {
+     "q": "Why did Dad decide to turn back?",
+     "options": [
+      "Nora wanted to go home.",
+      "They ran out of water.",
+      "A storm was coming.",
+      "They were tired."
+     ],
+     "answer": 2,
+     "type": "cause",
+     "why": "Dark clouds were stacking up and the wind had turned cold."
+    },
+    {
+     "q": "In the story, what does \"reluctantly\" mean?",
+     "options": [
+      "without wanting to",
+      "angrily",
+      "quickly",
+      "happily"
+     ],
+     "answer": 0,
+     "type": "vocab",
+     "why": "Nora's heart sank, so she turned around without wanting to."
+    },
+    {
+     "q": "What did Nora realize at the end?",
+     "options": [
+      "Her dad was wrong.",
+      "Climbing is easy.",
+      "She should climb alone.",
+      "Turning back was a brave choice."
+     ],
+     "answer": 3,
+     "type": "inference",
+     "why": "She realized that turning back took more courage than reaching the top."
+    },
+    {
+     "q": "What happened right after they started down?",
+     "options": [
+      "They met other hikers.",
+      "Lightning split the sky and rain poured.",
+      "They reached the summit.",
+      "They ate lunch at the top."
+     ],
+     "answer": 1,
+     "type": "sequence",
+     "why": "Halfway down, the sky split with lightning and rain poured."
+    }
+   ]
+  },
+  {
+   "id": "p33",
+   "g": 4.2,
+   "title": "Why We Have Seasons",
+   "emoji": "🌍",
+   "genre": "info",
+   "text": "Many people think summer happens because Earth moves closer to the sun. That idea sounds sensible, but it is wrong. In fact, Earth is closest to the sun in early January, in the middle of the northern winter. The real cause is a tilt. Earth's axis, the imaginary line it spins around, leans about twenty-three degrees. As Earth travels around the sun in a year-long orbit, the tilt always points the same direction in space. For half the year, the northern half of Earth leans toward the sun. Sunlight hits it more directly, days are long, and the weather warms up. That is summer. Six months later, the northern half leans away. Sunlight arrives at a slant and spreads out, days are shorter, and the air turns cold. That is winter. Meanwhile, the southern half has the opposite season. So when children in Chicago are building snowmen in January, children in Sydney are heading to the beach.",
+   "questions": [
+    {
+     "q": "What really causes the seasons?",
+     "options": [
+      "Changes in the sun's heat",
+      "The tilt of Earth's axis",
+      "The moon's pull",
+      "Earth moving closer to the sun"
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "The passage says the real cause is the tilt of Earth's axis."
+    },
+    {
+     "q": "When is Earth closest to the sun?",
+     "options": [
+      "every night",
+      "early July",
+      "early January",
+      "every spring"
+     ],
+     "answer": 2,
+     "type": "detail",
+     "why": "The passage says Earth is closest in early January, during northern winter."
+    },
+    {
+     "q": "In the passage, what does \"orbit\" mean?",
+     "options": [
+      "a path around something",
+      "a very fast spin",
+      "a shadow in space",
+      "a kind of weather"
+     ],
+     "answer": 0,
+     "type": "vocab",
+     "why": "Earth travels around the sun in a year-long orbit, meaning a path around it."
+    },
+    {
+     "q": "It is summer in Sydney. What season is it most likely in Chicago?",
+     "options": [
+      "summer",
+      "fall",
+      "winter",
+      "the same season"
+     ],
+     "answer": 2,
+     "type": "inference",
+     "why": "The passage says the two halves of Earth have opposite seasons."
+    }
+   ]
+  },
+  {
+   "id": "p34",
+   "g": 4.3,
+   "title": "Seeing Far Away",
+   "emoji": "🔭",
+   "genre": "info",
+   "text": "A telescope is a tool that makes distant objects look closer and brighter. The first telescopes, built in the early 1600s, used glass lenses to bend light. Galileo was one of the first people to point a telescope at the sky. A large lens at the front collects light from far away and focuses it, and a smaller lens near your eye magnifies the picture. Larger lenses collect more light, so they show fainter objects. But huge glass lenses are heavy and hard to make without flaws. So modern telescopes often use curved mirrors instead. A mirror can be supported from behind, which makes giant sizes possible. Even so, the atmosphere blurs starlight, much like heat waves make the air shimmer over a hot road. To avoid this blur, scientists launched the Hubble Space Telescope above the atmosphere in 1990. Its sharp images have shown galaxies billions of light-years away, helping us understand how old and enormous the universe really is.",
+   "questions": [
+    {
+     "q": "Why do many modern telescopes use mirrors?",
+     "options": [
+      "Mirrors are cheaper than glass.",
+      "Large mirrors can be supported from behind.",
+      "Lenses cannot bend light.",
+      "Mirrors make stars brighter."
+     ],
+     "answer": 1,
+     "type": "cause",
+     "why": "A mirror can be supported from behind, so giant sizes are possible."
+    },
+    {
+     "q": "Why was Hubble sent above the atmosphere?",
+     "options": [
+      "to be closer to the sun",
+      "to save money",
+      "to look at Earth",
+      "to avoid the blur from the air"
+     ],
+     "answer": 3,
+     "type": "inference",
+     "why": "The atmosphere blurs starlight, so Hubble flew above it."
+    },
+    {
+     "q": "In the passage, what does \"magnifies\" mean?",
+     "options": [
+      "makes bigger",
+      "makes darker",
+      "makes smaller",
+      "makes quieter"
+     ],
+     "answer": 0,
+     "type": "vocab",
+     "why": "The lens near your eye makes the picture look larger."
+    },
+    {
+     "q": "What does a larger lens do?",
+     "options": [
+      "It shrinks images.",
+      "It breaks more easily.",
+      "It bends less light.",
+      "It collects more light."
+     ],
+     "answer": 3,
+     "type": "detail",
+     "why": "Larger lenses collect more light, showing fainter objects."
+    }
+   ]
+  },
+  {
+   "id": "p35",
+   "g": 4.4,
+   "title": "Omar's Brave Speech",
+   "emoji": "🎤",
+   "genre": "story",
+   "text": "Omar had never felt so nervous. In ten minutes, he would stand in front of the entire school and give a speech about his grandmother's village. He had practiced in front of the mirror for a week. His hands were shaking, and the paper in them rattled like leaves. \"What if I forget everything?\" he whispered to his friend Rosa. She grinned. \"Then tell them about the goat.\" Omar laughed in spite of himself. Last week, he had told Rosa the story of a goat that wandered into his grandmother's kitchen and ate a whole loaf of bread. When it was his turn, Omar walked to the microphone, took a breath, and started with the goat. The audience chuckled. His shoulders relaxed, and the rest of the words flowed out. When he finished, the room burst into applause. Rosa gave him a thumbs up. Omar realized that being brave did not mean having no fear. It meant going on anyway.",
+   "questions": [
+    {
+     "q": "Why did Rosa tell Omar to tell them about the goat?",
+     "options": [
+      "She wanted him to be silly.",
+      "She knew the story would help him relax.",
+      "She forgot his speech.",
+      "She thought the goat was real."
+     ],
+     "answer": 1,
+     "type": "inference",
+     "why": "Omar laughed at the idea, then the goat story made him relax."
+    },
+    {
+     "q": "In the story, what does \"chuckled\" mean?",
+     "options": [
+      "left",
+      "shouted",
+      "laughed softly",
+      "cried"
+     ],
+     "answer": 2,
+     "type": "vocab",
+     "why": "The audience was amused, and Omar's shoulders relaxed."
+    },
+    {
+     "q": "Why did Omar's shoulders relax?",
+     "options": [
+      "The audience laughed at the goat story.",
+      "The microphone broke.",
+      "Rosa took the paper.",
+      "He finished the speech."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "The audience chuckled, and then he relaxed."
+    },
+    {
+     "q": "What lesson does the story teach?",
+     "options": [
+      "Being brave means going on even when afraid.",
+      "Friends should do the talking.",
+      "Goats make good speakers.",
+      "Never write things down."
+     ],
+     "answer": 0,
+     "type": "main-idea",
+     "why": "Omar realized that being brave meant going on anyway."
+    }
+   ]
+  },
+  {
+   "id": "p36",
+   "g": 4.6,
+   "title": "Why the Ocean Is Salty",
+   "emoji": "🌊",
+   "genre": "info",
+   "text": "Ocean water tastes salty, but the rivers that flow into it taste fresh. So where does all that salt come from? The answer begins on land. Rain is slightly acidic, and as it falls on rocks, it wears away tiny bits of minerals, including salts. Streams carry these minerals down to rivers, and rivers carry them out to sea. When the sun heats the ocean, the water evaporates, which means it turns into vapor and rises into the air. But the salt does not evaporate. It stays behind in the ocean. This process has been going on for hundreds of millions of years, and the salt has slowly built up. Today, if all of the ocean's salt were spread over the land, it would form a layer about five hundred feet thick! Some seas, like the Dead Sea, are much saltier than the ocean, because water flows in and has nowhere to go but up into the air.",
+   "questions": [
+    {
+     "q": "Why does salt stay in the ocean when water evaporates?",
+     "options": [
+      "Rivers carry it back.",
+      "Rain washes it away.",
+      "Salt turns to vapor too.",
+      "Salt does not evaporate."
+     ],
+     "answer": 3,
+     "type": "cause",
+     "why": "The passage says salt does not evaporate, so it stays in the ocean."
+    },
+    {
+     "q": "In the passage, what does \"evaporates\" mean?",
+     "options": [
+      "sinks to the bottom",
+      "freezes into ice",
+      "turns into vapor and rises",
+      "soaks into the ground"
+     ],
+     "answer": 2,
+     "type": "vocab",
+     "why": "The passage explains it means turning into vapor and rising into the air."
+    },
+    {
+     "q": "Why are rivers fresh while the ocean is salty?",
+     "options": [
+      "Rivers are shallow.",
+      "Rivers are colder.",
+      "Rivers have no minerals.",
+      "Rivers keep sending in salts, but the ocean traps them."
+     ],
+     "answer": 3,
+     "type": "inference",
+     "why": "Rivers carry minerals to the ocean, where the salt stays behind."
+    },
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "why oceans are blue",
+      "how rain forms",
+      "how deep the ocean is",
+      "how the ocean became salty"
+     ],
+     "answer": 3,
+     "type": "main-idea",
+     "why": "It explains where the ocean's salt comes from."
+    }
+   ]
+  },
+  {
+   "id": "p37",
+   "g": 4.7,
+   "title": "Bats in the Dark",
+   "emoji": "🦇",
+   "genre": "info",
+   "text": "Bats are the only mammals that can truly fly, and many of them hunt at night. Yet bats are not blind, and they do not need light to catch a moth in midair. They use a trick called echolocation. As a bat flies, it makes high-pitched squeaks, too high for people to hear. The sound waves travel out, hit an object, and bounce back as echoes. The bat's big ears catch the echoes, and its brain turns them into a picture of the world. By judging how long an echo takes to return, a bat can tell how far away something is. A faster echo means a closer object. A little brown bat can catch hundreds of mosquitoes in an hour, which makes bats helpful neighbors. They gobble up insects that bother people and damage crops. Some bats also pollinate flowers, carrying pollen from plant to plant. Sadly, many kinds of bats are in danger as their homes disappear, so scientists are working to protect them.",
+   "questions": [
+    {
+     "q": "A bat hears an echo return very quickly. What does that tell the bat?",
+     "options": [
+      "The object is a flower.",
+      "The object is close.",
+      "The object is asleep.",
+      "The object is far away."
+     ],
+     "answer": 1,
+     "type": "inference",
+     "why": "The passage says a faster echo means a closer object."
+    },
+    {
+     "q": "Why are bats called helpful neighbors?",
+     "options": [
+      "They eat many insects that bother people and crops.",
+      "They build bridges.",
+      "They make loud music.",
+      "They chase birds away."
+     ],
+     "answer": 0,
+     "type": "cause",
+     "why": "They gobble up insects that bother people and damage crops."
+    },
+    {
+     "q": "In the passage, what does \"pollinate\" mean?",
+     "options": [
+      "to make a squeak",
+      "to carry pollen between plants",
+      "to hunt at night",
+      "to build a nest"
+     ],
+     "answer": 1,
+     "type": "vocab",
+     "why": "The passage says they carry pollen from plant to plant."
+    },
+    {
+     "q": "What is this passage mostly about?",
+     "options": [
+      "how bats use sound and help people",
+      "why bats cannot see",
+      "how people hear high sounds",
+      "where bats build nests"
+     ],
+     "answer": 0,
+     "type": "main-idea",
+     "why": "It explains echolocation and why bats are helpful."
+    }
+   ]
+  },
+  {
+   "id": "p38",
+   "g": 4.8,
+   "title": "June and the Lightning",
+   "emoji": "⚡",
+   "genre": "story",
+   "text": "June loved lightning, but she had never understood it. One stormy afternoon, she watched from her bedroom window as a jagged bolt split the sky. She counted the seconds until the thunder rumbled: one, two, three, four, five. \"Five seconds,\" she muttered. Her uncle, a weather scientist, had once explained that sound travels about one mile in five seconds, so the storm was roughly a mile away. Light, on the other hand, reaches our eyes almost instantly. That is why lightning always seems to arrive before its thunder. June grabbed a notebook and started recording each flash and the count that followed. As the numbers grew smaller, she realized the storm was moving closer. She closed the window, put away her notebook, and moved to the center of the house, away from the glass. The storm roared outside, but June felt calm. Understanding how it worked had turned her fear into curiosity.",
+   "questions": [
+    {
+     "q": "What did June learn when her counts got smaller?",
+     "options": [
+      "The storm was ending.",
+      "The storm was moving closer.",
+      "Lightning was getting dimmer.",
+      "The thunder was broken."
+     ],
+     "answer": 1,
+     "type": "inference",
+     "why": "Smaller counts mean less time between flash and thunder, so the storm was nearer."
+    },
+    {
+     "q": "Why does lightning seem to arrive before thunder?",
+     "options": [
+      "Thunder is quieter.",
+      "Lightning is closer.",
+      "Light travels much faster than sound.",
+      "Sound is blocked by clouds."
+     ],
+     "answer": 2,
+     "type": "cause",
+     "why": "Light reaches our eyes almost instantly, but sound takes longer."
+    },
+    {
+     "q": "In the story, what does \"jagged\" mean?",
+     "options": [
+      "slow moving",
+      "having sharp, uneven points",
+      "very bright",
+      "smooth and round"
+     ],
+     "answer": 1,
+     "type": "vocab",
+     "why": "A jagged bolt splits the sky in sharp zigzags."
+    },
+    {
+     "q": "What is the main idea of the story?",
+     "options": [
+      "Uncles know everything.",
+      "Understanding something can turn fear into curiosity.",
+      "Storms always pass quickly.",
+      "Notebooks keep people safe."
+     ],
+     "answer": 1,
+     "type": "main-idea",
+     "why": "The last sentence says understanding turned her fear into curiosity."
+    }
+   ]
+  }
+ ]
+}

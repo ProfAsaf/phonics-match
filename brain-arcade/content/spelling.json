@@ -1,0 +1,1049 @@
+{
+ "about": "Spelling items for \"Which is spelled right?\" and spell-it. The voice says the word, the sentence, then the word again. misspellings are 3 plausible wrong spellings a child might write (never real words). g runs from 0.8 (digraph and silent-e words) to 4.5 (tricky words).",
+ "words": [
+  {
+   "word": "ship",
+   "g": 0.8,
+   "sentence": "The big ship sailed away.",
+   "misspellings": [ "shep", "shup", "shipp" ]
+  },
+  {
+   "word": "fish",
+   "g": 0.9,
+   "sentence": "A fish swam in the pond.",
+   "misspellings": [ "fich", "fush", "fis" ]
+  },
+  {
+   "word": "cake",
+   "g": 1,
+   "sentence": "We ate a cake at the party.",
+   "misspellings": [ "kake", "caik", "cak" ]
+  },
+  {
+   "word": "bike",
+   "g": 1,
+   "sentence": "I ride my bike to school.",
+   "misspellings": [ "biek", "bik", "byke" ]
+  },
+  {
+   "word": "gift",
+   "g": 1.1,
+   "sentence": "I got a gift for my birthday.",
+   "misspellings": [ "gifft", "gyft", "jift" ]
+  },
+  {
+   "word": "home",
+   "g": 1.1,
+   "sentence": "I go home after school.",
+   "misspellings": [ "hoem", "hom", "homm" ]
+  },
+  {
+   "word": "stop",
+   "g": 1.1,
+   "sentence": "Please stop at the red light.",
+   "misspellings": [ "stap", "stup", "stopp" ]
+  },
+  {
+   "word": "frog",
+   "g": 1.2,
+   "sentence": "The frog sat on a log.",
+   "misspellings": [ "frok", "frogg", "frug" ]
+  },
+  {
+   "word": "black",
+   "g": 1.2,
+   "sentence": "A black cat sat on the step.",
+   "misspellings": [ "blak", "blac", "blacc" ]
+  },
+  {
+   "word": "tree",
+   "g": 1.2,
+   "sentence": "A bird sat in the tree.",
+   "misspellings": [ "tre", "treee", "tere" ]
+  },
+  {
+   "word": "green",
+   "g": 1.2,
+   "sentence": "The grass is green.",
+   "misspellings": [ "gren", "grean", "grene" ]
+  },
+  {
+   "word": "chair",
+   "g": 1.3,
+   "sentence": "Please sit on the chair.",
+   "misspellings": [ "chaer", "chiar", "chaire" ]
+  },
+  {
+   "word": "train",
+   "g": 1.3,
+   "sentence": "The train went down the track.",
+   "misspellings": [ "trane", "trayn", "trian" ]
+  },
+  {
+   "word": "street",
+   "g": 1.3,
+   "sentence": "Look both ways on the street.",
+   "misspellings": [ "stret", "streat", "streit" ]
+  },
+  {
+   "word": "rain",
+   "g": 1.4,
+   "sentence": "The rain fell all day.",
+   "misspellings": [ "rane", "rian", "rayn" ]
+  },
+  {
+   "word": "boat",
+   "g": 1.4,
+   "sentence": "We rode in a small boat.",
+   "misspellings": [ "boet", "boaat", "bowt" ]
+  },
+  {
+   "word": "cheese",
+   "g": 1.4,
+   "sentence": "I like cheese on my pizza.",
+   "misspellings": [ "cheeze", "chese", "cheaze" ]
+  },
+  {
+   "word": "nose",
+   "g": 1.5,
+   "sentence": "My nose is cold.",
+   "misspellings": [ "noze", "nos", "noase" ]
+  },
+  {
+   "word": "smile",
+   "g": 1.5,
+   "sentence": "She gave me a big smile.",
+   "misspellings": [ "smyle", "smil", "smeil" ]
+  },
+  {
+   "word": "snow",
+   "g": 1.5,
+   "sentence": "Snow fell on the hill.",
+   "misspellings": [ "sno", "snoe", "snoo" ]
+  },
+  {
+   "word": "phone",
+   "g": 1.5,
+   "sentence": "The phone is ringing.",
+   "misspellings": [ "fone", "phon", "phoan" ]
+  },
+  {
+   "word": "whale",
+   "g": 1.5,
+   "sentence": "A whale swam by the boat.",
+   "misspellings": [ "whayl", "whael", "wheil" ]
+  },
+  {
+   "word": "night",
+   "g": 1.6,
+   "sentence": "The stars come out at night.",
+   "misspellings": [ "nite", "nigt", "niht" ]
+  },
+  {
+   "word": "light",
+   "g": 1.6,
+   "sentence": "Turn on the light.",
+   "misspellings": [ "lite", "lyt", "ligt" ]
+  },
+  {
+   "word": "spoon",
+   "g": 1.6,
+   "sentence": "Eat your soup with a spoon.",
+   "misspellings": [ "spon", "spune", "spoun" ]
+  },
+  {
+   "word": "snake",
+   "g": 1.6,
+   "sentence": "The snake slid away.",
+   "misspellings": [ "snak", "snaik", "snayk" ]
+  },
+  {
+   "word": "jump",
+   "g": 1.7,
+   "sentence": "I can jump very high.",
+   "misspellings": [ "jup", "jumb", "jomp" ]
+  },
+  {
+   "word": "queen",
+   "g": 1.8,
+   "sentence": "The queen wore a crown.",
+   "misspellings": [ "kween", "queene", "quen" ]
+  },
+  {
+   "word": "bridge",
+   "g": 1.8,
+   "sentence": "We walked over the bridge.",
+   "misspellings": [ "brige", "bridg", "brij" ]
+  },
+  {
+   "word": "brush",
+   "g": 1.8,
+   "sentence": "Please brush your teeth.",
+   "misspellings": [ "brosh", "brussh", "brish" ]
+  },
+  {
+   "word": "flower",
+   "g": 1.8,
+   "sentence": "She picked a flower.",
+   "misspellings": [ "flowr", "flouer", "flowur" ]
+  },
+  {
+   "word": "puppy",
+   "g": 1.8,
+   "sentence": "The puppy barked at me.",
+   "misspellings": [ "pupy", "puppie", "puppee" ]
+  },
+  {
+   "word": "sleep",
+   "g": 1.8,
+   "sentence": "I sleep at night.",
+   "misspellings": [ "sleap", "slepe", "sleeb" ]
+  },
+  {
+   "word": "cloud",
+   "g": 1.9,
+   "sentence": "A white cloud floated by.",
+   "misspellings": [ "clowd", "claud", "clould" ]
+  },
+  {
+   "word": "mouth",
+   "g": 1.9,
+   "sentence": "Open your mouth wide.",
+   "misspellings": [ "mowth", "mouf", "mouht" ]
+  },
+  {
+   "word": "horse",
+   "g": 1.9,
+   "sentence": "The horse ran fast.",
+   "misspellings": [ "hors", "horce", "hawrs" ]
+  },
+  {
+   "word": "beach",
+   "g": 1.9,
+   "sentence": "We played at the beach.",
+   "misspellings": [ "beche", "beetch", "beatch" ]
+  },
+  {
+   "word": "school",
+   "g": 2,
+   "sentence": "We learn at school.",
+   "misspellings": [ "scool", "skool", "shcool" ]
+  },
+  {
+   "word": "friend",
+   "g": 2,
+   "sentence": "She is my best friend.",
+   "misspellings": [ "freind", "frend", "frind" ]
+  },
+  {
+   "word": "water",
+   "g": 2,
+   "sentence": "Please drink some water.",
+   "misspellings": [ "watter", "wauter", "wotor" ]
+  },
+  {
+   "word": "again",
+   "g": 2.1,
+   "sentence": "Let us play it again.",
+   "misspellings": [ "agen", "agane", "agian" ]
+  },
+  {
+   "word": "happy",
+   "g": 2.1,
+   "sentence": "I am happy today.",
+   "misspellings": [ "hapy", "happee", "hapee" ]
+  },
+  {
+   "word": "family",
+   "g": 2.1,
+   "sentence": "My family eats dinner together.",
+   "misspellings": [ "famly", "familly", "famaly" ]
+  },
+  {
+   "word": "money",
+   "g": 2.1,
+   "sentence": "I saved my money.",
+   "misspellings": [ "muny", "monee", "munney" ]
+  },
+  {
+   "word": "pretty",
+   "g": 2.1,
+   "sentence": "The flower is pretty.",
+   "misspellings": [ "prity", "pritty", "pretti" ]
+  },
+  {
+   "word": "because",
+   "g": 2.2,
+   "sentence": "I smiled because I was happy.",
+   "misspellings": [ "becuz", "becawse", "becase" ]
+  },
+  {
+   "word": "people",
+   "g": 2.2,
+   "sentence": "Many people came to the park.",
+   "misspellings": [ "peeple", "peple", "pepol" ]
+  },
+  {
+   "word": "once",
+   "g": 2.2,
+   "sentence": "I went there once.",
+   "misspellings": [ "wunce", "onse", "wonse" ]
+  },
+  {
+   "word": "could",
+   "g": 2.2,
+   "sentence": "I could not find my shoe.",
+   "misspellings": [ "cud", "coud", "cuold" ]
+  },
+  {
+   "word": "earth",
+   "g": 2.2,
+   "sentence": "The earth goes around the sun.",
+   "misspellings": [ "erth", "urth", "earht" ]
+  },
+  {
+   "word": "heard",
+   "g": 2.2,
+   "sentence": "I heard a loud noise.",
+   "misspellings": [ "hurd", "heerd", "heared" ]
+  },
+  {
+   "word": "would",
+   "g": 2.3,
+   "sentence": "I would like some milk.",
+   "misspellings": [ "wud", "woud", "wuold" ]
+  },
+  {
+   "word": "should",
+   "g": 2.3,
+   "sentence": "You should wash your hands.",
+   "misspellings": [ "shud", "shoud", "shuld" ]
+  },
+  {
+   "word": "which",
+   "g": 2.3,
+   "sentence": "Which one do you want?",
+   "misspellings": [ "wich", "whitch", "whih" ]
+  },
+  {
+   "word": "said",
+   "g": 2.3,
+   "sentence": "She said hello to me.",
+   "misspellings": [ "sed", "sayd", "siad" ]
+  },
+  {
+   "word": "every",
+   "g": 2.4,
+   "sentence": "We read every night.",
+   "misspellings": [ "evry", "everey", "evrey" ]
+  },
+  {
+   "word": "where",
+   "g": 2.4,
+   "sentence": "Where is my hat?",
+   "misspellings": [ "whare", "wher", "whaer" ]
+  },
+  {
+   "word": "thought",
+   "g": 2.4,
+   "sentence": "I thought it was late.",
+   "misspellings": [ "thot", "thougt", "thawt" ]
+  },
+  {
+   "word": "country",
+   "g": 2.4,
+   "sentence": "We drove across the country.",
+   "misspellings": [ "countrey", "countre", "countri" ]
+  },
+  {
+   "word": "through",
+   "g": 2.5,
+   "sentence": "We walked through the gate.",
+   "misspellings": [ "thru", "throu", "throogh" ]
+  },
+  {
+   "word": "enough",
+   "g": 2.5,
+   "sentence": "We have enough food.",
+   "misspellings": [ "enuff", "enuf", "inough" ]
+  },
+  {
+   "word": "laugh",
+   "g": 2.5,
+   "sentence": "Jokes make me laugh.",
+   "misspellings": [ "laff", "lagh", "larf" ]
+  },
+  {
+   "word": "favorite",
+   "g": 2.5,
+   "sentence": "Blue is my favorite color.",
+   "misspellings": [ "favrit", "favorit", "faverite" ]
+  },
+  {
+   "word": "brought",
+   "g": 2.6,
+   "sentence": "He brought his book.",
+   "misspellings": [ "brot", "brougt", "braught" ]
+  },
+  {
+   "word": "beautiful",
+   "g": 2.6,
+   "sentence": "The garden looks beautiful.",
+   "misspellings": [ "beutiful", "butiful", "beautifull" ]
+  },
+  {
+   "word": "important",
+   "g": 2.6,
+   "sentence": "It is important to be kind.",
+   "misspellings": [ "importent", "importint", "imortant" ]
+  },
+  {
+   "word": "different",
+   "g": 2.6,
+   "sentence": "The twins look different.",
+   "misspellings": [ "diffrent", "diferent", "differant" ]
+  },
+  {
+   "word": "animal",
+   "g": 2.6,
+   "sentence": "A lion is a big animal.",
+   "misspellings": [ "animul", "anamal", "aminal" ]
+  },
+  {
+   "word": "busy",
+   "g": 2.7,
+   "sentence": "Mom is busy today.",
+   "misspellings": [ "bizzy", "bisy", "busey" ]
+  },
+  {
+   "word": "morning",
+   "g": 2.7,
+   "sentence": "I wake up in the morning.",
+   "misspellings": [ "mornin", "morming", "mowning" ]
+  },
+  {
+   "word": "running",
+   "g": 2.7,
+   "sentence": "The dog is running fast.",
+   "misspellings": [ "runing", "runnin", "runnning" ]
+  },
+  {
+   "word": "swimming",
+   "g": 2.8,
+   "sentence": "We are swimming in the lake.",
+   "misspellings": [ "swiming", "swimmin", "swimimg" ]
+  },
+  {
+   "word": "cried",
+   "g": 2.8,
+   "sentence": "The baby cried all night.",
+   "misspellings": [ "cryed", "cride", "cryd" ]
+  },
+  {
+   "word": "babies",
+   "g": 2.8,
+   "sentence": "The babies are sleeping.",
+   "misspellings": [ "babys", "babeis", "babbies" ]
+  },
+  {
+   "word": "knife",
+   "g": 2.8,
+   "sentence": "Use a knife to cut the bread.",
+   "misspellings": [ "nife", "knif", "nyfe" ]
+  },
+  {
+   "word": "wrong",
+   "g": 2.8,
+   "sentence": "That answer is wrong.",
+   "misspellings": [ "rong", "wrng", "wrongg" ]
+  },
+  {
+   "word": "write",
+   "g": 2.8,
+   "sentence": "Please write your name.",
+   "misspellings": [ "wryte", "wirte", "wrigt" ]
+  },
+  {
+   "word": "knock",
+   "g": 2.9,
+   "sentence": "Please knock on the door.",
+   "misspellings": [ "knok", "knoc", "kock" ]
+  },
+  {
+   "word": "climb",
+   "g": 2.9,
+   "sentence": "Let us climb the hill.",
+   "misspellings": [ "clim", "cliim", "clyme" ]
+  },
+  {
+   "word": "giant",
+   "g": 2.9,
+   "sentence": "The giant was very tall.",
+   "misspellings": [ "jiant", "gient", "gyant" ]
+  },
+  {
+   "word": "orange",
+   "g": 2.9,
+   "sentence": "I ate an orange.",
+   "misspellings": [ "orainge", "orenge", "oringe" ]
+  },
+  {
+   "word": "city",
+   "g": 3,
+   "sentence": "We drove to the city.",
+   "misspellings": [ "citty", "sity", "citi" ]
+  },
+  {
+   "word": "circle",
+   "g": 3,
+   "sentence": "Please draw a circle.",
+   "misspellings": [ "sircle", "circel", "cirkle" ]
+  },
+  {
+   "word": "pencil",
+   "g": 3,
+   "sentence": "I write with a pencil.",
+   "misspellings": [ "pensil", "pencel", "pensel" ]
+  },
+  {
+   "word": "kitchen",
+   "g": 3,
+   "sentence": "Mom is in the kitchen.",
+   "misspellings": [ "kichen", "kitchin", "kitchun" ]
+  },
+  {
+   "word": "catch",
+   "g": 3,
+   "sentence": "Can you catch the ball?",
+   "misspellings": [ "cach", "catsh", "catche" ]
+  },
+  {
+   "word": "watch",
+   "g": 3,
+   "sentence": "Please watch the baby.",
+   "misspellings": [ "wach", "wotch", "whatch" ]
+  },
+  {
+   "word": "gentle",
+   "g": 3,
+   "sentence": "Be gentle with the cat.",
+   "misspellings": [ "jentle", "gentel", "gental" ]
+  },
+  {
+   "word": "judge",
+   "g": 3.1,
+   "sentence": "The judge listened closely.",
+   "misspellings": [ "juge", "judg", "jugde" ]
+  },
+  {
+   "word": "table",
+   "g": 3.1,
+   "sentence": "Put it on the table.",
+   "misspellings": [ "tabel", "tabul", "taybul" ]
+  },
+  {
+   "word": "little",
+   "g": 3.1,
+   "sentence": "A little bird sang.",
+   "misspellings": [ "littel", "litle", "litul" ]
+  },
+  {
+   "word": "puzzle",
+   "g": 3.1,
+   "sentence": "We finished the puzzle.",
+   "misspellings": [ "puzle", "puzzel", "pusle" ]
+  },
+  {
+   "word": "purple",
+   "g": 3.1,
+   "sentence": "I like the purple crayon.",
+   "misspellings": [ "purpel", "perple", "purpal" ]
+  },
+  {
+   "word": "bubble",
+   "g": 3.1,
+   "sentence": "I blew a big bubble.",
+   "misspellings": [ "bubbel", "bubel", "bubbul" ]
+  },
+  {
+   "word": "eagle",
+   "g": 3.2,
+   "sentence": "An eagle flew over us.",
+   "misspellings": [ "eagel", "egle", "eagul" ]
+  },
+  {
+   "word": "careful",
+   "g": 3.2,
+   "sentence": "Be careful on the stairs.",
+   "misspellings": [ "carful", "carefull", "carefal" ]
+  },
+  {
+   "word": "helpful",
+   "g": 3.2,
+   "sentence": "She is very helpful.",
+   "misspellings": [ "helpfull", "helpfal", "helpul" ]
+  },
+  {
+   "word": "quickly",
+   "g": 3.2,
+   "sentence": "He ran quickly home.",
+   "misspellings": [ "quikly", "quickley", "quicly" ]
+  },
+  {
+   "word": "slowly",
+   "g": 3.2,
+   "sentence": "The turtle moved slowly.",
+   "misspellings": [ "slowley", "slowy", "slolly" ]
+  },
+  {
+   "word": "kindness",
+   "g": 3.2,
+   "sentence": "Kindness makes friends.",
+   "misspellings": [ "kindnes", "kindeness", "kinness" ]
+  },
+  {
+   "word": "candle",
+   "g": 3.2,
+   "sentence": "Please light the candle.",
+   "misspellings": [ "candel", "candul", "kandle" ]
+  },
+  {
+   "word": "hurried",
+   "g": 3.3,
+   "sentence": "She hurried to the bus.",
+   "misspellings": [ "hurryed", "hurred", "hurreid" ]
+  },
+  {
+   "word": "stories",
+   "g": 3.3,
+   "sentence": "I love funny stories.",
+   "misspellings": [ "storys", "storeis", "storris" ]
+  },
+  {
+   "word": "families",
+   "g": 3.3,
+   "sentence": "Many families came to the picnic.",
+   "misspellings": [ "familys", "famileis", "famalies" ]
+  },
+  {
+   "word": "carried",
+   "g": 3.3,
+   "sentence": "He carried the box.",
+   "misspellings": [ "carryed", "carred", "carreid" ]
+  },
+  {
+   "word": "studied",
+   "g": 3.3,
+   "sentence": "She studied for the test.",
+   "misspellings": [ "studyed", "studdied", "studeid" ]
+  },
+  {
+   "word": "hoping",
+   "g": 3.3,
+   "sentence": "I am hoping for sun.",
+   "misspellings": [ "hopeing", "hopin", "hoaping" ]
+  },
+  {
+   "word": "thirsty",
+   "g": 3.3,
+   "sentence": "I am thirsty after the race.",
+   "misspellings": [ "thursty", "thirtsy", "thirsti" ]
+  },
+  {
+   "word": "making",
+   "g": 3.4,
+   "sentence": "We are making a cake.",
+   "misspellings": [ "makeing", "makin", "maiking" ]
+  },
+  {
+   "word": "writing",
+   "g": 3.4,
+   "sentence": "He is writing a story.",
+   "misspellings": [ "writeing", "writting", "wrighting" ]
+  },
+  {
+   "word": "field",
+   "g": 3.4,
+   "sentence": "The cows are in the field.",
+   "misspellings": [ "feild", "feeld", "fild" ]
+  },
+  {
+   "word": "piece",
+   "g": 3.4,
+   "sentence": "I want one piece of pie.",
+   "misspellings": [ "peice", "peece", "pece" ]
+  },
+  {
+   "word": "believe",
+   "g": 3.4,
+   "sentence": "I believe you.",
+   "misspellings": [ "beleive", "belive", "beleve" ]
+  },
+  {
+   "word": "neighbor",
+   "g": 3.5,
+   "sentence": "Our neighbor has a dog.",
+   "misspellings": [ "nabor", "neighbur", "naybor" ]
+  },
+  {
+   "word": "answer",
+   "g": 3.5,
+   "sentence": "Please answer the question.",
+   "misspellings": [ "anser", "ansur", "ansewr" ]
+  },
+  {
+   "word": "island",
+   "g": 3.5,
+   "sentence": "We sailed to an island.",
+   "misspellings": [ "iland", "ilend", "islund" ]
+  },
+  {
+   "word": "listen",
+   "g": 3.5,
+   "sentence": "Please listen to me.",
+   "misspellings": [ "lisen", "lissen", "listin" ]
+  },
+  {
+   "word": "special",
+   "g": 3.5,
+   "sentence": "Today is a special day.",
+   "misspellings": [ "speshal", "specal", "spesial" ]
+  },
+  {
+   "word": "whole",
+   "g": 3.5,
+   "sentence": "I ate the whole apple.",
+   "misspellings": [ "whol", "wohle", "whoel" ]
+  },
+  {
+   "word": "minute",
+   "g": 3.6,
+   "sentence": "Please wait one minute.",
+   "misspellings": [ "minit", "minnit", "minut" ]
+  },
+  {
+   "word": "mountain",
+   "g": 3.6,
+   "sentence": "We climbed the mountain.",
+   "misspellings": [ "mountin", "mountan", "mounten" ]
+  },
+  {
+   "word": "library",
+   "g": 3.6,
+   "sentence": "We read books at the library.",
+   "misspellings": [ "libary", "liberry", "libarry" ]
+  },
+  {
+   "word": "caught",
+   "g": 3.6,
+   "sentence": "She caught the ball.",
+   "misspellings": [ "cought", "cawt", "caut" ]
+  },
+  {
+   "word": "straight",
+   "g": 3.6,
+   "sentence": "Draw a straight line.",
+   "misspellings": [ "stright", "strayt", "straigth" ]
+  },
+  {
+   "word": "decision",
+   "g": 3.7,
+   "sentence": "Making a decision is hard.",
+   "misspellings": [ "decishun", "decison", "desicion" ]
+  },
+  {
+   "word": "vacation",
+   "g": 3.7,
+   "sentence": "We went on vacation.",
+   "misspellings": [ "vacashun", "vacasion", "vacattion" ]
+  },
+  {
+   "word": "station",
+   "g": 3.7,
+   "sentence": "The train left the station.",
+   "misspellings": [ "stashun", "staion", "statoin" ]
+  },
+  {
+   "word": "direction",
+   "g": 3.7,
+   "sentence": "Which direction did he go?",
+   "misspellings": [ "direcshun", "directon", "derection" ]
+  },
+  {
+   "word": "invitation",
+   "g": 3.7,
+   "sentence": "I got an invitation.",
+   "misspellings": [ "invitashun", "invitaton", "invatation" ]
+  },
+  {
+   "word": "question",
+   "g": 3.7,
+   "sentence": "I have a question.",
+   "misspellings": [ "questun", "quesion", "qeustion" ]
+  },
+  {
+   "word": "adventure",
+   "g": 3.7,
+   "sentence": "The trip was an adventure.",
+   "misspellings": [ "advencher", "adventur", "adveture" ]
+  },
+  {
+   "word": "describe",
+   "g": 3.8,
+   "sentence": "Please describe your pet.",
+   "misspellings": [ "discribe", "desribe", "descibe" ]
+  },
+  {
+   "word": "although",
+   "g": 3.8,
+   "sentence": "I went although it rained.",
+   "misspellings": [ "allthough", "althogh", "althou" ]
+  },
+  {
+   "word": "enormous",
+   "g": 3.8,
+   "sentence": "An elephant is enormous.",
+   "misspellings": [ "enormus", "enormuos", "enomous" ]
+  },
+  {
+   "word": "certain",
+   "g": 3.8,
+   "sentence": "I am certain it is right.",
+   "misspellings": [ "certin", "sertain", "certian" ]
+  },
+  {
+   "word": "separate",
+   "g": 3.8,
+   "sentence": "Put them in separate piles.",
+   "misspellings": [ "seperate", "separat", "sepirate" ]
+  },
+  {
+   "word": "shoulder",
+   "g": 3.8,
+   "sentence": "My shoulder hurts.",
+   "misspellings": [ "sholder", "shoulter", "shoalder" ]
+  },
+  {
+   "word": "weight",
+   "g": 3.8,
+   "sentence": "The heavy box has a lot of weight.",
+   "misspellings": [ "wieght", "weigt", "wayght" ]
+  },
+  {
+   "word": "strength",
+   "g": 3.9,
+   "sentence": "He has great strength.",
+   "misspellings": [ "strenth", "strengh", "strenght" ]
+  },
+  {
+   "word": "laughter",
+   "g": 3.9,
+   "sentence": "I heard laughter.",
+   "misspellings": [ "laufter", "laughtor", "lafter" ]
+  },
+  {
+   "word": "nature",
+   "g": 3.9,
+   "sentence": "We went for a walk to enjoy nature.",
+   "misspellings": [ "nacher", "natur", "naycher" ]
+  },
+  {
+   "word": "pleasure",
+   "g": 3.9,
+   "sentence": "It was a pleasure to meet you.",
+   "misspellings": [ "plesure", "pleasur", "pleazure" ]
+  },
+  {
+   "word": "treasure",
+   "g": 3.9,
+   "sentence": "The pirates hid treasure.",
+   "misspellings": [ "tresure", "treasur", "trezure" ]
+  },
+  {
+   "word": "usually",
+   "g": 3.9,
+   "sentence": "We usually eat at six.",
+   "misspellings": [ "usualy", "usally", "usully" ]
+  },
+  {
+   "word": "probably",
+   "g": 3.9,
+   "sentence": "It will probably rain.",
+   "misspellings": [ "probly", "probaly", "probablly" ]
+  },
+  {
+   "word": "surprise",
+   "g": 3.9,
+   "sentence": "What a surprise!",
+   "misspellings": [ "suprise", "suprize", "sirprise" ]
+  },
+  {
+   "word": "exercise",
+   "g": 4,
+   "sentence": "I exercise every day.",
+   "misspellings": [ "excercise", "exersize", "exercize" ]
+  },
+  {
+   "word": "delicious",
+   "g": 4,
+   "sentence": "The pie is delicious.",
+   "misspellings": [ "delishus", "delicous", "deliscious" ]
+  },
+  {
+   "word": "realize",
+   "g": 4,
+   "sentence": "I realize I was wrong.",
+   "misspellings": [ "relize", "realyze", "realiz" ]
+  },
+  {
+   "word": "knowledge",
+   "g": 4,
+   "sentence": "Books give us knowledge.",
+   "misspellings": [ "nolege", "knowlege", "knowlidge" ]
+  },
+  {
+   "word": "curious",
+   "g": 4,
+   "sentence": "The cat is curious.",
+   "misspellings": [ "curius", "curios", "kurious" ]
+  },
+  {
+   "word": "cereal",
+   "g": 4,
+   "sentence": "I eat cereal for breakfast.",
+   "misspellings": [ "cerial", "ceareal", "sereal" ]
+  },
+  {
+   "word": "business",
+   "g": 4.1,
+   "sentence": "She runs a small business.",
+   "misspellings": [ "bisness", "buisness", "busness" ]
+  },
+  {
+   "word": "dangerous",
+   "g": 4.1,
+   "sentence": "Ice can be dangerous.",
+   "misspellings": [ "dangerus", "dangeros", "danjerous" ]
+  },
+  {
+   "word": "especially",
+   "g": 4.1,
+   "sentence": "I love dogs, especially puppies.",
+   "misspellings": [ "especally", "expecially", "espesially" ]
+  },
+  {
+   "word": "museum",
+   "g": 4.1,
+   "sentence": "We visited the museum.",
+   "misspellings": [ "musuem", "mewseum", "musium" ]
+  },
+  {
+   "word": "receive",
+   "g": 4.1,
+   "sentence": "I will receive a gift.",
+   "misspellings": [ "recieve", "receve", "riceive" ]
+  },
+  {
+   "word": "disappear",
+   "g": 4.1,
+   "sentence": "The magician made it disappear.",
+   "misspellings": [ "dissapear", "disapear", "disappeer" ]
+  },
+  {
+   "word": "character",
+   "g": 4.2,
+   "sentence": "She is my favorite character.",
+   "misspellings": [ "karacter", "charactor", "charecter" ]
+  },
+  {
+   "word": "temperature",
+   "g": 4.2,
+   "sentence": "The temperature is cold.",
+   "misspellings": [ "temprature", "temperture", "tempature" ]
+  },
+  {
+   "word": "beginning",
+   "g": 4.2,
+   "sentence": "At the beginning we sang.",
+   "misspellings": [ "begining", "beginnig", "beggining" ]
+  },
+  {
+   "word": "environment",
+   "g": 4.2,
+   "sentence": "Protect the environment.",
+   "misspellings": [ "enviroment", "envirnment", "enviornment" ]
+  },
+  {
+   "word": "immediately",
+   "g": 4.2,
+   "sentence": "Come here immediately.",
+   "misspellings": [ "imediately", "immediatly", "immedietly" ]
+  },
+  {
+   "word": "interrupt",
+   "g": 4.2,
+   "sentence": "Do not interrupt me.",
+   "misspellings": [ "interupt", "interrput", "intrupt" ]
+  },
+  {
+   "word": "sandwich",
+   "g": 4.2,
+   "sentence": "I ate a sandwich.",
+   "misspellings": [ "sandwhich", "sanwich", "sandwitch" ]
+  },
+  {
+   "word": "definitely",
+   "g": 4.3,
+   "sentence": "I will definitely come.",
+   "misspellings": [ "definately", "definitly", "defanitely" ]
+  },
+  {
+   "word": "necessary",
+   "g": 4.3,
+   "sentence": "It is necessary to rest.",
+   "misspellings": [ "neccessary", "necesary", "necessery" ]
+  },
+  {
+   "word": "vegetable",
+   "g": 4.3,
+   "sentence": "Broccoli is a healthy vegetable.",
+   "misspellings": [ "vegtable", "vegetible", "vejetable" ]
+  },
+  {
+   "word": "independent",
+   "g": 4.3,
+   "sentence": "She is very independent.",
+   "misspellings": [ "independant", "indepenent", "independint" ]
+  },
+  {
+   "word": "embarrass",
+   "g": 4.4,
+   "sentence": "Do not embarrass me.",
+   "misspellings": [ "embarass", "embarras", "embarrase" ]
+  },
+  {
+   "word": "convenient",
+   "g": 4.4,
+   "sentence": "The store is close, so it is convenient.",
+   "misspellings": [ "conveniant", "convienent", "convinient" ]
+  },
+  {
+   "word": "occasion",
+   "g": 4.4,
+   "sentence": "It was a special occasion.",
+   "misspellings": [ "ocassion", "occassion", "occasian" ]
+  },
+  {
+   "word": "rhythm",
+   "g": 4.5,
+   "sentence": "The drum keeps the rhythm.",
+   "misspellings": [ "rythm", "rhythem", "rythym" ]
+  },
+  {
+   "word": "privilege",
+   "g": 4.5,
+   "sentence": "It is a privilege to help.",
+   "misspellings": [ "priviledge", "privelege", "privilige" ]
+  }
+ ]
+}
