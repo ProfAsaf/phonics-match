@@ -21,7 +21,7 @@ export function optionInner(o) {
 // Shrink answer text until it fits inside its balloon / token / plate / orb.
 export function fitLabels(root) {
   for (const lab of root.querySelectorAll('.o-label')) {
-    const box = lab.closest('.b-body, .tok, .dish, .orb-in') || lab.parentElement;
+    const box = lab.closest('.b-body, .ct-in, .dish, .orb-in') || lab.parentElement;
     const max = box.clientWidth * 0.84;
     if (!max) continue;
     let fs = parseFloat(getComputedStyle(lab).fontSize);

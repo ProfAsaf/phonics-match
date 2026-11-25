@@ -226,8 +226,8 @@ function editPlayer(player) {
   $$('.col-pick', f).forEach((b) => b.addEventListener('click', () => { $$('.col-pick', f).forEach((x) => x.classList.remove('on')); b.classList.add('on'); }));
   $$('.st-chip', f).forEach((b) => b.addEventListener('click', () => { const on = b.classList.contains('on'); $$(`.st-chip[data-m="${b.dataset.m}"]`, f).forEach((x) => x.classList.remove('on')); if (!on) b.classList.add('on'); }));
   $('.restart', f)?.addEventListener('click', async () => {
-    if (!(await confirmBox(`Start ${p.name} over? This erases their answers, levels, history, stars and stickers. School scores and settings stay.`, { ok: 'Start over', danger: true }))) return;
-    for (const k of ['subjects', 'skills', 'history', 'log', 'days', 'seen', 'fluency', 'lastSubject', 'greeted']) delete player[k];
+    if (!(await confirmBox(`Start ${p.name} over? This erases their answers, levels, history, stars, stickers and chess games. School scores and settings stay.`, { ok: 'Start over', danger: true }))) return;
+    for (const k of ['subjects', 'skills', 'history', 'log', 'days', 'seen', 'fluency', 'lastSubject', 'greeted', 'chess']) delete player[k];
     player.stars = 0;
     player.stickers = [];
     E.reseed(player);

@@ -11,8 +11,8 @@ import { sfx, setSfx, unlockAudio } from './sfx.js';
 import { $, $$, esc, wait, holdToOpen, burst } from './ui.js';
 import { STICKER_PAGES } from './stickers.js';
 import { openParent } from './parent.js';
-
-
+import { pieceSVG } from './chess-pieces.js';
+import { WHITE, KNIGHT } from './chess.js';
 
 const root = document.getElementById('app');
 let unlocked = false;
@@ -26,7 +26,7 @@ document.addEventListener('pointerdown', unlock, { capture: true });
 
 const GAME_ART = {
   balloons: '<span class="gt-emoji">🎈</span>',
-  knight: '<span class="gt-chess">♞</span>',
+  chess: `<span class="gt-piece">${pieceSVG(WHITE | KNIGHT)}</span>`,
   monster: `<span class="gt-monster" style="--mc:#7bd389;--mc2:#ffd166">${MONSTER_SVG}</span>`,
   rocket: '<span class="gt-emoji">🚀</span>',
 };
@@ -119,12 +119,13 @@ async function startGame(player, game, subject) {
 }
 
 function placementIntro(player, subject) {
+  const { of } = E.placementRounds(player, subject);
   return new Promise((resolve) => {
     root.innerHTML = `<div class="screen intro" style="--c:${player.color}">
       <div class="intro-card"><div class="big">🧭</div><h2>Let's find your ${subject} level!</h2>
-      <p>Some questions will be easy and some will be tricky. That's on purpose! Just do your best. If you don't know, tap <b>🤔 Not sure</b>.</p>
+      <p>It takes ${of} short rounds. Some questions will be easy and some will be tricky. That's on purpose! Just do your best. If you don't know, tap <b>🤔 Not sure</b>.</p>
       <button class="btn primary big go">Start</button><button class="link back">Not now</button></div></div>`;
-    speak(`Let's find your ${subject} level! Some questions will be easy, and some will be tricky. That's on purpose. Just do your best. If you don't know, tap not sure.`);
+    speak(`Let's find your ${subject} level! It takes ${of} short rounds. Some questions will be easy, and some will be tricky. That's on purpose. Just do your best. If you don't know, tap not sure.`);
     $('.go', root).addEventListener('click', () => { stopSpeech(); resolve(true); });
     $('.back', root).addEventListener('click', () => { stopSpeech(); resolve(false); });
   });
@@ -134,8 +135,10 @@ async function showResults(player, res) {
   const pl = res.placement;
   const doneCheck = res.finishedPlacement;
   const moreCheck = pl && !doneCheck;
+  const lc = E.placementRounds(player, res.subject);
+  const left = Math.max(1, lc.of - lc.done);
   const title = doneCheck ? 'Level check done!' : moreCheck ? 'Great work!' : res.correct >= res.total * 0.8 ? 'Amazing!' : 'Great playing!';
-  const line = doneCheck ? 'Now your games will be just right for you.' : moreCheck ? 'A little more to find your level. Keep going!' : `You got ${res.correct} of ${res.total}.`;
+  const line = doneCheck ? 'Now your games will be just right for you.' : moreCheck ? `${left === 1 ? 'One more round' : `${left} more rounds`} to find your level. Keep going!` : `You got ${res.correct} of ${res.total}.`;
   root.innerHTML = `<div class="screen results" style="--c:${player.color}">
     <div class="res-card"><div class="res-stars">${'⭐'.repeat(Math.min(res.stars, 12))}</div>
     <h2>${title}</h2><p>${line}</p>
@@ -169,6 +172,7 @@ function showStickers(player) {
 
 async function boot() {
   store.load();
+  if (window.__BA_TEST) window.__BA_TEST.store = store; // the UI test reads and sets saved games
   configureSpeech(store.settings);
   setSfx(store.settings.sfx);
   root.innerHTML = '<div class="screen loading"><h1 class="logo">Brain <span>Arcade</span></h1><p>Loading…</p></div>';

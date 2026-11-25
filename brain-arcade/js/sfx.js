@@ -51,5 +51,8 @@ export const sfx = {
   chomp: () => { noise(0.07, { vol: 0.3, hp: 300 }); noise(0.07, { vol: 0.3, hp: 300, at: 0.16 }); tone(140, 0.12, { type: 'square', vol: 0.05 }); },
   jump: () => tone(330, 0.25, { type: 'triangle', vol: 0.12, slide: 2.2 }),
   boost: () => { noise(0.5, { vol: 0.15, hp: 200 }); tone(110, 0.5, { type: 'sawtooth', vol: 0.04, slide: 2 }); },
+  move: () => { noise(0.05, { vol: 0.28, hp: 1500 }); tone(196, 0.06, { type: 'triangle', vol: 0.1 }); },
+  capture: () => { noise(0.1, { vol: 0.4, hp: 700 }); tone(392, 0.1, { type: 'triangle', vol: 0.1, slide: 0.5 }); },
+  check: () => { tone(880, 0.1, { type: 'square', vol: 0.05 }); tone(698, 0.16, { type: 'square', vol: 0.05, at: 0.11 }); },
   win: () => { [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, 0.22, { vol: 0.12, at: i * 0.11 })); },
 };

@@ -1,8 +1,10 @@
-// The four game "skins". Each draws the answers as part of its world and celebrates right
-// answers its own way; the play screen does everything else. Long answers (sentences) are shown
-// as cards by the play screen, and the skin just plays its reward.
+// The game "skins". Balloons, Monster and Rocket draw the answers as part of their world and
+// celebrate right answers their own way; the play screen does everything else. Long answers
+// (sentences) are shown as cards by the play screen, and the skin just plays its reward.
+// Chess (chess-ui.js) is a real game of chess: each right answer earns a move.
 import { sfx } from './sfx.js';
 import { optionInner, maxLabel, wait, burst, centerIn, fitLabels } from './ui.js';
+import { ChessGame } from './chess-ui.js';
 
 const COLORS = ['#ff6b6b', '#4dabf7', '#ffa94d', '#51cf66', '#9775fa', '#f783ac', '#f7c531', '#20c997'];
 
@@ -86,122 +88,6 @@ class Balloons extends Skin {
     }
     await wait(1800);
   }
-}
-
-// ------------------------------------------------------------------ Knight Quest (chess)
-const N = 6;
-const KMOVES = [[1, 2], [2, 1], [-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1]];
-class Knight extends Skin {
-  maxWord = 5;
-  start() {
-    this.stage.innerHTML = `<div class="scene chess"><div class="board-wrap"><div class="board"></div></div><div class="tray"></div><div class="fx"></div></div>`;
-    this.board = this.stage.querySelector('.board');
-    this.tray = this.stage.querySelector('.tray');
-    this.fx = this.stage.querySelector('.fx');
-    let sq = '';
-    for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) sq += `<div class="sq ${(r + c) % 2 ? 'dark' : 'light'}" style="grid-row:${r + 1};grid-column:${c + 1}"></div>`;
-    this.board.innerHTML = sq + '<div class="piece knight">♞</div>';
-    this.knightEl = this.board.querySelector('.knight');
-    this.pos = [2, 2];
-    this.pawns = new Set();
-    this.place(this.knightEl, this.pos);
-    this.fitBoard();
-    this.ro = new ResizeObserver(() => this.fitBoard());
-    this.ro.observe(this.stage);
-  }
-  fitBoard() {
-    const r = this.stage.getBoundingClientRect();
-    const s = Math.max(180, Math.min(r.width - 16, r.height - 64));
-    this.board.style.width = this.board.style.height = s + 'px';
-  }
-  place(el, [r, c]) { el.style.left = (c / N) * 100 + '%'; el.style.top = (r / N) * 100 + '%'; }
-  legal([r, c]) { return KMOVES.map(([dr, dc]) => [r + dr, c + dc]).filter(([a, b]) => a >= 0 && b >= 0 && a < N && b < N); }
-  addPawn([r, c]) {
-    const k = r * N + c;
-    if (this.pawns.has(k)) return;
-    const p = document.createElement('div');
-    p.className = 'piece pawn';
-    p.textContent = '♟';
-    p.dataset.k = k;
-    this.place(p, [r, c]);
-    this.board.appendChild(p);
-    this.pawns.add(k);
-  }
-  async ensureMoves(n) {
-    if (this.legal(this.pos).length >= n) return;
-    const all = [];
-    for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) if (this.legal([r, c]).length >= Math.max(n, 4)) all.push([r, c]);
-    all.sort((a, b) => Math.hypot(a[0] - this.pos[0], a[1] - this.pos[1]) - Math.hypot(b[0] - this.pos[0], b[1] - this.pos[1]));
-    this.pos = all[0];
-    this.place(this.knightEl, this.pos);
-    await wait(350);
-  }
-  async show(item) {
-    this.clear();
-    const n = item.options.length;
-    await this.ensureMoves(n);
-    const moves = this.legal(this.pos).sort(() => Math.random() - 0.5).slice(0, n);
-    this.targets = moves;
-    item.options.forEach((o, i) => {
-      this.addPawn(moves[i]);
-      const t = document.createElement('button');
-      t.className = 'token';
-      t.style.setProperty('--c', COLORS[(i + this.round) % COLORS.length]);
-      this.place(t, moves[i]);
-      t.innerHTML = `<span class="tok">${optionInner(o)}</span>`;
-      this.bind(t, i);
-      this.board.appendChild(t);
-      this.els.push(t);
-    });
-    this.round++;
-    fitLabels(this.stage);
-  }
-  async hop(to) {
-    sfx.jump();
-    this.knightEl.classList.remove('hop'); void this.knightEl.offsetWidth; this.knightEl.classList.add('hop');
-    this.place(this.knightEl, to);
-    this.pos = to;
-    await wait(420);
-    const k = to[0] * N + to[1];
-    const pawn = this.board.querySelector(`.pawn[data-k="${k}"]`);
-    if (pawn) {
-      sfx.pop();
-      const c = centerIn(pawn, this.fx);
-      burst(this.fx, c.x, c.y, { n: 10, chars: ['✨', '⭐'] });
-      pawn.remove();
-      this.pawns.delete(k);
-      const cap = document.createElement('span');
-      cap.textContent = '♟';
-      this.tray.appendChild(cap);
-    }
-  }
-  async markRight(i) {
-    const to = this.targets[i];
-    this.els.forEach((e, j) => { if (j !== i) e.classList.add('fade'); });
-    this.els[i].classList.add('picked');
-    await wait(120);
-    this.clear();
-    await this.hop(to);
-  }
-  async neutral(i) { await this.markRight(i); }
-  async reward() {
-    const m = this.legal(this.pos);
-    const to = m[Math.floor(Math.random() * m.length)];
-    this.addPawn(to);
-    await wait(150);
-    await this.hop(to);
-  }
-  async finish() {
-    sfx.win();
-    const k = document.createElement('div');
-    k.className = 'checkmate';
-    k.innerHTML = '<span class="king">♚</span><b>Checkmate!</b>';
-    this.stage.querySelector('.scene').appendChild(k);
-    const r = this.fx.getBoundingClientRect();
-    burst(this.fx, r.width / 2, r.height / 2, { n: 24, spread: 180 });
-    await wait(1800);
-  }
-  destroy() { this.ro?.disconnect(); super.destroy(); }
 }
 
 // ------------------------------------------------------------------ Monster Munch
@@ -368,7 +254,7 @@ class Rocket extends Skin {
 
 export const GAMES = {
   balloons: { name: 'Balloon Pop', icon: '🎈', make: (stage, o) => new Balloons(stage, o) },
-  knight: { name: 'Knight Quest', icon: '♞', make: (stage, o) => new Knight(stage, o) },
+  chess: { name: 'Chess', icon: '♞', make: (stage, o) => new ChessGame(stage, o) },
   monster: { name: 'Monster Munch', icon: '🍪', make: (stage, o) => new Monster(stage, o) },
   rocket: { name: 'Rocket Ride', icon: '🚀', make: (stage, o) => new Rocket(stage, o) },
 };

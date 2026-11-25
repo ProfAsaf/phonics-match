@@ -127,6 +127,12 @@ export function placementProgress(player, subject) {
   const sub = ensureSubject(player, subject);
   return { n: sub.placement.n, max: PLACEMENT_MAX(player) };
 }
+// The level check comes in rounds of 10: 3 rounds from 1st grade up, 2 for Pre-K and K.
+export function placementRounds(player, subject) {
+  const { n, max } = placementProgress(player, subject);
+  const of = Math.ceil(max / 10);
+  return { done: Math.min(of, Math.floor(n / 10)), of };
+}
 
 // Before a strand's first placement question, borrow what the other strands already show.
 function borrowPrior(player, subject, strandId) {

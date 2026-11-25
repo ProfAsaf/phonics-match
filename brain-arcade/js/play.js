@@ -33,6 +33,7 @@ function autoSay(item, player) {
 export async function runRound(root, { player, subject, game, placement = null, onExit, onDone }) {
   const settings = store.settings;
   const sess = E.newSession(player, subject, { settings: { ...settings, focus: { [player.id]: player.settings?.focus || {} } }, placement });
+  const lc = E.placementRounds(player, subject);
   root.innerHTML = `
   <div class="play g-${game}${sess.placement ? ' placing' : ''}">
     <header class="hud">
@@ -40,34 +41,36 @@ export async function runRound(root, { player, subject, game, placement = null, 
       <div class="dots"></div>
       <div class="hud-stars"><span>⭐</span><b>${player.stars || 0}</b></div>
     </header>
-    <section class="qpanel">
-      ${sess.placement ? '<div class="ribbon">Level check · just do your best</div>' : ''}
-      <div class="passage hidden"></div>
-      <div class="qtop"><button class="speak" aria-label="Read it to me">🔊</button><div class="prompt"></div></div>
-      <div class="context hidden"></div>
-      <div class="visual"></div>
-      <div class="qtools"><button class="notsure">🤔 Not sure</button></div>
-    </section>
+    <div class="qwrap">
+      <section class="qpanel">
+        ${sess.placement ? `<div class="ribbon">Level check · round ${Math.min(lc.of, lc.done + 1)} of ${lc.of} · just do your best</div>` : ''}
+        <div class="passage hidden"></div>
+        <div class="qtop"><button class="speak" aria-label="Read it to me">🔊</button><div class="prompt"></div></div>
+        <div class="context hidden"></div>
+        <div class="visual"></div>
+        <div class="qtools"><button class="notsure">🤔 Not sure</button></div>
+      </section>
+      <div class="cards hidden"></div>
+      <div class="spell hidden"></div>
+    </div>
     <section class="stage"></section>
-    <div class="cards hidden"></div>
-    <div class="spell hidden"></div>
     <div class="why hidden"></div>
   </div>`;
   const el = {
     play: $('.play', root), dots: $('.dots', root), stars: $('.hud-stars b', root), prompt: $('.prompt', root), passage: $('.passage', root),
     context: $('.context', root), visual: $('.visual', root), stage: $('.stage', root), cards: $('.cards', root), spell: $('.spell', root),
-    why: $('.why', root), notsure: $('.notsure', root), speakBtn: $('.speak', root),
+    why: $('.why', root), notsure: $('.notsure', root), speakBtn: $('.speak', root), qwrap: $('.qwrap', root),
   };
   if (!settings.showDontKnow) el.notsure.classList.add('hidden');
 
   let resolvePick = null;
   const pick = (r) => { if (resolvePick) { const f = resolvePick; resolvePick = null; f(r); } };
   const nextPick = () => new Promise((r) => { resolvePick = r; });
-  const skin = GAMES[game].make(el.stage, { onPick: (i) => pick({ type: 'choice', i }) });
-  skin.start(sess.length);
+  const skin = GAMES[game].make(el.stage, { onPick: (i) => pick({ type: 'choice', i }), player, playEl: el.play, answerHost: el.qwrap });
 
   let exiting = false;
-  $('.home', root).addEventListener('click', () => { exiting = true; stopSpeech(); pick({ type: 'exit' }); });
+  $('.home', root).addEventListener('click', () => { exiting = true; stopSpeech(); skin.abort?.(); pick({ type: 'exit' }); });
+  await skin.start(sess.length);
   el.notsure.addEventListener('click', () => pick({ type: 'dontknow' }));
   let current = null, lastPassage = null;
   el.speakBtn.addEventListener('click', () => { if (current) speakItem(current, true); });
@@ -90,6 +93,7 @@ export async function runRound(root, { player, subject, game, placement = null, 
 
   function render(item) {
     current = item;
+    skin.ask?.(item);
     el.prompt.innerHTML = esc(item.prompt);
     el.prompt.classList.toggle('long', item.prompt.length > 70);
     const p = item.passage;
@@ -175,6 +179,12 @@ export async function runRound(root, { player, subject, game, placement = null, 
   }
 
   const optionEl = (i) => (skin.handles(current) ? skin.els[i] : el.cards.querySelector(`[data-i="${i}"]`));
+  // Chess: during a level check every answer earns a move (there is no right or wrong shown).
+  async function moveAfterAnswer() {
+    if (!skin.turnEveryAnswer) return;
+    el.cards.classList.add('hidden');
+    await skin.reward();
+  }
 
   async function playItem(item) {
     if (window.__BA_TEST) window.__BA_TEST.item = item;
@@ -190,7 +200,7 @@ export async function runRound(root, { player, subject, game, placement = null, 
       if (r.type === 'dontknow') {
         stopSpeech();
         if (!scored) { E.answer(sess, item, { dontKnow: true, ms }); scored = true; store.saveSoon(); }
-        if (sess.placement) { sfx.soft(); skin.clear(); return 'next'; }
+        if (sess.placement) { sfx.soft(); skin.clear(); await moveAfterAnswer(); return 'next'; }
         if (item.kind === 'choice') { skin.handles(item) ? skin.reveal(item.answer) : optionEl(item.answer)?.classList.add('reveal'); }
         else spellState?.show(item.answerText, 'right');
         await showWhy(item);
@@ -203,7 +213,7 @@ export async function runRound(root, { player, subject, game, placement = null, 
       if (sess.placement) {
         flyStar(r.type === 'choice' ? optionEl(r.i) : el.spell);
         if (r.type === 'choice' && skin.handles(item)) await skin.neutral(r.i);
-        else { sfx.soft(); await wait(300); }
+        else { sfx.soft(); await wait(300); await moveAfterAnswer(); }
         return 'next';
       }
       if (correct) {
