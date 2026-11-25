@@ -51,7 +51,7 @@ export function showPicker() {
     <h1 class="logo">Brain <span>Arcade</span></h1>
     ${players.length ? `<p class="sub">Who's playing?</p>
     <div class="who">${players.map((p) => `<button class="who-btn" data-id="${p.id}" style="--c:${p.color}"><span class="av">${p.avatar}</span><b>${esc(p.name)}</b></button>`).join('')}</div>`
-    : `<div class="welcome"><p>Welcome! A grown-up sets up a player for each child.</p><button class="btn primary big setup">Set up players</button><button class="link setupcode">or paste a setup code</button></div>`}
+    : `<div class="welcome"><p>Welcome! A grown-up sets up a player for each child.</p><button class="btn primary big setup">Set up players</button><button class="btn ghost big setupcode">📋 Paste a setup code</button></div>`}
     ${players.length ? '<p class="hint">Grown-ups: hold ⚙️ for 2 seconds</p>' : ''}
   </div>`;
   holdToOpen($('.gear', root), 1800, () => openParent(root, { onClose: showPicker }));
@@ -179,6 +179,15 @@ async function boot() {
     return;
   }
   showPicker();
+  // A link ending in #setup opens the paste-a-setup-code screen directly (also when already open).
+  const maybeSetup = () => {
+    if (location.hash !== '#setup') return;
+    history.replaceState(null, '', location.pathname + location.search);
+    stopSpeech();
+    openParent(root, { onClose: showPicker, startWith: 'setup' });
+  };
+  maybeSetup();
+  window.addEventListener('hashchange', maybeSetup);
   if ('serviceWorker' in navigator && !/^(localhost|127\.)/.test(location.hostname)) navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 window.addEventListener('pagehide', () => store.save());

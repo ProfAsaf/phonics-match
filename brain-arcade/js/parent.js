@@ -191,6 +191,7 @@ function editPlayer(player) {
   const ixl = sc.ixl || {}, dib = sc.dibels || {};
   const chip = (m, v) => ['wellbelow', 'below', 'at', 'above'].map((k) => `<button type="button" class="st-chip st-${k} ${dib[m] === k ? 'on' : ''}" data-m="${m}" data-v="${k}">${{ wellbelow: 'Well below', below: 'Below', at: 'At', above: 'Above' }[k]}</button>`).join('');
   const body = frame(isNew ? 'New player' : `Edit ${esc(p.name)}`, `
+    ${isNew ? '<p class="have-code">Have a setup code? <button type="button" class="btn small paste-instead">📋 Paste it instead</button></p>' : ''}
     <form class="pform">
       <label>Name <input name="name" value="${esc(p.name)}" maxlength="20" autocomplete="off" required></label>
       <label>Grade <select name="grade">${GRADE_CHOICES.map((g) => `<option value="${g.grade}" ${g.grade === p.grade ? 'selected' : ''}>${g.label}</option>`).join('')}</select></label>
@@ -220,6 +221,7 @@ function editPlayer(player) {
       <div class="p-actions"><button class="btn primary save" type="submit">${isNew ? 'Add player' : 'Save'}</button>${isNew ? '' : '<button type="button" class="btn restart">↺ Start over</button><button type="button" class="btn danger del">Delete player</button>'}</div>
     </form>`, { back: () => (player ? report(player) : parentHome()) });
   const f = $('form', body);
+  $('.paste-instead', body)?.addEventListener('click', () => setupCodeScreen(parentHome));
   $$('.av-pick', f).forEach((b) => b.addEventListener('click', () => { $$('.av-pick', f).forEach((x) => x.classList.remove('on')); b.classList.add('on'); }));
   $$('.col-pick', f).forEach((b) => b.addEventListener('click', () => { $$('.col-pick', f).forEach((x) => x.classList.remove('on')); b.classList.add('on'); }));
   $$('.st-chip', f).forEach((b) => b.addEventListener('click', () => { const on = b.classList.contains('on'); $$(`.st-chip[data-m="${b.dataset.m}"]`, f).forEach((x) => x.classList.remove('on')); if (!on) b.classList.add('on'); }));
