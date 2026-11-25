@@ -1,15 +1,18 @@
-// The Chess game: a real game of chess against a computer animal. Each right answer earns one
-// move (during a level check, every answer does), then the animal replies. The game is saved on
-// the player, so it carries on from round to round until someone wins.
+// The Chess game. Real chess against a computer animal for most children; free play for the
+// youngest (any piece anywhere, nothing to lose, catch all the animal's pieces). Each right
+// answer earns one move (during a level check, every answer does), then the animal moves. The
+// game is saved on the player, so it carries on from round to round.
+// Unlocks (chess-rewards.js): beating an animal opens the next one; stars open new boards.
 import {
-  Chess, chooseMove, OPPONENTS, START_FEN, WHITE, BLACK, PAWN, KNIGHT, BISHOP, ROOK, QUEEN,
+  Chess, FreeBoard, chooseMove, OPPONENTS, START_FEN, WHITE, BLACK, PAWN, KNIGHT, BISHOP, ROOK, QUEEN,
   F_CAP, F_EP, F_CASTLE_K, F_CASTLE_Q, F_PROMO, mFrom, mTo, mFlags, mPromo, sqName,
 } from './chess.js';
+import { BOARDS, isUnlocked, boardsOpen, boardFor } from './chess-rewards.js';
 import { pieceSVG } from './chess-pieces.js';
 import { sfx } from './sfx.js';
 import { speak } from './speech.js';
 import { store } from './store.js';
-import { optionInner, burst, fitLabels, esc, confirmBox } from './ui.js';
+import { optionInner, burst, centerIn, fitLabels, esc, confirmBox } from './ui.js';
 
 const VALUE = [0, 1, 3, 3, 5, 9, 0];
 const START_COUNT = [0, 8, 2, 2, 2, 1, 1];
@@ -19,7 +22,15 @@ const DRAW_WHY = {
   repetition: "The same position came up three times, so it's a draw.",
   fifty: "Fifty moves went by with no captures or pawn moves, so it's a draw.",
 };
+const CAUGHT = ['Got it!', 'Gotcha!', 'You caught one!'];
 const frame = () => new Promise((r) => requestAnimationFrame(() => r()));
+const swatch = (b) => `--l:${b.l};--d:${b.d};--f:${b.frame}`;
+
+// 'free' or 'real'. A grown-up can choose per child; automatically, Pre-K gets free play.
+export function chessMode(player) {
+  const m = player.settings?.chessMode;
+  return m === 'free' || m === 'real' ? m : player.grade < 0 ? 'free' : 'real';
+}
 
 export class ChessGame {
   constructor(stage, { onPick, player, playEl, answerHost }) {
@@ -38,6 +49,7 @@ export class ChessGame {
     this.legal = [];
     this.moveDone = null;
     this.status = '';
+    this.last = null;
   }
   handles(item) { return item.kind === 'choice' && item.layout !== 'long'; }
 
@@ -61,14 +73,28 @@ export class ChessGame {
     s.rec ||= {};
     s.keys ||= [];
     this.state = s;
-    this.opp = OPPONENTS.find((o) => o.id === s.opp) || OPPONENTS[0];
+    this.free = chessMode(this.player) === 'free';
     this.game = null;
-    if (s.fen) { try { this.game = new Chess(s.fen); } catch { this.game = null; } }
-    if (this.game && this.game.outcome(this.repeats())) this.game = null;
-    if (!this.game) s.fen = null;
+    if (this.free) {
+      this.opp = OPPONENTS[0];
+      this.game = new FreeBoard(s.free);
+      if (this.game.outcome()) this.game = new FreeBoard();
+      this.last = s.free?.last || null;
+    } else {
+      this.opp = OPPONENTS.find((o) => o.id === s.opp) || OPPONENTS[0];
+      if (s.fen) { try { this.game = new Chess(s.fen); } catch { this.game = null; } }
+      if (this.game && this.game.outcome(this.repeats())) this.game = null;
+      if (!this.game) s.fen = null;
+      this.last = s.last || null;
+    }
   }
   repeats() { const k = this.game.key(); return Math.max(1, this.state.keys.filter((x) => x === k).length); }
-  save() { this.state.fen = this.game ? this.game.fen() : null; this.state.opp = this.opp.id; store.saveSoon(); }
+  save() {
+    const s = this.state;
+    if (this.free) s.free = this.game ? { ...this.game.save(), last: this.last } : null;
+    else { s.fen = this.game ? this.game.fen() : null; s.opp = this.opp.id; s.last = this.last; }
+    store.saveSoon();
+  }
 
   // ------------------------------------------------------------ building the screen
   async start() {
@@ -87,6 +113,7 @@ export class ChessGame {
     this.meBar = q('.cbar.me');
     this.flashEl = q('.cflash');
     this.fx = q('.fx');
+    this.boardEl.classList.toggle('free', this.free);
     q('.cnew').addEventListener('click', () => this.askNewGame());
     this.buildSquares();
     this.bindBoard();
@@ -98,9 +125,12 @@ export class ChessGame {
     this.ro.observe(this.stage);
     if (window.__BA_TEST) window.__BA_TEST.chess = this.testHook();
     this.playEl.classList.add('c-move'); // show the board until the first question
+    this.applyBoard();
     this.renderAll();
+    await this.newBoards();
+    if (this.aborted) return;
     if (!this.game) await this.newGame();
-    else if (this.game.turn === BLACK) await this.robotTurn(); // left before the animal replied
+    else if (this.game.turn === BLACK) await this.robotTurn(); // left before the animal moved
     if (!this.aborted) this.setStatus('answer');
   }
   buildSquares() {
@@ -123,6 +153,33 @@ export class ChessGame {
     const avail = Math.min(r.width - 44, r.height - 2 * bar - 44, 820); // room for the frame
     this.wrap.style.setProperty('--bs', Math.max(200, Math.floor(avail / 8) * 8) + 'px');
     this.wrap.style.setProperty('--bh', bar + 'px');
+  }
+  applyBoard() {
+    const b = boardFor(this.state.board, this.player.stars);
+    this.theme = b;
+    const st = this.scene.style;
+    st.setProperty('--sq-l', b.l);
+    st.setProperty('--sq-d', b.d);
+    st.setProperty('--frame', b.frame);
+    st.setProperty('--bg1', b.bg1);
+    st.setProperty('--bg2', b.bg2);
+  }
+  // Stars from right answers open new boards: show off the newest one and switch to it.
+  async newBoards() {
+    const s = this.state, open = boardsOpen(this.player.stars);
+    const seen = (s.boardsSeen ||= ['wood']);
+    const fresh = open.filter((b) => !seen.includes(b.id));
+    if (!fresh.length) return;
+    const b = fresh[fresh.length - 1];
+    s.boardsSeen = open.map((x) => x.id);
+    s.board = b.id;
+    this.applyBoard();
+    this.save();
+    const cover = this.cover(`<div class="cpanel cnewboard"><div class="cnb-sw" style="${swatch(b)}"></div><h2>New board unlocked!</h2><p>${b.emoji} ${esc(b.name)}, for earning ${b.stars} stars</p><button class="btn primary big cboard-ok">Play on it ▶</button></div>`);
+    sfx.star();
+    speak(`You unlocked the ${b.name} board!`);
+    await this.until((done) => cover.querySelector('.cboard-ok').addEventListener('click', () => { sfx.tap(); done(true); }, { once: true }));
+    cover.remove();
   }
   renderAll() {
     this.pcsEl.innerHTML = '';
@@ -149,8 +206,7 @@ export class ChessGame {
   place(el, sq) { el.style.left = (sq & 7) * 12.5 + '%'; el.style.top = (7 - (sq >> 4)) * 12.5 + '%'; }
   markLast() {
     this.sqEls.forEach((d) => d.classList.remove('last'));
-    const l = this.state.last;
-    if (this.game && l) for (const sq of l) this.sqEls[sq]?.classList.add('last');
+    if (this.game && this.last) for (const sq of this.last) this.sqEls[sq]?.classList.add('last');
   }
   markCheck() {
     this.sqEls.forEach((d) => d.classList.remove('chk'));
@@ -160,13 +216,13 @@ export class ChessGame {
     const set = (bar, sel, v, html = false) => { const e = bar.querySelector(sel); if (html) e.innerHTML = v; else e.textContent = v; };
     set(this.oppBar, '.cav', this.opp.emoji);
     set(this.oppBar, '.cnm', this.opp.name);
-    set(this.oppBar, '.clvl', '★'.repeat(this.opp.level));
+    set(this.oppBar, '.clvl', this.free ? '' : '★'.repeat(this.opp.level));
     set(this.meBar, '.cav', this.player.avatar || '🙂');
     set(this.meBar, '.cnm', this.player.name);
     const c = this.captured();
     set(this.oppBar, '.ccap', c.byBlack, true);
     set(this.meBar, '.ccap', c.byWhite, true);
-    set(this.meBar, '.cadv', c.adv > 0 ? `+${c.adv}` : '');
+    set(this.meBar, '.cadv', this.free ? (this.game ? `${16 - this.game.count(BLACK)}/16` : '') : c.adv > 0 ? `+${c.adv}` : '');
   }
   // Pieces each side has taken, and how far ahead the child is in points.
   captured() {
@@ -190,7 +246,7 @@ export class ChessGame {
     this.oppBar.classList.toggle('turn', kind === 'thinking');
     if (kind === 'yours') me.textContent = 'Your move!';
     else if (kind === 'incheck') { me.textContent = 'Check!'; me.classList.add('red'); }
-    else if (kind === 'thinking') op.textContent = 'thinking…';
+    else if (kind === 'thinking') op.textContent = this.free ? 'hopping…' : 'thinking…';
   }
   flash(text) { this.flashEl.textContent = text; this.flashEl.classList.toggle('hidden', !text); }
   cover(html) {
@@ -261,7 +317,7 @@ export class ChessGame {
       if (this.game.turn === BLACK) { await this.robotTurn(); continue; }
       const r = await this.kidTurn();
       if (!r) return;
-      if (r === 'new') { this.game = null; this.state.keys = []; this.state.last = null; this.save(); continue; }
+      if (r === 'new') { this.game = null; this.state.keys = []; this.last = null; this.save(); continue; }
       if (await this.checkEnd()) return;
       await this.robotTurn();
       if (this.aborted) return;
@@ -274,7 +330,7 @@ export class ChessGame {
     const check = this.game.inCheck();
     this.setStatus(check ? 'incheck' : 'yours');
     if (check) speak("You're in check! Keep your king safe.");
-    else if (!this.saidTurn) speak('Your move!');
+    else if (!this.saidTurn) speak(this.free ? `Your turn! Move any piece anywhere. Can you catch ${this.opp.name}'s pieces?` : 'Your move!');
     this.saidTurn = true;
     this.boardEl.classList.add('my-turn');
     const r = await this.until((done) => { this.moveDone = done; });
@@ -288,13 +344,14 @@ export class ChessGame {
   }
   async robotTurn() {
     this.setStatus('thinking');
-    if (!(await this.sleep(380))) return;
+    if (!(await this.sleep(this.free ? 300 : 380))) return;
     await frame();
     const t0 = performance.now();
-    const m = chooseMove(this.game, this.opp, { seen: new Set(this.state.keys) });
-    const left = 450 - (performance.now() - t0);
+    const m = this.free ? this.game.animalMove() : chooseMove(this.game, this.opp, { seen: new Set(this.state.keys) });
+    const left = (this.free ? 250 : 450) - (performance.now() - t0);
     if (left > 0 && !(await this.sleep(left))) return;
-    if (this.aborted || m == null) return;
+    if (this.aborted) return;
+    if (m == null) { if (this.free) { this.game.pass(); this.save(); this.setStatus('answer'); } return; }
     await this.play(m);
     if (await this.checkEnd()) return;
     if (this.game.inCheck()) { sfx.check(); speak('Check!'); this.setStatus('incheck'); }
@@ -327,11 +384,20 @@ export class ChessGame {
       const rook = this.pcs.get(rf);
       if (rook) { this.pcs.delete(rf); this.pcs.set(rt, rook); this.place(rook, rt); }
     }
-    if (capSq >= 0) sfx.capture(); else sfx.move();
-    const s = this.state;
-    s.last = [from, to];
-    if ((mover & 7) === PAWN || capSq >= 0) s.keys = [];
-    s.keys.push(g.key());
+    if (capSq >= 0) {
+      sfx.capture();
+      if (!(mover & 8)) { // the child caught something: sparkles
+        const c = centerIn(this.sqEls[capSq], this.fx);
+        setTimeout(() => burst(this.fx, c.x, c.y, { n: 12, chars: ['✨', '⭐'], spread: 70 }), dropped ? 0 : 250);
+        if (this.free && Math.random() < 0.5) speak(CAUGHT[Math.floor(Math.random() * CAUGHT.length)]);
+      }
+    } else sfx.move();
+    this.last = [from, to];
+    if (!this.free) {
+      const s = this.state;
+      if ((mover & 7) === PAWN || capSq >= 0) s.keys = [];
+      s.keys.push(g.key());
+    }
     this.save();
     this.markLast();
     this.markCheck();
@@ -339,69 +405,122 @@ export class ChessGame {
     await this.sleep(dropped ? 160 : 380);
   }
   async checkEnd() {
-    const out = this.game.outcome(this.repeats());
+    const out = this.free ? this.game.outcome() : this.game.outcome(this.repeats());
     if (!out) return false;
-    const kind = out.result === 'checkmate' ? (out.winner === WHITE ? 'win' : 'loss') : 'draw';
-    const rec = (this.state.rec[this.opp.id] ||= { w: 0, l: 0, d: 0 });
-    rec[kind[0]]++;
-    this.state.games = (this.state.games || 0) + 1;
+    let kind, unlocked = null;
+    if (this.free) {
+      kind = 'caught';
+      this.state.freeGames = (this.state.freeGames || 0) + 1;
+    } else {
+      kind = out.result === 'checkmate' ? (out.winner === WHITE ? 'win' : 'loss') : 'draw';
+      const i = OPPONENTS.findIndex((o) => o.id === this.opp.id);
+      const nextWasOpen = isUnlocked(this.state.rec, i + 1);
+      const rec = (this.state.rec[this.opp.id] ||= { w: 0, l: 0, d: 0 });
+      rec[kind[0]]++;
+      if (kind === 'win' && OPPONENTS[i + 1] && !nextWasOpen && isUnlocked(this.state.rec, i + 1)) unlocked = OPPONENTS[i + 1];
+      this.state.games = (this.state.games || 0) + 1;
+      this.state.keys = [];
+    }
     this.game = null;
-    this.state.keys = [];
-    this.state.last = null;
+    this.last = null;
     this.save();
     store.save();
     this.setStatus('');
-    await this.showResult(kind, out.result);
+    await this.showResult(kind, out.result, unlocked);
     if (this.aborted) return true;
     await this.newGame();
     return true;
   }
-  async showResult(kind, how) {
+  async showResult(kind, how, unlocked) {
     const o = this.opp;
-    const title = kind === 'win' ? 'Checkmate!' : kind === 'loss' ? 'Checkmate' : "It's a draw";
-    const line = kind === 'win' ? `You beat ${o.name}!` : kind === 'loss' ? `${o.name} won this time. Good game!` : DRAW_WHY[how] || "It's a draw.";
-    const big = kind === 'win' ? '🏆' : kind === 'loss' ? o.emoji : '🤝';
-    const cover = this.cover(`<div class="cpanel cres ${kind}"><div class="cr-big">${big}</div><h2>${esc(title)}</h2><p>${esc(line)}</p><button class="btn primary big cgo">New game ▶</button></div>`);
-    if (kind === 'win') {
+    const R = {
+      caught: ['🏆', 'You caught them all!', `Every one of ${o.name}'s pieces!`],
+      win: ['🏆', 'Checkmate!', `You beat ${o.name}!`],
+      loss: [o.emoji, 'Checkmate', `${o.name} won this time. Good game!`],
+      draw: ['🤝', "It's a draw", DRAW_WHY[how] || "It's a draw."],
+    }[kind];
+    const [big, title, line] = R;
+    const extra = unlocked ? `<div class="cr-unlock"><span>${unlocked.emoji}</span><b>You unlocked ${esc(unlocked.name)}!</b></div>` : '';
+    const cover = this.cover(`<div class="cpanel cres ${kind}"><div class="cr-big">${big}</div><h2>${esc(title)}</h2><p>${esc(line)}</p>${extra}<button class="btn primary big cgo">New game ▶</button></div>`);
+    if (kind === 'win' || kind === 'caught') {
       sfx.win();
       const r = this.fx.getBoundingClientRect();
       burst(this.fx, r.width / 2, r.height * 0.4, { n: 36, spread: 240 });
     } else sfx.soft();
-    speak(`${title}! ${line}`);
+    speak(`${title}! ${line}${unlocked ? ` You unlocked ${unlocked.name}!` : ''}`);
     await this.until((done) => cover.querySelector('.cgo').addEventListener('click', () => { sfx.tap(); done(true); }, { once: true }));
     cover.remove();
   }
-  // The first animal not beaten yet.
+  // The first open animal not beaten yet.
   suggested() {
-    const i = OPPONENTS.findIndex((o) => !(this.state.rec[o.id]?.w > 0));
-    return OPPONENTS[i < 0 ? OPPONENTS.length - 1 : i];
+    const rec = this.state.rec;
+    const open = OPPONENTS.filter((o, i) => isUnlocked(rec, i));
+    return open.find((o) => !(rec[o.id]?.w > 0)) || open[open.length - 1];
   }
   async newGame() {
     this.setStatus('');
     this.flash('');
-    const sug = this.suggested();
-    const cover = this.cover(`<div class="cpanel cpick"><h2>Who do you want to play?</h2><div class="cp-list">${OPPONENTS.map((o) => {
-      const w = this.state.rec[o.id]?.w || 0;
-      return `<button class="cp-opp${o.id === sug.id ? ' sugg' : ''}" data-id="${o.id}"><span class="cp-em">${o.emoji}</span><span class="cp-txt"><b>${o.name}</b><small>${esc(o.blurb)}</small></span><span class="cp-side"><span class="cp-lv">${'★'.repeat(o.level)}<i>${'★'.repeat(5 - o.level)}</i></span>${w ? `<span class="cp-w">🏆 ${w}</span>` : o.id === sug.id ? '<span class="cp-next">Try me!</span>' : ''}</span></button>`;
-    }).join('')}</div><p class="cp-note">You play white and go first. Answer a question to make each move.</p></div>`);
-    speak('Who do you want to play?');
-    const pick = await this.until((done) => cover.addEventListener('click', (e) => {
-      const b = e.target.closest('.cp-opp');
-      if (b) { sfx.tap(); done(OPPONENTS.find((o) => o.id === b.dataset.id)); }
-    }));
-    cover.remove();
-    if (!pick) return;
-    this.opp = pick;
-    this.game = new Chess(START_FEN);
-    this.state.last = null;
-    this.state.keys = [this.game.key()];
+    if (this.free) {
+      this.game = new FreeBoard();
+    } else {
+      const pick = await this.pickOpponent();
+      if (!pick) return;
+      this.opp = pick;
+      this.game = new Chess(START_FEN);
+      this.state.keys = [this.game.key()];
+    }
+    this.last = null;
     this.saidTurn = false;
     this.save();
     this.renderAll();
   }
+  pickOpponent() {
+    const s = this.state, rec = s.rec, sug = this.suggested(), stars = this.player.stars || 0;
+    const lv = (o) => `<span class="cp-lv">${'★'.repeat(o.level)}<i>${'★'.repeat(5 - o.level)}</i></span>`;
+    const opps = OPPONENTS.map((o, i) => {
+      if (!isUnlocked(rec, i)) {
+        const prev = OPPONENTS[i - 1].name;
+        return `<button class="cp-opp locked" data-id="${o.id}" data-prev="${prev}"><span class="cp-em">${o.emoji}</span><span class="cp-txt"><b>${o.name}</b><small>🔒 Beat ${prev} to unlock</small></span><span class="cp-side">${lv(o)}</span></button>`;
+      }
+      const w = rec[o.id]?.w || 0;
+      return `<button class="cp-opp${o.id === sug.id ? ' sugg' : ''}" data-id="${o.id}"><span class="cp-em">${o.emoji}</span><span class="cp-txt"><b>${o.name}</b><small>${esc(o.blurb)}</small></span><span class="cp-side">${lv(o)}${w ? `<span class="cp-w">🏆 ${w}</span>` : o.id === sug.id ? '<span class="cp-next">Try me!</span>' : ''}</span></button>`;
+    }).join('');
+    const boards = BOARDS.map((b) => {
+      const open = stars >= b.stars;
+      return `<button class="cp-board${open ? '' : ' locked'}${b.id === this.theme.id ? ' on' : ''}" data-b="${b.id}" style="${swatch(b)}" aria-label="${b.name} board">${open ? '' : `<i>🔒${b.stars}⭐</i>`}</button>`;
+    }).join('');
+    const cover = this.cover(`<div class="cpanel cpick"><h2>Who do you want to play?</h2><div class="cp-list">${opps}</div><div class="cp-boards"><span>Board</span>${boards}</div><p class="cp-note">You play white and go first. Answer a question to make each move. Beat an animal to unlock the next one!</p></div>`);
+    speak('Who do you want to play?');
+    return this.until((done) => cover.addEventListener('click', (e) => {
+      const bb = e.target.closest('.cp-board');
+      if (bb) {
+        const b = BOARDS.find((x) => x.id === bb.dataset.b);
+        if (bb.classList.contains('locked')) { sfx.bad(); speak(`Earn ${b.stars} stars to unlock the ${b.name} board!`); return; }
+        sfx.tap();
+        s.board = b.id;
+        this.applyBoard();
+        this.save();
+        cover.querySelectorAll('.cp-board').forEach((x) => x.classList.toggle('on', x === bb));
+        return;
+      }
+      const ob = e.target.closest('.cp-opp');
+      if (!ob) return;
+      if (ob.classList.contains('locked')) {
+        sfx.bad();
+        speak(`Beat ${ob.dataset.prev} to unlock ${OPPONENTS.find((o) => o.id === ob.dataset.id).name}!`);
+        ob.classList.remove('nope');
+        void ob.offsetWidth;
+        ob.classList.add('nope');
+        return;
+      }
+      sfx.tap();
+      done(OPPONENTS.find((o) => o.id === ob.dataset.id));
+    })).then((v) => { cover.remove(); return v; });
+  }
   async askNewGame() {
     if (!this.moveDone) return;
-    const ok = await confirmBox('Start a new game? This one will end.', { ok: 'New game', cancel: 'Keep playing' });
+    const msg = this.free ? 'Start a new game? All the pieces go back to the start.' : 'Start a new game? This one will end.';
+    const ok = await confirmBox(msg, { ok: 'New game', cancel: 'Keep playing' });
     if (ok && this.moveDone) { const d = this.moveDone; this.moveDone = null; d('new'); }
   }
   pickPromotion() {
@@ -514,6 +633,7 @@ export class ChessGame {
   }
   testHook() {
     return {
+      mode: () => (this.free ? 'free' : 'real'),
       phase: () => (this.moveDone ? 'move' : this.status),
       moves: () => (this.moveDone ? this.legal.map((m) => [sqName(mFrom(m)), sqName(mTo(m)), mFlags(m)]) : []),
       fen: () => this.game?.fen() || null,

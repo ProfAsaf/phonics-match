@@ -1,7 +1,7 @@
 // Offline support. Online, every file comes fresh from the network (revalidated, so updates show
 // up at once); the copy kept here is used only when the network is missing or slow.
 // Bump VERSION on each release.
-const VERSION = 'brain-arcade-v4';
+const VERSION = 'brain-arcade-v5';
 const CORE = ['./', 'index.html', 'css/app.css', 'js/app.js'];
 
 self.addEventListener('install', (e) => {

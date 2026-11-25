@@ -5,7 +5,7 @@ const KEY = 'brainArcade.v1';
 export const DEFAULT_SETTINGS = {
   voice: '', rate: 0.95, sfx: true, roundLength: 0, showDontKnow: true,
 };
-export const DEFAULT_PLAYER_SETTINGS = { subjectMode: 'choice', readAloud: 'auto', focus: {} };
+export const DEFAULT_PLAYER_SETTINGS = { subjectMode: 'choice', readAloud: 'auto', focus: {}, chessMode: 'auto' };
 
 export const store = {
   data: null,

@@ -60,20 +60,8 @@ export class Chess {
   }
 
   fen() {
-    let s = '';
-    for (let r = 7; r >= 0; r--) {
-      let empty = 0;
-      for (let f = 0; f < 8; f++) {
-        const p = this.board[r * 16 + f];
-        if (!p) { empty++; continue; }
-        if (empty) { s += empty; empty = 0; }
-        s += CHARS[p];
-      }
-      if (empty) s += empty;
-      if (r) s += '/';
-    }
     const c = (this.castling & 1 ? 'K' : '') + (this.castling & 2 ? 'Q' : '') + (this.castling & 4 ? 'k' : '') + (this.castling & 8 ? 'q' : '');
-    return `${s} ${this.turn === WHITE ? 'w' : 'b'} ${c || '-'} ${this.ep >= 0 ? sqName(this.ep) : '-'} ${this.half} ${this.full}`;
+    return `${placement(this.board)} ${this.turn === WHITE ? 'w' : 'b'} ${c || '-'} ${this.ep >= 0 ? sqName(this.ep) : '-'} ${this.half} ${this.full}`;
   }
   // The position without the move counters (for spotting repeated positions).
   key() { return this.fen().split(' ').slice(0, 4).join(' '); }
@@ -271,6 +259,85 @@ export class Chess {
     }
     return this.turn === WHITE ? score : -score;
   }
+}
+
+// The piece-placement part of a FEN (rank 8 first).
+function placement(board) {
+  let s = '';
+  for (let r = 7; r >= 0; r--) {
+    let empty = 0;
+    for (let f = 0; f < 8; f++) {
+      const p = board[r * 16 + f];
+      if (!p) { empty++; continue; }
+      if (empty) { s += empty; empty = 0; }
+      s += CHARS[p];
+    }
+    if (empty) s += empty;
+    if (r) s += '/';
+  }
+  return s;
+}
+
+// ---------------------------------------------------------------- free play (for the youngest)
+// Any of the child's pieces can go to any square that isn't one of their own; landing on an
+// animal's piece catches it. The animal only nudges one of its pieces a single step and never
+// catches anything, so there is nothing to lose. Catch all 16 to win. Same shape as Chess where
+// the game screen needs it.
+export class FreeBoard {
+  constructor(saved = null) {
+    if (saved && Array.isArray(saved.b) && saved.b.length === 64) {
+      this.board = new Array(128).fill(0);
+      saved.b.forEach((p, i) => { this.board[(i >> 3) * 16 + (i & 7)] = +p || 0; });
+      this.turn = saved.t === 'b' ? BLACK : WHITE;
+    } else {
+      this.board = new Chess().board.slice();
+      this.turn = WHITE;
+    }
+    this.kings = [-1, -1];
+  }
+  save() {
+    const b = [];
+    for (let r = 0; r < 8; r++) for (let f = 0; f < 8; f++) b.push(this.board[r * 16 + f]);
+    return { b, t: this.turn === WHITE ? 'w' : 'b' };
+  }
+  fen() { return `${placement(this.board)} ${this.turn === WHITE ? 'w' : 'b'}`; }
+  inCheck() { return false; }
+  count(side) {
+    let n = 0;
+    for (let sq = 0; sq < 120; sq++) {
+      if (sq & 0x88) { sq += 7; continue; }
+      if (this.board[sq] && (this.board[sq] & 8) === side) n++;
+    }
+    return n;
+  }
+  legal() {
+    const out = [], b = this.board;
+    if (this.turn !== WHITE) return out;
+    for (let sq = 0; sq < 120; sq++) {
+      if (sq & 0x88) { sq += 7; continue; }
+      if (!b[sq] || (b[sq] & 8)) continue;
+      for (let to = 0; to < 120; to++) {
+        if (to & 0x88) { to += 7; continue; }
+        const q = b[to];
+        if (q && !(q & 8)) continue; // one of the child's own pieces (or the piece itself)
+        out.push(mk(sq, to, q ? F_CAP : 0));
+      }
+    }
+    return out;
+  }
+  make(m) { const from = mFrom(m), to = mTo(m); this.board[to] = this.board[from]; this.board[from] = 0; this.turn ^= 8; }
+  pass() { this.turn ^= 8; }
+  // The animal's turn: one of its pieces steps to an empty square next to it (null if none can).
+  animalMove(rng = Math.random) {
+    const out = [], b = this.board;
+    for (let sq = 0; sq < 120; sq++) {
+      if (sq & 0x88) { sq += 7; continue; }
+      if (!b[sq] || !(b[sq] & 8)) continue;
+      for (const d of K_OFF) { const to = sq + d; if (!(to & 0x88) && !b[to]) out.push(mk(sq, to)); }
+    }
+    return out.length ? out[Math.floor(rng() * out.length)] : null;
+  }
+  outcome() { return this.count(BLACK) ? null : { result: 'allcaught', winner: WHITE }; }
 }
 
 // ---------------------------------------------------------------- evaluation tables

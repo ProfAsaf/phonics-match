@@ -39,7 +39,11 @@ Simulated children (`test/sim.test.mjs`) check that the level check lands within
 
 The Chess game is a real game of chess against a computer animal. The child plays white; each right answer earns one move (during a level check, every answer does), then the animal replies. The question panel slides away for each move. Pieces move by tap-tap or drag, with dots showing where a piece can go; castling, en passant, promotion, check, checkmate and the draw rules all work. The game is saved, so it carries on from round to round until someone wins; 🏳️ starts a new one.
 
-Opponents, weakest first: 🐣 Chick (random moves), 🐢 Turtle (grabs pieces, looks one move ahead), 🦊 Fox (two moves, sees simple traps), 🦉 Owl (three moves), 🐉 Dragon (four moves, plays carefully). The picker suggests the first animal the child hasn't beaten yet and shows trophies for wins. `test/chess.test.mjs` checks the move generator against the standard perft counts and that each animal beats the weaker ones.
+Opponents, weakest first: 🐣 Chick (random moves), 🐢 Turtle (grabs pieces, looks one move ahead), 🦊 Fox (two moves, sees simple traps), 🦉 Owl (three moves), 🐉 Dragon (four moves, plays carefully). `test/chess.test.mjs` checks the move generator against the standard perft counts and that each animal beats the weaker ones.
+
+**Unlocks.** Only Chick is open at first; beating an animal opens the next one, and the picker shows trophies for wins. Stars from right answers open new board colours: Ocean at 25, Candy at 75, Forest at 150, Space at 250 and Gold at 400. A newly earned board is shown off and switched to when the next chess round starts, and boards can be changed in the picker (`js/chess-rewards.js`).
+
+**Free play** (automatic in Pre-K): any piece can go to any square, the animal only nudges its pieces one step and never catches anything, and the goal is to catch all 16 of its pieces. Grown-ups can switch any child between free play and real chess in Edit player → Chess game.
 
 ## Strands
 
@@ -62,7 +66,7 @@ The report shows each strand's level, the likely range, the typical level for th
 - `js/model.js`: the ability model. `js/engine.js`: starting levels, level check, question choice, scoring, report numbers.
 - `js/curriculum.js`: subjects and strands. `js/gen/math.js`, `js/gen/reading.js`: about 80 question generators.
 - `js/play.js`: the play screen. `js/games.js`: the game worlds. `js/app.js`: kid screens. `js/parent.js`: grown-up area.
-- `js/chess.js`: chess rules and the computer opponents. `js/chess-ui.js`: the Chess game screen. `js/chess-pieces.js`: the piece drawings.
+- `js/chess.js`: chess rules, free play and the computer opponents. `js/chess-ui.js`: the Chess game screen. `js/chess-rewards.js`: unlocks. `js/chess-pieces.js`: the piece drawings.
 - `content/`: word lists, phonemic-awareness picture words, vocabulary, Maze items, sentences, passages, listening stories, fluency passages. `phonics1.json` and `nonsense1.json` come from Phonics Match.
 - `fonts/`: Fredoka and Andika (SIL Open Font License).
 

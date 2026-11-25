@@ -206,6 +206,10 @@ function editPlayer(player) {
         <option value="auto" ${p.settings.readAloud === 'auto' ? 'selected' : ''}>Automatic (until they read well)</option>
         <option value="always" ${p.settings.readAloud === 'always' ? 'selected' : ''}>Always</option>
         <option value="tap" ${p.settings.readAloud === 'tap' ? 'selected' : ''}>Only when they tap 🔊</option></select></label>
+      <label>Chess game <select name="chessMode">
+        <option value="auto" ${!['free', 'real'].includes(p.settings.chessMode) ? 'selected' : ''}>Automatic (free play in Pre-K, real chess from K up)</option>
+        <option value="free" ${p.settings.chessMode === 'free' ? 'selected' : ''}>Free play: move any piece anywhere, nothing to lose</option>
+        <option value="real" ${p.settings.chessMode === 'real' ? 'selected' : ''}>Real chess: beat each animal to unlock the next</option></select></label>
       <details ${isNew ? 'open' : ''}><summary>School scores (optional, makes the first level check faster and more accurate)</summary>
         <p class="muted small">From the IXL LevelUp Diagnostic and mCLASS DIBELS reports. Leave blank what you don't have.</p>
         <h4>IXL math levels</h4>
@@ -253,7 +257,7 @@ function editPlayer(player) {
       name, grade: +fd.get('grade'), avatar: $('.av-pick.on', f)?.dataset.a || p.avatar, color: $('.col-pick.on', f)?.dataset.c || p.color,
       school: { ...(anyIxl ? { ixl: ixlNew } : {}), ...(anyDib ? { dibels: dibNew } : {}) },
     };
-    const settings = { ...p.settings, subjectMode: fd.get('subjectMode'), readAloud: fd.get('readAloud') };
+    const settings = { ...p.settings, subjectMode: fd.get('subjectMode'), readAloud: fd.get('readAloud'), chessMode: fd.get('chessMode') || 'auto' };
     if (!isNew) { settings.focus = {}; for (const id of Object.keys(STRANDS)) if (fd.get('focus_' + id)) settings.focus[id] = true; }
     let target;
     if (isNew) target = store.addPlayer({ ...fields, settings });

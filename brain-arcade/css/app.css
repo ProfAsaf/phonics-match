@@ -287,7 +287,7 @@ input, select, textarea { font-family: inherit; font-size: 16px; -webkit-user-se
 .ctile.picked { border-color: #9775fa; background: #f3f0ff; box-shadow: 0 6px 0 #7048e8; }
 @keyframes ctIn { from { transform: scale(.5); opacity: 0; } }
 /* the board */
-.chessroom { display: grid; place-items: center; background: radial-gradient(ellipse at 50% 30%, #fbf3e4, #e2cba3); }
+.chessroom { display: grid; place-items: center; background: radial-gradient(ellipse at 50% 30%, var(--bg1, #fbf3e4), var(--bg2, #e2cba3)); transition: background .4s; }
 .cwrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .cbar { width: var(--bs); height: var(--bh); display: flex; align-items: center; gap: 8px; padding: 0 12px; border-radius: 16px; background: rgba(255, 255, 255, .55); font-size: 18px; transition: background .2s, box-shadow .2s; }
 .cbar.turn { background: #fff; box-shadow: 0 0 0 3px #fcc419, 0 4px 12px rgba(0, 0, 0, .12); }
@@ -302,18 +302,19 @@ input, select, textarea { font-family: inherit; font-size: 16px; -webkit-user-se
 .cmsg.red { background: #ffe3e3; color: #c92a2a; }
 .cnew { flex: none; border: 0; background: none; font-size: 20px; padding: 4px; visibility: hidden; }
 .cboard.my-turn ~ .cbar .cnew { visibility: visible; }
-.cboard { position: relative; width: var(--bs); height: var(--bs); border-radius: 8px; box-shadow: 0 0 0 calc(var(--bs) * .012 + 3px) #6f4a2a, 0 14px 34px rgba(0, 0, 0, .3); touch-action: none; }
+.cboard { position: relative; width: var(--bs); height: var(--bs); border-radius: 8px; box-shadow: 0 0 0 calc(var(--bs) * .012 + 3px) var(--frame, #6f4a2a), 0 14px 34px rgba(0, 0, 0, .3); touch-action: none; }
 .csqs { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); border-radius: 8px; overflow: hidden; }
 .csq { position: relative; }
-.csq.l { background-color: #f0d9b5; } .csq.d { background-color: #b58863; }
-.csq.last.l { background-color: #f3e78a; } .csq.last.d { background-color: #d4bd52; }
+.csq.l { background-color: var(--sq-l, #f0d9b5); } .csq.d { background-color: var(--sq-d, #b58863); }
+.csq.last::before { content: ''; position: absolute; inset: 0; background: rgba(255, 221, 51, .5); }
+.cboard.free .csq.tgt::after { display: none; } /* free play: any square works, so no dots */
 .csq.sel { box-shadow: inset 0 0 0 calc(var(--bs) / 8 * .07) #4dabf7; }
 .csq.tgt::after { content: ''; position: absolute; left: 35%; top: 35%; width: 30%; height: 30%; border-radius: 50%; background: rgba(40, 70, 30, .32); }
 .csq.tcap::after { content: ''; position: absolute; inset: 3%; border-radius: 50%; box-shadow: inset 0 0 0 calc(var(--bs) / 8 * .08) rgba(40, 70, 30, .38); }
 .csq.chk { background-image: radial-gradient(circle, rgba(255, 60, 60, .95) 0%, rgba(255, 60, 60, .55) 45%, rgba(255, 60, 60, 0) 75%); }
 .crk, .cfl { position: absolute; font-style: normal; font-weight: 700; font-size: calc(var(--bs) / 8 * .2); line-height: 1; pointer-events: none; }
 .crk { left: 3px; top: 3px; } .cfl { right: 4px; bottom: 3px; }
-.csq.l .crk, .csq.l .cfl { color: #b58863; } .csq.d .crk, .csq.d .cfl { color: #f0d9b5; }
+.csq.l .crk, .csq.l .cfl { color: var(--sq-d, #b58863); } .csq.d .crk, .csq.d .cfl { color: var(--sq-l, #f0d9b5); }
 .cpcs { position: absolute; inset: 0; pointer-events: none; }
 .cpc { position: absolute; width: 12.5%; height: 12.5%; display: grid; place-items: center; transition: left .3s ease, top .3s ease, opacity .35s, transform .3s; }
 .cpc .pc { width: 92%; height: 92%; filter: drop-shadow(0 2px 1.5px rgba(0, 0, 0, .28)); }
@@ -347,6 +348,22 @@ input, select, textarea { font-family: inherit; font-size: 16px; -webkit-user-se
 .cp-next { font-size: 13px; font-weight: 700; color: #fff; background: #f59f00; border-radius: 10px; padding: 1px 8px; white-space: nowrap; }
 .cp-opp.sugg { border-color: #fcc419; box-shadow: 0 4px 0 #f0b400, 0 0 0 4px #fff3bf; }
 .cp-note { margin: 12px 4px 0; font-size: 15px; color: #8a7660; }
+.cp-opp.locked { background: #f6efe3; border-style: dashed; box-shadow: none; }
+.cp-opp.locked .cp-em { filter: grayscale(1); opacity: .5; }
+.cp-opp.locked b { color: #9a8a76; }
+.cp-opp.locked small { color: #a0522d; font-weight: 600; }
+.cp-opp.nope { animation: shake .4s; }
+.cp-boards { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 8px; margin-top: 14px; }
+.cp-boards > span { font-size: 15px; font-weight: 600; color: #8a7660; margin-right: 4px; }
+.cp-board, .cnb-sw { background: conic-gradient(var(--l) 25%, var(--d) 0 50%, var(--l) 0 75%, var(--d) 0) 0 0 / 50% 50%; }
+.cp-board { position: relative; width: 44px; height: 44px; border-radius: 10px; border: 3px solid var(--f); padding: 0; }
+.cp-board.on { box-shadow: 0 0 0 3px #fff, 0 0 0 6px #4dabf7; }
+.cp-board.locked { opacity: .6; } /* still in colour: something to look forward to */
+.cp-board i { position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); font-style: normal; font-size: 10px; font-weight: 700; line-height: 1; background: #fff; color: #5c3d1e; border-radius: 8px; padding: 2px 4px; white-space: nowrap; }
+.cr-unlock { display: flex; align-items: center; justify-content: center; gap: 10px; margin: -4px auto 16px; padding: 8px 16px; border-radius: 16px; background: #fff3bf; color: #5c3d1e; font-size: 20px; width: max-content; max-width: 100%; animation: pulse 1.2s 3; }
+.cr-unlock span { font-size: 34px; line-height: 1; }
+.cnb-sw { width: 120px; height: 120px; margin: 6px auto 10px; border-radius: 16px; border: 6px solid var(--f); box-shadow: 0 8px 20px rgba(0, 0, 0, .2); animation: pulse 1.2s infinite; }
+.cnewboard p { font-size: 20px; color: #5c3d1e; margin: 0 0 16px; }
 .cres .cr-big { font-size: 84px; line-height: 1.1; }
 .cres h2 { font-size: 34px; margin: 4px 0; }
 .cres p { font-size: 20px; margin: 0 0 16px; color: #5c3d1e; }
@@ -428,6 +445,8 @@ input, select, textarea { font-family: inherit; font-size: 16px; -webkit-user-se
 }
 /* phones: give answers room next to a reading passage */
 @media (max-width: 520px) {
+  .cp-boards { gap: 12px 6px; }
+  .cp-board { width: 37px; height: 37px; border-width: 2.5px; }
   .has-passage .qpanel { max-height: 54dvh; }
   .has-passage .passage { max-height: 24dvh; font-size: 18px; }
   .has-passage .prompt { font-size: 19px; }
