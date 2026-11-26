@@ -294,6 +294,7 @@ input, select, textarea { font-family: inherit; font-size: 16px; -webkit-user-se
 .cav { font-size: calc(var(--bh) * .62); line-height: 1; }
 .cnm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32%; }
 .clvl { color: #f59f00; font-size: 12px; letter-spacing: -1px; white-space: nowrap; }
+.clvl.num { letter-spacing: 0; font-size: 14px; font-weight: 700; color: #5f3dc4; background: #f3f0ff; border-radius: 8px; padding: 1px 7px; }
 .ccap { flex: 1; min-width: 0; display: flex; align-items: center; overflow: hidden; }
 .ccap .pc { width: calc(var(--bh) * .52); height: calc(var(--bh) * .52); margin-right: calc(var(--bh) * -.2); flex: none; }
 .cadv { font-size: 15px; font-weight: 700; color: #5c3d1e; }
@@ -362,6 +363,13 @@ input, select, textarea { font-family: inherit; font-size: 16px; -webkit-user-se
 .cp-board i { position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); font-style: normal; font-size: 10px; font-weight: 700; line-height: 1; background: #fff; color: #5c3d1e; border-radius: 8px; padding: 2px 4px; white-space: nowrap; }
 .cr-unlock { display: flex; align-items: center; justify-content: center; gap: 10px; margin: -4px auto 16px; padding: 8px 16px; border-radius: 16px; background: #fff3bf; color: #5c3d1e; font-size: 20px; width: max-content; max-width: 100%; animation: pulse 1.2s 3; }
 .cr-unlock span { font-size: 34px; line-height: 1; }
+.cr-rating { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; margin: -4px auto 16px; padding: 8px 14px; border-radius: 16px; background: #f3f0ff; color: #3b2a6b; font-size: 19px; max-width: 100%; }
+.cr-rating > span:first-child { font-size: 30px; line-height: 1; }
+.cr-rating small { flex-basis: 100%; font-size: 15px; color: #6b5c99; }
+.cr-rating .up { color: #2b8a3e; } .cr-rating .down { color: #c92a2a; }
+.cp-r { font-size: 12px; font-weight: 700; color: #8a7660; background: #f3ead9; border-radius: 8px; padding: 0 6px; }
+.cp-top { display: flex; align-items: center; gap: 6px; }
+.chess-sum p { margin: 6px 0; line-height: 1.5; }
 .cnb-sw { width: 120px; height: 120px; margin: 6px auto 10px; border-radius: 16px; border: 6px solid var(--f); box-shadow: 0 8px 20px rgba(0, 0, 0, .2); animation: pulse 1.2s infinite; }
 .cnewboard p { font-size: 20px; color: #5c3d1e; margin: 0 0 16px; }
 .cres .cr-big { font-size: 84px; line-height: 1.1; }

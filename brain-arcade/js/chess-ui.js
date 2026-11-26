@@ -4,10 +4,10 @@
 // game is saved on the player, so it carries on from round to round.
 // Unlocks (chess-rewards.js): beating an animal opens the next one; stars open new boards.
 import {
-  Chess, FreeBoard, chooseMove, OPPONENTS, START_FEN, WHITE, BLACK, PAWN, KNIGHT, BISHOP, ROOK, QUEEN,
+  Chess, FreeBoard, chooseMove, playerFor, OPPONENTS, START_FEN, WHITE, BLACK, PAWN, KNIGHT, BISHOP, ROOK, QUEEN,
   F_CAP, F_EP, F_CASTLE_K, F_CASTLE_Q, F_PROMO, mFrom, mTo, mFlags, mPromo, sqName,
 } from './chess.js';
-import { BOARDS, isUnlocked, boardsOpen, boardFor } from './chess-rewards.js';
+import { BOARDS, isUnlocked, boardsOpen, boardFor, DRAGON_START, dragonAfter } from './chess-rewards.js';
 import { pieceSVG } from './chess-pieces.js';
 import { sfx } from './sfx.js';
 import { speak } from './speech.js';
@@ -26,10 +26,27 @@ const CAUGHT = ['Got it!', 'Gotcha!', 'You caught one!'];
 const frame = () => new Promise((r) => requestAnimationFrame(() => r()));
 const swatch = (b) => `--l:${b.l};--d:${b.d};--f:${b.frame}`;
 
-// 'free' or 'real'. A grown-up can choose per child; automatically, Pre-K gets free play.
+// 'free' or 'real'. A grown-up can choose per child ('open' = real chess with every animal
+// open, for strong players); automatically, Pre-K gets free play.
 export function chessMode(player) {
   const m = player.settings?.chessMode;
-  return m === 'free' || m === 'real' ? m : player.grade < 0 ? 'free' : 'real';
+  return m === 'free' ? 'free' : m === 'real' || m === 'open' ? 'real' : player.grade < 0 ? 'free' : 'real';
+}
+
+// The engine thinks in a worker thread when the browser allows it (smooth screen while Dragon
+// looks ahead for up to 2 seconds); otherwise right here.
+let worker = null, workerOk = typeof Worker !== 'undefined', seq = 0;
+const waiting = new Map();
+function engineWorker() {
+  if (!workerOk) return null;
+  if (!worker) {
+    try {
+      worker = new Worker(new URL('./chess-worker.js', import.meta.url), { type: 'module' });
+      worker.addEventListener('message', (e) => { const f = waiting.get(e.data?.id); if (f) f(e.data.m); });
+      worker.addEventListener('error', () => { workerOk = false; worker = null; for (const f of [...waiting.values()]) f(null); });
+    } catch { workerOk = false; worker = null; }
+  }
+  return worker;
 }
 
 export class ChessGame {
@@ -74,6 +91,7 @@ export class ChessGame {
     s.keys ||= [];
     this.state = s;
     this.free = chessMode(this.player) === 'free';
+    this.allOpen = this.player.settings?.chessMode === 'open';
     this.game = null;
     if (this.free) {
       this.opp = OPPONENTS[0];
@@ -216,7 +234,8 @@ export class ChessGame {
     const set = (bar, sel, v, html = false) => { const e = bar.querySelector(sel); if (html) e.innerHTML = v; else e.textContent = v; };
     set(this.oppBar, '.cav', this.opp.emoji);
     set(this.oppBar, '.cnm', this.opp.name);
-    set(this.oppBar, '.clvl', this.free ? '' : '★'.repeat(this.opp.level));
+    set(this.oppBar, '.clvl', this.free ? '' : this.opp.adaptive ? String(this.dragonRating()) : '★'.repeat(this.opp.level));
+    this.oppBar.querySelector('.clvl').classList.toggle('num', !this.free && !!this.opp.adaptive);
     set(this.meBar, '.cav', this.player.avatar || '🙂');
     set(this.meBar, '.cnm', this.player.name);
     const c = this.captured();
@@ -342,12 +361,28 @@ export class ChessGame {
     await this.play(r.m, r.dropped);
     return 'moved';
   }
+  dragonRating() { return this.state.dragon?.r ?? DRAGON_START; }
+  // Ask the engine for the animal's move (in the worker when there is one).
+  think(params) {
+    const fen = this.game.fen(), seen = this.state.keys.slice();
+    const local = () => chooseMove(new Chess(fen), params, { seen: new Set(seen) });
+    const w = engineWorker();
+    if (!w) return Promise.resolve(local());
+    return new Promise((resolve) => {
+      const id = ++seq;
+      const timer = setTimeout(() => finish(null), (params.ms || 1000) + 8000);
+      const finish = (m) => { clearTimeout(timer); waiting.delete(id); resolve(m == null ? local() : m); };
+      waiting.set(id, finish);
+      w.postMessage({ id, fen, params, seen });
+    });
+  }
   async robotTurn() {
     this.setStatus('thinking');
     if (!(await this.sleep(this.free ? 300 : 380))) return;
     await frame();
     const t0 = performance.now();
-    const m = this.free ? this.game.animalMove() : chooseMove(this.game, this.opp, { seen: new Set(this.state.keys) });
+    const m = this.free ? this.game.animalMove()
+      : await this.until((done) => this.think(playerFor(this.opp, this.opp.adaptive ? this.dragonRating() : this.opp.rating)).then(done));
     const left = (this.free ? 250 : 450) - (performance.now() - t0);
     if (left > 0 && !(await this.sleep(left))) return;
     if (this.aborted) return;
@@ -407,7 +442,7 @@ export class ChessGame {
   async checkEnd() {
     const out = this.free ? this.game.outcome() : this.game.outcome(this.repeats());
     if (!out) return false;
-    let kind, unlocked = null;
+    let kind, unlocked = null, dragon = null;
     if (this.free) {
       kind = 'caught';
       this.state.freeGames = (this.state.freeGames || 0) + 1;
@@ -417,7 +452,12 @@ export class ChessGame {
       const nextWasOpen = isUnlocked(this.state.rec, i + 1);
       const rec = (this.state.rec[this.opp.id] ||= { w: 0, l: 0, d: 0 });
       rec[kind[0]]++;
-      if (kind === 'win' && OPPONENTS[i + 1] && !nextWasOpen && isUnlocked(this.state.rec, i + 1)) unlocked = OPPONENTS[i + 1];
+      if (kind === 'win' && OPPONENTS[i + 1] && !nextWasOpen && !this.allOpen && isUnlocked(this.state.rec, i + 1)) unlocked = OPPONENTS[i + 1];
+      if (this.opp.adaptive) { // Dragon keeps pace: up after a win, down after a loss
+        const before = this.dragonRating();
+        this.state.dragon = dragonAfter(this.state.dragon, kind === 'win' ? 1 : kind === 'loss' ? 0 : 0.5);
+        dragon = { before, after: this.state.dragon.r };
+      }
       this.state.games = (this.state.games || 0) + 1;
       this.state.keys = [];
     }
@@ -426,12 +466,12 @@ export class ChessGame {
     this.save();
     store.save();
     this.setStatus('');
-    await this.showResult(kind, out.result, unlocked);
+    await this.showResult(kind, out.result, unlocked, dragon);
     if (this.aborted) return true;
     await this.newGame();
     return true;
   }
-  async showResult(kind, how, unlocked) {
+  async showResult(kind, how, unlocked, dragon) {
     const o = this.opp;
     const R = {
       caught: ['🏆', 'You caught them all!', `Every one of ${o.name}'s pieces!`],
@@ -440,20 +480,28 @@ export class ChessGame {
       draw: ['🤝', "It's a draw", DRAW_WHY[how] || "It's a draw."],
     }[kind];
     const [big, title, line] = R;
-    const extra = unlocked ? `<div class="cr-unlock"><span>${unlocked.emoji}</span><b>You unlocked ${esc(unlocked.name)}!</b></div>` : '';
+    let extra = unlocked ? `<div class="cr-unlock"><span>${unlocked.emoji}</span><b>You unlocked ${esc(unlocked.name)}!</b></div>` : '';
+    let sayMore = unlocked ? ` You unlocked ${unlocked.name}!` : '';
+    if (dragon) {
+      const up = dragon.after > dragon.before, down = dragon.after < dragon.before;
+      const note = up ? 'It will play stronger next time!' : down ? 'It will go a little easier next time.' : 'It stays the same.';
+      extra += `<div class="cr-rating"><span>${o.emoji}</span><span>Dragon's level <b>${dragon.before}</b> ${up || down ? `→ <b class="${up ? 'up' : 'down'}">${dragon.after}</b>` : ''}</span><small>${note}</small></div>`;
+      sayMore += ` Dragon's level is now ${dragon.after}. ${note}`;
+    }
     const cover = this.cover(`<div class="cpanel cres ${kind}"><div class="cr-big">${big}</div><h2>${esc(title)}</h2><p>${esc(line)}</p>${extra}<button class="btn primary big cgo">New game ▶</button></div>`);
     if (kind === 'win' || kind === 'caught') {
       sfx.win();
       const r = this.fx.getBoundingClientRect();
       burst(this.fx, r.width / 2, r.height * 0.4, { n: 36, spread: 240 });
     } else sfx.soft();
-    speak(`${title}! ${line}${unlocked ? ` You unlocked ${unlocked.name}!` : ''}`);
+    speak(`${title}! ${line}${sayMore}`);
     await this.until((done) => cover.querySelector('.cgo').addEventListener('click', () => { sfx.tap(); done(true); }, { once: true }));
     cover.remove();
   }
-  // The first open animal not beaten yet.
+  // The first open animal not beaten yet (with every animal open: Dragon, which adapts).
   suggested() {
     const rec = this.state.rec;
+    if (this.allOpen) return OPPONENTS[OPPONENTS.length - 1];
     const open = OPPONENTS.filter((o, i) => isUnlocked(rec, i));
     return open.find((o) => !(rec[o.id]?.w > 0)) || open[open.length - 1];
   }
@@ -477,13 +525,15 @@ export class ChessGame {
   pickOpponent() {
     const s = this.state, rec = s.rec, sug = this.suggested(), stars = this.player.stars || 0;
     const lv = (o) => `<span class="cp-lv">${'★'.repeat(o.level)}<i>${'★'.repeat(5 - o.level)}</i></span>`;
+    const rating = (o) => (o.random ? '' : `<span class="cp-r">${o.adaptive ? this.dragonRating() : o.rating}</span>`);
     const opps = OPPONENTS.map((o, i) => {
-      if (!isUnlocked(rec, i)) {
+      if (!this.allOpen && !isUnlocked(rec, i)) {
         const prev = OPPONENTS[i - 1].name;
         return `<button class="cp-opp locked" data-id="${o.id}" data-prev="${prev}"><span class="cp-em">${o.emoji}</span><span class="cp-txt"><b>${o.name}</b><small>🔒 Beat ${prev} to unlock</small></span><span class="cp-side">${lv(o)}</span></button>`;
       }
       const w = rec[o.id]?.w || 0;
-      return `<button class="cp-opp${o.id === sug.id ? ' sugg' : ''}" data-id="${o.id}"><span class="cp-em">${o.emoji}</span><span class="cp-txt"><b>${o.name}</b><small>${esc(o.blurb)}</small></span><span class="cp-side">${lv(o)}${w ? `<span class="cp-w">🏆 ${w}</span>` : o.id === sug.id ? '<span class="cp-next">Try me!</span>' : ''}</span></button>`;
+      const blurb = o.adaptive ? `Matches your level · now ${this.dragonRating()}` : o.blurb;
+      return `<button class="cp-opp${o.id === sug.id ? ' sugg' : ''}" data-id="${o.id}"><span class="cp-em">${o.emoji}</span><span class="cp-txt"><b>${o.name}</b><small>${esc(blurb)}</small></span><span class="cp-side"><span class="cp-top">${rating(o)}${lv(o)}</span>${w ? `<span class="cp-w">🏆 ${w}</span>` : o.id === sug.id ? '<span class="cp-next">Try me!</span>' : ''}</span></button>`;
     }).join('');
     const boards = BOARDS.map((b) => {
       const open = stars >= b.stars;
@@ -634,6 +684,7 @@ export class ChessGame {
   testHook() {
     return {
       mode: () => (this.free ? 'free' : 'real'),
+      engine: () => (worker && workerOk ? 'worker' : 'main thread'),
       phase: () => (this.moveDone ? 'move' : this.status),
       moves: () => (this.moveDone ? this.legal.map((m) => [sqName(mFrom(m)), sqName(mTo(m)), mFlags(m)]) : []),
       fen: () => this.game?.fen() || null,

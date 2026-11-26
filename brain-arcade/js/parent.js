@@ -8,6 +8,7 @@ import { englishVoices, configureSpeech, speak, currentVoiceName, stopSpeech } f
 import { setSfx, sfx } from './sfx.js';
 import { $, $$, esc, toast, confirmBox, wait } from './ui.js';
 import { loadFluency, fluencyNorm, fluencyGE } from './fluency.js';
+import { chessSummary } from './chess-rewards.js';
 
 const AVATARS = ['🦊', '🐼', '🐯', '🦁', '🐸', '🐵', '🐨', '🐧', '🦄', '🐙', '🦖', '🐶', '🐱', '🐰', '🐻', '🐲'];
 const COLORS = ['#ff6b6b', '#ffa94d', '#f7c531', '#51cf66', '#4dabf7', '#9775fa', '#f783ac', '#20c997'];
@@ -173,8 +174,21 @@ function activityTab(player, tb) {
     <div class="stats"><div><b>${wq}</b><small>questions this week</small></div><div><b>${wq ? Math.round((wok / wq) * 100) : 0}%</b><small>right on the first try</small></div><div><b>${Math.round(wms / 60000)}</b><small>minutes answering</small></div><div><b>${streak}</b><small>day streak</small></div></div>
     <svg viewBox="0 0 300 110" class="daybars">${list.map((x, i) => `<rect x="${8 + i * 20.5}" y="${92 - (x.q / maxQ) * 80}" width="15" height="${(x.q / maxQ) * 80}" rx="3" fill="#4dabf7"/><rect x="${8 + i * 20.5}" y="${92 - (x.ok / maxQ) * 80}" width="15" height="${(x.ok / maxQ) * 80}" rx="3" fill="#1c7ed6"/><text x="${15.5 + i * 20.5}" y="104" font-size="7.5" text-anchor="middle" fill="#8a93a6">${x.d.getDate()}</text>`).join('')}</svg>
     <p class="muted small">Light bars: questions per day. Dark: right on the first try.</p>
+    ${chessHTML(player)}
     <h4>Recent answers</h4>
     <ul class="recent">${(player.log || []).slice(-25).reverse().map((l) => `<li class="${l.ok ? 'ok' : 'miss'}"><span>${l.ok ? '✓' : l.dk ? '🤔' : '✗'}</span><b>${esc(skillName(l.s))}</b><small>${gradeLabel(l.b)} · ${Math.round(l.ms / 100) / 10}s</small></li>`).join('') || '<li class="muted">No answers yet.</li>'}</ul>`;
+}
+
+// Chess: games and wins by animal, and Dragon's rating, which sits near the child's playing strength.
+function chessHTML(player) {
+  const c = chessSummary(player.chess);
+  if (!c.games && !c.freeGames) return '<h4>Chess</h4><p class="muted small">No chess games finished yet.</p>';
+  const d = c.dragon, n = esc(player.name);
+  return `<h4>Chess</h4><div class="chess-sum">
+    ${c.games ? `<p>${c.games} game${c.games === 1 ? '' : 's'}: <b>${c.w}</b> won, ${c.l} lost, ${c.d} drawn. Wins: ${c.animals.filter((x) => x.w).map((x) => `${x.o.emoji} ${x.w}`).join(' · ') || 'none yet'}.</p>` : ''}
+    ${d ? `<p>🐉 Dragon's level: <b>${d.r}</b> after ${d.n} game${d.n === 1 ? '' : 's'} (${d.hist.slice(-8).join(' → ')}). It goes up when ${n} wins and down when ${n} loses, so it settles near ${n}'s playing strength. The numbers are rough, on a scale like chess sites' ratings.</p>` : ''}
+    ${c.freeGames ? `<p>Free play: caught all the pieces ${c.freeGames} time${c.freeGames === 1 ? '' : 's'}.</p>` : ''}
+  </div>`;
 }
 
 function fluencySummary(player) {
@@ -209,7 +223,8 @@ function editPlayer(player) {
       <label>Chess game <select name="chessMode">
         <option value="auto" ${!['free', 'real'].includes(p.settings.chessMode) ? 'selected' : ''}>Automatic (free play in Pre-K, real chess from K up)</option>
         <option value="free" ${p.settings.chessMode === 'free' ? 'selected' : ''}>Free play: move any piece anywhere, nothing to lose</option>
-        <option value="real" ${p.settings.chessMode === 'real' ? 'selected' : ''}>Real chess: beat each animal to unlock the next</option></select></label>
+        <option value="real" ${p.settings.chessMode === 'real' ? 'selected' : ''}>Real chess: beat each animal to unlock the next</option>
+        <option value="open" ${p.settings.chessMode === 'open' ? 'selected' : ''}>Real chess, every animal open (for strong players)</option></select></label>
       <details ${isNew ? 'open' : ''}><summary>School scores (optional, makes the first level check faster and more accurate)</summary>
         <p class="muted small">From the IXL LevelUp Diagnostic and mCLASS DIBELS reports. Leave blank what you don't have.</p>
         <h4>IXL math levels</h4>
