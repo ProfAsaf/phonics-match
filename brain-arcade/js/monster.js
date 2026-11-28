@@ -22,6 +22,7 @@ export class MonsterGame extends Skin {
     this.w = new Waits();
     this.phase = 'start';
     this.coverOpen = null;
+    this.playEl = opts.playEl;
   }
   get pet() { return this._pet; }
   get m() { return this._pet.cur; }
@@ -90,9 +91,10 @@ export class MonsterGame extends Skin {
     el.innerHTML = html;
     this.scene.appendChild(el);
     this.coverOpen = el;
+    this.playEl?.classList.add('cover-open'); // the question card steps aside so the panel has room (phones)
     return el;
   }
-  closeCover(el) { el.remove(); if (this.coverOpen === el) this.coverOpen = null; }
+  closeCover(el) { el.remove(); if (this.coverOpen === el) { this.coverOpen = null; this.playEl?.classList.remove('cover-open'); } }
   // wait for a tap on something matching sel inside a cover; resolves with that element (or null after Home)
   tapIn(el, sel) {
     return this.w.until((done) => el.addEventListener('click', (e) => { const b = e.target.closest(sel); if (b && !b.disabled) { sfx.tap(); done(b); } }));

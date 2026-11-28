@@ -124,7 +124,7 @@ export class BubbleField {
   burst(x, y, { amount = 1 } = {}) {
     const W = this.W, H = this.H, m = Math.min(W, H);
     if (!W || !H) return Promise.resolve();
-    const fast = !!window.__BA_TEST?.fastBubbles;
+    const fast = !!window.__BA_TEST?.fast;
     const big = this.big ? 1.3 : 1;
     const n = Math.max(8, Math.round(Math.min(56, Math.max(24, (W * H) / 11000)) * amount / (this.big ? 1.25 : 1)));
     const rMin = Math.max(16, m * 0.035) * big, rMax = Math.max(30, m * 0.085) * big;
