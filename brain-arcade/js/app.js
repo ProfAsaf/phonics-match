@@ -4,7 +4,9 @@ import { store } from './store.js';
 import { CONTENT_FILES } from './content-files.js';
 import { setContent } from './gen/reading.js';
 import * as E from './engine.js';
-import { GAMES, MONSTER_SVG } from './games.js';
+import { GAMES } from './games.js';
+import { monsterSVG, eggSVG } from './monster-art.js';
+import { isEgg, newEgg } from './monster-pet.js';
 import { runRound } from './play.js';
 import { speak, stopSpeech, configureSpeech, unlockSpeech } from './speech.js';
 import { sfx, setSfx, unlockAudio } from './sfx.js';
@@ -24,11 +26,13 @@ function unlock() {
 }
 document.addEventListener('pointerdown', unlock, { capture: true });
 
+// The picture on each game's button. Monster Munch shows the child's own monster (or its egg).
+const SAMPLE_EGG = newEgg(0, 424242);
 const GAME_ART = {
-  balloons: '<span class="gt-emoji">🎈</span>',
-  chess: `<span class="gt-piece">${pieceSVG(WHITE | KNIGHT)}</span>`,
-  monster: `<span class="gt-monster" style="--mc:#7bd389;--mc2:#ffd166">${MONSTER_SVG}</span>`,
-  rocket: '<span class="gt-emoji">🚀</span>',
+  balloons: () => '<span class="gt-emoji">🎈</span>',
+  chess: () => `<span class="gt-piece">${pieceSVG(WHITE | KNIGHT)}</span>`,
+  monster: (p) => { const m = p.pet?.cur || SAMPLE_EGG; return `<span class="gt-pet">${isEgg(m) ? eggSVG(m) : monsterSVG(m, { big: true })}</span>`; },
+  rocket: () => '<span class="gt-emoji">🚀</span>',
 };
 
 async function loadContent() {
@@ -74,7 +78,7 @@ export function showHome(player) {
       <div class="me"><span class="av">${player.avatar}</span><b>${esc(player.name)}</b></div>
       <button class="stars-btn" aria-label="Sticker book">⭐ <b>${player.stars || 0}</b> <span class="book">📒</span></button>
     </header>
-    <div class="games">${Object.entries(GAMES).map(([id, g]) => `<button class="game-tile gt-${id}" data-g="${id}">${GAME_ART[id]}<b>${g.name}</b></button>`).join('')}</div>
+    <div class="games">${Object.entries(GAMES).map(([id, g]) => `<button class="game-tile gt-${id}" data-g="${id}">${GAME_ART[id](player)}<b>${g.name}</b></button>`).join('')}</div>
     ${todayBadges(player)}
   </div>`;
   $('.back', root).addEventListener('click', showPicker);

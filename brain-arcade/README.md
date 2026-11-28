@@ -35,6 +35,27 @@ Every skill area ("strand") has its own level on a grade scale: 0 = start of kin
 
 Simulated children (`test/sim.test.mjs`) check that the level check lands within about a quarter grade when school scores are entered, and within about 0.4 grade without them.
 
+## The games
+
+Each game plays its own little game around the questions: a right answer earns a turn (bubbles to pop, a treat, fuel, a chess move), and during a level check every answer does, since no right or wrong is shown then. The question itself is never timed and nothing moves while the child answers, so the play never affects the level estimates. Everything a child builds up is saved on the device with the rest of their progress.
+
+**Balloon Pop** (`js/balloons.js`, `js/bubbles.js`). The answers float up as balloons. Popping the right one lets out a gush of soap bubbles, up to about 55 on an iPad and 25 on a phone (about half after a second try). The child pops them by tapping, or by swiping through several, which plays a rising tune. A few bubbles have a little friend inside. Bubbles also pop by themselves after a few seconds, so each burst ends within about 9 seconds, and then the next balloons come up. A question answered on a card or by spelling gets a surprise balloon instead. The round ends with a count of the bubbles popped, and the best round is kept. Pre-K bubbles are bigger, slower and fewer.
+
+**Monster Munch** (`js/monster.js`, `js/monster-pet.js`, `js/monster-art.js`). Each child raises their own monster:
+- It starts as an egg. Three answers keep it warm until it hatches, and the child names it.
+- Before each round the child picks today's menu: berries, veggies, sweets, pizza or fish. Every right answer is a treat.
+- What it eats most shapes it: first its colour, then horns (15 treats), then a pattern from its second favourite (40), and finally a tail (80, grown up).
+- A grown monster moves into the Monster Castle (🏰), and a new egg arrives.
+- Star totals unlock hats (👒 button) and things for its room.
+- Tapping the monster makes it giggle, and the Monster Munch button on the home screen shows the child's own monster.
+
+**Rocket Ride** (`js/rocket.js`, `js/space.js`, `js/space-art.js`). A trip across a saved star map:
+- The answers are fuel orbs. After each right one the child steers the rocket for about 5 seconds by dragging anywhere, grabbing stars and dodging rocks. The rocks speed up and multiply when the child flies well, and ease off after bumps.
+- Each stop takes 6 to 12 fuel, so a child reaches about one stop per round.
+- At each stop an alien friend says hello and tells a true, simple fact: the Moon, Mars, Ceres, Jupiter, Europa, Saturn, Titan, Uranus, Neptune, Pluto, a comet, Proxima Centauri.
+- After that come pretend planets (Candy, Jelly, Dino...), which say they are pretend and loop with new friends.
+- The 🗺️ map shows the friends met.
+
 ## Chess
 
 The Chess game is a real game of chess against a computer animal. The child plays white; each right answer earns one move (during a level check, every answer does), then the animal replies. The question panel slides away for each move. Pieces move by tap-tap or drag, with dots showing where a piece can go; castling, en passant, promotion, check, checkmate and the draw rules all work. The game is saved, so it carries on from round to round until someone wins; 🏳️ starts a new one.
@@ -69,7 +90,8 @@ The report shows each strand's level, the likely range, the typical level for th
 
 - `js/model.js`: the ability model. `js/engine.js`: starting levels, level check, question choice, scoring, report numbers.
 - `js/curriculum.js`: subjects and strands. `js/gen/math.js`, `js/gen/reading.js`: about 80 question generators.
-- `js/play.js`: the play screen. `js/games.js`: the game worlds. `js/app.js`: kid screens. `js/parent.js`: grown-up area.
+- `js/play.js`: the play screen. `js/games.js`: the list of games. `js/skin.js`: what every game can do. `js/app.js`: kid screens. `js/parent.js`: grown-up area.
+- `js/balloons.js`, `js/bubbles.js`: Balloon Pop and its bubbles. `js/monster.js`, `js/monster-pet.js`, `js/monster-art.js`: Monster Munch's screen, rules and drawings. `js/rocket.js`, `js/space.js`, `js/space-art.js`: Rocket Ride's screen, trip and drawings.
 - `js/chess.js`: chess rules, free play and the computer opponents. `js/chess-ui.js`: the Chess game screen. `js/chess-rewards.js`: unlocks. `js/chess-pieces.js`: the piece drawings.
 - `content/`: word lists, phonemic-awareness picture words, vocabulary, Maze items, sentences, passages, listening stories, fluency passages. `phonics1.json` and `nonsense1.json` come from Phonics Match.
 - `fonts/`: Fredoka and Andika (SIL Open Font License).
@@ -77,10 +99,14 @@ The report shows each strand's level, the likely range, the typical level for th
 ## Tests
 
 ```bash
-npm test                    # generators (every skill, across its range), simulated children, chess rules
+npm test                    # generators (every skill, across its range), simulated children, chess, pet and trip rules
 node tools/ui-test.mjs      # plays the real game in headless Chromium at iPad and iPhone sizes
 node tools/ui-test.mjs chess  # chess only: a level-check round, the saved game, Home mid-move, checkmate
+node tools/ui-test.mjs balloons  # Balloon Pop at real speed: tapping and swiping bubbles, Home mid-burst, the record
+node tools/ui-test.mjs monster   # Monster Munch: hatching, naming, menus, growing, hats, the Monster Castle
+node tools/ui-test.mjs rocket    # Rocket Ride at real speed: steering, arriving at stops, the map, Home mid-flight
 ```
+Add `iphone` or `ipadL` to run a scenario at another size. The full run plays the bubbles and flights at a few times normal speed.
 
 The UI test uses the Chromium that Playwright installs, saves screenshots to `%TEMP%\brain-arcade-shots`, and deletes its browser profiles when it ends.
 

@@ -35,7 +35,7 @@ export async function runRound(root, { player, subject, game, placement = null, 
   const sess = E.newSession(player, subject, { settings: { ...settings, focus: { [player.id]: player.settings?.focus || {} } }, placement });
   const lc = E.placementRounds(player, subject);
   root.innerHTML = `
-  <div class="play g-${game}${sess.placement ? ' placing' : ''}">
+  <div class="play g-${game}${sess.placement ? ' placing' : ''} starting">
     <header class="hud">
       <button class="hud-btn home" aria-label="Home">🏠</button>
       <div class="dots"></div>
@@ -93,6 +93,7 @@ export async function runRound(root, { player, subject, game, placement = null, 
 
   function render(item) {
     current = item;
+    el.play.classList.remove('starting'); // the question card stays hidden while a game opens (its menus, a new egg...)
     skin.ask?.(item);
     el.prompt.innerHTML = esc(item.prompt);
     el.prompt.classList.toggle('long', item.prompt.length > 70);
@@ -179,10 +180,12 @@ export async function runRound(root, { player, subject, game, placement = null, 
   }
 
   const optionEl = (i) => (skin.handles(current) ? skin.els[i] : el.cards.querySelector(`[data-i="${i}"]`));
-  // Chess: during a level check every answer earns a move (there is no right or wrong shown).
+  // During a level check every answer earns the game's turn (a chess move, bubbles, food...),
+  // since no right or wrong is shown.
   async function moveAfterAnswer() {
     if (!skin.turnEveryAnswer) return;
     el.cards.classList.add('hidden');
+    el.spell.classList.add('hidden');
     await skin.reward();
   }
 
@@ -220,9 +223,10 @@ export async function runRound(root, { player, subject, game, placement = null, 
         sfx.good();
         if (tries === 0) flyStar(r.type === 'choice' ? optionEl(r.i) : el.spell);
         if (Math.random() < 0.35 || tries > 0) speak(tries ? 'Yes! You got it.' : PRAISE[Math.floor(Math.random() * PRAISE.length)]);
-        if (r.type === 'spell') { spellState.show(item.answerText, 'right'); await wait(500); await skin.reward(); }
-        else if (skin.handles(item)) await skin.markRight(r.i);
-        else { optionEl(r.i)?.classList.add('right'); await wait(400); el.cards.classList.add('hidden'); await skin.reward(); }
+        // tries: 0 = right first time; games may celebrate a second-try answer a little less
+        if (r.type === 'spell') { spellState.show(item.answerText, 'right'); await wait(500); el.spell.classList.add('hidden'); await skin.reward({ tries }); }
+        else if (skin.handles(item)) await skin.markRight(r.i, { tries });
+        else { optionEl(r.i)?.classList.add('right'); await wait(400); el.cards.classList.add('hidden'); await skin.reward({ tries }); }
         return 'next';
       }
       tries++;
